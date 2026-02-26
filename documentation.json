@@ -45,6 +45,17 @@
                 "icon": "plug"
               }
             ]
+          },
+          {
+            "group": "Client Projects",
+            "icon": "folder",
+            "pages": [
+              {
+                "title": "Bestelportaal - Gezellig",
+                "path": "client-projects/bestelportaal-gezellig",
+                "icon": "shopping-cart"
+              }
+            ]
           }
         ]
       },
