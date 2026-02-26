@@ -1,0 +1,120 @@
+---
+title: Changelog
+description: Track the latest updates, new features, and improvements in the Kay Jilesen documentation platform.
+---
+
+## Recent Updates
+
+<Callout kind="info">
+  Check this changelog to stay informed about new features, bug fixes, and improvements to the Kay Jilesen documentation space. We release updates regularly to enhance your experience managing project documentation.
+</Callout>
+
+<Update label="2024-10-15" description="v1.2.0" tags={["feature", "improvement"]}>
+
+## New Features
+
+- Added support for custom brand colors in documentation themes, starting with `#1A2D35` for Kay Jilesen branding.
+- Introduced Mermaid diagram rendering for visualizing web design workflows and project strategies.
+
+## Improvements
+
+- Enhanced search functionality to better index WordPress specialist guides and case studies.
+- Optimized page load times by `>30%` for documentation pages with heavy image mockups.
+
+## Bug Fixes
+
+- Fixed rendering issues with Dutch language content in service descriptions.
+- Resolved anchor link navigation for sections like "Strategie.Design.Code."
+
+</Update>
+
+<Update label="2024-09-20" description="v1.1.0" tags={["feature", "bugfix"]}>
+
+## New Features
+
+- Integrated expandable FAQ sections for common questions about freelance web design and development services.
+- Added card-based showcases for client cases like Olli, Ruud Lenssen, and VicTech.
+
+## Bug Fixes
+
+- Corrected image loading for mockups from `https://new.kayjilesen.dev/wp-content`.
+- Patched responsive design issues on mobile for portfolio galleries.
+
+## Improvements
+
+- Streamlined navigation to key pages such as "Diensten" and "Kom in contact".
+
+</Update>
+
+<Update label="2024-08-10" description="v1.0.0" tags={["breaking", "feature"]}>
+
+## Initial Release
+
+- Launched core documentation platform with sections for Strategie, Design, and Code.
+- Included starter templates for organizing project docs, services, and case studies.
+
+## Breaking Changes
+
+- Migrated from legacy Markdown to full MDX support for interactive components.
+
+</Update>
+
+## Upcoming Changes
+
+Preview what's coming next to help you plan your documentation updates.
+
+<Columns cols={3}>
+  <Card title="Advanced Theming" icon="palette" href="#">
+    Full custom CSS support matching `#1A2D35` and other brand colors.
+  </Card>
+  <Card title="API Integration" icon="code" href="#">
+    Endpoints for automating WordPress project documentation.
+  </Card>
+  <Card title="Collaboration Tools" icon="users" href="#">
+    Real-time editing for team-based freelance projects.
+  </Card>
+</Columns>
+
+## How to Upgrade
+
+Follow these steps to ensure your documentation stays current.
+
+<Steps>
+  <Step title="Check Version" icon="package">
+    Verify your current version by running:
+    
+    ```
+    npm list kay-jilesen-docs
+    ```
+  </Step>
+  <Step title="Update Package" icon="download">
+    <Tabs>
+      <Tab title="npm" icon="package">
+        ```
+        npm update kay-jilesen-docs
+        ```
+      </Tab>
+      <Tab title="yarn" icon="package">
+        ```
+        yarn upgrade kay-jilesen-docs
+        ```
+      </Tab>
+    </Tabs>
+  </Step>
+  <Step title="Review Changes" icon="book-open">
+    Scan this changelog for breaking changes and test your pages.
+  </Step>
+</Steps>
+
+<Callout kind="tip">
+  Subscribe to notifications or watch the repository to get alerts for new releases. Contribute by suggesting features tailored to web design and WordPress workflows.
+</Callout>
+
+<Expandable title="Detailed Release Notes" default-open="false">
+  For in-depth notes on v1.2.0, including migration guides from previous versions, expand this section.
+  
+  | Version | Key Migration Step | Impact |
+  |---------|--------------------|--------|
+  | v1.2.0 | Update MDX components | Low |
+  | v1.1.0 | Refresh image paths | Medium |
+</Expandable>
