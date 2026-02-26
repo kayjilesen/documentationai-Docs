@@ -47,6 +47,27 @@
             ]
           },
           {
+            "group": "Advanced Custom Fields",
+            "icon": "database",
+            "pages": [
+              {
+                "title": "Pagebuilder",
+                "path": "acf/pagebuilder",
+                "icon": "layers"
+              },
+              {
+                "title": "Components",
+                "path": "acf/components",
+                "icon": "puzzle"
+              },
+              {
+                "title": "Options Pages",
+                "path": "acf/options-pages",
+                "icon": "settings"
+              }
+            ]
+          },
+          {
             "group": "Hosting",
             "icon": "server",
             "pages": [
@@ -71,16 +92,10 @@
                 "icon": "shield"
               }
             ]
-          }
-        ]
-      },
-      {
-        "tab": "WordPress Development",
-        "icon": "code",
-        "groups": [
+          },
           {
-            "group": "Architectuur",
-            "icon": "layout",
+            "group": "WordPress Development",
+            "icon": "code",
             "pages": [
               {
                 "title": "Theme Architectuur",
@@ -96,13 +111,7 @@
                 "title": "Naamgevingsconventies",
                 "path": "wordpress/naming-conventions",
                 "icon": "file-text"
-              }
-            ]
-          },
-          {
-            "group": "Configuratie",
-            "icon": "settings",
-            "pages": [
+              },
               {
                 "title": "ACF Patronen & Conventies",
                 "path": "wordpress/acf-patterns",
@@ -112,6 +121,32 @@
                 "title": "Tailwind CSS Setup",
                 "path": "wordpress/tailwind-setup",
                 "icon": "palette"
+              }
+            ]
+          },
+          {
+            "group": "DevOps & Tools",
+            "icon": "terminal",
+            "pages": [
+              {
+                "title": "Lokale Ontwikkelomgeving",
+                "path": "devops/local-dev",
+                "icon": "terminal"
+              },
+              {
+                "title": "Git Workflow",
+                "path": "devops/git-workflow",
+                "icon": "git-branch"
+              },
+              {
+                "title": "Deployment",
+                "path": "devops/deployment",
+                "icon": "upload"
+              },
+              {
+                "title": "Skills Overzicht",
+                "path": "claude/skills-overview",
+                "icon": "zap"
               }
             ]
           }
@@ -155,44 +190,6 @@
             "title": "Bestelportaal - Gezellig",
             "path": "client-projects/bestelportaal-gezellig",
             "icon": "shopping-cart"
-          }
-        ]
-      },
-      {
-        "tab": "DevOps & Tools",
-        "icon": "terminal",
-        "groups": [
-          {
-            "group": "Development",
-            "icon": "terminal",
-            "pages": [
-              {
-                "title": "Lokale Ontwikkelomgeving",
-                "path": "devops/local-dev",
-                "icon": "terminal"
-              },
-              {
-                "title": "Git Workflow",
-                "path": "devops/git-workflow",
-                "icon": "git-branch"
-              },
-              {
-                "title": "Deployment",
-                "path": "devops/deployment",
-                "icon": "upload"
-              }
-            ]
-          },
-          {
-            "group": "Claude Code",
-            "icon": "zap",
-            "pages": [
-              {
-                "title": "Skills Overzicht",
-                "path": "claude/skills-overview",
-                "icon": "zap"
-              }
-            ]
           }
         ]
       },
