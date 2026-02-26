@@ -1,0 +1,195 @@
+---
+title: "Project: KJ-Boilerplate"
+description: "WordPress theme starttemplate — het beginpunt voor elk nieuw klantproject."
+---
+
+## Project Overzicht
+
+| Detail | Waarde |
+|--------|--------|
+| **Type** | Boilerplate / Starttemplate |
+| **Status** | Actief (doorlopend bijgewerkt) |
+| **Doel** | Snelle start voor nieuwe WordPress projecten |
+| **Pad** | `/DEV/kj-boilerplate/` |
+
+De KJ-Boilerplate is het startpunt voor elk nieuw klantproject. Het bevat de standaard folderstructuur, build configuratie, basisblocks, en alle benodigde include-bestanden. Kopieer deze template en pas de kleuren, fonts en blocks aan voor het nieuwe project.
+
+<Callout kind="info" title="Geen WordPress installatie">
+  De boilerplate is een standalone themamap — geen volledige WordPress installatie. Kopieer de map naar `wp-content/themes/` van een lokale WordPress installatie.
+</Callout>
+
+---
+
+## Tech Stack
+
+<Columns cols={3}>
+  <Card title="WordPress" icon="code">
+    Custom theme, klaar voor ACF Pro pagebuilder
+  </Card>
+  <Card title="Tailwind CSS 3.4" icon="palette">
+    Geconfigureerd met placeholder kleuren en fonts
+  </Card>
+  <Card title="NPM Build" icon="terminal">
+    CSS compilatie + JS bundeling via npm scripts
+  </Card>
+</Columns>
+
+---
+
+## Huisstijl / Design Tokens (Placeholder)
+
+<Tabs>
+  <Tab title="Kleuren" icon="palette">
+    Standaard placeholder kleuren — worden per project aangepast:
+
+    | Token | Hex | Beschrijving |
+    |-------|-----|-------------|
+    | `primary` | `#F35613` | Primaire kleur (placeholder) |
+    | `secondary` | `#035F5A` | Secundaire kleur (placeholder) |
+    | `accent` | `#032A28` | Accent kleur (placeholder) |
+  </Tab>
+  <Tab title="Typografie" icon="file-text">
+    Fonts zijn uitgecommentarieerd — stel in per project:
+
+    ```javascript
+    // tailwind.config.js — uncomment en pas aan
+    // fontFamily: {
+    //   'sans': ['DM Sans', 'system-ui', 'sans-serif'],
+    //   'serif': ['Space Grotesk', 'serif'],
+    // },
+    ```
+  </Tab>
+</Tabs>
+
+---
+
+## Meegeleverde Blocks
+
+De boilerplate bevat 2 voorbeeldblocks om mee te starten:
+
+| Block | Beschrijving |
+|-------|-------------|
+| `hero` | Hero sectie met titel, content, buttons, en achtergrondafbeelding |
+| `text-image` | Tekst naast afbeelding (links/rechts wisselbaar) |
+
+Nieuwe blocks aanmaken: zie [Pagebuilder Systeem](/wordpress/pagebuilder-blocks).
+
+---
+
+## Folderstructuur
+
+```
+kj-boilerplate/
+├── acf-json/                        # ACF veldgroepen
+│   ├── group_pagebuilder.json       # Hoofd flexible content
+│   ├── group_layout_hero.json       # Hero velden
+│   ├── group_layout_text-image.json # Text-Image velden
+│   └── group_button_fields.json     # Button component velden
+├── assets/
+│   ├── css/
+│   │   ├── input.css                # Tailwind bronbestand
+│   │   └── style.css                # Gecompileerde CSS
+│   ├── js/
+│   ├── fonts/
+│   └── images/
+├── templates/
+│   ├── components/
+│   │   └── button.php               # Button component
+│   └── pagebuilder/
+│       ├── loop.php                 # Block loader
+│       ├── hero/                    # Hero block
+│       └── text-image/              # Text-Image block
+├── inc/
+│   ├── helpers.php
+│   ├── remove.php
+│   ├── settings.php
+│   ├── acf.php
+│   ├── custom-header.php
+│   ├── scripts.php
+│   └── template-functions.php
+├── scripts/
+│   └── build-pagebuilder-js.js
+├── functions.php
+├── header.php
+├── footer.php
+├── page.php
+├── index.php
+├── 404.php
+├── style.css
+├── tailwind.config.js
+└── package.json
+```
+
+---
+
+## Build & Development
+
+```bash
+# Installeer dependencies
+npm install
+
+# Development — CSS watch mode
+npm run dev
+
+# Productie — CSS + JS build
+npm run build
+```
+
+| Script | Commando | Beschrijving |
+|--------|----------|-------------|
+| `dev` | `tailwindcss ... --watch` | Tailwind watch mode |
+| `build` | `build:css && build:js` | Volledige build |
+| `build:css` | `tailwindcss ... --minify` | CSS compilatie |
+| `build:js` | `node scripts/build-pagebuilder-js.js` | JS bundeling |
+
+---
+
+## Hoe te gebruiken
+
+<Steps>
+  <Step title="Kopieer de boilerplate" icon="copy">
+    ```bash
+    cp -r kj-boilerplate/ wp-content/themes/nieuw-project/
+    ```
+  </Step>
+  <Step title="Update theme metadata" icon="file-text">
+    Pas `style.css` aan:
+    ```css
+    /*
+    Theme Name: Nieuw Project
+    Description: WordPress Theme voor Nieuw Project
+    Version: 1.0.0
+    Author: Kay Jilesen
+    Text Domain: nieuw-project
+    */
+    ```
+  </Step>
+  <Step title="Stel kleuren en fonts in" icon="palette">
+    Bewerk `tailwind.config.js` met de projectkleuren en fonts uit het Figma ontwerp.
+  </Step>
+  <Step title="Installeer en start" icon="terminal">
+    ```bash
+    cd wp-content/themes/nieuw-project
+    npm install
+    npm run dev
+    ```
+  </Step>
+  <Step title="Voeg blocks en CPTs toe" icon="layers">
+    Bouw de pagebuilder blocks en registreer Custom Post Types op basis van de projectvereisten.
+  </Step>
+</Steps>
+
+---
+
+## Configuratie Checklist
+
+| Stap | Bestand | Actie |
+|------|---------|-------|
+| Theme naam | `style.css` | Update Theme Name en Text Domain |
+| Kleuren | `tailwind.config.js` | Verander placeholder kleuren |
+| Fonts | `tailwind.config.js` | Stel projectfonts in |
+| `@font-face` | `assets/css/input.css` | Voeg webfonts toe |
+| Versie constant | `functions.php` | Update `_KAYJILESEN_VERSION` naam |
+| CPTs | `inc/post-types.php` | Maak bestand aan indien nodig |
+| ACF optiepagina | `inc/acf.php` | Configureer footer/header opties |
+| Favicon | WordPress admin | Upload via Customizer |

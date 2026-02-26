@@ -1,0 +1,169 @@
+---
+title: "Naamgevingsconventies"
+description: "Standaard naamgeving voor PHP functies, CSS classes, ACF velden, bestanden en mappen."
+---
+
+## Overzicht
+
+Consistente naamgeving is essentieel voor samenwerking. Alle projecten volgen dezelfde conventies.
+
+---
+
+## PHP Functies
+
+<Callout kind="warning" title="Verplicht: kj_ prefix">
+  Alle custom PHP functies MOETEN beginnen met het `kj_` prefix. Geen uitzonderingen.
+</Callout>
+
+| Patroon | Voorbeeld | Uitleg |
+|---------|-----------|--------|
+| `kj_<actie>_<onderwerp>()` | `kj_render_button()` | Render een component |
+| `kj_<onderwerp>()` | `kj_acf()`, `kj_image()` | Helper/utility functie |
+| `kj_register_<type>()` | `kj_register_post_types()` | Registratie functie |
+| `kj_is_<conditie>()` | `kj_is_live_domain()` | Boolean check |
+
+```php
+// Goed
+function kj_render_button($data) { ... }
+function kj_get_project_categories() { ... }
+function kj_limit_revisions($num, $post) { ... }
+
+// Fout — geen prefix
+function render_button($data) { ... }
+function get_categories() { ... }
+```
+
+---
+
+## Bestanden & Mappen
+
+| Type | Conventie | Voorbeeld |
+|------|-----------|-----------|
+| Mappen | lowercase met hyphens | `text-image/`, `call-to-action/` |
+| PHP bestanden | lowercase met hyphens | `hero.php`, `text-image.php` |
+| CSS bestanden | lowercase met hyphens | `hero.css`, `text-image.css` |
+| JS bestanden | lowercase met hyphens | `hero.js`, `text-image.js` |
+| ACF JSON | `group_layout_<slug>.json` | `group_layout_hero.json` |
+| Post type includes | `post-types.php` | Altijd enkelvoud bestandsnaam |
+
+---
+
+## CSS Classes
+
+Combinatie van **BEM** (voor block-specifieke classes) en **Tailwind** (voor utilities):
+
+<Tabs>
+  <Tab title="BEM Blokken" icon="code">
+    ```css
+    /* Block class = block-slug + "-block" suffix */
+    .hero-block { }
+    .hero-block__title { }
+    .hero-block__content { }
+    .hero-block__image { }
+
+    .text-image-block { }
+    .text-image-block__text { }
+    .text-image-block__media { }
+    ```
+
+    **Patroon:** `.{block-slug}-block__{element}`
+  </Tab>
+  <Tab title="Component classes" icon="layers">
+    ```css
+    /* Component classes met kj- prefix */
+    .kj-button { }
+    .kj-button-inner { }
+    .kj-header { }
+    .kj-footer { }
+    ```
+
+    **Patroon:** `.kj-{component-naam}`
+  </Tab>
+  <Tab title="Tailwind in PHP" icon="palette">
+    ```php
+    <!-- Altijd Tailwind classes in de template, niet in CSS -->
+    <section class="hero-block py-16 md:py-24 bg-primary">
+        <div class="container mx-auto px-4">
+            <h1 class="font-title text-4xl md:text-6xl font-bold text-white">
+                <?php echo wp_kses_post($title); ?>
+            </h1>
+        </div>
+    </section>
+    ```
+  </Tab>
+</Tabs>
+
+---
+
+## ACF Veldnamen
+
+| Type | Conventie | Voorbeeld |
+|------|-----------|-----------|
+| Veldnamen | lowercase met underscores | `button_label`, `background_image` |
+| Groepnamen | `group_layout_<slug>` | `group_layout_hero` |
+| Layout namen | lowercase met hyphens | `text-image`, `call-to-action` |
+| Optiepagina's | `ui_options_page_<naam>` | `ui_options_page_footer` |
+| Clone velden | `field_clone_<slug>` | `field_clone_hero` |
+
+```
+// ACF veldgroep naamgeving
+group_pagebuilder            → Hoofd flexible content
+group_layout_hero            → Block veldgroep
+group_layout_text-image      → Block veldgroep
+group_button_fields          → Herbruikbare component
+group_project_fields         → CPT velden
+group_footer_fields          → Footer velden
+```
+
+---
+
+## Custom Post Types
+
+| Element | Conventie | Voorbeeld |
+|---------|-----------|-----------|
+| Post type slug | Engels, enkelvoud | `project`, `vacature`, `review`, `podcast` |
+| Rewrite slug | Nederlands, meervoud | `projecten`, `vacatures`, `podcasts` |
+| Labels | Nederlands | `Projecten`, `Nieuw Project Toevoegen` |
+| Taxonomy slug | Engels met underscore prefix | `project_dienst`, `project_doelgroep` |
+| Taxonomy rewrite | Nederlands pad | `projecten/dienst`, `projecten/doelgroep` |
+
+```php
+// Post type registratie patroon
+register_post_type('project', [
+    'rewrite' => ['slug' => 'projecten', 'with_front' => false],
+    'menu_icon' => 'dashicons-portfolio',
+    'menu_position' => 20,
+    // ...
+]);
+```
+
+---
+
+## Git Commits
+
+| Prefix | Gebruik | Voorbeeld |
+|--------|---------|-----------|
+| `Add` | Nieuwe feature/block | `Add hero block with ACF fields` |
+| `Update` | Verbetering bestaand | `Update text-image block responsive layout` |
+| `Fix` | Bug fix | `Fix button hover state on mobile` |
+| `Refactor` | Code herstructurering | `Refactor pagebuilder loop for performance` |
+| `Improve` | Visuele/UX verbetering | `Improve spacing on pricing block` |
+
+<Callout kind="info" title="Commit stijl">
+  Begin met een werkwoord in de tegenwoordige tijd. Beschrijf WAT er veranderd is, niet HOE.
+</Callout>
+
+---
+
+## Samenvatting
+
+| Domein | Regel |
+|--------|-------|
+| PHP functies | `kj_` prefix, altijd |
+| Bestanden/mappen | lowercase met hyphens |
+| CSS block classes | `.{slug}-block__{element}` (BEM) |
+| CSS componenten | `.kj-{naam}` |
+| ACF velden | lowercase met underscores |
+| ACF groepen | `group_layout_<slug>` |
+| CPT slugs | Engels enkelvoud, rewrite Nederlands meervoud |
+| Commits | Werkwoord + beschrijving |

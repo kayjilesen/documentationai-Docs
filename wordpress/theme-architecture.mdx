@@ -1,0 +1,220 @@
+---
+title: "Theme Architectuur"
+description: "Standaard folderstructuur en bestandsverantwoordelijkheden van alle KJ WordPress themes."
+---
+
+## Overzicht
+
+Alle WordPress themes volgen dezelfde architectuur: **WordPress + ACF Pro + Tailwind CSS**. Het startpunt voor elk nieuw project is de [KJ-Boilerplate](/client-projects/kj-boilerplate).
+
+<Callout kind="info" title="Consistente structuur">
+  Elk project volgt exact dezelfde folderstructuur. Als je één project kent, kun je direct in elk ander project aan de slag.
+</Callout>
+
+---
+
+## Folderstructuur
+
+```
+theme-naam/
+├── acf-json/                        # ACF veldgroepen (JSON sync)
+│   ├── group_pagebuilder.json       # Hoofdpagebuilder (flexible content)
+│   ├── group_layout_hero.json       # Veldgroep per block
+│   ├── group_layout_text-image.json
+│   ├── group_button_fields.json     # Herbruikbare button velden
+│   └── ...
+├── assets/
+│   ├── css/
+│   │   ├── input.css                # Tailwind bronbestand + imports
+│   │   └── style.css                # Gecompileerde CSS (gegenereerd)
+│   ├── js/
+│   │   ├── script.js                # Globale JavaScript
+│   │   └── pagebuilder.js           # Gebundelde block JS (gegenereerd)
+│   ├── fonts/                       # Webfonts (@font-face)
+│   └── images/                      # Theme afbeeldingen
+├── templates/
+│   ├── components/                  # Herbruikbare PHP componenten
+│   │   └── button.php               # Button component
+│   └── pagebuilder/                 # Pagebuilder blocks
+│       ├── loop.php                 # Block loader (flexible content loop)
+│       ├── hero/
+│       │   ├── hero.php             # Template
+│       │   ├── hero.css             # Styles
+│       │   └── hero.js              # JavaScript
+│       ├── text-image/
+│       └── ...
+├── inc/                             # PHP includes
+│   ├── helpers.php                  # Utility functies (kj_acf, kj_image, etc.)
+│   ├── remove.php                   # WordPress cleanup (emoji, oembed, etc.)
+│   ├── settings.php                 # Theme support & instellingen
+│   ├── post-types.php               # Custom Post Types registratie
+│   ├── acf.php                      # ACF hooks & optiepagina's
+│   ├── custom-header.php            # Header markup helpers
+│   ├── scripts.php                  # Script & style enqueuing
+│   ├── template-functions.php       # Template helpers
+│   ├── gravity-forms.php            # Gravity Forms aanpassingen (optioneel)
+│   └── tracking.php                 # Analytics/tracking codes (optioneel)
+├── scripts/
+│   └── build-pagebuilder-js.js      # JS bundler voor blocks
+├── functions.php                    # Hoofdbestand — laadt alle /inc/ bestanden
+├── header.php                       # HTML head + header
+├── footer.php                       # Footer
+├── page.php                         # Standaard pagina template
+├── index.php                        # Fallback template
+├── 404.php                          # 404 pagina
+├── style.css                        # WordPress theme header (metadata)
+├── tailwind.config.js               # Tailwind configuratie
+├── package.json                     # NPM dependencies & scripts
+└── screenshot.jpg                   # Theme screenshot voor wp-admin
+```
+
+---
+
+## Bestandsverantwoordelijkheden
+
+<Tabs>
+  <Tab title="functions.php" icon="code">
+    Het hoofdbestand dat alle includes laadt. Bevat **geen logica** — alleen `require_once` statements.
+
+    ```php
+    <?php
+    defined( 'ABSPATH' ) || exit;
+
+    if ( ! defined( '_KAYJILESEN_VERSION' ) ) {
+        define( '_KAYJILESEN_VERSION', '1.0.0' );
+    }
+
+    require_once get_template_directory() . '/inc/helpers.php';
+    require_once get_template_directory() . '/inc/remove.php';
+    require_once get_template_directory() . '/inc/settings.php';
+    require_once get_template_directory() . '/inc/post-types.php';
+    require_once get_template_directory() . '/inc/acf.php';
+    require_once get_template_directory() . '/inc/custom-header.php';
+    require_once get_template_directory() . '/inc/scripts.php';
+    require_once get_template_directory() . '/inc/template-functions.php';
+    require_once get_template_directory() . '/templates/components/button.php';
+    ```
+  </Tab>
+  <Tab title="/inc/ bestanden" icon="folder">
+    | Bestand | Verantwoordelijkheid |
+    |---------|---------------------|
+    | `helpers.php` | Utility functies: `kj_acf()`, `kj_image()`, `kj_sub_image()`, `kj_escape_html()` |
+    | `remove.php` | WordPress cleanup: emoji, oembed, RSS feeds, etc. |
+    | `settings.php` | Theme support, menu registratie, image sizes |
+    | `post-types.php` | Custom Post Types & taxonomieën registreren |
+    | `acf.php` | ACF optiepagina's, hooks, veld configuratie |
+    | `custom-header.php` | Header markup logica |
+    | `scripts.php` | CSS/JS enqueuen met `filemtime()` cache busting |
+    | `template-functions.php` | Template helpers en conditionele logica |
+    | `gravity-forms.php` | GF styling & customization (niet in elk project) |
+    | `tracking.php` | Analytics codes via ACF optiepagina (niet in elk project) |
+  </Tab>
+  <Tab title="/templates/" icon="layers">
+    **`/templates/pagebuilder/`** — Alle pagebuilder blocks. Elk block is een map met `.php`, `.css`, `.js`.
+
+    **`/templates/pagebuilder/loop.php`** — De flexible content loop die blocks laadt op basis van `get_row_layout()`.
+
+    **`/templates/components/`** — Herbruikbare componenten (bijv. `button.php`).
+  </Tab>
+  <Tab title="/acf-json/" icon="database">
+    **Alle ACF veldgroepen** als JSON bestanden voor versiebeheer.
+
+    | Bestand | Doel |
+    |---------|------|
+    | `group_pagebuilder.json` | Hoofd flexible content veld met alle layouts |
+    | `group_layout_*.json` | Veldgroep per pagebuilder block |
+    | `group_button_fields.json` | Herbruikbare button velden (gecloned) |
+    | `group_*_fields.json` | Overige veldgroepen (footer, CPT velden, etc.) |
+  </Tab>
+</Tabs>
+
+---
+
+## Build Systeem
+
+Alle projecten gebruiken dezelfde NPM scripts:
+
+```bash
+# Development — Tailwind watch mode
+npm run dev
+
+# Productie — CSS minificatie + JS bundeling
+npm run build
+
+# Alleen CSS compileren
+npm run build:css
+
+# Alleen JS bundelen (pagebuilder blocks)
+npm run build:js
+```
+
+<Callout kind="tip" title="Workflow">
+  Start altijd met `npm run dev` tijdens ontwikkeling. Draai `npm run build` voor een commit of deployment.
+</Callout>
+
+### CSS Flow
+
+```
+assets/css/input.css → (Tailwind CLI) → assets/css/style.css
+```
+
+`input.css` bevat:
+1. `@tailwind base`, `@tailwind components`, `@tailwind utilities`
+2. `@import` van alle block CSS bestanden
+3. Globale component styles (header, footer)
+
+### JS Flow
+
+```
+templates/pagebuilder/*/block.js → (build-pagebuilder-js.js) → assets/js/pagebuilder.js
+```
+
+Het script `scripts/build-pagebuilder-js.js` bundelt alle individuele block JS bestanden tot één `pagebuilder.js`.
+
+---
+
+## Helper Functies
+
+Beschikbaar in elk project via `inc/helpers.php`:
+
+| Functie | Beschrijving | Voorbeeld |
+|---------|-------------|-----------|
+| `kj_acf($field, $post_id)` | Echo escaped ACF veld | `kj_acf('title')` |
+| `kj_image($field, $size, $post_id)` | Output WordPress `<img>` tag | `kj_image('hero_image', 'large')` |
+| `kj_sub_image($field, $size)` | Output sub field image | `kj_sub_image('photo', 'medium')` |
+| `kj_render_button($data)` | Render enkele button | `kj_render_button($btn)` |
+| `kj_render_buttons()` | Render button repeater | `kj_render_buttons()` |
+| `kj_is_live_domain()` | Check live/lokaal domein | `if (kj_is_live_domain()) { ... }` |
+| `kj_escape_html($text)` | Escape met toegestane tags | `kj_escape_html($content)` |
+
+---
+
+## Nieuw Project Opzetten
+
+<Steps>
+  <Step title="Clone de boilerplate" icon="copy">
+    Kopieer de KJ-Boilerplate als startpunt voor het nieuwe project.
+
+    ```bash
+    cp -r kj-boilerplate/ nieuw-project/
+    ```
+  </Step>
+  <Step title="Pas style.css metadata aan" icon="file-text">
+    Update Theme Name, Description, en Text Domain in `style.css`.
+  </Step>
+  <Step title="Configureer Tailwind" icon="palette">
+    Pas kleuren, fonts, en spacing aan in `tailwind.config.js` op basis van het ontwerp.
+  </Step>
+  <Step title="Installeer dependencies" icon="package">
+    ```bash
+    npm install
+    npm run dev
+    ```
+  </Step>
+  <Step title="Voeg blocks toe" icon="layers">
+    Maak pagebuilder blocks aan via het [Pagebuilder Systeem](/wordpress/pagebuilder-blocks). De boilerplate bevat al `hero` en `text-image` als voorbeeld.
+  </Step>
+  <Step title="Registreer CPTs" icon="file-text">
+    Voeg Custom Post Types toe in `inc/post-types.php` indien nodig.
+  </Step>
+</Steps>

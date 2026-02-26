@@ -1,0 +1,227 @@
+---
+title: "ACF Patronen & Conventies"
+description: "Standaard ACF workflow: JSON sync, veldgroep naamgeving, image velden, buttons, en optiepagina's."
+---
+
+## Overzicht
+
+Alle projecten gebruiken **ACF Pro** met JSON sync. Veldgroepen worden als JSON-bestanden opgeslagen in `/acf-json/` en via Git bijgehouden. Nooit direct in de database bewerken.
+
+---
+
+## JSON Sync Workflow
+
+<Steps>
+  <Step title="Bewerk JSON bestanden" icon="code">
+    Alle ACF veldgroepen staan in `/acf-json/`. Bewerk deze bestanden direct (niet via de WordPress admin).
+  </Step>
+  <Step title="Update de timestamp" icon="clock">
+    Na **elke** wijziging: update het `"modified"` veld met de huidige Unix timestamp.
+
+    ```bash
+    # Huidige Unix timestamp ophalen
+    date +%s
+    # Voorbeeld output: 1708963200
+    ```
+
+    Plak deze waarde in het `"modified"` veld van het JSON bestand.
+  </Step>
+  <Step title="Sync in WordPress" icon="database">
+    WordPress detecteert de gewijzigde timestamp en synchroniseert de velden automatisch vanuit JSON naar de database.
+  </Step>
+  <Step title="Commit naar Git" icon="git-branch">
+    Commit de JSON bestanden zodat alle teamleden dezelfde veldconfiguratie hebben.
+  </Step>
+</Steps>
+
+<Callout kind="warning" title="Timestamp verplicht">
+  Als je de `"modified"` timestamp niet update, detecteert WordPress de wijzigingen niet en worden ze niet gesynchroniseerd.
+</Callout>
+
+---
+
+## Veldgroep Structuur
+
+### Bestandsnaamgeving
+
+| Type | Patroon | Voorbeeld |
+|------|---------|-----------|
+| Pagebuilder | `group_pagebuilder.json` | Hoofd flexible content |
+| Block veldgroep | `group_layout_<slug>.json` | `group_layout_hero.json` |
+| Component velden | `group_<naam>_fields.json` | `group_button_fields.json` |
+| CPT velden | `group_<cpt>_fields.json` | `group_project_fields.json` |
+| Optiepagina velden | `ui_options_page_<naam>.json` | `ui_options_page_footer.json` |
+
+### Hoofdpagebuilder
+
+`group_pagebuilder.json` bevat één **Flexible Content** veld met alle beschikbare layouts. Elke layout cloned een aparte veldgroep:
+
+```json
+{
+    "key": "layout_hero",
+    "name": "hero",
+    "label": "Hero",
+    "display": "block",
+    "sub_fields": [
+        {
+            "key": "field_clone_hero",
+            "type": "clone",
+            "clone": ["group_layout_hero"],
+            "display": "seamless",
+            "layout": "all"
+        }
+    ]
+}
+```
+
+### Block Veldgroepen
+
+Elke block heeft een eigen veldgroep met `"active": false` — ze worden niet direct getoond maar gecloned in de pagebuilder.
+
+```json
+{
+    "key": "group_layout_hero",
+    "title": "Layout: Hero",
+    "active": false,
+    "acfe_autosync": ["json"],
+    "modified": 1708963200,
+    "fields": [ ... ]
+}
+```
+
+<Callout kind="warning" title="Verplichte instellingen">
+  Bij **nieuwe** veldgroepen altijd toevoegen:
+  - `"active": false` (voor block veldgroepen)
+  - `"acfe_autosync": ["json"]` voor automatische sync
+  - `"modified"` met huidige timestamp
+</Callout>
+
+---
+
+## Veldtype Regels
+
+<Tabs>
+  <Tab title="Images" icon="image">
+    **Altijd Image Array retourneren:**
+
+    ```json
+    {
+        "type": "image",
+        "return_format": "array",
+        "preview_size": "thumbnail"
+    }
+    ```
+
+    | Instelling | Waarde | Reden |
+    |-----------|--------|-------|
+    | `return_format` | `"array"` | Geeft toegang tot alle formaten en alt tekst |
+    | `preview_size` | `"thumbnail"` | Snelle preview in admin |
+
+    **Nooit** `"id"` of `"url"` als return format gebruiken.
+
+    Gebruik in templates:
+    ```php
+    <?php
+    $image = get_sub_field('image');
+    if ($image) : ?>
+        <img src="<?php echo esc_url($image['sizes']['large']); ?>"
+             alt="<?php echo esc_attr($image['alt']); ?>"
+             width="<?php echo esc_attr($image['sizes']['large-width']); ?>"
+             height="<?php echo esc_attr($image['sizes']['large-height']); ?>">
+    <?php endif; ?>
+    ```
+
+    Of met de helper:
+    ```php
+    <?php kj_sub_image('image', 'large'); ?>
+    ```
+  </Tab>
+  <Tab title="Buttons" icon="mouse-pointer">
+    **Buttons zijn ALTIJD repeaters** — zelfs als er maar 1 button nodig is.
+
+    ```json
+    {
+        "type": "repeater",
+        "name": "buttons",
+        "label": "Buttons",
+        "layout": "block",
+        "sub_fields": [
+            {
+                "type": "clone",
+                "clone": ["group_button_fields"],
+                "display": "seamless"
+            }
+        ]
+    }
+    ```
+
+    Render in template:
+    ```php
+    <?php kj_render_buttons(); ?>
+    ```
+
+    Dit cloned de herbruikbare `group_button_fields` veldgroep zodat elke button dezelfde opties heeft (label, link type, stijl, etc.).
+  </Tab>
+  <Tab title="Tabs" icon="columns">
+    **Als tabs worden gebruikt, moeten ALLE velden onder een tab staan.**
+
+    Correcte volgorde:
+    1. Tab: "Content" — alle inhoudsvelden
+    2. Tab: "Witruimte" / "UI Opties" — padding, achtergrondkleur
+
+    ```json
+    {
+        "fields": [
+            { "type": "tab", "label": "Content" },
+            { "type": "text", "name": "title" },
+            { "type": "wysiwyg", "name": "content" },
+            { "type": "tab", "label": "Witruimte" },
+            { "type": "select", "name": "padding_top" },
+            { "type": "select", "name": "padding_bottom" },
+            { "type": "select", "name": "bg_color" }
+        ]
+    }
+    ```
+
+    **Nooit** velden buiten een tab plaatsen als er tabs zijn.
+  </Tab>
+</Tabs>
+
+---
+
+## Optiepagina's
+
+ACF optiepagina's worden gebruikt voor thema-brede instellingen:
+
+| Pagina | Gebruik | Voorbeeld project |
+|--------|---------|-------------------|
+| Footer | Footer content, links, social media | Alle projecten |
+| Contact | Contactgegevens, adres, telefoon | Diverse projecten |
+| Tracking Codes | Analytics scripts (head/body/footer) | Asbestverwijdering |
+
+Registratie in `inc/acf.php`:
+```php
+if (function_exists('acf_add_options_page')) {
+    acf_add_options_page([
+        'page_title' => 'Theme Instellingen',
+        'menu_title' => 'Instellingen',
+        'menu_slug'  => 'theme-settings',
+        'capability' => 'edit_posts',
+    ]);
+}
+```
+
+---
+
+## Samenvatting Regels
+
+| Regel | Beschrijving |
+|-------|-------------|
+| JSON sync | Altijd via `/acf-json/`, nooit direct in database |
+| Timestamp | Update `"modified"` na elke wijziging |
+| `acfe_autosync` | Altijd `["json"]` bij nieuwe groepen |
+| Images | Return format: `"array"`, preview: `"thumbnail"` |
+| Buttons | Altijd als repeater, zelfs voor 1 button |
+| Tabs | Alle velden onder een tab als tabs worden gebruikt |
+| Block groepen | `"active": false` (worden gecloned) |
+| Naamgeving | `group_layout_<slug>` voor blocks |

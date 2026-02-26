@@ -1,0 +1,142 @@
+---
+title: "Lokale Ontwikkelomgeving"
+description: "Lokale WordPress ontwikkelomgeving opzetten met MAMP, theme koppelen, en build tools."
+---
+
+## Overzicht
+
+Voor lokale ontwikkeling wordt een WordPress installatie gebruikt met de themabestanden gekoppeld. De standaard setup gebruikt MAMP of een vergelijkbare lokale server.
+
+---
+
+## Vereisten
+
+| Tool | Doel | Versie |
+|------|------|--------|
+| **MAMP / Local** | Lokale webserver (Apache + MySQL + PHP) | Laatste versie |
+| **Node.js** | NPM voor Tailwind en build tools | v18+ |
+| **Git** | Versiebeheer | Laatste versie |
+| **Code editor** | VS Code aanbevolen | Laatste versie |
+
+---
+
+## Setup Stappen
+
+<Steps>
+  <Step title="Installeer lokale server" icon="server">
+    Installeer MAMP (of Local by Flywheel) en maak een nieuwe site aan.
+
+    Standaard lokale URL: `localhost:8888` of een subdomein.
+  </Step>
+  <Step title="Installeer WordPress" icon="code">
+    Download WordPress en installeer via de standaard wizard. Kies taal, database, en admin credentials.
+  </Step>
+  <Step title="Clone het theme" icon="git-branch">
+    Clone de theme repository naar `wp-content/themes/`:
+
+    ```bash
+    cd /pad/naar/wordpress/wp-content/themes/
+    git clone <repo-url> theme-naam
+    ```
+
+    Of voor een nieuw project: kopieer de KJ-Boilerplate.
+  </Step>
+  <Step title="Installeer dependencies" icon="package">
+    ```bash
+    cd wp-content/themes/theme-naam
+    npm install
+    ```
+  </Step>
+  <Step title="Start Tailwind watch mode" icon="terminal">
+    ```bash
+    npm run dev
+    ```
+
+    Laat dit draaien tijdens ontwikkeling — Tailwind hercompileert automatisch bij wijzigingen.
+  </Step>
+  <Step title="Activeer het theme" icon="check-circle">
+    Ga naar **WordPress admin > Weergave > Thema's** en activeer het theme.
+  </Step>
+  <Step title="Installeer verplichte plugins" icon="package">
+    Installeer minimaal:
+    - **ACF Pro** (licentie via account)
+    - Overige plugins per project (zie projectdocumentatie)
+  </Step>
+  <Step title="Synchroniseer ACF velden" icon="database">
+    Ga naar **WordPress admin > ACF > Sync** en synchroniseer alle veldgroepen vanuit de JSON bestanden.
+  </Step>
+</Steps>
+
+---
+
+## Omgeving Detectie
+
+Alle themes bevatten een `kj_is_live_domain()` functie die detecteert of de site lokaal draait:
+
+```php
+function kj_is_live_domain() {
+    $host = $_SERVER['HTTP_HOST'] ?? '';
+    // Lokaal als poort 8888 of subdomein
+    if (strpos($host, ':8888') !== false) return false;
+    return true;
+}
+```
+
+Op lokale omgevingen worden automatische updates voor plugins en core ingeschakeld. Op productie zijn ze uitgeschakeld.
+
+---
+
+## Dagelijkse Workflow
+
+```bash
+# 1. Open terminal in theme directory
+cd wp-content/themes/theme-naam
+
+# 2. Start Tailwind watch
+npm run dev
+
+# 3. Ontwikkel — wijzig PHP, CSS, JS bestanden
+#    Tailwind hercompileert automatisch
+
+# 4. Voor commit/deploy: volledige build
+npm run build
+
+# 5. Git commit
+git add .
+git commit -m "Add nieuwe feature"
+```
+
+---
+
+## Veelvoorkomende Issues
+
+<Expandable title="Tailwind genereert geen classes" default-open="false">
+  **Oorzaak:** De content paths in `tailwind.config.js` matchen niet met je bestanden.
+
+  **Oplossing:** Controleer dat de paths kloppen:
+  ```javascript
+  content: [
+      "./inc/*.php",
+      "./templates/**/*.php",
+      "./*.php"
+  ],
+  ```
+</Expandable>
+
+<Expandable title="ACF velden verschijnen niet" default-open="false">
+  **Oorzaak:** JSON bestanden niet gesynchroniseerd.
+
+  **Oplossing:**
+  1. Ga naar ACF > Sync in WordPress admin
+  2. Selecteer alle veldgroepen met "Sync beschikbaar"
+  3. Klik "Synchroniseer"
+</Expandable>
+
+<Expandable title="npm install faalt" default-open="false">
+  **Oorzaak:** Node.js versie te oud.
+
+  **Oplossing:** Update naar Node.js v18 of hoger:
+  ```bash
+  node --version  # Check huidige versie
+  ```
+</Expandable>

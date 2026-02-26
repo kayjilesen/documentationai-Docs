@@ -1,0 +1,130 @@
+---
+title: "Git Workflow"
+description: "Git workflow, commit conventies, en code quality tools (ESLint, Husky, lint-staged)."
+---
+
+## Overzicht
+
+Elk project is een Git repository. De workflow is eenvoudig: werk op de `main` branch, commit regelmatig, en push naar de remote.
+
+---
+
+## Basis Workflow
+
+<Steps>
+  <Step title="Pull laatste wijzigingen" icon="download">
+    ```bash
+    git pull origin main
+    ```
+  </Step>
+  <Step title="Ontwikkel" icon="code">
+    Maak wijzigingen aan PHP, CSS, JS bestanden. Draai `npm run dev` voor Tailwind watch.
+  </Step>
+  <Step title="Build assets" icon="terminal">
+    ```bash
+    npm run build
+    ```
+
+    Dit compileert CSS en bundelt JavaScript. **Altijd builden voor een commit.**
+  </Step>
+  <Step title="Review en commit" icon="git-branch">
+    ```bash
+    git status          # Bekijk gewijzigde bestanden
+    git diff            # Review wijzigingen
+    git add .           # Stage alles
+    git commit -m "Add hero block met responsive layout"
+    ```
+  </Step>
+  <Step title="Push" icon="upload">
+    ```bash
+    git push origin main
+    ```
+  </Step>
+</Steps>
+
+---
+
+## Commit Conventies
+
+| Prefix | Gebruik | Voorbeeld |
+|--------|---------|-----------|
+| `Add` | Nieuwe feature of block | `Add team block with ACF fields` |
+| `Update` | Wijziging aan bestaand | `Update hero block responsive spacing` |
+| `Fix` | Bug fix | `Fix button hover state on mobile` |
+| `Refactor` | Code herstructurering | `Refactor pagebuilder loop logic` |
+| `Improve` | Visuele/UX verbetering | `Improve contact form validation` |
+| `Remove` | Verwijdering | `Remove unused CSS imports` |
+
+**Regels:**
+- Begin met een werkwoord in de tegenwoordige tijd
+- Beschrijf WAT er veranderd is, niet HOE
+- Maximaal 1-2 regels
+- Engels
+
+---
+
+## Code Quality Tools
+
+Sommige projecten hebben ESLint en Husky geconfigureerd voor automatische code quality checks:
+
+### Projecten met linting
+
+| Project | ESLint | Husky | lint-staged |
+|---------|--------|-------|-------------|
+| Asbestverwijdering | Ja | Ja | Ja |
+| ecoXbouw | Ja | Ja | Ja |
+| Vullings Media | Ja | Ja | Ja |
+| Perfect Finish | Nee | Nee | Nee |
+| VDBrand | Nee | Nee | Nee |
+
+### ESLint
+
+```bash
+# Lint controleren
+npm run lint:js
+
+# Automatisch fixen
+npm run lint:js:fix
+```
+
+### Husky + lint-staged
+
+Bij projecten met Husky draait er automatisch een **pre-commit hook** die ESLint uitvoert op gewijzigde `.js` bestanden:
+
+```json
+// package.json
+"lint-staged": {
+    "*.js": "eslint --no-warn-ignored"
+}
+```
+
+Als linting faalt, wordt de commit geblokkeerd. Fix de issues en probeer opnieuw.
+
+<Callout kind="tip" title="Husky installeren">
+  Na een `npm install` op een project met Husky wordt de hook automatisch geïnstalleerd via het `prepare` script.
+</Callout>
+
+---
+
+## .gitignore
+
+Standaard genegeerde bestanden:
+
+```
+node_modules/
+.DS_Store
+```
+
+**Wel committen:**
+- `assets/css/style.css` (gecompileerde CSS)
+- `assets/js/pagebuilder.js` (gebundeld JS)
+- `acf-json/` (ACF veldgroepen)
+
+---
+
+## Tips
+
+- Commit regelmatig — liever veel kleine commits dan één grote
+- Build altijd voor een commit (`npm run build`)
+- Review je `git diff` voor je commit — voorkom ongewenste wijzigingen
+- ACF JSON bestanden: controleer dat de `"modified"` timestamp is bijgewerkt
