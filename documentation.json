@@ -15,7 +15,7 @@
         "icon": "book",
         "groups": [
           {
-            "group": "Aan de slag",
+            "group": "Getting Started",
             "icon": "rocket",
             "pages": [
               {
@@ -24,18 +24,18 @@
                 "icon": "home"
               },
               {
-                "title": "Snelstart",
+                "title": "Quickstart",
                 "path": "quickstart",
                 "icon": "zap"
               }
             ]
           },
           {
-            "group": "Kernconcepten",
+            "group": "Core Concepts",
             "icon": "layers",
             "pages": [
               {
-                "title": "Functionaliteiten",
+                "title": "Features",
                 "path": "features",
                 "icon": "file-text"
               },
@@ -45,17 +45,17 @@
                 "icon": "plug"
               }
             ]
-          },
+          }
+        ]
+      },
+      {
+        "tab": "Klantprojecten",
+        "icon": "folder",
+        "pages": [
           {
-            "group": "Klantprojecten",
-            "icon": "folder",
-            "pages": [
-              {
-                "title": "Bestelportaal - Gezellig",
-                "path": "client-projects/bestelportaal-gezellig",
-                "icon": "shopping-cart"
-              }
-            ]
+            "title": "Bestelportaal - Gezellig",
+            "path": "client-projects/bestelportaal-gezellig",
+            "icon": "shopping-cart"
           }
         ]
       },
@@ -80,18 +80,18 @@
             "icon": "home"
           },
           {
-            "group": "Veelgestelde vragen",
+            "group": "FAQ",
             "icon": "help-circle",
             "expandable": false,
             "pages": [
               {
-                "title": "Aan de slag - FAQ",
+                "title": "Getting Started FAQ",
                 "path": "help-center/faq/getting-started"
               }
             ]
           },
           {
-            "group": "Probleemoplossing",
+            "group": "Troubleshooting",
             "icon": "alert-triangle",
             "expandable": false,
             "pages": [
@@ -102,7 +102,7 @@
             ]
           },
           {
-            "group": "Handleidingen",
+            "group": "Guides",
             "icon": "book-open",
             "expandable": false,
             "pages": [
@@ -115,11 +115,11 @@
         ]
       },
       {
-        "tab": "Wijzigingslog",
+        "tab": "Changelog",
         "icon": "clock",
         "pages": [
           {
-            "title": "Versiegeschiedenis",
+            "title": "Release History",
             "path": "changelog",
             "icon": "history"
           }
