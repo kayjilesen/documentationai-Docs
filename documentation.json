@@ -47,23 +47,71 @@
             ]
           },
           {
-            "group": "Advanced Custom Fields",
-            "icon": "database",
+            "group": "Hosting",
+            "icon": "server",
             "pages": [
               {
-                "title": "Pagebuilder",
-                "path": "acf/pagebuilder",
+                "title": "Server Setup",
+                "path": "hosting/server-setup",
+                "icon": "server"
+              },
+              {
+                "title": "Site Management",
+                "path": "hosting/site-management",
+                "icon": "globe"
+              },
+              {
+                "title": "Deployments",
+                "path": "hosting/deployments",
+                "icon": "git-branch"
+              },
+              {
+                "title": "Backups & Security",
+                "path": "hosting/backups-security",
+                "icon": "shield"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "WordPress Development",
+        "icon": "code",
+        "groups": [
+          {
+            "group": "Architectuur",
+            "icon": "layout",
+            "pages": [
+              {
+                "title": "Theme Architectuur",
+                "path": "wordpress/theme-architecture",
                 "icon": "layout"
               },
               {
-                "title": "Components",
-                "path": "acf/components",
-                "icon": "package"
+                "title": "Pagebuilder Systeem",
+                "path": "wordpress/pagebuilder-blocks",
+                "icon": "layers"
               },
               {
-                "title": "Options Pages",
-                "path": "acf/options-pages",
-                "icon": "settings"
+                "title": "Naamgevingsconventies",
+                "path": "wordpress/naming-conventions",
+                "icon": "file-text"
+              }
+            ]
+          },
+          {
+            "group": "Configuratie",
+            "icon": "settings",
+            "pages": [
+              {
+                "title": "ACF Patronen & Conventies",
+                "path": "wordpress/acf-patterns",
+                "icon": "database"
+              },
+              {
+                "title": "Tailwind CSS Setup",
+                "path": "wordpress/tailwind-setup",
+                "icon": "palette"
               }
             ]
           }
@@ -74,9 +122,77 @@
         "icon": "folder",
         "pages": [
           {
+            "title": "KJ-Boilerplate",
+            "path": "client-projects/kj-boilerplate",
+            "icon": "copy"
+          },
+          {
+            "title": "Perfect Finish",
+            "path": "client-projects/perfect-finish",
+            "icon": "folder"
+          },
+          {
+            "title": "Asbestverwijdering",
+            "path": "client-projects/asbestverwijdering",
+            "icon": "folder"
+          },
+          {
+            "title": "ecoXbouw",
+            "path": "client-projects/ecoxbouw",
+            "icon": "folder"
+          },
+          {
+            "title": "Van den Brand Fysio",
+            "path": "client-projects/vdbrand",
+            "icon": "folder"
+          },
+          {
+            "title": "Vullings Media",
+            "path": "client-projects/vullingsmedia",
+            "icon": "folder"
+          },
+          {
             "title": "Bestelportaal - Gezellig",
             "path": "client-projects/bestelportaal-gezellig",
             "icon": "shopping-cart"
+          }
+        ]
+      },
+      {
+        "tab": "DevOps & Tools",
+        "icon": "terminal",
+        "groups": [
+          {
+            "group": "Development",
+            "icon": "terminal",
+            "pages": [
+              {
+                "title": "Lokale Ontwikkelomgeving",
+                "path": "devops/local-dev",
+                "icon": "terminal"
+              },
+              {
+                "title": "Git Workflow",
+                "path": "devops/git-workflow",
+                "icon": "git-branch"
+              },
+              {
+                "title": "Deployment",
+                "path": "devops/deployment",
+                "icon": "upload"
+              }
+            ]
+          },
+          {
+            "group": "Claude Code",
+            "icon": "zap",
+            "pages": [
+              {
+                "title": "Skills Overzicht",
+                "path": "claude/skills-overview",
+                "icon": "zap"
+              }
+            ]
           }
         ]
       },

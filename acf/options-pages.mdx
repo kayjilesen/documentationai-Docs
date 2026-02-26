@@ -62,25 +62,28 @@ if (function_exists('acf_add_options_page')) {
 
 ---
 
-## Opzet per project
+## Opzet varianten
+
+Er zijn twee gangbare opzetten:
 
 <Tabs>
-  <Tab title="PerfectFinish" icon="layout">
+  <Tab title="Enkele pagina" icon="file-text">
     | Pagina | Menu slug | Beschrijving |
     |--------|-----------|-------------|
     | **Theme Settings** | `theme-settings` | Parent (redirect: `false`) |
 
-    PerfectFinish gebruikt de parent page direct zonder subpagina's. Alle instellingen staan op één pagina.
+    Alle instellingen staan op één pagina. Geschikt voor kleinere projecten met beperkte opties.
   </Tab>
-  <Tab title="Vullingsmedia" icon="layout">
+  <Tab title="Met subpagina's" icon="layers">
     | Pagina | Menu slug | Beschrijving |
     |--------|-----------|-------------|
     | **Theme Settings** | `theme-settings` | Parent (redirect: `true`) |
     | Algemeen | `theme-settings-algemeen` | Contactgegevens, social media |
     | Footer | `theme-settings-footer` | Footer content en links |
     | Defaults | `theme-settings-defaults` | Standaardwaarden voor layouts |
+    | Tracking | `theme-settings-tracking` | Scripts en tracking codes |
 
-    Vullingsmedia splitst instellingen op in subpagina's voor overzicht.
+    Instellingen worden opgesplitst in subpagina's voor overzicht. Geschikt voor grotere projecten.
   </Tab>
 </Tabs>
 
