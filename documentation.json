@@ -45,6 +45,27 @@
                 "icon": "plug"
               }
             ]
+          },
+          {
+            "group": "Advanced Custom Fields",
+            "icon": "database",
+            "pages": [
+              {
+                "title": "Pagebuilder",
+                "path": "acf/pagebuilder",
+                "icon": "layout"
+              },
+              {
+                "title": "Components",
+                "path": "acf/components",
+                "icon": "package"
+              },
+              {
+                "title": "Options Pages",
+                "path": "acf/options-pages",
+                "icon": "settings"
+              }
+            ]
           }
         ]
       },
