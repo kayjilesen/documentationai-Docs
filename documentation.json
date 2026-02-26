@@ -125,6 +125,27 @@
             ]
           },
           {
+            "group": "E-mail Setup",
+            "icon": "mail",
+            "pages": [
+              {
+                "title": "Microsoft 365 (PAX8)",
+                "path": "email/microsoft-365",
+                "icon": "mail"
+              },
+              {
+                "title": "Google Workspace",
+                "path": "email/google-workspace",
+                "icon": "mail"
+              },
+              {
+                "title": "MXRoute",
+                "path": "email/mxroute",
+                "icon": "mail"
+              }
+            ]
+          },
+          {
             "group": "DevOps & Tools",
             "icon": "terminal",
             "pages": [
@@ -142,6 +163,11 @@
                 "title": "Deployment",
                 "path": "devops/deployment",
                 "icon": "upload"
+              },
+              {
+                "title": "CI/CD Setup",
+                "path": "devops/ci-cd",
+                "icon": "play-circle"
               },
               {
                 "title": "Skills Overzicht",
