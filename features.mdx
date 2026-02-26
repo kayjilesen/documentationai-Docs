@@ -1,106 +1,106 @@
 ---
-title: Core Features
-description: Explore the main capabilities of the platform, including document organization, collaboration tools, and customization options.
+title: Kernfunctionaliteiten
+description: Ontdek de belangrijkste mogelijkheden van het platform, waaronder documentorganisatie, samenwerkingstools en aanpassingsopties.
 ---
 
-## Overview
+## Overzicht
 
-Kay Jilesen provides a powerful documentation platform to organize and manage your project documentation efficiently. You can structure content hierarchically, collaborate with teams using version control, search through documents quickly, and customize the look with themes and branding. These features help you create professional docs that scale with your projects.
+Dit platform biedt een krachtige documentatieomgeving om je projectdocumentatie efficiënt te organiseren en beheren. Je kunt content hiërarchisch structureren, samenwerken met teams via versiebeheer, snel door documenten zoeken en het uiterlijk aanpassen met thema's en branding. Deze functies helpen je professionele documentatie te maken die meegroeit met je projecten.
 
 <Columns cols={2}>
-  <Card title="Document Structuring" icon="layers" href="#document-structuring">
-    Build nested hierarchies for complex documentation.
+  <Card title="Documentstructuur" icon="layers" href="#documentstructuur">
+    Bouw geneste hiërarchieën voor complexe documentatie.
   </Card>
-  <Card title="Collaboration" icon="users" href="#collaboration">
-    Work together with real-time edits and version history.
+  <Card title="Samenwerking" icon="users" href="#samenwerking">
+    Werk samen met realtime bewerkingen en versiegeschiedenis.
   </Card>
-  <Card title="Search Tools" icon="search" href="#search-tools">
-    Find content instantly with advanced filtering.
+  <Card title="Zoektools" icon="search" href="#zoektools">
+    Vind content direct met geavanceerde filtering.
   </Card>
-  <Card title="Customization" icon="palette" href="#customization">
-    Tailor themes and branding to match your style.
+  <Card title="Aanpassingen" icon="palette" href="#aanpassingen">
+    Stem thema's en branding af op jouw stijl.
   </Card>
 </Columns>
 
-## Document Structuring and Hierarchy
+## Documentstructuur en hiërarchie
 
-Organize your documentation into a clear hierarchy using folders and pages. This mirrors your project's structure, making navigation intuitive.
+Organiseer je documentatie in een overzichtelijke hiërarchie met mappen en pagina's. Dit weerspiegelt de structuur van je project, waardoor navigatie intuïtief wordt.
 
 ```mermaid
 graph TD
-    A[Root] --> B[Projects]
+    A[Root] --> B[Projecten]
     B --> C[Website Design]
     B --> D[WordPress Development]
     C --> E[Planning]
     C --> F[Design]
-    C --> G[Deployment]
+    C --> G[Oplevering]
     D --> H[Setup]
-    D --> I[Customization]
+    D --> I[Aanpassingen]
 ```
 
 <Steps>
-  <Step title="Create Folders" icon="folder">
-    Use the sidebar to nest pages under parent folders.
+  <Step title="Mappen aanmaken" icon="folder">
+    Gebruik de zijbalk om pagina's onder bovenliggende mappen te nestelen.
   </Step>
-  <Step title="Add Pages" icon="file-text">
-    Drag and drop MDX files into the hierarchy.
+  <Step title="Pagina's toevoegen" icon="file-text">
+    Sleep MDX-bestanden naar de hiërarchie.
   </Step>
-  <Step title="Link Navigation" icon="link">
-    Automatic sidebar generation reflects your structure.
+  <Step title="Navigatie koppelen" icon="link">
+    Automatische zijbalkgeneratie weerspiegelt je structuur.
   </Step>
 </Steps>
 
-## Collaboration and Version Control
+## Samenwerking en versiebeheer
 
-Invite team members to collaborate seamlessly. Track changes with Git-based version control integrated directly into the platform.
+Nodig teamleden uit om naadloos samen te werken. Volg wijzigingen met Git-gebaseerd versiebeheer dat direct in het platform is geïntegreerd.
 
 <Tabs>
-  <Tab title="Invite Collaborators" icon="user-plus">
-    Share edit access via email invitations.
+  <Tab title="Medewerkers uitnodigen" icon="user-plus">
+    Deel bewerkingstoegang via e-mailuitnodigingen.
   </Tab>
-  <Tab title="Version History" icon="git-branch">
-    View diffs and revert changes easily.
+  <Tab title="Versiegeschiedenis" icon="git-branch">
+    Bekijk diffs en draai wijzigingen eenvoudig terug.
   </Tab>
 </Tabs>
 
 <Callout kind="tip">
-  Enable branch previews for safe testing of updates.
+  Schakel branch-previews in om updates veilig te testen.
 </Callout>
 
-## Search and Filtering Tools
+## Zoeken en filteren
 
-Powerful search helps you locate documents quickly. Filter by tags, dates, or authors.
+Krachtige zoekfunctionaliteit helpt je documenten snel te vinden. Filter op tags, datums of auteurs.
 
-| Filter Type | Description | Example |
-|-------------|-------------|---------|
-| Tags | Narrow by labels like `design`, `development` | `tag:wordpress` |
-| Date Range | Find recent updates | `updated:>2024-01-01` |
-| Author | Search by contributor | `author:kay` |
-| Full-Text | Keyword matching across content | `strategy design` |
+| Filtertype | Beschrijving | Voorbeeld |
+|------------|-------------|---------|
+| Tags | Verfijnen op labels zoals `design`, `development` | `tag:wordpress` |
+| Datumbereik | Recente updates vinden | `updated:>2024-01-01` |
+| Auteur | Zoeken op bijdrager | `author:kay` |
+| Volledige tekst | Trefwoorden zoeken in content | `strategie design` |
 
-<CodeGroup tabs="Query Examples">
+<CodeGroup tabs="Query voorbeelden">
   ```javascript
-  // Advanced search query
+  // Geavanceerde zoekopdracht
   const results = searchDocs({
-    query: "website strategy",
+    query: "website strategie",
     filters: { tags: ["design"], updated: ">2024-01-01" }
   });
   ```
   ```python
-  # Python client search
+  # Python client zoeken
   results = client.search(
-      query="website strategy",
+      query="website strategie",
       filters={"tags": ["design"]}
   )
   ```
 </CodeGroup>
 
-## Customization Themes and Branding
+## Thema's en branding aanpassen
 
-Personalize your docs with custom themes. Apply your brand colors like `#1A2D35` and fonts.
+Personaliseer je documenten met aangepaste thema's. Pas je merkkleuren toe zoals `#1A2D35` en lettertypes.
 
-<Expandable title="Advanced Theme Config" default-open="false">
-  Edit the theme in your config file:
+<Expandable title="Geavanceerde thema-configuratie" default-open="false">
+  Bewerk het thema in je configuratiebestand:
 
 ````yaml
 theme:
@@ -115,7 +115,7 @@ theme:
 </Expandable>
 
 <Callout kind="success">
-  Preview changes live before publishing.
+  Bekijk wijzigingen live voordat je publiceert.
 </Callout>
 
-These core features form the foundation of your documentation workflow. Start by structuring your first project and invite collaborators to build together.
+Deze kernfunctionaliteiten vormen de basis van je documentatieworkflow. Begin met het structureren van je eerste project en nodig medewerkers uit om samen te bouwen.

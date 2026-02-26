@@ -11,43 +11,43 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Documentation",
+        "tab": "Documentatie",
         "icon": "book",
         "groups": [
           {
-            "group": "Getting Started",
+            "group": "Aan de slag",
             "icon": "rocket",
             "pages": [
               {
-                "title": "Introduction",
+                "title": "Introductie",
                 "path": "introduction",
                 "icon": "home"
               },
               {
-                "title": "Quickstart",
+                "title": "Snelstart",
                 "path": "quickstart",
                 "icon": "zap"
               }
             ]
           },
           {
-            "group": "Core Concepts",
+            "group": "Kernconcepten",
             "icon": "layers",
             "pages": [
               {
-                "title": "Features",
+                "title": "Functionaliteiten",
                 "path": "features",
                 "icon": "file-text"
               },
               {
-                "title": "Integrations",
+                "title": "Integraties",
                 "path": "integrations",
                 "icon": "plug"
               }
             ]
           },
           {
-            "group": "Client Projects",
+            "group": "Klantprojecten",
             "icon": "folder",
             "pages": [
               {
@@ -60,7 +60,7 @@
         ]
       },
       {
-        "tab": "API Reference",
+        "tab": "API Referentie",
         "icon": "code",
         "groups": [
           {
@@ -71,43 +71,43 @@
         ]
       },
       {
-        "tab": "Help Center",
+        "tab": "Helpcentrum",
         "icon": "help-circle",
         "pages": [
           {
-            "title": "Help Center",
+            "title": "Helpcentrum",
             "path": "help-center",
             "icon": "home"
           },
           {
-            "group": "FAQs",
+            "group": "Veelgestelde vragen",
             "icon": "help-circle",
             "expandable": false,
             "pages": [
               {
-                "title": "Getting Started FAQ",
+                "title": "Aan de slag - FAQ",
                 "path": "help-center/faq/getting-started"
               }
             ]
           },
           {
-            "group": "Troubleshooting",
+            "group": "Probleemoplossing",
             "icon": "alert-triangle",
             "expandable": false,
             "pages": [
               {
-                "title": "Cannot Edit Docs",
+                "title": "Pagina's niet bewerkbaar",
                 "path": "help-center/troubleshooting/cannot-edit-docs"
               }
             ]
           },
           {
-            "group": "Guides",
+            "group": "Handleidingen",
             "icon": "book-open",
             "expandable": false,
             "pages": [
               {
-                "title": "Create New Doc",
+                "title": "Nieuwe pagina aanmaken",
                 "path": "help-center/guides/create-new-doc"
               }
             ]
@@ -115,11 +115,11 @@
         ]
       },
       {
-        "tab": "Changelog",
+        "tab": "Wijzigingslog",
         "icon": "clock",
         "pages": [
           {
-            "title": "Release History",
+            "title": "Versiegeschiedenis",
             "path": "changelog",
             "icon": "history"
           }

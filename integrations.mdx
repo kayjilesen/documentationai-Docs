@@ -1,52 +1,52 @@
 ---
-title: Integrations and Extensions
-description: Connect Kay Jilesen documentation with third-party tools to enhance workflow and automate documentation processes.
+title: Integraties en extensies
+description: Verbind je documentatie met tools van derden om je workflow te verbeteren en documentatieprocessen te automatiseren.
 ---
 
-## Overview
+## Overzicht
 
-Integrate Kay Jilesen documentation with popular third-party services to streamline your workflow. Automate updates from GitHub repositories, receive Slack notifications for changes, set up webhooks for real-time alerts, and use the API for custom extensions. You can also import content from external sources like Markdown files or CMS exports.
+Integreer je documentatie met populaire diensten van derden om je workflow te stroomlijnen. Automatiseer updates vanuit GitHub-repositories, ontvang Slack-notificaties bij wijzigingen, stel webhooks in voor realtime meldingen en gebruik de API voor aangepaste extensies. Je kunt ook content importeren uit externe bronnen zoals Markdown-bestanden of CMS-exports.
 
 <Callout kind="tip">
-Start with GitHub integration for automatic documentation syncing from your repo.
+Begin met de GitHub-integratie voor automatische documentatiesynchronisatie vanuit je repository.
 </Callout>
 
-## Popular Integrations
+## Populaire integraties
 
-Discover ready-to-use integrations that extend Kay Jilesen's capabilities.
+Ontdek kant-en-klare integraties die de mogelijkheden van het platform uitbreiden.
 
 <Columns cols={3}>
   <Card title="GitHub" icon="github" href="https://github.com">
-    Sync documentation directly from your GitHub repository. Push changes and see live updates.
+    Synchroniseer documentatie rechtstreeks vanuit je GitHub-repository. Push wijzigingen en zie live updates.
   </Card>
   <Card title="Slack" icon="message-circle" href="https://slack.com">
-    Get instant notifications in your Slack channels for documentation updates and reviews.
+    Ontvang directe notificaties in je Slack-kanalen bij documentatie-updates en reviews.
   </Card>
   <Card title="Zapier" icon="zap" href="https://zapier.com">
-    Connect to 5000+ apps via Zapier for no-code automations.
+    Verbind met 5000+ apps via Zapier voor no-code automatiseringen.
   </Card>
 </Columns>
 
-## Webhook Setup
+## Webhook instellen
 
-Set up webhooks to receive real-time notifications about documentation events like page updates or new versions.
+Stel webhooks in om realtime meldingen te ontvangen over documentatiegebeurtenissen zoals pagina-updates of nieuwe versies.
 
 <Steps>
-  <Step title="Create Webhook" icon="settings">
-    Navigate to your project settings and select the `Integrations` tab.
+  <Step title="Webhook aanmaken" icon="settings">
+    Ga naar je projectinstellingen en selecteer het tabblad `Integraties`.
   </Step>
-  <Step title="Add Endpoint URL" icon="link">
-    Enter your webhook URL, such as `https://your-webhook-url.com/kayjilesen`.
+  <Step title="Endpoint-URL toevoegen" icon="link">
+    Voer je webhook-URL in, bijvoorbeeld `https://your-webhook-url.com/kayjilesen`.
   </Step>
-  <Step title="Select Events" icon="bell">
-    Choose events like `page.updated` or `version.published`.
+  <Step title="Gebeurtenissen selecteren" icon="bell">
+    Kies gebeurtenissen zoals `page.updated` of `version.published`.
   </Step>
-  <Step title="Test and Save" icon="check-circle">
-    Send a test payload and verify receipt.
+  <Step title="Testen en opslaan" icon="check-circle">
+    Verstuur een test-payload en controleer de ontvangst.
   </Step>
 </Steps>
 
-Here is an example webhook payload:
+Hier is een voorbeeld van een webhook-payload:
 
 <CodeGroup tabs="JSON">
   ```json
@@ -62,19 +62,19 @@ Here is an example webhook payload:
   ```
 </CodeGroup>
 
-## API Access for Custom Extensions
+## API-toegang voor aangepaste extensies
 
-Use the Kay Jilesen API to build custom integrations. Authenticate with your API key.
+Gebruik de API om aangepaste integraties te bouwen. Authenticeer met je API-sleutel.
 
 <ParamField header="Authorization" param-type="string" required="true">
   Bearer token: `Bearer YOUR_API_KEY`
 </ParamField>
 
 <ParamField query="project" param-type="string" required="false">
-  Project identifier, e.g., `kay-jilesen-docs`.
+  Project-ID, bijv. `kay-jilesen-docs`.
 </ParamField>
 
-Example API call to list pages:
+Voorbeeld API-aanroep om pagina's op te halen:
 
 <Tabs>
   <Tab title="JavaScript" icon="code">
@@ -102,42 +102,42 @@ Example API call to list pages:
 </Tabs>
 
 <ResponseField name="pages" field-type="array" required="true">
-  Array of page objects with `id`, `path`, and `updated_at`.
+  Array van pagina-objecten met `id`, `path` en `updated_at`.
 </ResponseField>
 
 <Callout kind="alert">
-Never expose your `YOUR_API_KEY` in client-side code. Use server-side proxies for security.
+Stel je `YOUR_API_KEY` nooit bloot in client-side code. Gebruik server-side proxies voor beveiliging.
 </Callout>
 
-## Importing from External Sources
+## Importeren vanuit externe bronnen
 
-<Expandable title="Import from GitHub or CMS" default-open="true">
-Bring in existing documentation from GitHub repos, Notion, or WordPress exports.
+<Expandable title="Importeren vanuit GitHub of CMS" default-open="true">
+Haal bestaande documentatie op uit GitHub-repositories, Notion of WordPress-exports.
 
-### GitHub Import
-1. Connect your repo in settings.
-2. Select branches and paths.
-3. Map Markdown files to pages.
+### GitHub importeren
+1. Verbind je repository in de instellingen.
+2. Selecteer branches en paden.
+3. Koppel Markdown-bestanden aan pagina's.
 
-### CMS Import
-Supports CSV, JSON, or Markdown bulk uploads. Use the API endpoint `POST /v1/import` with a file payload.
+### CMS importeren
+Ondersteunt CSV-, JSON- of Markdown-bulkuploads. Gebruik het API-endpoint `POST /v1/import` met een bestandspayload.
 </Expandable>
 
-<Expandable title="Advanced: Custom Parsers">
-For non-standard formats, implement custom parsers using the API webhooks to process incoming data.
+<Expandable title="Geavanceerd: aangepaste parsers">
+Voor niet-standaard formaten kun je aangepaste parsers implementeren via de API-webhooks om binnenkomende data te verwerken.
 </Expandable>
 
-## Next Steps
+## Volgende stappen
 
 <Columns cols={2}>
-  <Card title="API Reference" icon="book-open" href="/authentication">
-    Dive into full API documentation and endpoints.
+  <Card title="API Referentie" icon="book-open" href="/authentication">
+    Duik in de volledige API-documentatie en endpoints.
   </Card>
-  <Card title="Troubleshooting" icon="help-circle" href="/help-center">
-    Common integration issues and solutions.
+  <Card title="Probleemoplossing" icon="help-circle" href="/help-center">
+    Veelvoorkomende integratieproblemen en oplossingen.
   </Card>
 </Columns>
 
 <Callout kind="success">
-Your integrations are now live. Monitor the activity log in your dashboard at `https://dashboard.example.com`.
+Je integraties zijn nu live. Monitor het activiteitenlogboek in je dashboard op `https://dashboard.example.com`.
 </Callout>
