@@ -5,7 +5,7 @@ description: "Hoe WordPress themes worden gedeployed naar productieservers."
 
 ## Overzicht
 
-Deployment verschilt per project maar volgt een standaard patroon: build lokaal, commit, en deploy naar de server.
+Deployments zijn altijd geautomatiseerd — nooit handmatig via (S)FTP. Er zijn twee methodes: **GitHub Actions** (CI/CD pipeline) of de **Deployer for Git** WordPress plugin.
 
 ---
 
@@ -15,8 +15,11 @@ Deployment verschilt per project maar volgt een standaard patroon: build lokaal,
 graph LR
     A["Lokaal ontwikkelen"] --> B["npm run build"]
     B --> C["git commit + push"]
-    C --> D["Deploy naar server"]
-    D --> E["Productie live"]
+    C --> D{"Deployment methode"}
+    D -->|"GitHub Actions"| E["CI/CD pipeline"]
+    D -->|"Deployer for Git"| F["WordPress plugin sync"]
+    E --> G["Productie live"]
+    F --> G
 ```
 
 <Steps>
@@ -34,7 +37,7 @@ graph LR
     ```
   </Step>
   <Step title="Deploy naar server" icon="upload">
-    Afhankelijk van het project: handmatig via SFTP, SSH rsync, of geautomatiseerd via GitHub Actions.
+    De deploy wordt automatisch getriggerd via GitHub Actions (bij push naar `main`) of handmatig via de Deployer for Git plugin in WordPress.
   </Step>
   <Step title="Controleer productie" icon="check-circle">
     Open de live site en controleer of alle wijzigingen correct zijn doorgevoerd. Let op:
@@ -49,31 +52,26 @@ graph LR
 ## Deployment Methodes
 
 <Tabs>
-  <Tab title="SFTP / Handmatig" icon="upload">
-    Upload gewijzigde bestanden via een SFTP-client (FileZilla, Cyberduck, of VS Code SFTP extensie).
-
-    **Upload alleen:**
-    - Gewijzigde PHP bestanden
-    - `assets/css/style.css` (gecompileerd)
-    - `assets/js/pagebuilder.js` (gebundeld)
-    - `acf-json/` bestanden (bij veldwijzigingen)
-
-    **Upload nooit:**
-    - `node_modules/`
-    - `.git/`
-  </Tab>
-  <Tab title="SSH / rsync" icon="terminal">
-    Snellere optie via de commandline:
-
-    ```bash
-    rsync -avz --exclude='node_modules' --exclude='.git' \
-        ./ user@server:/pad/naar/wp-content/themes/theme-naam/
-    ```
-  </Tab>
   <Tab title="GitHub Actions" icon="git-branch">
-    Geautomatiseerde deployment bij push naar `main`. Configuratie via `.github/workflows/deploy.yml`.
+    Geautomatiseerde deployment bij push naar `main` via een CI/CD pipeline. Configuratie via `.github/workflows/deploy.yml`.
 
-    Projecten met CI/CD: zie de CI/CD skill documentatie voor setup.
+    De workflow draait typisch:
+    1. Lint checks (ESLint, Stylelint)
+    2. Build assets (`npm run build`)
+    3. Deploy via rsync over SSH naar de server
+
+    Zie de CI/CD skill documentatie voor volledige setup.
+  </Tab>
+  <Tab title="Deployer for Git" icon="upload">
+    De **Deployer for Git** WordPress plugin deployt automatisch vanuit een Git repository naar de server.
+
+    **Setup:**
+    1. Installeer de plugin op de productieserver
+    2. Koppel de GitHub repository
+    3. Configureer welke branch (meestal `main`) wordt gedeployed
+    4. Bij een push naar de gekoppelde branch wordt de code automatisch gesynchroniseerd
+
+    Dit is de eenvoudigste optie voor projecten zonder CI/CD pipeline.
   </Tab>
 </Tabs>
 
