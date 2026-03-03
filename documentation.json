@@ -216,6 +216,11 @@
             "title": "Bestelportaal - Gezellig",
             "path": "client-projects/bestelportaal-gezellig",
             "icon": "shopping-cart"
+          },
+          {
+            "title": "CMS Energy",
+            "path": "client-projects/energiesystemen",
+            "icon": "zap"
           }
         ]
       },
