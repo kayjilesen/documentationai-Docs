@@ -1,0 +1,112 @@
+---
+title: "Basis Setup"
+description: "Shopify Partners account, development store en Shopify CLI opzetten voor custom theme development."
+---
+
+## Overzicht
+
+Voordat je aan een custom Shopify shop begint, heb je drie dingen nodig: een **Shopify Partners account**, een **development store** (gratis voor ontwikkelaars), en de **Shopify CLI** op je machine.
+
+<Callout kind="info" title="Waarom Partners?">
+  Een Partners account geeft je gratis onbeperkte development stores, toegang tot klant-stores via collaborator access, en de mogelijkheid om apps en themes te ontwikkelen zonder betaalde subscription.
+</Callout>
+
+## Stappen
+
+<Steps>
+  <Step title="Partners account aanmaken" icon="user-plus">
+    Ga naar [partners.shopify.com](https://partners.shopify.com) en maak een gratis Partners account aan. Vul bedrijfsgegevens in (als freelancer mag je je eigen naam gebruiken).
+  </Step>
+
+  <Step title="Development store opzetten" icon="store">
+    In het Partners dashboard: **Stores → Add store → Create development store**.
+
+    - **Store name**: `kj-dev-<projectnaam>` (makkelijk te herkennen)
+    - **Purpose**: *Build a new store for a client* of *Test an app or theme*
+    - **Store type**: Standaard Online Store
+
+    Je krijgt een URL zoals `kj-dev-projectnaam.myshopify.com`.
+
+    <Callout kind="tip">
+      Dev stores zijn gratis en onbeperkt. Pas wanneer je overzet naar een betaald plan (live-gaan) gaan de kosten lopen. Klanten hebben zelf een Shopify subscription nodig.
+    </Callout>
+  </Step>
+
+  <Step title="Shopify CLI installeren" icon="terminal">
+    De CLI vereist Node.js 18+. Installeer globaal via npm:
+
+    ```bash
+    npm install -g @shopify/cli @shopify/theme
+    ```
+
+    Verifieer:
+
+    ```bash
+    shopify version
+    ```
+  </Step>
+
+  <Step title="Inloggen op je store" icon="log-in">
+    Log de CLI in op je dev store:
+
+    ```bash
+    shopify auth login --store kj-dev-projectnaam.myshopify.com
+    ```
+
+    Dit opent een browser voor OAuth authenticatie. Daarna kan de CLI met je store communiceren.
+  </Step>
+
+  <Step title="Git repo initialiseren" icon="git-branch">
+    Maak lokaal een projectmap aan en initialiseer Git. Shopify heeft wel een ingebouwde theme history, maar Git is de bron van waarheid:
+
+    ```bash
+    mkdir shopify-projectnaam && cd shopify-projectnaam
+    git init
+    ```
+
+    Voeg een `.gitignore` toe met minimaal:
+
+    ```
+    node_modules/
+    .DS_Store
+    .shopify/
+    .env
+    ```
+  </Step>
+
+  <Step title="Test de verbinding" icon="check-circle">
+    Start een development server die live met je dev store synct:
+
+    ```bash
+    shopify theme dev
+    ```
+
+    Dit pulled het actieve theme, serveert het lokaal op `http://127.0.0.1:9292` en toont wijzigingen live in de browser.
+
+    <Callout kind="success">
+      Als je bij deze stap een werkende preview ziet met je dev store content, is de basis setup klaar.
+    </Callout>
+  </Step>
+</Steps>
+
+## Handige CLI Commands
+
+| Commando | Doel |
+|----------|------|
+| `shopify theme dev` | Lokale development server met hot reload |
+| `shopify theme pull` | Haal het live theme op vanuit de store |
+| `shopify theme push` | Upload lokaal theme naar store (als unpublished) |
+| `shopify theme push --live` | Publiceer direct als live theme |
+| `shopify theme list` | Toon alle themes in de store |
+| `shopify theme check` | Linter voor Liquid en theme best practices |
+
+## Volgende stap
+
+<Columns cols={2}>
+  <Card title="Theme Development" icon="code" href="/shopify/theme-development">
+    Start met een custom theme op basis van Dawn.
+  </Card>
+  <Card title="Overzicht" icon="book" href="/shopify/overzicht">
+    Terug naar het Shopify overzicht.
+  </Card>
+</Columns>

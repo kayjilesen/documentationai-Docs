@@ -125,6 +125,37 @@
             ]
           },
           {
+            "group": "Shopify",
+            "icon": "shopping-bag",
+            "pages": [
+              {
+                "title": "Overzicht",
+                "path": "shopify/overzicht",
+                "icon": "book"
+              },
+              {
+                "title": "Basis Setup",
+                "path": "shopify/basis-setup",
+                "icon": "rocket"
+              },
+              {
+                "title": "Theme Development",
+                "path": "shopify/theme-development",
+                "icon": "code"
+              },
+              {
+                "title": "Sections & Blocks",
+                "path": "shopify/sections-blocks",
+                "icon": "layers"
+              },
+              {
+                "title": "Deployment",
+                "path": "shopify/deployment",
+                "icon": "upload"
+              }
+            ]
+          },
+          {
             "group": "E-mail Setup",
             "icon": "mail",
             "pages": [

@@ -1,0 +1,140 @@
+---
+title: "Theme Development"
+description: "Custom Shopify theme bouwen op basis van Dawn: folderstructuur, Liquid, en lokale workflow."
+---
+
+## Overzicht
+
+Een custom Shopify theme wordt bij voorkeur gebouwd bovenop **Dawn**, Shopify's open-source reference theme. Dawn is goed onderhouden, volledig gelokaliseerd, en implementeert de nieuwste Online Store 2.0 patronen (JSON templates, sections everywhere, app blocks).
+
+<Callout kind="info" title="Dawn of from scratch?">
+  Voor 90% van de projecten is een Dawn fork de snelste route. Start alleen blank als de klant een totaal afwijkende structuur nodig heeft én je alle edge cases (cart drawer, variants, search, localization) zelf wilt bouwen.
+</Callout>
+
+## Stappen
+
+<Steps>
+  <Step title="Dawn clonen als startpunt" icon="download">
+    Initialiseer een nieuw theme gebaseerd op Dawn:
+
+    ```bash
+    shopify theme init projectnaam-theme --clone-url https://github.com/Shopify/dawn.git
+    cd projectnaam-theme
+    ```
+
+    Verwijder de `.git` map van Dawn en init opnieuw zodat de history van jouw project begint:
+
+    ```bash
+    rm -rf .git && git init && git add . && git commit -m "Initial commit (Dawn base)"
+    ```
+  </Step>
+
+  <Step title="Folderstructuur begrijpen" icon="folder">
+    Een Shopify theme heeft een vaste structuur — bestandsnamen en folders zijn niet aanpasbaar:
+
+    ```
+    projectnaam-theme/
+    ├── assets/           # CSS, JS, fonts, images (plat, geen submappen)
+    ├── config/           # settings_schema.json (theme editor) + settings_data.json
+    ├── layout/           # theme.liquid (hoofdlayout), checkout.liquid (Plus)
+    ├── locales/          # i18n vertalingen (nl.json, en.default.json)
+    ├── sections/         # Herbruikbare section blocks (.liquid)
+    ├── snippets/         # Kleine Liquid partials
+    ├── templates/        # Page templates (.json voor OS 2.0, .liquid legacy)
+    └── blocks/           # App blocks / theme blocks (nieuwer)
+    ```
+
+    <Callout kind="warning">
+      Shopify vereist deze exacte folderstructuur. Je kunt geen subfolders aanmaken in `sections/` of `snippets/` — alles staat plat.
+    </Callout>
+  </Step>
+
+  <Step title="Theme.liquid en layout" icon="layout">
+    `layout/theme.liquid` is de hoofdlayout van elke page. Hier zitten `<head>`, navigatie, footer, en de `{{ content_for_layout }}` placeholder waar template content gerendered wordt.
+
+    Belangrijke tags:
+    - `{{ content_for_header }}` — verplicht voor Shopify scripts
+    - `{{ content_for_layout }}` — template output
+    - `{% section 'header' %}` / `{% section 'footer' %}` — vaste sections
+  </Step>
+
+  <Step title="JSON templates (OS 2.0)" icon="file-text">
+    Moderne Shopify themes gebruiken JSON templates in `templates/` in plaats van Liquid. Bijvoorbeeld `templates/index.json`:
+
+    ```json
+    {
+      "sections": {
+        "hero": {
+          "type": "hero-banner",
+          "settings": { "heading": "Welkom" }
+        },
+        "featured": {
+          "type": "featured-collection",
+          "settings": { "collection": "frontpage" }
+        }
+      },
+      "order": ["hero", "featured"]
+    }
+    ```
+
+    Dit geeft de klant volledige controle via de theme editor: sections toevoegen, verwijderen, herordenen.
+  </Step>
+
+  <Step title="Lokale development starten" icon="play">
+    Start de dev server:
+
+    ```bash
+    shopify theme dev
+    ```
+
+    Dit opent een preview URL die live met je dev store synct. Wijzigingen in Liquid, CSS en JS worden direct zichtbaar zonder page reload (hot reload).
+
+    <Callout kind="tip">
+      Gebruik `--theme <id>` om tegen een specifiek unpublished theme te werken in plaats van de live theme. Zo kun je veilig testen zonder klant-content te verstoren.
+    </Callout>
+  </Step>
+
+  <Step title="Theme check linting" icon="check-circle">
+    Draai de linter regelmatig om Liquid best practices en performance issues op te vangen:
+
+    ```bash
+    shopify theme check
+    ```
+
+    Fixt waarschuwingen over `{% render %}` vs `{% include %}`, ontbrekende templates, en undefined objects.
+  </Step>
+</Steps>
+
+## Liquid Basics
+
+Shopify gebruikt **Liquid** als templating taal. Belangrijkste constructies:
+
+| Syntax | Doel |
+|--------|------|
+| `{{ variable }}` | Output een waarde |
+| `{% if %}` / `{% endif %}` | Conditionals |
+| `{% for product in collection.products %}` | Loops |
+| `{% render 'snippet-name' %}` | Include partial (voorkeur boven `include`) |
+| `{% section 'name' %}` | Render een section |
+| `{{ product.title \| escape }}` | Filters |
+
+## Shopify Globals
+
+Veelgebruikte objecten die altijd beschikbaar zijn in Liquid:
+
+- `shop` — winkelinfo (naam, domain, email, currency)
+- `cart` — huidige winkelwagen
+- `customer` — ingelogde klant (of `nil`)
+- `product`, `collection`, `article` — context afhankelijk van template
+- `settings` — theme settings uit `settings_schema.json`
+
+## Volgende stap
+
+<Columns cols={2}>
+  <Card title="Sections & Blocks" icon="layers" href="/shopify/sections-blocks">
+    Modulaire content met schema-gebaseerde settings.
+  </Card>
+  <Card title="Deployment" icon="upload" href="/shopify/deployment">
+    Theme pushen en live publiceren.
+  </Card>
+</Columns>
