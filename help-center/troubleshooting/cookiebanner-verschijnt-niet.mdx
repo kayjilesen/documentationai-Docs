@@ -1,0 +1,100 @@
+---
+title: Cookiebanner verschijnt niet in custom theme
+description: De cookie-consent plugin is actief, maar er verschijnt geen banner op de site. Meestal ontbreekt wp_body_open() in header.php.
+---
+
+## Symptomen
+
+- De cookie-consent plugin is geïnstalleerd en geactiveerd, maar er verschijnt geen banner op de front-end
+- De banner werkt wél in de WP-admin preview of op een standaard theme (Twenty Twenty-Something)
+- Scripts die geblokkeerd zouden moeten worden tot toestemming (Analytics, Meta Pixel, embeds) laden gewoon door
+- Geen JavaScript-fouten in de console — er wordt simpelweg niets gerenderd
+
+## Mogelijke oorzaken
+
+- **`wp_body_open()` ontbreekt in `header.php`** — verreweg de meest voorkomende oorzaak bij oudere custom themes
+- De plugin is helemaal niet geïnstalleerd (banner op productie, maar niet in je lokale kopie)
+- De banner wordt verborgen door CSS uit het theme (`overflow: hidden`, z-index-conflict)
+- Pagina-caching serveert een versie van vóór de fix
+
+## Waarom dit gebeurt
+
+De hook `wp_body_open` bestaat pas sinds **WordPress 5.2** (mei 2019). Themes die daarvóór zijn gebouwd — of geport zijn van een oudere boilerplate — missen hem vaak, omdat er lang geen officiële plek was om markup direct na de openende `<body>`-tag te injecteren.
+
+Vrijwel elke cookie-consent plugin hangt zijn banner-markup en script-blocker aan die hook. Zonder de hook wordt de callback nooit uitgevoerd en output de plugin niets. De plugin zelf werkt prima; het theme biedt alleen geen aanhechtingspunt.
+
+<Callout kind="info">
+  Dit raakt niet alleen cookiebanners. GTM-noscript-fallbacks, skip-links voor toegankelijkheid en diverse A/B-testing tools gebruiken dezelfde hook. Ontbreekt hij, dan falen die allemaal stilletjes.
+</Callout>
+
+## Snelle oplossing
+
+<Steps>
+  <Step title="Controleer of de hook aanwezig is">
+    Draai dit vanuit je theme-map:
+
+    ```bash
+    grep -rn "wp_body_open" --include="*.php" .
+    ```
+
+    Geen resultaat? Dan is dit vrijwel zeker je probleem. Controleer meteen ook of `wp_head()` en `wp_footer()` er wél zijn — ontbreken die ook, dan is er meer aan de hand dan alleen de cookiebanner.
+  </Step>
+  <Step title="Voeg de hook toe aan header.php">
+    Plaats `wp_body_open()` direct ná de openende `<body>`-tag, vóór alle andere markup:
+
+    ```php
+    <body <?php body_class(); ?>>
+    <?php wp_body_open(); ?>
+    ```
+
+    <Callout kind="warning">
+      De volgorde is belangrijk. Staat de hook ná een topbar, header of andere output, dan kan de banner onder je eigen markup vallen of buiten de viewport belanden.
+    </Callout>
+  </Step>
+  <Step title="Leeg de cache en verifieer">
+    Leeg alle caches (plugin, server, CDN) en open de site in een incognitovenster — je hebt de banner mogelijk al eerder geaccepteerd in je normale sessie.
+
+    Bekijk vervolgens de paginabron. De banner-markup hoort direct na de `<body>`-tag te staan.
+  </Step>
+</Steps>
+
+## Als de hook er al stond
+
+<Expandable title="Plugin is niet geïnstalleerd" default-open="false">
+  Controleer de plugins-map van de site:
+
+  ```bash
+  ls wp-content/plugins/
+  ```
+
+  Bij een lokale kopie van een live site is de plugins-map vaak niet meegesynct. Draait de plugin wel op productie maar niet lokaal, dan is de ontbrekende hook alsnog een echte bug — hij valt lokaal alleen niet op.
+</Expandable>
+
+<Expandable title="Banner wordt verborgen door theme-CSS" default-open="false">
+  Zoek het banner-element in de DevTools en controleer of het in de DOM aanwezig is. Zit de markup er wél maar zie je niets, kijk dan naar:
+
+  - `overflow: hidden` op `<body>` of `<html>` — komt veel voor bij themes die horizontale scroll onderdrukken
+  - Een z-index-conflict met een fixed header of overlay
+  - Een `position: fixed` container die de banner buiten de viewport duwt
+
+  De banner heeft meestal een hoge z-index nodig. Controleer welke waarden je theme al gebruikt voor headers en modals.
+</Expandable>
+
+<Expandable title="Caching serveert een oude versie" default-open="false">
+  Pagina-caching (WP Rocket, LiteSpeed, Cloudflare, server-side full-page cache) kan een gecachte versie van vóór de fix blijven serveren. Leeg alle cachelagen en test in incognito.
+
+  Test bij twijfel met een cache-buster in de URL: `?nocache=1`.
+</Expandable>
+
+## Preventie
+
+<Callout kind="tip" title="Neem de hook standaard op in je boilerplate">
+  Zorg dat `wp_body_open()` vanaf het begin in je theme-boilerplate zit, samen met `wp_head()` en `wp_footer()`. Het is één regel die je een frustrerende debugsessie bespaart zodra er een cookie-plugin, GTM-container of toegankelijkheidstool bij komt.
+
+  Bij het overnemen van een bestaand theme: draai die `grep` even als onderdeel van je eerste inventarisatie.
+</Callout>
+
+## Gerelateerd
+
+- [Theme Architectuur](wordpress/theme-architecture) — opbouw van header.php en de standaard hooks
+- [KJ-Boilerplate](client-projects/kj-boilerplate) — de basis waarin deze hooks al zijn opgenomen

@@ -294,6 +294,10 @@
               {
                 "title": "Pagina's niet bewerkbaar",
                 "path": "help-center/troubleshooting/cannot-edit-docs"
+              },
+              {
+                "title": "Cookiebanner verschijnt niet",
+                "path": "help-center/troubleshooting/cookiebanner-verschijnt-niet"
               }
             ]
           },
