@@ -38,13 +38,16 @@ Ontdek de kernmogelijkheden die deze documentatieruimte krachtig maken voor je f
   </Card>
 </Columns>
 
-## Quickstart
+## Aan de slag via Git
 
-Ga binnen enkele minuten aan de slag met deze essentiële stappen.
+Deze documentatie beheer je volledig via de Git-repository. Er is geen los dashboard nodig om pagina's toe te voegen of te wijzigen.
 
 <Steps>
-  <Step title="Maak je eerste document" icon="plus">
-    Navigeer naar het dashboard en klik op "Nieuw document". Kies een projectmap zoals "Olli" of "Ruud Lenssen".
+  <Step title="Clone of open de docs-repo" icon="git-branch">
+    Open de repository lokaal en werk vanuit je favoriete editor in de map met `.mdx` bestanden.
+  </Step>
+  <Step title="Pas content aan" icon="edit-3">
+    Werk bestaande pagina's bij of maak nieuwe pagina's aan. Gebruik duidelijke titels, beschrijvingen en een consistente structuur.
 
     ```markdown
     # Projectstrategie
@@ -53,11 +56,8 @@ Ga binnen enkele minuten aan de slag met deze essentiële stappen.
     - Sitesnelheid verbeteren
     ```
   </Step>
-  <Step title="Organiseer projecten" icon="folder">
-    Gebruik mappen om documenten per klant te groeperen. Maak bijvoorbeeld secties aan voor "Strategie", "Design" en "Code".
-  </Step>
-  <Step title="Publiceer & deel" icon="share-2">
-    Klik op "Publiceren" om een live link te genereren. Deel met klanten via e-mail of verwerk in voorstellen.
+  <Step title="Commit en push" icon="upload">
+    Commit je wijzigingen en push naar de hoofdbranch. De documentatie wordt daarna automatisch gesynchroniseerd.
   </Step>
 </Steps>
 
@@ -71,7 +71,7 @@ Krijg snel toegang tot belangrijke secties via deze gidsen.
 
     | Sectie | Beschrijving |
     |--------|-------------|
-    | [Quickstart](/quickstart) | Stel je eerste project in |
+    | [Git Workflow](/devops/git-workflow) | Werk documentatie bij via commits |
     | [Authenticatie](/authentication) | Beveiligde toegang instellen |
     | [Changelog](/changelog) | Laatste updates |
   </Tab>
@@ -112,5 +112,5 @@ Krijg snel toegang tot belangrijke secties via deze gidsen.
 </Expandable>
 
 <Callout kind="tip">
-  Klaar om dieper te duiken? Bekijk de [Quickstart](/quickstart) gids om je eerste projectdocument te maken.
+  Klaar om dieper te duiken? Bekijk de [Git Workflow](/devops/git-workflow) voor het complete proces van branchen, committen en deployen.
 </Callout>
