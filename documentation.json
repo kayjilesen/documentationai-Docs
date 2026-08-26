@@ -124,9 +124,14 @@
                     "icon": "database"
                   },
                   {
-                    "title": "wp-content & uploads",
-                    "path": "wordpress/wp-content",
+                    "title": "Bestanden",
+                    "path": "wordpress/bestanden",
                     "icon": "folder"
+                  },
+                  {
+                    "title": "Configuratie",
+                    "path": "wordpress/configuratie",
+                    "icon": "settings"
                   }
                 ]
               },
@@ -195,56 +200,62 @@
             ]
           },
           {
-            "group": "Shopify",
-            "icon": "shopping-bag",
-            "expandable": true,
+            "group": "Shopify & e-mail",
+            "icon": "package",
             "pages": [
               {
-                "title": "Overzicht",
-                "path": "shopify/overzicht",
-                "icon": "book"
+                "group": "Shopify",
+                "icon": "shopping-bag",
+                "expandable": true,
+                "pages": [
+                  {
+                    "title": "Overzicht",
+                    "path": "shopify/overzicht",
+                    "icon": "book"
+                  },
+                  {
+                    "title": "Basis Setup",
+                    "path": "shopify/basis-setup",
+                    "icon": "rocket"
+                  },
+                  {
+                    "title": "Theme Development",
+                    "path": "shopify/theme-development",
+                    "icon": "code"
+                  },
+                  {
+                    "title": "Sections & Blocks",
+                    "path": "shopify/sections-blocks",
+                    "icon": "layers"
+                  },
+                  {
+                    "title": "Deployment",
+                    "path": "shopify/deployment",
+                    "icon": "upload"
+                  }
+                ]
               },
               {
-                "title": "Basis Setup",
-                "path": "shopify/basis-setup",
-                "icon": "rocket"
-              },
-              {
-                "title": "Theme Development",
-                "path": "shopify/theme-development",
-                "icon": "code"
-              },
-              {
-                "title": "Sections & Blocks",
-                "path": "shopify/sections-blocks",
-                "icon": "layers"
-              },
-              {
-                "title": "Deployment",
-                "path": "shopify/deployment",
-                "icon": "upload"
-              }
-            ]
-          },
-          {
-            "group": "E-mail Setup",
-            "icon": "mail",
-            "expandable": true,
-            "pages": [
-              {
-                "title": "Microsoft 365 (PAX8)",
-                "path": "email/microsoft-365",
-                "icon": "mail"
-              },
-              {
-                "title": "Google Workspace",
-                "path": "email/google-workspace",
-                "icon": "mail"
-              },
-              {
-                "title": "MXRoute",
-                "path": "email/mxroute",
-                "icon": "mail"
+                "group": "E-mail Setup",
+                "icon": "mail",
+                "expandable": true,
+                "pages": [
+                  {
+                    "title": "Microsoft 365 (PAX8)",
+                    "path": "email/microsoft-365",
+                    "icon": "mail"
+                  },
+                  {
+                    "title": "Google Workspace",
+                    "path": "email/google-workspace",
+                    "icon": "mail"
+                  },
+                  {
+                    "title": "MXRoute",
+                    "path": "email/mxroute",
+                    "icon": "mail"
+                  }
+                ]
               }
             ]
           },
