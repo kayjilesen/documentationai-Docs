@@ -45,6 +45,11 @@
                 "icon": "layers"
               },
               {
+                "title": "Pagebuilder Systeem",
+                "path": "wordpress/pagebuilder-blocks",
+                "icon": "layers"
+              },
+              {
                 "title": "Components",
                 "path": "acf/components",
                 "icon": "puzzle"
@@ -53,6 +58,11 @@
                 "title": "Options Pages",
                 "path": "acf/options-pages",
                 "icon": "settings"
+              },
+              {
+                "title": "ACF Patronen & Conventies",
+                "path": "wordpress/acf-patterns",
+                "icon": "database"
               }
             ]
           },
@@ -103,6 +113,23 @@
             "group": "WordPress Development",
             "icon": "code",
             "pages": [
+              {
+                "group": "Basis",
+                "icon": "book-open",
+                "expandable": true,
+                "pages": [
+                  {
+                    "title": "Database",
+                    "path": "wordpress/database",
+                    "icon": "database"
+                  },
+                  {
+                    "title": "wp-content & uploads",
+                    "path": "wordpress/wp-content",
+                    "icon": "folder"
+                  }
+                ]
+              },
               {
                 "title": "Theme Architectuur",
                 "path": "wordpress/theme-architecture",
