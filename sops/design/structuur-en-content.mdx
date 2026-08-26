@@ -1,44 +1,72 @@
 ---
 title: "Design — Structuur & content"
-description: "Sitemap, templates, contenttypes en formulieren afspreken vóór/tijdens design."
+description: "Website-structuur in FigJam: hoofdpagina's met secties en CTA's, plus CPT's en content."
 ---
 
-<Callout kind="info" title="Dit is een SOP (opzet)">
-  Voorkomt dat development gokt welke pagina’s en CPT’s er komen.
+<Callout kind="info" title="Dit is een SOP">
+  Structuur werk je uit in **FigJam** — niet alleen een platte sitemap-lijst. Elke hoofdpagina toont **secties** en **CTA’s**, zodat Design (Figma) en Bouwen weten wat er per pagina komt.
 </Callout>
 
 ## Doel
 
-Duidelijke informatie-architectuur: welke URL’s/templates, welke herhaalbare content, welke formulieren.
+Eén FigJam-overzicht als bron van waarheid voor IA: pagina’s, volgorde van secties, CTA’s, en wat later CPT/archief wordt.
+
+## FigJam-structuur
+
+Per **hoofdpagina** (kolom of cluster):
+
+1. **Paginanaam** (bijv. Home, Over ons, Projecten, Contact)  
+2. **Secties** in volgorde (bijv. Hero, Voor wie?, FAQ) — namen bij voorkeur al in de trant van `Section - …` waar dat helpt  
+3. **CTA’s** expliciet (bijv. Call to Action → Kom in contact, Download, Bekijk vacatures)  
+4. **Doorklikken** naar child-templates (bijv. Projectdetail, Artikel) als eigen blokken  
+
+Legal/tekstpagina’s (Disclaimer, Privacy & Cookies) ook opnemen, al is het kort.
+
+**Voorbeeld-opbouw** (zoals bij projecten als Hoex): Home met Hero → korte over ons → … → CTA; landings met Informatie / FAQ / Succesverhaal / CTA; archieven met filtering; singles met details + gerelateerd + CTA.
 
 ## Stappen
 
 <Steps>
-  <Step title="Sitemap / navigatie" icon="map">
-    Hoofdnavigatie + belangrijke landings. Noteer ook legal (privacy, cookies, voorwaarden).
+  <Step title="FigJam starten" icon="map">
+    Nieuw FigJam (of board in het projectbestand). Alle hoofdpagina’s + primaire navigatie.
   </Step>
-  <Step title="Template-lijst" icon="layout-template">
-    Bijv. home, landings, over ons, contact, single CPT, archief. Alles wat een apart template of pagebuilder-set nodig heeft.
+  <Step title="Secties per pagina" icon="layers">
+    Onder elke pagina de secties in scroll-volgorde. Herhaalbare patronen (FAQ, CTA, succesverhaal) consequent benoemen.
   </Step>
-  <Step title="CPT’s & taxonomieën" icon="database">
-    Alleen wat de klant echt beheert (projecten, vacatures, …). Geen CPT “omdat het kan”.
+  <Step title="CTA’s markeren" icon="mouse-pointer-click">
+    Elke pagina: welke CTA(‘s), waarheen (contact, download, externe vacature-pagina, …). Geen “impliciete” CTA’s alleen in Figma.
+  </Step>
+  <Step title="CPT’s & templates" icon="database">
+    Wat is pagina vs archief vs single (projecten, blog, …)? Alleen CPT’s die de klant beheert. Filtergedrag noteren indien relevant.
   </Step>
   <Step title="Formulieren" icon="mail">
-    Welke forms (contact, offerte, nieuwsbrief)? Standaard = [SureForms](/wordpress/plugins/formulieren); Gravity alleen bij harde feature-eis.
+    Welke forms op welke pagina? Standaard [SureForms](/wordpress/plugins/formulieren); Gravity alleen bij harde feature-eis.
   </Step>
   <Step title="Content" icon="file-text">
-    Wie levert teksten/foto’s? Deadlines? Placeholders OK tot staging-review, maar kritieke claims/juridisch niet verzinnen.
+    Wie levert teksten/foto’s? Deadlines? Placeholders OK tot staging; juridische claims niet verzinnen.
+  </Step>
+  <Step title="Akkoord" icon="check">
+    Intern (en zo nodig klant) FigJam als go voor Figma UI. Link in projectdossier / kickoff-notities.
   </Step>
 </Steps>
 
 ## Af
 
-- [ ] Sitemap of navigatiestructuur akkoord (intern of met klant)
-- [ ] Template-/paginalijst compleet genoeg om te plannen
+- [ ] FigJam met alle hoofdpagina’s
+- [ ] Per pagina: secties in volgorde
+- [ ] Per pagina: CTA’s benoemd (doel + bestemming)
+- [ ] Child-templates (single project/artikel, …) zichtbaar waar nodig
+- [ ] Legal-pagina’s opgenomen
 - [ ] CPT’s/taxonomieën besloten (of “geen”)
 - [ ] Formulierenlijst + plugin-keuze (default SureForms)
 - [ ] Contentverantwoordelijke + timing bekend
+- [ ] FigJam-link bereikbaar voor design + development
+
+## Koppeling naar Figma
+
+FigJam = **wat** op welke pagina. Daarna [Merk & Figma](/sops/design/merk-en-figma): UI op 1920/12-grid, components, `Section - …` / `Card - …`.
 
 ## Volgende
 
-→ [Review & handoff](/sops/design/review-en-handoff)
+→ [Review & handoff](/sops/design/review-en-handoff) (na of parallel met Figma UI)  
+→ Of eerst [Merk & Figma](/sops/design/merk-en-figma) als FigJam akkoord is
