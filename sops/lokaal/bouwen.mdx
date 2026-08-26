@@ -1,53 +1,66 @@
 ---
 title: "Lokaal — Bouwen"
-description: "Pagebuilder-blokken, templates, CPT’s, formulieren en content tijdens development."
+description: "Van Figma naar pagebuilder-blokken, templates en content in het theme."
 ---
 
-<Callout kind="info" title="Dit is een SOP (opzet)">
-  Doorlopende fase tot staging/live. Werk in slices: eerst home + kernblokken, dan rest.
+<Callout kind="info" title="Dit is een SOP">
+  Theme-structuur staat ([Theme / boilerplate](/sops/lokaal/theme-boilerplate)). Nu vullen o.b.v. FigJam + Figma: globals, blocks, CPT’s, content.
 </Callout>
 
 ## Doel
 
-Site functioneel en visueel volgens Figma-handoff, binnen KJ-conventies, commitbaar en deploybaar.
+Site lokaal volgens handoff: secties als pagebuilder-blokken, herbruikbare components, realistische content — klaar voor eerste deploy naar `projectnaam.kayjilesen.dev`.
 
-## Stappen (herhaalbaar)
+## Volgorde (aanbevolen)
 
 <Steps>
-  <Step title="Tokens → Tailwind" icon="droplet">
-    Kleuren/fonts uit design in theme-config. Zie [Tailwind Setup](/wordpress/tailwind-setup).
+  <Step title="Tokens / merk in theme" icon="droplet">
+    Kleuren en fonts uit Figma **Brand** → `tailwind.config.js` + `@font-face` in `assets/css/input.css`. Zie [Tailwind Setup](/wordpress/tailwind-setup).
   </Step>
-  <Step title="Globals" icon="settings">
-    Header, footer, options (ACF options pages). Zie [Options Pages](/acf/options-pages).
+  <Step title="Header & footer" icon="layout">
+    Markup in `header.php` / `footer.php` (+ helpers). Options via ACF waar de boilerplate dat al voorziet ([Options Pages](/acf/options-pages)).
   </Step>
-  <Step title="Blokken" icon="layers">
-    Pagebuilder-blokken: PHP + CSS + ACF. Zie [Pagebuilder](/acf/pagebuilder), [Pagebuilder Systeem](/wordpress/pagebuilder-blocks), [Components](/acf/components).
+  <Step title="Pagebuilder-blokken" icon="layers">
+    Per Figma `Section - …` / `Card - …`:
+
+    1. ACF layout-JSON (+ clone section styling, geen eigen padding-velden)  
+    2. Map onder `templates/pagebuilder/<slug>/` (`*.php`, `*.css`, evt. `*.js`)  
+    3. Registratie in pagebuilder flexible content  
+
+    Naslag: [Pagebuilder](/acf/pagebuilder), [Pagebuilder Systeem](/wordpress/pagebuilder-blocks), [Components](/acf/components).
+  </Step>
+  <Step title="PHP-components" icon="box">
+    Buttons e.d. in `templates/components/` — gelijk houden aan Figma-components.
   </Step>
   <Step title="CPT’s" icon="database">
-    Alleen volgens [Structuur & content](/sops/design/structuur-en-content). Labels NL, rewrites netjes.
+    Alleen wat in [FigJam](/sops/design/structuur-en-content) staat → `inc/post-types.php` (+ archief/single templates indien nodig).
   </Step>
-  <Step title="Formulieren" icon="mail">
-    [SureForms](/wordpress/plugins/formulieren) (of GF bij harde eis). Lokaal plaatsen; mailtest echt op staging.
-  </Step>
-  <Step title="Tracking-hooks (optioneel vroeg)" icon="activity">
-    Consent-aware generate_lead / gtag-voorbereiding in theme. Scripts pas actief i.c.m. SureCookie op staging/live.
+  <Step title="Formulieren plaatsen" icon="mail">
+    [SureForms](/wordpress/plugins/formulieren) op contact/CTA-pagina’s. Echte mailtest gebeurt op staging.
   </Step>
   <Step title="Content seeden" icon="file">
-    Demo-pagina’s met realistische contentlengtes. Geen productie-secrets in content.
+    Pagina’s met pagebuilder-slices; lengtes zoals in design. Geen productie-secrets.
   </Step>
-  <Step title="Kwaliteit" icon="check-square">
-    Responsive steekproef, `npm run build` clean, ACF-JSON gecommit bij veldwijzigingen.
+  <Step title="Steekproef" icon="check-square">
+    Desktop + mobiel op `.local`. ACF-JSON gecommit bij veldwijzigingen. CSS/JS: als styles niet meekomen → eenmalig `npm run dev` / `npm run build` in de themamap.
   </Step>
 </Steps>
 
-## Af (per milestone / vóór staging-push)
+## Wat je níet lokaal hoeft “af” te hebben
 
-- [ ] Afgesproken templates/blokken voor deze slice staan
-- [ ] `npm run build` zonder errors
-- [ ] ACF-JSON gecommit waar nodig
-- [ ] Geen secrets in Git
-- [ ] Formulieren aanwezig (mailbewijs volgt op staging)
-- [ ] Desktop + mobiel steekproef op slice OK
+- FluentSMTP / Pushover / SureCookie-productiepresets → [Staging — Stack](/sops/staging/stack-en-testen)
+- DNS, `*.kayjilesen.dev` → Staging
+- Domein-helper fine-tuning → wanneer staging-URL bekend is
+
+## Af (per slice / vóór staging)
+
+- [ ] Tokens/fonts uit Brand doorgevoerd (of ticket waarom later)
+- [ ] Header/footer bruikbaar
+- [ ] Afgesproken sections/cards van deze slice als blokken (+ ACF JSON in Git)
+- [ ] CPT’s volgens FigJam (of n.v.t.)
+- [ ] Formulieren op de juiste pagina’s
+- [ ] Demo-content; desktop + mobiel OK op `.local`
+- [ ] Geen secrets in de repo
 
 ## Volgende
 

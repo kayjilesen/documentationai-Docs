@@ -1,47 +1,172 @@
 ---
 title: "Lokaal — Theme / boilerplate"
-description: "Theme opzetten vanuit kj-boilerplate, npm, ACF JSON, Git."
+description: "Nieuw theme vullen vanuit kj-boilerplate — mapstructuur, verplichte bestanden, ACF, activeren."
 ---
 
-<Callout kind="info" title="Dit is een SOP (opzet)">
-  Elk nieuw theme start leeg en wordt opgebouwd o.b.v. [KJ-Boilerplate](/client-projects/kj-boilerplate) (via Claude-prompt in local-dev).
+<Callout kind="info" title="Dit is een SOP">
+  Na [MAMP-omgeving](/sops/lokaal/omgeving): de **lege themamap** vullen o.b.v. [KJ-Boilerplate](/client-projects/kj-boilerplate). Dit is de kern van lokaal werk — niet npm of domein-helpers.
 </Callout>
 
 ## Doel
 
-Werkend theme met Tailwind-build, ACF Pro + JSON, Git-repo, klaar om blokken te bouwen.
+Een geactiveerd theme onder `/DEV/projectnaam/wp-content/themes/projectnaam/` met de **volledige KJ-structuur**, projectmetadata, ACF JSON gesynct, klaar om blokken te bouwen.
 
-## Stappen
+## Bron & doel
+
+| | Pad |
+|--|-----|
+| **Bron (niet aanpassen als “het project”)** | `/DEV/kj-boilerplate/` |
+| **Doel (nieuw theme)** | `/DEV/projectnaam/wp-content/themes/projectnaam/` |
+
+De boilerplate is alleen een themamap — geen complete WP-installatie.
+
+## Hoe opzetten
 
 <Steps>
-  <Step title="Boilerplate toepassen" icon="copy">
-    Volg de Claude-/setup-stappen in [Lokale ontwikkelomgeving](/devops/local-dev). Theme activeren.
+  <Step title="Lege map staat klaar" icon="folder">
+    Zie vorige SOP: `…/themes/projectnaam/` bestaat en is leeg.
   </Step>
-  <Step title="npm" icon="terminal">
-    `npm install` en `npm run dev`. Controleer dat CSS/build loopt.
+  <Step title="Boilerplate overzetten" icon="copy">
+    Laat Claude/Cursor de structuur zetten met deze prompt (placeholders vervangen), of kopieer bewust vanuit `/DEV/kj-boilerplate`:
+
+    ```text
+    Zet een nieuw WordPress theme op op basis van kj-boilerplate.
+
+    Doelmap (leeg, handmatig aangemaakt):
+    /DEV/<projectnaam>/wp-content/themes/<projectnaam>
+
+    Bron:
+    /DEV/kj-boilerplate
+
+    Doe het volgende:
+    1. Kopieer de boilerplate-structuur naar de doelmap
+    2. Update style.css (Theme Name, Description, Text Domain) naar <projectnaam>
+    3. Pas text domain, function-prefixes en versieconstanten aan naar het project
+    4. Laat build-tooling (package.json / Tailwind) intact
+    5. Geef een korte checklist: theme activeren, ACF Pro, ACF Sync
+    ```
   </Step>
-  <Step title="ACF" icon="database">
-    ACF Pro actief. Sync bestaande JSON uit boilerplate. Werkwijze: [ACF Patronen](/wordpress/acf-patterns).
+  <Step title="Controleer de mapinhoud" icon="list">
+    Loop de structuur hieronder na — alles wat in de boilerplate zit hoort nu in het projecttheme te staan (aangepaste namen waar nodig).
   </Step>
-  <Step title="Git" icon="git-branch">
-    Repo initialiseren/koppelen. Secrets niet committen. Zie [Git Workflow](/devops/git-workflow).
+  <Step title="Theme activeren" icon="check-circle">
+    Op `projectnaam.local` → **Weergave → Thema’s** → activeer het nieuwe theme.
   </Step>
-  <Step title="Domein-helper" icon="globe">
-    `kj_is_live_domain()` (of equivalent): staging-/productiedomeinen projectspecifiek zetten.
+  <Step title="ACF Pro + Sync" icon="database">
+    ACF Pro installeren/activeren. **ACF → Sync**: alle veldgroepen uit `acf-json/` synchroniseren. Zie [ACF Patronen](/wordpress/acf-patterns).
   </Step>
-  <Step title="Conventies scannen" icon="book-open">
-    Kort: [Theme Architectuur](/wordpress/theme-architecture), [Naamgevingsconventies](/wordpress/naming-conventions).
+  <Step title="Git (theme-repo)" icon="git-branch">
+    Initialiseer of koppel de Git-repo op themamap (of afgesproken monorepo). Geen `wp-config`, dumps of secrets committen. Zie [Git Workflow](/devops/git-workflow).
   </Step>
 </Steps>
 
+## Wat er in het nieuwe thema moet staan
+
+Canonieke structuur (gelijk aan boilerplate + [Theme Architectuur](/wordpress/theme-architecture)):
+
+```
+projectnaam/
+├── acf-json/                 # ACF-veldgroepen (JSON = bron in Git)
+│   ├── group_pagebuilder.json
+│   ├── group_layout_hero.json
+│   ├── group_layout_text_image.json   # of text-image — zoals in bron
+│   ├── group_button_fields.json
+│   └── group_section_styling.json     # gedeelde padding-tab
+├── assets/
+│   ├── css/
+│   │   ├── input.css         # Tailwind-bron + @font-face
+│   │   └── style.css         # gecompileerde CSS (build-output)
+│   ├── js/                   # globaal JS + gebundelde pagebuilder.js
+│   ├── fonts/
+│   └── images/
+├── templates/
+│   ├── components/           # herbruikbare PHP (button, …)
+│   │   └── button.php
+│   └── pagebuilder/
+│       ├── loop.php          # flexible-content loader
+│       ├── hero/             # hero.php + hero.css (+ js)
+│       └── text-image/
+├── inc/
+│   ├── helpers.php           # kj_acf, kj_image, utilities
+│   ├── remove.php            # WP-cleanup
+│   ├── settings.php          # theme support
+│   ├── acf.php               # ACF hooks / options
+│   ├── custom-header.php
+│   ├── scripts.php           # enqueue CSS/JS
+│   ├── template-functions.php
+│   ├── tracking.php          # optioneel
+│   └── post-types.php        # toevoegen wanneer CPT’s nodig zijn
+├── scripts/
+│   └── build-pagebuilder-js.js
+├── functions.php             # alleen requires — geen business logic
+├── header.php
+├── footer.php
+├── page.php                  # pagebuilder-pagina’s
+├── index.php
+├── 404.php
+├── style.css                 # Theme Name / Text Domain (WP-header)
+├── tailwind.config.js
+├── package.json
+└── screenshot.jpg            # optioneel, handig in wp-admin
+```
+
+### Kernbestanden — wat hoort waar
+
+| Onderdeel | Moet / mag | Toelichting |
+|-----------|------------|-------------|
+| `style.css` (header) | **Moet** | Theme Name, Text Domain = project |
+| `functions.php` | **Moet** | Laadt alle `inc/*` + component-requires |
+| `header.php` / `footer.php` | **Moet** | Chrome; later merkspecifiek |
+| `page.php` + `templates/pagebuilder/loop.php` | **Moet** | Pagebuilder-pagina’s renderen |
+| `acf-json/` | **Moet** | Minstens pagebuilder + starter layouts + button + section styling |
+| `inc/helpers.php`, `settings.php`, `scripts.php`, `acf.php`, `remove.php` | **Moet** | Standaard KJ-includes |
+| `templates/components/` | **Moet** | Minstens button; breidt uit met Figma-components |
+| Starter blocks `hero`, `text-image` | **Moet** (start) | Voorbeeld om van te kopiëren; daarna projectblokken |
+| `inc/post-types.php` | Als FigJam CPT’s heeft | Anders nog niet verplicht |
+| `assets/css/input.css` + Tailwind config | **Moet** | Tokens/fonts uit Figma Brand later |
+| `package.json` / npm | Aanwezig | Eenmalig `npm install`; tijdens bouw `npm run dev` — geen focus van deze SOP |
+| `kj_is_live_domain()` e.d. | Optioneel vroeg | Mag later; niet blocking om lokaal te bouwen |
+
+### ACF JSON — minimale set na sync
+
+Na **ACF → Sync** verwacht je o.a.:
+
+- Hoofd-**pagebuilder** (flexible content op pagina’s)
+- Layouts voor meegeleverde blocks (hero, text-image)
+- Herbruikbare **button**-velden
+- **Section styling** (padding boven/onder) — geen eigen padding-velden per layout verzinnen; zie boilerplate-docs
+
+### Metadata die je meteen projectspecifiek maakt
+
+| Bestand | Actie |
+|---------|--------|
+| `style.css` | Theme Name, Description, Text Domain |
+| `functions.php` | Versieconstante / prefixes naar project |
+| Text domain in PHP | Gelijk trekken met `style.css` |
+| `tailwind.config.js` | Later kleuren/fonts uit Figma (bij [Bouwen](/sops/lokaal/bouwen)) |
+
+## Bewust níet het zwaartepunt (nu)
+
+- **npm** — tooling blijft in de map; draai `npm install` als CSS niet update. Detail: [KJ-Boilerplate](/client-projects/kj-boilerplate) / [Tailwind](/wordpress/tailwind-setup).
+- **Domein-helper** (`kj_is_live_domain`) — fijn voor staging/live-gedrag; lokaal bouwen blokkeert er niet op. Zet recht vóór staging/live indien nodig.
+
 ## Af
 
-- [ ] Theme actief op `.local`
-- [ ] `npm run dev` / `npm run build` OK
-- [ ] ACF Pro + JSON sync OK
-- [ ] Git repo met schone eerste commits
-- [ ] Live/staging-domeinen in helper gezet (of ticket om later te zetten)
-- [ ] Conventie-docs gelezen (nieuw teamlid)
+- [ ] Themamap gevuld vanuit kj-boilerplate (niet half leeg)
+- [ ] Structuur klopt: `acf-json/`, `assets/`, `templates/`, `inc/`, root-templates, `functions.php`, `style.css`
+- [ ] `style.css` + text domain / prefixes projectspecifiek
+- [ ] Theme **geactiveerd** op `projectnaam.local`
+- [ ] ACF Pro actief; **Sync** gedaan voor aanwezige JSON
+- [ ] Starter pagebuilder zichtbaar op een testpagina (hero/text-image of leeg flexibel)
+- [ ] Git op theme geïnitialiseerd of gekoppeld (geen secrets)
+
+## Naslag
+
+- [KJ-Boilerplate](/client-projects/kj-boilerplate)
+- [Theme Architectuur](/wordpress/theme-architecture)
+- [Naamgevingsconventies](/wordpress/naming-conventions)
+- [ACF Patronen](/wordpress/acf-patterns)
+- [Pagebuilder](/acf/pagebuilder)
 
 ## Volgende
 

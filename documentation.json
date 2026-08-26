@@ -352,7 +352,7 @@
             "expandable": true,
             "pages": [
               {
-                "title": "Omgeving",
+                "title": "Omgeving (MAMP)",
                 "path": "sops/lokaal/omgeving",
                 "icon": "server"
               },

@@ -1,190 +1,89 @@
 ---
 title: "Lokale Ontwikkelomgeving"
-description: "Lokale WordPress ontwikkelomgeving opzetten met .local domeinen, themamap aanmaken, en theme starten via KJ-Boilerplate."
+description: "Naslag: MAMP + .local + theme via kj-boilerplate. Canonieke stappen staan in de SOP Lokaal."
 ---
 
 ## Overzicht
 
-Voor lokale ontwikkeling draait WordPress onder een `.local` domein. Elk nieuw theme begint als een lege map in `/DEV/<projectnaam>/wp-content/themes/<projectnaam>`; Claude zet die daarna op basis van de [KJ-Boilerplate](/client-projects/kj-boilerplate).
+Lokale sites draaien op **`.local`** onder **`/DEV/<projectnaam>/`**. Het theme begint leeg en wordt gevuld vanuit [KJ-Boilerplate](/client-projects/kj-boilerplate).
 
-<Callout kind="info" title="Dit is een SOP">
-  Onderdeel van [SOP: Lokaal — Omgeving](/sops/lokaal/omgeving). Onderstaand **Af** = omgeving klaar.
+<Callout kind="info" title="SOP's = doe-procedure">
+  Volledige stappen + Af:
+
+  1. [Lokaal — Omgeving (MAMP)](/sops/lokaal/omgeving)  
+  2. [Theme / boilerplate](/sops/lokaal/theme-boilerplate) — **wat er in het theme moet staan**  
+  3. [Bouwen](/sops/lokaal/bouwen)
 </Callout>
 
 ---
 
-## Vereisten
+## Kort pad
 
-| Tool | Doel | Versie |
-|------|------|--------|
-| **MAMP / Local** | Lokale webserver (Apache + MySQL + PHP) | Laatste versie |
-| **Node.js** | NPM voor Tailwind en build tools | v18+ |
-| **Git** | Versiebeheer | Laatste versie |
-| **Code editor** | VS Code / Cursor aanbevolen | Laatste versie |
+| Stap | Resultaat |
+|------|-----------|
+| MAMP PRO-host | `projectnaam.local` → document root `/DEV/projectnaam` |
+| WordPress | Geïnstalleerd in die root |
+| Themamap | `/DEV/projectnaam/wp-content/themes/projectnaam/` (eerst leeg, dan boilerplate) |
+| Activeren + ACF Sync | Theme live lokaal; pagebuilder-JSON synct |
 
----
-
-## Setup Stappen
-
-<Steps>
-  <Step title="Maak de lokale site aan" icon="server">
-    Installeer MAMP (of Local by Flywheel) en maak een nieuwe WordPress site aan.
-
-    Gebruik altijd een `.local` domein, bijvoorbeeld `projectnaam.local`.
-
-    <Callout kind="info">
-      Poort-URL's zoals `localhost:8888` worden niet gebruikt. Standaard is `https://projectnaam.local` (of `http://` afhankelijk van je lokale SSL-setup).
-    </Callout>
-  </Step>
-  <Step title="Installeer WordPress" icon="code">
-    Download WordPress en installeer via de standaard wizard. Kies taal, database, en admin credentials.
-  </Step>
-  <Step title="Maak de themamap aan" icon="folder">
-    Maak handmatig een lege themamap aan in de WordPress installatie, met dezelfde naam als het project:
-
-    ```bash
-    mkdir /DEV/projectnaam/wp-content/themes/projectnaam
-    ```
-
-    Voorbeelden: `/DEV/perfectfinish/wp-content/themes/perfectfinish` of `/DEV/vdbrand/wp-content/themes/vdbrand`.
-  </Step>
-  <Step title="Laat Claude het theme opzetten" icon="zap">
-    Plak onderstaande prompt in Claude/Cursor (vervang de placeholders):
-
-    ```text
-    Zet een nieuw WordPress theme op op basis van kj-boilerplate.
-
-    Doelmap (leeg, handmatig aangemaakt):
-    /DEV/<projectnaam>/wp-content/themes/<projectnaam>
-
-    Bron:
-    /DEV/kj-boilerplate
-
-    Doe het volgende:
-    1. Kopieer de boilerplate-structuur naar de doelmap
-    2. Update style.css (Theme Name, Description, Text Domain) naar <projectnaam>
-    3. Pas text domain, prefixes en versieconstanten aan naar het project
-    4. Update kj_is_live_domain() staging-check naar het productiedomein van dit project
-    5. Laat Tailwind/npm scripts intact; ik doe zelf npm install + npm run dev
-    6. Geef een korte checklist van wat ik hierna nog handmatig moet doen (activeren theme, ACF Pro, ACF sync)
-    ```
-
-    Claude kopieert de boilerplate-structuur, past metadata aan en legt de basisbestanden klaar.
-  </Step>
-  <Step title="Installeer dependencies" icon="package">
-    ```bash
-    cd /DEV/projectnaam/wp-content/themes/projectnaam
-    npm install
-    ```
-  </Step>
-  <Step title="Start Tailwind watch mode" icon="terminal">
-    ```bash
-    npm run dev
-    ```
-
-    Laat dit draaien tijdens ontwikkeling — Tailwind hercompileert automatisch bij wijzigingen.
-  </Step>
-  <Step title="Activeer het theme" icon="check-circle">
-    Ga naar **WordPress admin > Weergave > Thema's** op `projectnaam.local` en activeer het theme.
-  </Step>
-  <Step title="Installeer verplichte plugins" icon="package">
-    Installeer minimaal:
-    - **ACF Pro** (licentie via account)
-    - Overige plugins per project (zie projectdocumentatie)
-  </Step>
-  <Step title="Synchroniseer ACF velden" icon="database">
-    Ga naar **WordPress admin > ACF > Sync** en synchroniseer alle veldgroepen vanuit de JSON bestanden.
-  </Step>
-</Steps>
+Geen `localhost:8888` als primaire URL.
 
 ---
 
-## Omgeving Detectie
+## Claude-prompt (theme vullen)
 
-Themes gebruiken `kj_is_live_domain()` in `inc/helpers.php` om te bepalen of de request op productie draait.
+Plak in Cursor (placeholders vervangen) — zelfde als in de theme-SOP:
 
-**Niet live (auto-updates aan):**
-- Lokaal: `localhost` of `*.local`
-- CLI/cron zonder host
-- Staging/dev-subdomeinen (projectspecifiek)
+```text
+Zet een nieuw WordPress theme op op basis van kj-boilerplate.
 
-**Live:** het productiedomein (apex en `www` tellen als hetzelfde).
+Doelmap (leeg, handmatig aangemaakt):
+/DEV/<projectnaam>/wp-content/themes/<projectnaam>
 
-<Callout kind="info">
-  De staging-check is projectspecifiek. In de [KJ-Boilerplate](/client-projects/kj-boilerplate) staat `kayjilesen.dev`; per project vervang je dat door het eigen domein (zoals `hoexsystems.nl`). De actuele implementatie staat in de theme-code, niet hier.
-</Callout>
+Bron:
+/DEV/kj-boilerplate
 
-Op niet-live omgevingen worden automatische updates voor plugins, core, themes en vertalingen ingeschakeld. Op productie blijven ze uit.
-
----
-
-## Dagelijkse Workflow
-
-```bash
-# 1. Open terminal in theme directory
-cd /DEV/projectnaam/wp-content/themes/projectnaam
-
-# 2. Start Tailwind watch
-npm run dev
-
-# 3. Ontwikkel — wijzig PHP, CSS, JS bestanden
-#    Tailwind hercompileert automatisch
-#    Preview op https://projectnaam.local
-
-# 4. Voor commit/deploy: volledige build
-npm run build
-
-# 5. Git commit
-git add .
-git commit -m "Add nieuwe feature"
+Doe het volgende:
+1. Kopieer de boilerplate-structuur naar de doelmap
+2. Update style.css (Theme Name, Description, Text Domain) naar <projectnaam>
+3. Pas text domain, prefixes en versieconstanten aan naar het project
+4. Laat Tailwind/npm scripts intact
+5. Geef een korte checklist: theme activeren, ACF Pro, ACF Sync
 ```
 
 ---
 
-## Af
+## npm (ondergeschikt)
 
-- [ ] Site bereikbaar op `https://projectnaam.local` (of http)
-- [ ] Themamap: `/DEV/<project>/wp-content/themes/<project>/` met boilerplate-structuur
-- [ ] `npm install` en `npm run dev` OK
-- [ ] Theme geactiveerd in WP-admin
-- [ ] ACF Pro actief; veldgroepen gesynct (indien JSON aanwezig)
-- [ ] `kj_is_live_domain()` staging-domein projectspecifiek gezet
+Alleen nodig voor CSS/JS-build in de themamap:
 
-## Veelvoorkomende Issues
+```bash
+cd /DEV/projectnaam/wp-content/themes/projectnaam
+npm install
+npm run dev    # tijdens UI-werk
+npm run build  # voor commit/deploy
+```
 
-<Expandable title="Tailwind genereert geen classes" default-open="false">
-  **Oorzaak:** De content paths in `tailwind.config.js` matchen niet met je bestanden.
+Detail: [KJ-Boilerplate](/client-projects/kj-boilerplate), [Tailwind Setup](/wordpress/tailwind-setup).
 
-  **Oplossing:** Controleer dat de paths kloppen:
-  ```javascript
-  content: [
-      "./inc/*.php",
-      "./templates/**/*.php",
-      "./*.php"
-  ],
-  ```
+---
+
+## Omgeving-detectie (optioneel)
+
+`kj_is_live_domain()` in `inc/helpers.php` stuurt o.a. auto-updates. Lokaal (`*.local`) telt als niet-live. Productie-/staging-hosts projectspecifiek zetten wanneer die URL’s bekend zijn — niet blocking om te beginnen met bouwen.
+
+---
+
+## Troubleshooting
+
+<Expandable title="Site niet bereikbaar op .local" default-open="false">
+  MAMP-host aan? Servers gestart? Document root = `/DEV/projectnaam`? Zie [Omgeving (MAMP)](/sops/lokaal/omgeving).
 </Expandable>
 
-<Expandable title="ACF velden verschijnen niet" default-open="false">
-  **Oorzaak:** JSON bestanden niet gesynchroniseerd.
-
-  **Oplossing:**
-  1. Ga naar ACF > Sync in WordPress admin
-  2. Selecteer alle veldgroepen met "Sync beschikbaar"
-  3. Klik "Synchroniseer"
+<Expandable title="ACF-velden verschijnen niet" default-open="false">
+  **ACF → Sync** alle groepen met “Sync beschikbaar”. JSON moet in `acf-json/` van het actieve theme staan.
 </Expandable>
 
-<Expandable title="npm install faalt" default-open="false">
-  **Oorzaak:** Node.js versie te oud.
-
-  **Oplossing:** Update naar Node.js v18 of hoger:
-  ```bash
-  node --version  # Check huidige versie
-  ```
-</Expandable>
-
-<Expandable title="Site is niet bereikbaar op .local" default-open="false">
-  **Oorzaak:** Hosts-entry of virtuele host ontbreekt.
-
-  **Oplossing:** Controleer dat `projectnaam.local` naar `127.0.0.1` wijst en dat je lokale server (MAMP/Local) het domein correct serveert.
+<Expandable title="Tailwind classes ontbreken" default-open="false">
+  `npm run dev` draaien; check `content`-paths in `tailwind.config.js` (o.a. `./templates/**/*.php`, `./inc/*.php`, `./*.php`).
 </Expandable>

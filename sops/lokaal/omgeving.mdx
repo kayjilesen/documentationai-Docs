@@ -1,34 +1,115 @@
 ---
-title: "Lokaal — Omgeving"
-description: "Lokale WordPress op .local, themamap en tools — start van development."
+title: "Lokaal — Omgeving (MAMP)"
+description: "WordPress lokaal opzetten met MAMP: host, .local-domein, database, document root onder /DEV."
 ---
 
-<Callout kind="info" title="Dit is een SOP (opzet)">
-  Procedure staat uitgebreid in Documentatie; hier de Af-poort voor fase Lokaal (omgeving).
+<Callout kind="info" title="Dit is een SOP">
+  Fase Lokaal begint hier. Focus: **MAMP + WordPress + lege themamap**. Theme-inhoud = volgende pagina.
 </Callout>
 
 ## Doel
 
-Site bereikbaar op `projectnaam.local`, lege themamap klaar, tooling geïnstalleerd.
+Een bereikbare lokale site op **`https://projectnaam.local`** (of http), met document root onder **`/DEV/projectnaam/`**, klaar om het theme in te zetten.
 
-## Doe dit
+## Vereisten
 
-Volg volledig: [Lokale ontwikkelomgeving](/devops/local-dev).
+| Tool | Rol |
+|------|-----|
+| **MAMP PRO** (voorkeur) | Apache, MySQL, hosts, SSL, PHP-versie per site |
+| **Cursor / editor** | Code |
+| **Git** | Later voor het theme |
+| Node / npm | Pas relevant bij CSS-build in het theme — zie kort op [Theme](/sops/lokaal/theme-boilerplate) |
 
-Kort:
+<Callout kind="tip">
+  We werken met **MAMP PRO** en projectmappen onder `/DEV/…`. Poort-URL’s zoals `localhost:8888` zijn **niet** de standaard manier van werken.
+</Callout>
 
-1. WP op `.local` (geen `:8888` als primaire URL)  
-2. Map `/DEV/<project>/wp-content/themes/<project>/`  
-3. Node, Git, editor OK  
-4. Daarna: [Theme / boilerplate](/sops/lokaal/theme-boilerplate)
+## Padconventie
+
+| Wat | Pad |
+|-----|-----|
+| WordPress-root (document root) | `/DEV/projectnaam/` |
+| Theme (leeg → later boilerplate) | `/DEV/projectnaam/wp-content/themes/projectnaam/` |
+| URL | `https://projectnaam.local` |
+
+`projectnaam` = zelfde slug als in [Kickoff](/sops/kickoff) (bijv. `hoexsystems`, `vdbrand`).
+
+## MAMP — nieuwe site stap voor stap
+
+<Steps>
+  <Step title="MAMP PRO starten" icon="play">
+    Open **MAMP PRO**. Zorg dat je servers kunt starten (Apache + MySQL). Stop/start via de knoppen bovenaan als iets niet reageert.
+  </Step>
+  <Step title="Host aanmaken" icon="plus">
+    Maak een **nieuwe host** (Host → + of equivalent):
+
+    - **Name / domein:** `projectnaam.local`
+    - **Document root:** `/DEV/projectnaam`  
+      Bestaan de map nog niet? Maak `/DEV/projectnaam` aan in Finder/Terminal, daarna koppelen.
+  </Step>
+  <Step title="PHP-versie" icon="code">
+    Kies per host een actuele PHP **8.2+** (gelijk aan productie waar mogelijk). Geen verouderde 7.x.
+  </Step>
+  <Step title="SSL (aanbevolen)" icon="lock">
+    Schakel SSL voor deze host in als MAMP dat aanbiedt (self-signed is OK lokaal). Dan werk je op `https://projectnaam.local`. Browserwaarschuwing “niet vertrouwd” is normaal — eenmalig accepteren.
+  </Step>
+  <Step title="Database" icon="database">
+    Maak een **MySQL-database** voor dit project (via MAMP → Databases / phpMyAdmin):
+
+    - Databasenaam bijv. `projectnaam` of `wp_projectnaam`
+    - Gebruiker: vaak `root` (MAMP-default); wachtwoord zoals in jouw MAMP-instelling (leeg of `root` — check **MySQL**-tab)
+    - Noteer host: meestal `localhost` (soms `127.0.0.1`) en poort **8889** of **3306** afhankelijk van MAMP-config
+  </Step>
+  <Step title="Servers starten" icon="server">
+    Start Apache + MySQL. Host `projectnaam.local` moet “groen” / actief zijn.
+  </Step>
+  <Step title="WordPress in de document root" icon="download">
+    1. Download WordPress (nl.wordpress.org of wordpress.org).  
+    2. Pak uit **in** `/DEV/projectnaam/` zodat je daar `wp-admin`, `wp-content`, `wp-config-sample.php` ziet — niet een geneste `wordpress/`-map eronder.  
+    3. Open `https://projectnaam.local` in de browser → installatiewizard.
+  </Step>
+  <Step title="wp-config / wizard" icon="settings">
+    Vul databasegegevens uit MAMP in. Taal: Nederlands. Sterke admin credentials → in **1Password**, niet in docs/chat.
+
+    Na installatie: frontend + `/wp-admin` (lokaal nog zonder Defender `/beheer`) moeten werken.
+  </Step>
+  <Step title="Lege themamap" icon="folder">
+    ```bash
+    mkdir -p /DEV/projectnaam/wp-content/themes/projectnaam
+    ```
+    Map blijft **leeg** tot [Theme / boilerplate](/sops/lokaal/theme-boilerplate). Naam themamap = projectnaam.
+  </Step>
+</Steps>
+
+## Controleren of MAMP goed staat
+
+| Check | Verwacht |
+|-------|----------|
+| Hosts-file / MAMP DNS | `projectnaam.local` → deze machine |
+| Document root | Bestanden onder `/DEV/projectnaam` zichtbaar in browser |
+| MySQL | phpMyAdmin opent; database bestaat |
+| PHP | Info of WP-install toont PHP 8.2+ |
+| Geen `:8888` als primaire URL | Je deelt/werkt met `projectnaam.local` |
+
+## Veelvoorkomende MAMP-problemen
+
+| Probleem | Richting |
+|----------|----------|
+| Site niet bereikbaar | Host aan? Servers gestart? Juiste document root? Even `ping projectnaam.local` |
+| 403 / lege directory | WP-bestanden niet in root, of permissions; check of `index.php` in `/DEV/projectnaam` staat |
+| Database connection error | Poort/user/wachtwoord vs MAMP MySQL-tab; soms `127.0.0.1` i.p.v. `localhost` |
+| Verkeerde site / oude content | Andere host wijst naar dezelfde map, of browser-cache / verkeerd `.local`-naam |
+| SSL-klachten | Self-signed accepteren, of tijdelijk http als SSL nog uit staat |
 
 ## Af
 
-- [ ] `https://projectnaam.local` (of http) bereikbaar
-- [ ] Themamap bestaat met juiste projectnaam
-- [ ] WP-admin bereikbaar; rechten OK om theme te activeren
-- [ ] Node 18+ en Git beschikbaar
+- [ ] MAMP PRO: host `projectnaam.local` met document root `/DEV/projectnaam`
+- [ ] PHP 8.2+ op die host
+- [ ] MySQL-database aangemaakt en WP geïnstalleerd
+- [ ] Site bereikbaar op `projectnaam.local` (https bij voorkeur)
+- [ ] WP-admin login werkt; credentials in 1Password
+- [ ] Lege map `/DEV/projectnaam/wp-content/themes/projectnaam/` bestaat
 
 ## Volgende
 
-→ [Theme / boilerplate](/sops/lokaal/theme-boilerplate)
+→ [Theme / boilerplate](/sops/lokaal/theme-boilerplate) — wat er in het nieuwe thema moet staan
