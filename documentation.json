@@ -221,7 +221,7 @@
                 ]
               },
               {
-                "group": "E-mail Setup",
+                "group": "Email",
                 "icon": "mail",
                 "expandable": true,
                 "pages": [
@@ -239,6 +239,30 @@
                     "title": "MXRoute",
                     "path": "email/mxroute",
                     "icon": "mail"
+                  }
+                ]
+              },
+              {
+                "group": "Cloudflare",
+                "icon": "cloud",
+                "expandable": true,
+                "pages": [
+                  {
+                    "title": "Domein toevoegen",
+                    "path": "overig/cloudflare",
+                    "icon": "globe"
+                  }
+                ]
+              },
+              {
+                "group": "OpenProvider",
+                "icon": "globe",
+                "expandable": true,
+                "pages": [
+                  {
+                    "title": "Registreren & transfer",
+                    "path": "overig/openprovider",
+                    "icon": "truck"
                   }
                 ]
               }

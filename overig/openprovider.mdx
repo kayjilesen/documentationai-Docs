@@ -1,0 +1,83 @@
+---
+title: "OpenProvider — Registreren & transfer"
+description: "Domeinnamen registreren of transferen via OpenProvider; nameservers en volgorde t.o.v. Cloudflare."
+---
+
+<Callout kind="info" title="Rol van OpenProvider">
+  **OpenProvider** = registrar (eigendom / facturatie van de domeinnaam). **Cloudflare** = DNS. Houd die rollen gescheiden.
+</Callout>
+
+## Doel
+
+Domein staat op het juiste OpenProvider-account (wij of klant), verlenging/WHOIS kloppen, en NS wijzen naar Cloudflare wanneer wij DNS beheren.
+
+## Registreren (nieuw domein)
+
+<Steps>
+  <Step title="Beschikbaarheid" icon="search">
+    Zoek het domein in OpenProvider. Check TLD-regels (.nl vs .com) en prijs/verlenging.
+  </Step>
+  <Step title="Handle / contact" icon="user">
+    Gebruik het juiste **handle** (bedrijf of klant). Factuuradres en abuse-contact moeten kloppen.
+  </Step>
+  <Step title="Bestellen" icon="shopping-cart">
+    Registreer op het teamaccount (of klantaccount als zo afgesproken). Zet notitie in **Proton Pass** / projectdossier: wie is eigenaar, wie betaalt verlenging.
+  </Step>
+  <Step title="Nameservers" icon="server">
+    Direct na registratie: NS naar **Cloudflare** (zone eerst aanmaken — zie [Cloudflare](/overig/cloudflare)). Default OpenProvider-DNS alleen tijdelijk gebruiken als Cloudflare nog niet klaar is.
+  </Step>
+  <Step title="DNS in Cloudflare" icon="cloud">
+    Zone Active + A-records naar xCloud vóór site live gaat.
+  </Step>
+</Steps>
+
+## Transfer (binnenhalen)
+
+<Steps>
+  <Step title="Cloudflare eerst" icon="cloud">
+    Bij overnames: zet het domein **eerst** in Cloudflare en NS om **bij de huidige registrar**. Pas transferen als de zone **Active** is. Zie [Livegang](/sops/livegang/productie-en-dns).
+  </Step>
+  <Step title="Unlock + auth code" icon="key">
+    Bij de **huidige** registrar: domein unlocken, transfer-lock uit, **EPP / auth code** opvragen. WHOIS privacy kan transfer blokkeren — tijdelijk uitzetten indien nodig.
+  </Step>
+  <Step title="Transfer starten in OpenProvider" icon="truck">
+    Start inbound transfer met auth code. Betaal transferkosten indien van toepassing. Houd e-mail in de gaten (goedkeuring / FOA).
+  </Step>
+  <Step title="Afronden" icon="check">
+    Na voltooiing: bevestig NS staan nog op Cloudflare (soms reset een registrar NS — controleer). Verlenging en auto-renew naar wens. Auth code / unlock weer netjes zetten.
+  </Step>
+</Steps>
+
+<Callout kind="warning" title="Niet omdraaien">
+  Eerst transfer, dan pas Cloudflare → downtime-risico en lastige DNS bij de oude partij. **CF + NS eerst, transfer daarna.**
+</Callout>
+
+## Uitgaande transfer
+
+Als de klant het domein weghaalt:
+
+1. Unlock + auth code leveren via veilige weg (Pass / versleuteld)  
+2. NS-afspraak: blijven zij op Cloudflare of zetten zij eigen DNS?  
+3. Na vertrek: zone in CF opruimen of overdragen; OpenProvider-contact bijwerken  
+
+## Af
+
+**Registreren**
+
+- [ ] Domein geregistreerd op juiste account/handle
+- [ ] Eigenaar / verlenging genoteerd (Pass of dossier)
+- [ ] Cloudflare-zone + NS gezet
+- [ ] Zone Active; basis A/MX records OK
+
+**Transfer in**
+
+- [ ] Cloudflare Active **vóór** transfer
+- [ ] Unlock + auth code verwerkt; transfer voltooid in OpenProvider
+- [ ] NS nog steeds Cloudflare na transfer
+- [ ] Auto-renew / facturatie gecheckt
+
+## Gerelateerd
+
+- [Cloudflare — Domein toevoegen](/overig/cloudflare)  
+- [Livegang — Productie & DNS](/sops/livegang/productie-en-dns)  
+- [Offboarding](/sops/offboarding) — OpenProvider-toegang intrekken

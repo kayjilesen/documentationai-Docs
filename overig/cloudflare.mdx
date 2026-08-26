@@ -1,0 +1,76 @@
+---
+title: "Cloudflare — Domein toevoegen"
+description: "Klant- of eigen domein als zone in Cloudflare zetten, nameservers omzetten, DNS-records beheren."
+---
+
+<Callout kind="info" title="Standaard DNS">
+  Alle klant-DNS beheren we via **Cloudflare**. Registrar (vaak [OpenProvider](/overig/openprovider)) houdt het domein; Cloudflare de nameservers en records.
+</Callout>
+
+## Doel
+
+Domein staat als **Active** zone in Cloudflare; NS wijzen naar Cloudflare; A/AAAA (en mail) kun je veilig beheren.
+
+## Wanneer
+
+- Nieuw project / livegang  
+- Domeinovername (NS **vóór** transfer — zie [Livegang](/sops/livegang/productie-en-dns))  
+- Staging-subdomein op `kayjilesen.dev` (alleen A-record in bestaande zone; geen nieuwe zone)
+
+## Domein toevoegen (nieuwe zone)
+
+<Steps>
+  <Step title="Add site" icon="plus">
+    In Cloudflare → **Add a site** / Add domain. Vul het apex-domein in (`voorbeeld.nl`), geen `www`.
+  </Step>
+  <Step title="Plan" icon="credit-card">
+    Meestal **Free** tenzij er bewuste reden is voor Pro.
+  </Step>
+  <Step title="DNS-records" icon="list">
+    Importeer of vul handmatig wat nu nodig is zodat niets breekt tijdens NS-wissel:
+
+    - **A / AAAA** → xCloud-server-IP (site)  
+    - **www** → CNAME naar apex of eigen A  
+    - Bestaande **MX / TXT** (mail) meenemen  
+
+    Voor staging op ons domein: zie apart [Site & deploy](/sops/staging/site-en-deploy) (`projectnaam` A-record in zone `kayjilesen.dev`).
+  </Step>
+  <Step title="Proxy-standaard" icon="shield">
+    Voor WordPress op xCloud + Let's Encrypt: records op **DNS only** (grijs wolkje), tenzij je bewust Cloudflare-proxy/SSL gebruikt.
+
+    Zelfde regel voor `*.kayjilesen.dev`-hosts.
+  </Step>
+  <Step title="Nameservers" icon="server">
+    Cloudflare toont 2 nameservers. Zet die bij de **registrar** (OpenProvider of huidige partij). Verwijder oude NS.
+  </Step>
+  <Step title="Wachten op Active" icon="clock">
+    Zone-status → **Active**. Kan minuten tot uren duren. Daarna pas SSL in xCloud forceren / live cutover.
+  </Step>
+</Steps>
+
+## Checklist records (typische WP-site)
+
+| Type | Naam | Doel |
+|------|------|------|
+| A | `@` | xCloud server-IP |
+| CNAME of A | `www` | naar site |
+| MX + TXT | `@` | mail (M365 / Google / MXRoute) |
+| TXT | `@` / host | SPF, DKIM, DMARC, Maileroo |
+
+SPF: **één** SPF-TXT; combineer includes (mail + Maileroo) — zie [FluentSMTP](/wordpress/plugins/fluent-smtp) en [Klant-e-mail](/sops/extra/klant-email).
+
+## Af
+
+- [ ] Zone aangemaakt voor het juiste apex-domein
+- [ ] Noodzakelijke DNS-records gezet (web + mail)
+- [ ] Proxy: DNS only waar we Let's Encrypt op de server gebruiken
+- [ ] Nameservers bij registrar → Cloudflare
+- [ ] Zone-status **Active**
+- [ ] Credentials/toegang in **Proton Pass** (niet in docs)
+
+## Gerelateerd
+
+- [OpenProvider](/overig/openprovider) — registreren / transfer  
+- [Livegang — Productie & DNS](/sops/livegang/productie-en-dns)  
+- [Staging — Site & deploy](/sops/staging/site-en-deploy)  
+- [Site Management](/hosting/site-management)

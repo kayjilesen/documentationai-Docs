@@ -17,7 +17,7 @@ Bij site-overgangen, domeinovernames of “DNS komt onze kant op”:
 
 <Steps>
   <Step title="Domein in Cloudflare" icon="cloud">
-    Voeg het **klant-domein** toe als site/zone in Cloudflare. Importeer of zet de benodigde records (minimaal wat nu nog moet blijven werken: mail, www, enz.).
+    Voeg het **klant-domein** toe als site/zone in Cloudflare — procedure: [Cloudflare — Domein toevoegen](/overig/cloudflare). Importeer of zet de benodigde records (mail, www, enz.).
   </Step>
   <Step title="Nameservers omzetten" icon="server">
     Zet bij de **huidige registrar** de nameservers op die van Cloudflare. Doe dit **vóór** je het domein verhuist/overneemt.
@@ -26,7 +26,7 @@ Bij site-overgangen, domeinovernames of “DNS komt onze kant op”:
     Controleer tot Cloudflare de zone **Active** toont en NS wereldwijd kloppen. Pas dan verder met verhuizen.
   </Step>
   <Step title="Daarna pas domeinnaam verhuizen" icon="truck">
-    Registrar-transfer / overname naar jullie of klant-account gebeurt **pas** als NS overal op Cloudflare staan. Zo blijft DNS stabiel tijdens de verhuizing.
+    Registrar-transfer via [OpenProvider](/overig/openprovider) (of huidige partij → OpenProvider) gebeurt **pas** als NS overal op Cloudflare staan.
   </Step>
 </Steps>
 

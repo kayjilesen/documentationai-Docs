@@ -18,12 +18,12 @@ Code draait op een deelbare URL via Git. Hosting-standaarden staan al goed (zelf
     In xCloud op de **productieserver**: nieuwe WordPress-site, PHP 8.2+, label = projectnaam. Zie [Site Management](/hosting/site-management). Noteer het **server-IP** (nodig voor DNS).
   </Step>
   <Step title="DNS in Cloudflare" icon="cloud">
-    In Cloudflare → zone **`kayjilesen.dev`**:
+    In Cloudflare → zone **`kayjilesen.dev`** (bestaande zone; geen nieuwe site):
 
     - Type: **A** (of zoals xCloud voorschrijft)
     - Name: **`projectnaam`** (wordt `projectnaam.kayjilesen.dev`)
     - Value: IP van de xCloud-server
-    - Proxy: **DNS only** (grijs wolkje) — SSL via Let's Encrypt op de server, niet via Cloudflare-proxy
+    - Proxy: **DNS only** (grijs) — zie ook [Cloudflare](/overig/cloudflare)
 
     Wacht tot de record resolve’t vóór je SSL forceert.
   </Step>
