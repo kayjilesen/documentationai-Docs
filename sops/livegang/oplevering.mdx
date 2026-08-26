@@ -1,0 +1,64 @@
+---
+title: "Livegang — Oplevering"
+description: "Laatste poort vóór overdracht aan de klant — techniek, content, mail, cookies, overdracht."
+---
+
+<Callout kind="info" title="Dit is een SOP">
+  Pas “opgeleverd” zeggen als alles hieronder af is. Komt ná [Go-live checks](/sops/livegang/go-live-checks).
+</Callout>
+
+## Doel
+
+Live site stabiel volgens KJ-standaard; klant kan inloggen en kritieke flows werken; uitzonderingen zijn gedeeld.
+
+## Vooraf
+
+- [ ] [Productie & DNS](/sops/livegang/productie-en-dns) Af
+- [ ] [Go-live checks](/sops/livegang/go-live-checks) Af
+- [ ] Staging-feedback kritiek afgehandeld
+
+## Af — Techniek
+
+- [ ] HTTPS / SSL OK (geen mixed content op kernpagina's)
+- [ ] Login via **`/beheer`**
+- [ ] FastCGI + Redis; caches geleegd na laatste deploy
+- [ ] Remote backups volgens [Backups](/hosting/backups)
+- [ ] WAF volgens [Security](/hosting/security)
+
+## Af — Theme & content
+
+- [ ] `npm run build` gedraaid en assets live
+- [ ] Kernpagina's visueel OK desktop/mobiel
+- [ ] Geen PHP-fatals; WP_DEBUG uit
+- [ ] Favicon / basismeta waar gevraagd
+
+## Af — Mail & formulieren
+
+- [ ] FluentSMTP: Maileroo (+ SES backup aanwezig)
+- [ ] Pushover gekoppeld
+- [ ] Formulier(en) OK; notificatie ontvangen
+- [ ] SureForms tenzij bewuste Gravity Forms-feature
+
+## Af — Cookies & tracking
+
+- [ ] SureCookie in incognito
+- [ ] Reconsent + cookiebeleid-pagina
+- [ ] Tracking respecteert consent
+
+## Af — Overdracht
+
+- [ ] Klant heeft `/beheer` + credentials via wachtwoordmanager (niet chat/docs)
+- [ ] Korte uitleg of handleiding waar beloofd
+- [ ] Uitzonderingen in klantproject-dossier of mail
+- [ ] Geen bekende “lokaal wel / live niet”-blockers
+- [ ] Nazorg: wie pakt Pushover/backup-alerts op?
+
+<Callout kind="success" title="Af">
+  Alles aangevinkt → oplevering volgens standaard compleet.
+</Callout>
+
+## Gerelateerd
+
+- [Het traject](/sops/nieuwe-wordpress-site)
+- [Doorlopend](/sops/doorlopend)
+- [Deployments](/hosting/deployments)

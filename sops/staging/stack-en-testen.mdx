@@ -1,0 +1,49 @@
+---
+title: "Staging — Stack & testen"
+description: "Standaard plugins, mail, cookies en formulieren op staging installeren en testen."
+---
+
+<Callout kind="info" title="Dit is een SOP (opzet)">
+  Doe dit **niet** pas bij livegang. Mail/cookies/forms moeten op staging al groen zijn.
+</Callout>
+
+## Doel
+
+KJ-pluginstandaard actief; kritieke flows (login, mail, cookies, forms) bewezen op staging.
+
+## Stappen
+
+<Steps>
+  <Step title="Plugin-stack" icon="package">
+    Volg [Plugins overzicht](/wordpress/plugins/overzicht): Defender, Switchboard, Smush, Hummingbird, SureCookie, FluentSMTP (+ projectplugins).
+  </Step>
+  <Step title="Defender /beheer" icon="shield">
+    [WP Defender](/wordpress/plugins/wp-defender) — Mask Login slug **`beheer`**. Test login-URL.
+  </Step>
+  <Step title="Overige presets" icon="sliders">
+    Switchboard / Smush / Hummingbird volgens hun Documentatie-pagina’s + configs in `wordpress/configs/` waar van toepassing.
+  </Step>
+  <Step title="SureCookie" icon="cookie">
+    [SureCookie](/wordpress/plugins/surecookie) — import/standaard, merkkleuren, beleidspagina, reconsent, `wp_body_open`.
+  </Step>
+  <Step title="FluentSMTP" icon="mail">
+    [FluentSMTP](/wordpress/plugins/fluent-smtp) — Maileroo primair, SES backup, keys in wp-config via xCloud, Pushover. DNS voor Maileroo zo vroeg mogelijk (ook als live nog niet is).
+  </Step>
+  <Step title="Formulieren testen" icon="send">
+    Submit in incognito; mail aankomst + eventuele tracking alleen mét consent.
+  </Step>
+</Steps>
+
+## Af
+
+- [ ] Standaardplugins actief + presets
+- [ ] Login via `/beheer` op staging
+- [ ] SureCookie zichtbaar (incognito); reconsent werkt
+- [ ] Testmail Maileroo én SES OK
+- [ ] Pushover-test OK
+- [ ] Formulier(en) OK op staging
+- [ ] Individuele plugin-Af’s afgevinkt waar gebruikt
+
+## Volgende
+
+→ [Feedback](/sops/staging/feedback)

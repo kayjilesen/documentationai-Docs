@@ -308,14 +308,138 @@
             "icon": "list"
           },
           {
-            "title": "Nieuwe WordPress-site",
+            "title": "Het traject",
             "path": "sops/nieuwe-wordpress-site",
             "icon": "rocket"
           },
           {
-            "title": "Oplevering",
-            "path": "sops/oplevering",
-            "icon": "check-circle"
+            "group": "Kickoff",
+            "icon": "flag",
+            "expandable": true,
+            "pages": [
+              {
+                "title": "Project starten",
+                "path": "sops/kickoff",
+                "icon": "play"
+              }
+            ]
+          },
+          {
+            "group": "Design",
+            "icon": "palette",
+            "expandable": true,
+            "pages": [
+              {
+                "title": "Merk & Figma",
+                "path": "sops/design/merk-en-figma",
+                "icon": "figma"
+              },
+              {
+                "title": "Structuur & content",
+                "path": "sops/design/structuur-en-content",
+                "icon": "map"
+              },
+              {
+                "title": "Review & handoff",
+                "path": "sops/design/review-en-handoff",
+                "icon": "check-circle"
+              }
+            ]
+          },
+          {
+            "group": "Lokaal",
+            "icon": "laptop",
+            "expandable": true,
+            "pages": [
+              {
+                "title": "Omgeving",
+                "path": "sops/lokaal/omgeving",
+                "icon": "server"
+              },
+              {
+                "title": "Theme / boilerplate",
+                "path": "sops/lokaal/theme-boilerplate",
+                "icon": "copy"
+              },
+              {
+                "title": "Bouwen",
+                "path": "sops/lokaal/bouwen",
+                "icon": "code"
+              }
+            ]
+          },
+          {
+            "group": "Staging",
+            "icon": "cloud",
+            "expandable": true,
+            "pages": [
+              {
+                "title": "Site & deploy",
+                "path": "sops/staging/site-en-deploy",
+                "icon": "upload"
+              },
+              {
+                "title": "Stack & testen",
+                "path": "sops/staging/stack-en-testen",
+                "icon": "package"
+              },
+              {
+                "title": "Feedback",
+                "path": "sops/staging/feedback",
+                "icon": "message-square"
+              }
+            ]
+          },
+          {
+            "group": "Livegang",
+            "icon": "globe",
+            "expandable": true,
+            "pages": [
+              {
+                "title": "Productie & DNS",
+                "path": "sops/livegang/productie-en-dns",
+                "icon": "server"
+              },
+              {
+                "title": "Go-live checks",
+                "path": "sops/livegang/go-live-checks",
+                "icon": "list-checks"
+              },
+              {
+                "title": "Oplevering",
+                "path": "sops/livegang/oplevering",
+                "icon": "check-circle"
+              }
+            ]
+          },
+          {
+            "group": "Doorlopend",
+            "icon": "refresh-cw",
+            "expandable": true,
+            "pages": [
+              {
+                "title": "Onderhoud & updates",
+                "path": "sops/doorlopend",
+                "icon": "wrench"
+              }
+            ]
+          },
+          {
+            "group": "Extra",
+            "icon": "plus-circle",
+            "expandable": true,
+            "pages": [
+              {
+                "title": "Migratie oude WordPress",
+                "path": "sops/extra/migratie-wordpress",
+                "icon": "database"
+              },
+              {
+                "title": "Klant-e-mail",
+                "path": "sops/extra/klant-email",
+                "icon": "mail"
+              }
+            ]
           }
         ]
       },

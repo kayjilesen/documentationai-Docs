@@ -1,0 +1,51 @@
+---
+title: "Livegang — Go-live checks"
+description: "Steekproef op productie: techniek, content, mail, cookies, tracking."
+---
+
+<Callout kind="info" title="Dit is een SOP (opzet)">
+  Korte, harde checklist direct na DNS/SSL — vóór je “live” communiceert.
+</Callout>
+
+## Doel
+
+Geen verrassingen op het publieke domein die op staging wél werkten.
+
+## Checks
+
+### Techniek
+
+- [ ] Home + 2–3 kernpagina’s laden (desktop + mobiel)
+- [ ] Geen mixed content / duidelijke SSL-fouten
+- [ ] Login alleen delen als **`/beheer`**
+- [ ] WP_DEBUG uit op productie
+- [ ] Page cache + Redis actief; na deploy gepurged
+
+### Theme & content
+
+- [ ] Assets uit laatste `npm run build` zichtbaar (geen oude CSS)
+- [ ] Pagebuilder-blokken zonder fatale errors
+- [ ] Favicon / basismeta waar afgesproken
+- [ ] Formulieren zichtbaar op contact/landings
+
+### Mail & formulieren
+
+- [ ] Testsubmit → mail via Maileroo
+- [ ] Backup-route SES getest of recent op staging bewezen + keys op prod aanwezig
+- [ ] Pushover gekoppeld op prod
+
+### Cookies & tracking
+
+- [ ] SureCookie in **incognito** op productiedomein
+- [ ] Reconsent / cookiebeleid
+- [ ] Tracking alleen na consent (GCM waar van toepassing)
+
+### SEO / hygiene (licht)
+
+- [ ] Sitemap/robots niet per ongeluk “block all” (SureRank of equivalent)
+- [ ] Canonical/domein niet nog op staging-URL
+
+## Af
+
+- [ ] Alle secties hierboven groen of uitzondering bewust gedeeld
+- [ ] Klaar voor [Oplevering](/sops/livegang/oplevering)

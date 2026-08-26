@@ -1,0 +1,55 @@
+---
+title: "Livegang — Productie & DNS"
+description: "Staging-site omzetten naar klant-domein — DNS, SSL, mail-DNS, redirects."
+---
+
+<Callout kind="info" title="Dit is een SOP">
+  Standaard: de site op **`projectnaam.kayjilesen.dev`** staat al op de live-server. Livegang = **omzetten** naar het klant-domein (primair domein wisselen + DNS), niet een tweede site bouwen.
+</Callout>
+
+## Doel
+
+Publiek klant-domein wijst naar dezelfde xCloud-site; SSL en mail-DNS kloppen; oude URL’s redirecten waar nodig.
+
+## Stappen
+
+<Steps>
+  <Step title="Laatste deploy op staging" icon="upload">
+    [Deployments](/hosting/deployments): finale build, Deployer, **ACF > Sync**, cache purge. Go van [Feedback](/sops/staging/feedback).
+  </Step>
+  <Step title="Primair domein wisselen" icon="globe">
+    In xCloud: klant-domein toevoegen als primair (of naast `*.kayjilesen.dev`). Staging-subdomein mag tijdelijk blijven voor nazorg.
+  </Step>
+  <Step title="DNS" icon="server">
+    A/AAAA of nameservers volgens xCloud. TTL vooraf verlagen helpt. Eigenaar DNS = uit [Kickoff](/sops/kickoff).
+  </Step>
+  <Step title="SSL" icon="lock">
+    Let's Encrypt op klant-domein; force HTTPS. Oude `*.kayjilesen.dev` cert laten staan zolang dat host actief is.
+  </Step>
+  <Step title="Mail DNS" icon="mail">
+    SPF/DKIM/DMARC voor Maileroo (`noreply@klant`). Let op overlap met [klant-e-mail](/sops/extra/klant-email) (één samenhangend SPF).
+  </Step>
+  <Step title="Hosting check" icon="shield">
+    Caching / backups / WAF stonden al op staging — steekproef of alles nog klopt na domeinwissel.
+  </Step>
+  <Step title="Redirects / migratie" icon="corner-down-right">
+    Bij migratie: volg [Migratie oude WordPress](/sops/extra/migratie-wordpress). Anders: bekende oude URL’s 301’en. Oude hosting pas uitzetten ná verificatie.
+  </Step>
+  <Step title="Helpers & credentials" icon="key">
+    Klant-domein in `kj_is_live_domain()`. `/beheer` + credentials in 1Password.
+  </Step>
+</Steps>
+
+## Af
+
+- [ ] Klant-domein resolve’t naar deze xCloud-site
+- [ ] HTTPS OK op klant-domein
+- [ ] Laatste deploy + ACF Sync + cache purge vóór/na cutover
+- [ ] Mail DNS (Maileroo) gezet of follow-up met DNS-eigenaar
+- [ ] Cache / backup / WAF nog OK na omzetting
+- [ ] `/beheer` + credentials in wachtwoordmanager
+- [ ] Redirects gedaan of bewust niet van toepassing
+
+## Volgende
+
+→ [Go-live checks](/sops/livegang/go-live-checks)

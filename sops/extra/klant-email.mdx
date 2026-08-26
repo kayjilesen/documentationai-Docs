@@ -1,0 +1,56 @@
+---
+title: "Extra — Klant-e-mail (M365 / Google)"
+description: "Mailboxen voor de klant opzetten — Microsoft 365 (PAX8) of Google Workspace — naast de website."
+---
+
+<Callout kind="info" title="Dit is een SOP (opzet)">
+  Dit is **klantmailboxen**, niet FluentSMTP (transactionele site-mail). Site-mail blijft [FluentSMTP](/wordpress/plugins/fluent-smtp) / Maileroo.
+</Callout>
+
+## Doel
+
+Klant kan mailen op `@klantdomein` via M365 of Google; DNS en overdracht zijn rond.
+
+## Keuze
+
+| Situatie | Standaard |
+|----------|-----------|
+| Zakelijk, wij beheren via partner | **Microsoft 365 via PAX8** |
+| Klant wil Google / eigen factuur | **Google Workspace** |
+| Lichte mailbox / anders | [MXRoute](/email/mxroute) (naslag) |
+
+Leg de keuze vast in kickoff + klantproject-dossier.
+
+## Stappen (hoog niveau)
+
+<Steps>
+  <Step title="Scope in kickoff" icon="flag">
+    Aantal mailboxen, aliassen, wie admin wordt, facturatie (PAX8 vs klant).
+  </Step>
+  <Step title="Provider-SOP volgen" icon="book">
+    - M365: [Microsoft 365 (PAX8)](/email/microsoft-365)  
+    - Google: [Google Workspace](/email/google-workspace)  
+  </Step>
+  <Step title="DNS" icon="globe">
+    MX + verificatie + SPF/DKIM. Let op conflict met Maileroo/site-mail SPF (één samenhangend SPF-record).
+  </Step>
+  <Step title="Gebruikers & 2FA" icon="users">
+    Accounts aanmaken, MFA aanzetten, credentials via 1Password naar klant.
+  </Step>
+  <Step title="Overdracht" icon="check">
+    Klant kan inloggen; wij hebben GDAP/partnertoegang waar van toepassing; facturatie loopt.
+  </Step>
+</Steps>
+
+## Af
+
+- [ ] Provider gekozen (M365 / Google / anders) en gedocumenteerd
+- [ ] Provider-documentatie-stappen afgerond
+- [ ] DNS (MX + auth) OK; site-mail SPF niet kapot
+- [ ] Mailboxen + MFA; credentials via wachtwoordmanager
+- [ ] Klant geïnformeerd / kan mailen
+
+## Gerelateerd
+
+- [Kickoff](/sops/kickoff)
+- [FluentSMTP](/wordpress/plugins/fluent-smtp) (site, niet mailbox)

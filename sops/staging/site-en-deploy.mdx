@@ -1,0 +1,52 @@
+---
+title: "Staging — Site & deploy"
+description: "Staging-site in xCloud op projectnaam.kayjilesen.dev — Git-deploy en hosting-standaarden."
+---
+
+<Callout kind="info" title="Dit is een SOP">
+  Staging = **aparte xCloud-site** op de live-server, URL-patroon: **`projectnaam.kayjilesen.dev`**. Bij livegang wordt deze site meestal omgezet naar het klant-domein.
+</Callout>
+
+## Doel
+
+Code draait op een deelbare URL via Git — niet via FTP. Hosting-standaarden staan al goed (zelfde machine als later live).
+
+## Stappen
+
+<Steps>
+  <Step title="Site aanmaken" icon="server">
+    In xCloud op de **productieserver**: nieuwe WordPress-site, PHP 8.2+, label = projectnaam. Zie [Site Management](/hosting/site-management).
+  </Step>
+  <Step title="Domein & SSL" icon="lock">
+    Koppel **`projectnaam.kayjilesen.dev`** (bijv. `hoexsystems.kayjilesen.dev`) + Let's Encrypt.
+  </Step>
+  <Step title="Git / Deployer" icon="git-branch">
+    Koppel repo; deploy theme met [Deployer for Git](/hosting/deployments). Eerste push vanaf gebouwde slice.
+  </Step>
+  <Step title="Hosting-standaarden" icon="zap">
+    Zet meteen de productiestandaard (blijft gelden na omzetting):
+
+    - [Caching](/hosting/caching) — FastCGI 60 min + Redis  
+    - [Backups](/hosting/backups) — remote incremental  
+    - [Security](/hosting/security) — WAF  
+  </Step>
+  <Step title="ACF Sync + cache" icon="refresh-cw">
+    Na deploy met JSON-wijzigingen: **ACF > Sync**. Purge page cache + Redis.
+  </Step>
+  <Step title="Domein-helper" icon="globe">
+    Dit `*.kayjilesen.dev`-host opnemen in `kj_is_live_domain()` / project-equivalent.
+  </Step>
+</Steps>
+
+## Af
+
+- [ ] `https://projectnaam.kayjilesen.dev` bereikbaar (HTTPS)
+- [ ] Theme/code via Git-deploy
+- [ ] Caching + Redis volgens standaard
+- [ ] WAF + remote backups aan
+- [ ] ACF Sync gedaan indien nodig; caches gepurged
+- [ ] Staging-host in theme-helper
+
+## Volgende
+
+→ [Stack & testen](/sops/staging/stack-en-testen)

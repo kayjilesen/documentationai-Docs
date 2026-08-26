@@ -1,0 +1,50 @@
+---
+title: "Design — Merk & Figma"
+description: "Merkassets, design tokens en UI in Figma klaarzetten voor development."
+---
+
+<Callout kind="info" title="Dit is een SOP (opzet)">
+  Onderdeel van fase Design. Geldt of we zelf ontwerpen of Figma van een externe partij ontvangen.
+</Callout>
+
+## Doel
+
+Developers hebben een bruikbaar Figma-bestand met merk, componenten en kernschermen — geen losse screenshots in chat.
+
+Bron mag zijn: **zelf ontworpen**, **aangeleverd door de klant**, of **bureau** — de checklist is hetzelfde. Ontvang je alleen PDF/screenshots: zet om naar Figma of noteer expliciet de beperking in het projectdossier.
+
+## Stappen
+
+<Steps>
+  <Step title="Merkassets verzamelen" icon="palette">
+    Logo (SVG/PNG), kleuren, fonts, fotostijl, bestaande huisstijlgids indien aanwezig.
+  </Step>
+  <Step title="Tokens vastleggen" icon="droplet">
+    Primary/secondary, neutrals, fonts — later mappen naar Tailwind in het theme. Noteer hex/waarden in Figma of een kort tokens-overzicht.
+  </Step>
+  <Step title="UI in Figma" icon="figma">
+    Desktop + mobiel voor kernpagina’s. Gebruik frames/breakpoints die aansluiten op hoe we bouwen (niet één collage).
+  </Step>
+  <Step title="Herbruikbare secties" icon="layout">
+    Markeer herhaalbare blocks (hero, USP’s, CTA, team, FAQ, …) — dat worden pagebuilder-blokken.
+  </Step>
+  <Step title="States & edge cases" icon="alert-circle">
+    Lege states, lange titels, 2 vs 6 cards, hover/focus waar relevant. Voorkomt “werkt alleen met perfecte demo-content”.
+  </Step>
+</Steps>
+
+## Af
+
+- [ ] Logo + kleuren + fonts beschikbaar
+- [ ] Figma (of opvolger) bereikbaar voor het team
+- [ ] Kernschermen desktop én mobiel
+- [ ] Herbruikbare secties herkenbaar gelabeld
+- [ ] Tokens bruikbaar voor Tailwind-mapping
+
+## Naslag
+
+- Later in bouw: [Tailwind CSS Setup](/wordpress/tailwind-setup), [Pagebuilder](/acf/pagebuilder)
+
+## Volgende
+
+→ [Structuur & content](/sops/design/structuur-en-content)

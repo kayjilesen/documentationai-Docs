@@ -1,0 +1,43 @@
+---
+title: "Staging — Feedback"
+description: "Staging delen, feedback verzamelen en slices terug naar lokaal/deploy."
+---
+
+<Callout kind="info" title="Dit is een SOP (opzet)">
+  Staging is de gezamenlijke waarheid — niet iemands `.local`.
+</Callout>
+
+## Doel
+
+Gestructureerde feedback → fixes → opnieuw deployen, tot “klaar voor livegang”.
+
+## Stappen
+
+<Steps>
+  <Step title="URL delen" icon="link">
+    Staging-URL + `/beheer` alleen aan wie het nodig heeft. Credentials via wachtwoordmanager.
+  </Step>
+  <Step title="Review-ronde" icon="eye">
+    Vraag gerichte feedback: content, design-afwijkingen, formulieren, mobiel. Deadline zetten.
+  </Step>
+  <Step title="Tickets / lijst" icon="list">
+    Bundel punten (Notion/Linear/mail — één systeem). Scheid: bug / content / later / out of scope.
+  </Step>
+  <Step title="Fix lokaal → deploy" icon="git-branch">
+    Fix in Git, `npm run build`, deploy, ACF Sync indien nodig, cache purge. Herhaal tot kritiek groen.
+  </Step>
+  <Step title="Go/no-go livegang" icon="flag">
+    Intern (en zo nodig klant): staging is goed genoeg om DNS/productie te doen.
+  </Step>
+</Steps>
+
+## Af
+
+- [ ] Minstens één review-ronde afgerond
+- [ ] Kritieke bugs gefixt en opnieuw op staging geverifieerd
+- [ ] Open punten gelabeld (nu / later / out of scope)
+- [ ] Expliciet go voor livegang (of bewuste soft-launch plan)
+
+## Volgende
+
+→ [Livegang: Productie & DNS](/sops/livegang/productie-en-dns)

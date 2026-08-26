@@ -1,0 +1,54 @@
+---
+title: "Lokaal — Bouwen"
+description: "Pagebuilder-blokken, templates, CPT’s, formulieren en content tijdens development."
+---
+
+<Callout kind="info" title="Dit is een SOP (opzet)">
+  Doorlopende fase tot staging/live. Werk in slices: eerst home + kernblokken, dan rest.
+</Callout>
+
+## Doel
+
+Site functioneel en visueel volgens Figma-handoff, binnen KJ-conventies, commitbaar en deploybaar.
+
+## Stappen (herhaalbaar)
+
+<Steps>
+  <Step title="Tokens → Tailwind" icon="droplet">
+    Kleuren/fonts uit design in theme-config. Zie [Tailwind Setup](/wordpress/tailwind-setup).
+  </Step>
+  <Step title="Globals" icon="settings">
+    Header, footer, options (ACF options pages). Zie [Options Pages](/acf/options-pages).
+  </Step>
+  <Step title="Blokken" icon="layers">
+    Pagebuilder-blokken: PHP + CSS + ACF. Zie [Pagebuilder](/acf/pagebuilder), [Pagebuilder Systeem](/wordpress/pagebuilder-blocks), [Components](/acf/components).
+  </Step>
+  <Step title="CPT’s" icon="database">
+    Alleen volgens [Structuur & content](/sops/design/structuur-en-content). Labels NL, rewrites netjes.
+  </Step>
+  <Step title="Formulieren" icon="mail">
+    [SureForms](/wordpress/plugins/formulieren) (of GF bij harde eis). Lokaal plaatsen; mailtest echt op staging.
+  </Step>
+  <Step title="Tracking-hooks (optioneel vroeg)" icon="activity">
+    Consent-aware generate_lead / gtag-voorbereiding in theme. Scripts pas actief i.c.m. SureCookie op staging/live.
+  </Step>
+  <Step title="Content seeden" icon="file">
+    Demo-pagina’s met realistische contentlengtes. Geen productie-secrets in content.
+  </Step>
+  <Step title="Kwaliteit" icon="check-square">
+    Responsive steekproef, `npm run build` clean, ACF-JSON gecommit bij veldwijzigingen.
+  </Step>
+</Steps>
+
+## Af (per milestone / vóór staging-push)
+
+- [ ] Afgesproken templates/blokken voor deze slice staan
+- [ ] `npm run build` zonder errors
+- [ ] ACF-JSON gecommit waar nodig
+- [ ] Geen secrets in Git
+- [ ] Formulieren aanwezig (mailbewijs volgt op staging)
+- [ ] Desktop + mobiel steekproef op slice OK
+
+## Volgende
+
+→ [Staging: Site & deploy](/sops/staging/site-en-deploy)

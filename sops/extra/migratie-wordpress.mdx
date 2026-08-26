@@ -1,0 +1,53 @@
+---
+title: "Extra — Migratie oude WordPress"
+description: "Content, media en redirects van een bestaande WordPress-site naar de nieuwe KJ-stack."
+---
+
+<Callout kind="info" title="Dit is een SOP (opzet)">
+  Alleen als er een **bestaande site** is. Parallel aan Design/Lokaal; kritiek rond Staging/Livegang.
+</Callout>
+
+## Doel
+
+Nodige content en URL’s landen op de nieuwe site zonder dataverlies en met werkende redirects.
+
+## Wanneer
+
+Scope in [Kickoff](/sops/kickoff) bevat migratie (oude WP, andere CMS, of alleen deel van content).
+
+## Stappen
+
+<Steps>
+  <Step title="Inventaris" icon="search">
+    Oude URL’s (sitemap/export), plugins die content dragen, formulierinzendingen, redirects die al bestaan, wie DNS/hosting beheert.
+  </Step>
+  <Step title="Toegang" icon="key">
+    WP-admin of hosting/FTP/DB in 1Password. Geen credentials in chat/docs.
+  </Step>
+  <Step title="Contentstrategie" icon="copy">
+    Wat komt 1:1 mee, wat herschrijven we in pagebuilder, wat archiveren we? Media: bulk-import vs selectief.
+  </Step>
+  <Step title="Import / overzetten" icon="database">
+    Tools naar gelang bron (WP export/import, WP All Import, handmatig in pagebuilder). Test eerst op **`projectnaam.kayjilesen.dev`**.
+  </Step>
+  <Step title="URL-mapping" icon="link">
+    Oude → nieuwe paden in een lijst. 301’s op productie (plugin of server). Home en top-landings eerst.
+  </Step>
+  <Step title="Cutover" icon="flag">
+    Bij [Livegang](/sops/livegang/productie-en-dns): DNS/omzetting, redirects live, oude site pas uitzetten na steekproef.
+  </Step>
+</Steps>
+
+## Af
+
+- [ ] Inventaris + toegang rond
+- [ ] Contentstrategie afgesproken (niet “alles maar importeren”)
+- [ ] Content/media op staging gecontroleerd
+- [ ] Redirect-lijst klaar vóór DNS-cutover
+- [ ] Na live: steekproef oude top-URL’s → 301/200 OK
+- [ ] Oude omgeving uitgezet of geparkeerd (bewust)
+
+## Naslag
+
+- [Livegang — Productie & DNS](/sops/livegang/productie-en-dns)
+- [Go-live checks](/sops/livegang/go-live-checks)

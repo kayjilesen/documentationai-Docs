@@ -1,0 +1,48 @@
+---
+title: "Lokaal — Theme / boilerplate"
+description: "Theme opzetten vanuit kj-boilerplate, npm, ACF JSON, Git."
+---
+
+<Callout kind="info" title="Dit is een SOP (opzet)">
+  Elk nieuw theme start leeg en wordt opgebouwd o.b.v. [KJ-Boilerplate](/client-projects/kj-boilerplate) (via Claude-prompt in local-dev).
+</Callout>
+
+## Doel
+
+Werkend theme met Tailwind-build, ACF Pro + JSON, Git-repo, klaar om blokken te bouwen.
+
+## Stappen
+
+<Steps>
+  <Step title="Boilerplate toepassen" icon="copy">
+    Volg de Claude-/setup-stappen in [Lokale ontwikkelomgeving](/devops/local-dev). Theme activeren.
+  </Step>
+  <Step title="npm" icon="terminal">
+    `npm install` en `npm run dev`. Controleer dat CSS/build loopt.
+  </Step>
+  <Step title="ACF" icon="database">
+    ACF Pro actief. Sync bestaande JSON uit boilerplate. Werkwijze: [ACF Patronen](/wordpress/acf-patterns).
+  </Step>
+  <Step title="Git" icon="git-branch">
+    Repo initialiseren/koppelen. Secrets niet committen. Zie [Git Workflow](/devops/git-workflow).
+  </Step>
+  <Step title="Domein-helper" icon="globe">
+    `kj_is_live_domain()` (of equivalent): staging-/productiedomeinen projectspecifiek zetten.
+  </Step>
+  <Step title="Conventies scannen" icon="book-open">
+    Kort: [Theme Architectuur](/wordpress/theme-architecture), [Naamgevingsconventies](/wordpress/naming-conventions).
+  </Step>
+</Steps>
+
+## Af
+
+- [ ] Theme actief op `.local`
+- [ ] `npm run dev` / `npm run build` OK
+- [ ] ACF Pro + JSON sync OK
+- [ ] Git repo met schone eerste commits
+- [ ] Live/staging-domeinen in helper gezet (of ticket om later te zetten)
+- [ ] Conventie-docs gelezen (nieuw teamlid)
+
+## Volgende
+
+→ [Bouwen](/sops/lokaal/bouwen)

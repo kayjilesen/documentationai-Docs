@@ -1,0 +1,37 @@
+---
+title: "Doorlopend — onderhoud & updates"
+description: "Na oplevering: deploys, updates, monitoring, docs en klantproject bijhouden."
+---
+
+<Callout kind="info" title="Dit is een SOP (opzet)">
+  Geen fase in het traject, wél vast werk na livegang (en soms al tijdens).
+</Callout>
+
+## Doel
+
+Sites gezond houden zonder ad-hoc FTP of ongedocumenteerde uitzonderingen.
+
+## Terugkerende taken
+
+| Taak | Richtlijn |
+|------|-----------|
+| **Kleine wijzigingen** | Lokaal → Git → deploy staging (indien nodig) → productie; ACF Sync; cache purge |
+| **Plugin/core updates** | Bij voorkeur eerst staging; daarna prod. Defender/security niet “even uit” |
+| **Content voor klant** | Klant in WP; jij alleen bij pagebuilder/technisch |
+| **Incidents** | Mail (Pushover), cache, cookies: eerst [Helpcentrum](/help-center), dan fix + docs |
+| **Docs** | Leerpunten → SOP of Documentatie via Git |
+| **Klantproject-dossier** | URL’s, uitzonderingen, speciale plugins actueel houden |
+
+## Af (na elke productie-wijziging)
+
+- [ ] Via Git/Deployer gegaan
+- [ ] ACF Sync indien JSON gewijzigd
+- [ ] Caches gepurged
+- [ ] Steekproef op het gewijzigde onderdeel
+- [ ] Uitzondering of nieuwe afspraak in docs/dossier gezet indien nodig
+
+## Naslag
+
+- [Git Workflow](/devops/git-workflow)
+- [Deployments](/hosting/deployments)
+- [SOP Overzicht](/sops/overzicht)
