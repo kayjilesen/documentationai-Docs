@@ -1,0 +1,108 @@
+---
+title: "SureCookie"
+description: "Standaard cookie consent met SureCookie — GDPR opt-in, scriptblokkering, Google Consent Mode en NL teksten."
+---
+
+**SureCookie** is de standaard cookie-consent plugin voor nieuwe sites (premium lifetime). Pressidium alleen op bestaande sites laten staan tot je bewust migreert.
+
+Export: `wordpress/configs/surecookie.json`  
+(Bronexport: christoffelvenray.nl — logo en merkkleuren zijn projectspecifiek.)
+
+## Vereiste in het theme
+
+Zonder `wp_body_open()` in `header.php` verschijnt de banner niet. Zie [Cookiebanner verschijnt niet](/help-center/troubleshooting/cookiebanner-verschijnt-niet).
+
+```php
+<body <?php body_class(); ?>>
+<?php wp_body_open(); ?>
+```
+
+## Standaardinstellingen (import)
+
+Na installatie: instellingen importeren via SureCookie of handmatig afstemmen op onderstaande defaults.
+
+### Banner & knoppen
+
+| Instelling | Standaard |
+|------------|-----------|
+| Banner | Aan — type **banner**, positie **bottom**, animatie **fade** |
+| Overlay | Uit |
+| Branding verwijderen | Aan |
+| Floating widget | Uit |
+| Bericht | NL tekst over cookies / ervaring verbeteren |
+| Knoppen | Alles accepteren · Alleen essentieel · Voorkeuren · Weigeren |
+| Button order | `accept_all, accept, preferences, decline` |
+
+Logo en kleuren: per project (theme primary). In de export: custom palette mode met projecthex.
+
+### Toestemming & naleving
+
+| Instelling | Standaard |
+|------------|-----------|
+| Wetgeving | **GDPR** |
+| Consent model | **opt-in** |
+| Consent logging | Aan — retentie **365 days** |
+| Consent duration | **365** dagen |
+| Geo | Worldwide (Pro); EU defaults via GCM |
+
+### Categorieën
+
+| Categorie | Verplicht |
+|-----------|-----------|
+| Essentiële Cookies | Ja |
+| Functionele Cookies | Nee |
+| Analysecookies | Nee |
+| Marketing Cookies | Nee |
+| Ongecategoriseerde Cookies | Nee |
+
+### Scriptblokkering & scan
+
+| Instelling | Standaard |
+|------------|-----------|
+| Blocking | **Aan** |
+| Auto scan | Aan — **weekly**, scope `all_published` |
+| Auto scan apply mode | `auto` |
+| Compliance guard | Aan |
+| Google Consent Mode (GCM) | **Aan** — wait for update **500** ms |
+| GCM defaults | functional / analytics / marketing = **false** (ook EU-region) |
+
+## Theme-integratie (checklist)
+
+<Steps>
+  <Step title="wp_body_open controleren" icon="code">
+    Hook direct na `<body>` in `header.php`.
+  </Step>
+  <Step title="Plugin + preset" icon="package">
+    SureCookie installeren/activeren. Importeer `wordpress/configs/surecookie.json` en pas logo + kleuren aan op het project.
+  </Step>
+  <Step title="Kleuren in theme (aanbevolen)" icon="palette">
+    Pin merkkleuren via PHP-filter (`surecookie_resolved_palette_colors`) zodat staging/fresh installs dezelfde kleuren hebben zonder DB-stap. Zie skill **wp-cookies**.
+  </Step>
+  <Step title="Footer reconsent" icon="mouse-pointer">
+    Cookie-dropdown of shortcode `[surecookie_reconsent_button]` in de footer, zodat bezoekers voorkeuren opnieuw kunnen openen.
+  </Step>
+  <Step title="Cookiebeleid-pagina" icon="file-text">
+    Pagina `/cookiebeleid/` met `[surecookie_cookie_policy_content]`. Koppel aan ACF `page_cookies` indien aanwezig.
+  </Step>
+  <Step title="Caches legen" icon="zap">
+    Na livegang: [xCloud page/Redis cache](/hosting/caching) + Hummingbird purge; test in incognito.
+  </Step>
+</Steps>
+
+## Shortcodes
+
+| Shortcode | Gebruik |
+|-----------|---------|
+| `[surecookie_reconsent_button]` | Voorkeuren opnieuw openen |
+| `[surecookie_cookie_policy_content]` | Dynamische cookietabel op beleidspagina |
+
+## Legacy: Pressidium
+
+Bestaande Pressidium-sites niet migreren zonder overleg — consent logs en blocking-regels gaan niet mee. Nieuwe sites: altijd SureCookie.
+
+## Gerelateerd
+
+- [Plugins Overzicht](/wordpress/plugins/overzicht)
+- [Cookiebanner verschijnt niet](/help-center/troubleshooting/cookiebanner-verschijnt-niet)
+- [Skills Overzicht](/claude/skills-overview) — skill `wp-cookies`
+- [xCloud Caching](/hosting/caching)

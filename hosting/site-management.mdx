@@ -129,19 +129,10 @@ De PHP versie is per site instelbaar via **Site > PHP Version**. Beschikbare ver
 
 ## E-mail configuratie
 
-xCloud kan transactionele e-mails versturen via een SMTP provider. Dit wordt geconfigureerd via **FluentSMTP** (WordPress plugin).
-
-### Ondersteunde SMTP providers
-
-| Provider | Beschrijving |
-|----------|-------------|
-| **Mailgun** | Betrouwbaar voor transactionele e-mails |
-| **SendGrid** | Populair voor bulk en transactionele e-mails |
-| **Elastic Email** | Voordelig voor hoge volumes |
-| **Elke SMTP provider** | Handmatige SMTP configuratie mogelijk |
+xCloud kan transactionele e-mails versturen via **FluentSMTP**. Standaard: **Maileroo** (`noreply@klant`) als primair + **Amazon SES** (`@kayjilesen.dev`, Stockholm) als backup — credentials in `wp-config.php`, Pushover voor alerts. Zie [FluentSMTP](/wordpress/plugins/fluent-smtp).
 
 <Callout kind="warning" title="E-mail testen">
-  Configureer altijd een SMTP provider. Standaard server-mail is onbetrouwbaar en komt vaak in spam terecht.
+  Configureer altijd beide connections en stuur testmails. Standaard server-mail is onbetrouwbaar. Zet SMTP-/AWS-keys nooit in Git.
 </Callout>
 
 ---

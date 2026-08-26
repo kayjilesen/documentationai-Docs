@@ -1,0 +1,324 @@
+{
+  "type": "surecookie-settings-export",
+  "schema_version": 1,
+  "plugin_version": "1.4.0",
+  "exported_at": "2026-08-26T11:37:18+00:00",
+  "site_url": "https://christoffelvenray.nl",
+  "sections": {
+    "banner": {
+      "label": "Banner",
+      "tier": "free",
+      "keys": [
+        "banner_enabled",
+        "message_heading",
+        "message_description",
+        "banner_position",
+        "banner_logo",
+        "notice_type",
+        "notice_position",
+        "color_palette",
+        "banner_width",
+        "preferences_modal_heading",
+        "preferences_modal_description",
+        "banner_animation",
+        "banner_overlay_enabled",
+        "remove_branding",
+        "floating_widget_enabled",
+        "floating_widget_position",
+        "floating_widget_size",
+        "floating_widget_icon",
+        "floating_widget_device_visibility",
+        "floating_widget_logo",
+        "custom_colors",
+        "banner_hidden_page_ids",
+        "banner_hidden_terms",
+        "banner_hidden_templates",
+        "banner_hidden_archives",
+        "banner_hidden_user_roles",
+        "banner_hidden_urls",
+        "banner_hidden_allow_scripts"
+      ],
+      "options": []
+    },
+    "buttons": {
+      "label": "Knoppen & labels",
+      "tier": "free",
+      "keys": [
+        "accept_btn_text",
+        "accept_all_enabled",
+        "accept_all_btn_text",
+        "decline_btn_text",
+        "settings_btn_text",
+        "button_order",
+        "preferences_btn_text",
+        "reconsent_button_label"
+      ],
+      "options": []
+    },
+    "consent": {
+      "label": "Toestemming & naleving",
+      "tier": "free",
+      "keys": [
+        "compliance_law",
+        "consent_logging_enabled",
+        "consent_log_retention",
+        "consent_duration_days",
+        "consent_model"
+      ],
+      "options": []
+    },
+    "cookie_categories": {
+      "label": "Cookiecategorieën",
+      "tier": "free",
+      "keys": [
+        "cookie_categories",
+        "hide_unused_categories"
+      ],
+      "options": []
+    },
+    "cookies": {
+      "label": "Cookies",
+      "tier": "free",
+      "keys": [
+        "custom_cookies"
+      ],
+      "options": []
+    },
+    "blocking": {
+      "label": "Scriptblokkering",
+      "tier": "free",
+      "keys": [
+        "blocking_enabled",
+        "resource_category_overrides",
+        "custom_blocked_scripts"
+      ],
+      "options": []
+    },
+    "advanced": {
+      "label": "Geavanceerd",
+      "tier": "free",
+      "keys": [
+        "top_level_menu_enabled",
+        "custom_css",
+        "delete_data_on_uninstall",
+        "enable_mcp",
+        "excluded_scan_resources",
+        "placeholder_image",
+        "placeholder_description",
+        "placeholder_button_text",
+        "placeholder_video_thumbnails",
+        "data_request_settings",
+        "consent_forwarding_show_sites"
+      ],
+      "options": []
+    },
+    "cookies_scripts": {
+      "label": "Cookies & Scripts",
+      "tier": "free",
+      "keys": [
+        "custom_whitelisted_scripts",
+        "auto_scan_email_enabled",
+        "auto_scan_email_recipient",
+        "auto_scan_apply_mode",
+        "auto_scan_compliance_guard"
+      ],
+      "options": []
+    },
+    "scanning": {
+      "label": "Automatisch scannen",
+      "tier": "free",
+      "keys": [
+        "auto_scan_enabled",
+        "auto_scan_frequency",
+        "auto_scan_scope"
+      ],
+      "options": []
+    },
+    "geo": {
+      "label": "Geografische regels",
+      "tier": "pro",
+      "keys": [
+        "geo_display_mode",
+        "geo_fallback_mode",
+        "geo_fallback_preset_id",
+        "geo_presets"
+      ],
+      "options": []
+    },
+    "consent_frameworks": {
+      "label": "Toestemmingskaders",
+      "tier": "free",
+      "keys": [
+        "consent_forwarding_enabled",
+        "consent_forwarding_mode",
+        "consent_forwarding_partner_sites",
+        "consent_forwarding_banner_notice",
+        "consent_forwarding_description"
+      ],
+      "options": []
+    },
+    "gcm": {
+      "label": "Google toestemmingsmodus",
+      "tier": "free",
+      "keys": [
+        "gcm_enabled",
+        "gcm_wait_for_update",
+        "gcm_default_consent",
+        "gcm_region_defaults"
+      ],
+      "options": []
+    }
+  },
+  "settings": {
+    "banner_enabled": true,
+    "message_heading": "",
+    "message_description": "<p>We gebruiken cookies om uw ervaring te verbeteren en te begrijpen hoe u onze site gebruikt. U kunt uw keuzes op elk moment bekijken.</p>",
+    "banner_position": "bottom",
+    "banner_logo": "https://christoffelvenray.nl/wp-content/uploads/2025/12/Logo-Blauw.png",
+    "accept_btn_text": "Alleen essentieel",
+    "accept_all_enabled": true,
+    "accept_all_btn_text": "Alles accepteren",
+    "decline_btn_text": "Weigeren",
+    "settings_btn_text": "Cookie-instellingen",
+    "button_order": "accept_all,accept,preferences,decline",
+    "compliance_law": {
+      "id": "1",
+      "name": "GDPR"
+    },
+    "notice_type": "banner",
+    "notice_position": "bottom",
+    "cookie_categories": {
+      "essential": {
+        "id": "essential",
+        "name": "Essentiële Cookies",
+        "description": "Vereist voor basisfunctionaliteit van de website.",
+        "required": true
+      },
+      "functional": {
+        "id": "functional",
+        "name": "Functionele Cookies",
+        "description": "Schakel functies in zoals opgeslagen voorkeuren en gepersonaliseerde inhoud.",
+        "required": false
+      },
+      "analytics": {
+        "id": "analytics",
+        "name": "Analysecookies",
+        "description": "Help ons te begrijpen hoe bezoekers onze site gebruiken zodat we deze kunnen verbeteren.",
+        "required": false
+      },
+      "marketing": {
+        "id": "marketing",
+        "name": "Marketing Cookies",
+        "description": "Wordt gebruikt om je relevante advertenties te tonen op basis van je interesses.",
+        "required": false
+      },
+      "uncategorized": {
+        "id": "uncategorized",
+        "name": "Ongecategoriseerde Cookies",
+        "description": "Cookies die nog niet zijn gecategoriseerd.",
+        "required": false
+      }
+    },
+    "hide_unused_categories": false,
+    "custom_cookies": [],
+    "consent_logging_enabled": true,
+    "consent_log_retention": "365_days",
+    "consent_duration_days": 365,
+    "color_palette": "green-lime",
+    "banner_width": 550,
+    "preferences_btn_text": "Voorkeuren",
+    "preferences_modal_heading": "Privacyvoorkeur",
+    "preferences_modal_description": "We gebruiken cookies en vergelijkbare technologieën om te helpen bij het personaliseren van inhoud, het afstemmen en meten van advertenties, en het bieden van een betere ervaring.",
+    "blocking_enabled": true,
+    "top_level_menu_enabled": true,
+    "banner_animation": "fade",
+    "banner_overlay_enabled": false,
+    "reconsent_button_label": "Cookievoorkeuren",
+    "custom_css": "",
+    "delete_data_on_uninstall": false,
+    "enable_mcp": false,
+    "excluded_scan_resources": [],
+    "custom_whitelisted_scripts": [],
+    "resource_category_overrides": [],
+    "placeholder_image": "",
+    "placeholder_description": "This content is blocked because it would connect to {service}.",
+    "placeholder_button_text": "Accepteren & Laden",
+    "placeholder_video_thumbnails": false,
+    "custom_blocked_scripts": [],
+    "consent_model": "opt-in",
+    "auto_scan_enabled": true,
+    "auto_scan_frequency": "weekly",
+    "auto_scan_scope": "all_published",
+    "remove_branding": true,
+    "floating_widget_enabled": false,
+    "floating_widget_position": "bottom-right",
+    "floating_widget_size": "medium",
+    "floating_widget_icon": "cookie",
+    "floating_widget_device_visibility": "all",
+    "floating_widget_logo": "",
+    "data_request_settings": {
+      "data_request_enabled": false,
+      "data_request_recipient_email": "",
+      "data_request_sla_days": 30,
+      "data_request_types_enabled": [
+        "access",
+        "erasure",
+        "rectification",
+        "portability",
+        "objection",
+        "restriction"
+      ],
+      "data_request_auto_insert_privacy_page": false,
+      "data_request_form_title": "Submit a Data Request",
+      "data_request_form_intro": "Use this form to exercise your data subject rights under GDPR, CCPA, and similar laws. We will verify your email address before processing your request and respond within 30 days."
+    },
+    "geo_display_mode": "worldwide",
+    "geo_fallback_mode": "show",
+    "geo_fallback_preset_id": "gdpr",
+    "geo_presets": [],
+    "consent_forwarding_enabled": false,
+    "consent_forwarding_mode": "selected",
+    "consent_forwarding_partner_sites": [],
+    "consent_forwarding_banner_notice": false,
+    "consent_forwarding_description": "Your consent also applies to our connected partner sites.",
+    "consent_forwarding_show_sites": false,
+    "auto_scan_email_enabled": false,
+    "auto_scan_email_recipient": "dev@kayjilesen.nl",
+    "auto_scan_apply_mode": "auto",
+    "auto_scan_compliance_guard": true,
+    "custom_colors": {
+      "mode": "custom",
+      "colors": {
+        "primary": "#006eb8",
+        "secondary": "#006eb8",
+        "foreground": "#020e15",
+        "background": ""
+      }
+    },
+    "banner_hidden_page_ids": [],
+    "banner_hidden_terms": [],
+    "banner_hidden_templates": [],
+    "banner_hidden_archives": [],
+    "banner_hidden_user_roles": [],
+    "banner_hidden_urls": [],
+    "banner_hidden_allow_scripts": false,
+    "gcm_enabled": true,
+    "gcm_wait_for_update": 500,
+    "gcm_default_consent": {
+      "functional": false,
+      "analytics": false,
+      "marketing": false
+    },
+    "gcm_region_defaults": [
+      {
+        "region": [
+          "EU"
+        ],
+        "analytics": false,
+        "marketing": false,
+        "functional": false
+      }
+    ]
+  },
+  "options": []
+}

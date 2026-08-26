@@ -143,6 +143,16 @@
                     "title": "Hummingbird",
                     "path": "wordpress/plugins/hummingbird",
                     "icon": "feather"
+                  },
+                  {
+                    "title": "SureCookie",
+                    "path": "wordpress/plugins/surecookie",
+                    "icon": "cookie"
+                  },
+                  {
+                    "title": "FluentSMTP",
+                    "path": "wordpress/plugins/fluent-smtp",
+                    "icon": "mail"
                   }
                 ]
               },
