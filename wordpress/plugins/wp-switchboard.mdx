@@ -3,7 +3,7 @@ title: "WP Switchboard Pro"
 description: "Standaard Switchboard-modules voor admin-cleanup, bloat removal en kleine security/performance-opties."
 ---
 
-Standaardmodules gebaseerd op recente productiesites (o.a. Hoexsystems).
+Standaardmodules voor alle sites (pagebuilder-stack). Afgeleid van overlap tussen recente productiesites, zonder dubbele security ten opzichte van [WP Defender](/wordpress/plugins/wp-defender).
 
 Export: `wordpress/configs/wpswitchboard.json`
 
@@ -17,20 +17,23 @@ Export: `wordpress/configs/wpswitchboard.json`
 | `duplicate-post-button` | Posts/pages dupliceren |
 | `disable-dashicons-frontend` | Dashicons niet laden op front-end |
 | `disable-emoji` | WP emoji-scripts uit |
+| `disable-embeds` | oEmbed-scripts uit |
 | `disable-feeds` | Feeds uit |
+| `disable-self-pingbacks` | Self-pingbacks uit |
+| `disable-gutenberg` | Block editor uit (ACF pagebuilder-sites) |
+| `disable-admin-bar-frontend` | Geen admin bar op de front-end |
 | `transients-cleaner` | Verlopen transients opruimen |
+| `heartbeat-control` | Admin-heartbeat beperken |
 | `disable-author-archives` | Author archives uit |
 | `disable-file-editing` | Theme/plugin editor in admin uit |
 | `disable-xmlrpc` | XML-RPC uit |
 | `hide-wp-version` | WP-versie verbergen |
+| `hide-login-errors` | Generieke login-foutmeldingen |
 | `last-login-column` | Laatste login in users-lijst |
 | `revisions-control` | Revisielimiet (**5**) |
 | `clean-admin-bar` | Admin bar opschonen (zie settings) |
 | `active-plugins-first` | Actieve plugins bovenaan |
 | `disable-dashboard-widgets-select` | Standaard dashboard widgets verbergen |
-| `download-plugin-zip` | Plugin als zip downloaden |
-| `quick-debug-toggle` | Snelle debug-toggle |
-| `security-headers` | Extra security headers |
 
 ## Module-settings (standaard)
 
@@ -40,17 +43,26 @@ Export: `wordpress/configs/wpswitchboard.json`
 
 **revisions-control** — limit: `5`
 
+**disable-gutenberg** — mode `specific` voor pages + custom CPT's (projectafhankelijk welke post types).
+
 ## Optioneel per project
 
 | Module | Wanneer |
 |--------|---------|
-| `disable-gutenberg` | Classic editor / pagebuilder-sites (vaak pages + custom CPT's) |
-| `disable-embeds` | Geen oEmbeds nodig |
 | `svg-support` | SVG-uploads toestaan |
 | `media-categories` | Media organiseren in categorieën |
-| `heartbeat-control` | Admin-heartbeat beperken |
-| `username-blacklist` | Extra naast Defender |
-| `disable-admin-bar-frontend` | Geen admin bar op de front-end |
+| `remove-shortlink` / `remove-rss-feed-links` | Extra head-cleanup |
+| `quick-debug-toggle` | Alleen op lokale/dev omgevingen |
+| `download-plugin-zip` | Handig voor development, niet standaard op live |
+| `username-blacklist` | Liever via [Defender](/wordpress/plugins/wp-defender) |
+| `security-headers` | Liever via Defender (voorkom dubbele headers) |
+| `disable-rest-api` | Alleen als je zeker weet dat REST niet nodig is (ACF/apps) |
+| `obfuscate-author-slugs` | Extra enum-bescherming; Defender doet user-enum al |
+
+## Niet als standaard (overlap andere tools)
+
+- Performance: `defer-javascript`, `lazy-load-control`, `lcp-image-priority`, `add-missing-image-dimensions` — zit in [Hummingbird](/wordpress/plugins/hummingbird) / [Smush](/wordpress/plugins/smush)
+- Login-lockouts / 2FA-achtige hardening — zit in Defender
 
 <Callout kind="warning">
   Licentiekeys horen niet in de docs of in Git. Activeer Switchboard Pro per site via je eigen licentie.

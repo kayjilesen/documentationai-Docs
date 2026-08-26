@@ -1,28 +1,31 @@
 {
     "name": "Kay Jilesen | Switchboard Standard",
-    "source": "hoexsystems",
+    "source": "site-overlap + docs recommendation",
     "exported_at": "2026-08-26",
     "active_modules": [
         "active-plugins-first",
         "clean-admin-bar",
-        "disable-dashboard-widgets-select",
-        "move-switchboard-to-tools",
-        "site-identity-login",
-        "disable-comments",
-        "duplicate-post-button",
-        "disable-dashicons-frontend",
-        "disable-emoji",
-        "transients-cleaner",
+        "disable-admin-bar-frontend",
         "disable-author-archives",
+        "disable-comments",
+        "disable-dashboard-widgets-select",
+        "disable-dashicons-frontend",
+        "disable-embeds",
+        "disable-emoji",
+        "disable-feeds",
         "disable-file-editing",
+        "disable-gutenberg",
+        "disable-self-pingbacks",
+        "disable-xmlrpc",
+        "duplicate-post-button",
+        "heartbeat-control",
+        "hide-login-errors",
         "hide-wp-version",
         "last-login-column",
-        "download-plugin-zip",
-        "quick-debug-toggle",
-        "disable-feeds",
+        "move-switchboard-to-tools",
         "revisions-control",
-        "disable-xmlrpc",
-        "security-headers"
+        "site-identity-login",
+        "transients-cleaner"
     ],
     "module_settings": {
         "clean-admin-bar": {
@@ -41,6 +44,12 @@
         },
         "revisions-control": {
             "limit": "5"
+        },
+        "disable-gutenberg": {
+            "mode": "specific",
+            "post_type_page": "1",
+            "post_type_post": "1"
         }
-    }
+    },
+    "notes": "Security headers, username blacklist and REST lockdown stay in WP Defender. Dev helpers (quick-debug-toggle, download-plugin-zip) are optional, not default on live."
 }
