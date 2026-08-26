@@ -7,6 +7,10 @@ description: "Lokale WordPress ontwikkelomgeving opzetten met .local domeinen, t
 
 Voor lokale ontwikkeling draait WordPress onder een `.local` domein. Elk nieuw theme begint als een lege map in `/DEV/<projectnaam>/wp-content/themes/<projectnaam>`; Claude zet die daarna op basis van de [KJ-Boilerplate](/client-projects/kj-boilerplate).
 
+<Callout kind="info" title="Dit is een SOP">
+  Onderdeel van [SOP: Nieuwe WordPress-site](/sops/nieuwe-wordpress-site). Onderstaand **Af** = fase lokaal klaar.
+</Callout>
+
 ---
 
 ## Vereisten
@@ -136,6 +140,15 @@ git commit -m "Add nieuwe feature"
 ```
 
 ---
+
+## Af
+
+- [ ] Site bereikbaar op `https://projectnaam.local` (of http)
+- [ ] Themamap: `/DEV/<project>/wp-content/themes/<project>/` met boilerplate-structuur
+- [ ] `npm install` en `npm run dev` OK
+- [ ] Theme geactiveerd in WP-admin
+- [ ] ACF Pro actief; veldgroepen gesynct (indien JSON aanwezig)
+- [ ] `kj_is_live_domain()` staging-domein projectspecifiek gezet
 
 ## Veelvoorkomende Issues
 

@@ -7,6 +7,10 @@ Preset: **Kay Jilesen | 2026 | Weekly** — import via Defender configs of WPMU 
 
 Export: `wordpress/configs/wp-defender.json`
 
+<Callout kind="info" title="Dit is een SOP">
+  Onderdeel van [SOP: Nieuwe WordPress-site](/sops/nieuwe-wordpress-site). Zie **Af** onderaan.
+</Callout>
+
 ## Mask Login (verplicht)
 
 | Instelling | Waarde |
@@ -41,7 +45,11 @@ Productie-inlog: `https://domein.nl/beheer`
 | Blocklist monitor | Uit | |
 | Security tweaks | Alle recommendations fixed | o.a. XML-RPC uit, hide errors, prevent user enum, disable file editor |
 
-## Gerelateerd
+## Af
 
-- [Plugins Overzicht](/wordpress/plugins/overzicht)
-- [Hosting Security](/hosting/security)
+- [ ] Defender actief; preset/import toegepast
+- [ ] Mask Login aan; slug **`beheer`**
+- [ ] `https://domein.nl/beheer` werkt; oude login niet als klantlink gebruikt
+- [ ] Security scan / lockouts / headers volgens standaardpreset
+
+## Gerelateerd

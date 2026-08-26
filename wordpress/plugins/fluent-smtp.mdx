@@ -5,6 +5,10 @@ description: "Standaard SMTP via FluentSMTP — Maileroo (noreply@klant) als pri
 
 **FluentSMTP** is de standaard WordPress-plugin voor transactionele mail. Server-mail (`mail()`) gebruiken we niet.
 
+<Callout kind="info" title="Dit is een SOP">
+  Onderdeel van [SOP: Nieuwe WordPress-site](/sops/nieuwe-wordpress-site). Zie **Af** onderaan.
+</Callout>
+
 <Callout kind="info" title="Geen export">
   FluentSMTP heeft geen nette settings-export. Credentials horen in **`wp-config.php` via xCloud** (niet in de database, niet in Git). Documenteer per project alleen providers + from-adressen.
 </Callout>
@@ -121,6 +125,16 @@ Via FluentSMTP → **Waarschuwingen** / notifications:
     Testmail via connection 1 én 2. Check inbox/spam en Pushover bij een geforceerde fout indien mogelijk.
   </Step>
 </Steps>
+
+## Af
+
+- [ ] Maileroo primair: `noreply@klantdomein.nl`, DNS records gezet
+- [ ] Keys via `FLUENTMAIL_SMTP_*` in `wp-config.php` (niet in DB)
+- [ ] Amazon SES backup: `…@kayjilesen.dev`, regio **Stockholm**
+- [ ] Keys via `FLUENTMAIL_AWS_*` in `wp-config.php`
+- [ ] Routing: 1 = Maileroo, 2 = SES backup; logging **1 jaar**
+- [ ] Testmail connection 1 én 2 ontvangen
+- [ ] Pushover gekoppeld + testalert ontvangen
 
 ## Troubleshooting
 

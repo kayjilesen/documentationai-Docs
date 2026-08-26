@@ -1,0 +1,64 @@
+---
+title: "SOP: Oplevering"
+description: "Af-checklist vóór overdracht aan de klant — techniek, content, mail, cookies, security en caches."
+---
+
+<Callout kind="info" title="Dit is een SOP">
+  Gebruik dit als **laatste poort** na bouwen en deploy. Pas “opgeleverd” zeggen als alles hieronder afgevinkt is.
+</Callout>
+
+## Doel
+
+De live site is stabiel, bereikbaar, veilig genoeg volgens standaard, en de kritieke flows (mail, formulier, cookies) werken.
+
+## Vooraf
+
+- [ ] [SOP Nieuwe WordPress-site](/sops/nieuwe-wordpress-site) fases 1–7 af (of aantoonbaar niet van toepassing)
+- [ ] Laatste deploy + ACF Sync + cache purge gedaan
+
+## Af — Techniek
+
+- [ ] HTTPS / SSL OK (geen mixed content op kernpagina's)
+- [ ] Login via **`/beheer`** (niet `/wp-admin` delen)
+- [ ] FastCGI + Redis actief; caches geleegd na laatste deploy
+- [ ] Remote backups actief volgens [Backups](/hosting/backups)
+- [ ] WAF aan volgens [Security](/hosting/security)
+
+## Af — Theme & content
+
+- [ ] `npm run build` gedraaid en assets live
+- [ ] Kernpagina's (home + 2–3 templates) visueel OK desktop/mobiel
+- [ ] Pagebuilder-blokken renderen zonder PHP-notices (WP_DEBUG uit op live)
+- [ ] Favicon / basismeta aanwezig waar gevraagd
+
+## Af — Mail & formulieren
+
+- [ ] FluentSMTP: test via Maileroo én SES
+- [ ] Pushover gekoppeld (alerts bij mailfouten)
+- [ ] Formulier(en) versturen OK; notificatie ontvangen
+- [ ] SureForms gebruikt, tenzij bewuste Gravity Forms-feature
+
+## Af — Cookies & tracking
+
+- [ ] SureCookie-banner in incognito
+- [ ] Voorkeuren heropenbaar (footer / reconsent)
+- [ ] Cookiebeleid-pagina met shortcode aanwezig
+- [ ] Tracking/scripts respecteren consent (GCM waar van toepassing)
+
+## Af — Overdracht
+
+- [ ] Klant heeft `/beheer`-URL en credentials via wachtwoordmanager (niet in chat/docs)
+- [ ] Bekende uitzonderingen mondeling/schriftelijk gedeeld indien nodig
+- [ ] Geen openstaande “werkt lokaal niet op live”-bugs bekend
+
+<Callout kind="success" title="Af">
+  Alles aangevinkt → oplevering technisch compleet volgens standaard.
+</Callout>
+
+## Gerelateerd
+
+- [Nieuwe WordPress-site](/sops/nieuwe-wordpress-site)
+- [Deployments](/hosting/deployments)
+- [FluentSMTP](/wordpress/plugins/fluent-smtp)
+- [SureCookie](/wordpress/plugins/surecookie)
+- [Formulieren](/wordpress/plugins/formulieren)

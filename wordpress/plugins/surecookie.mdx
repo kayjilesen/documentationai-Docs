@@ -5,6 +5,10 @@ description: "Standaard cookie consent met SureCookie — GDPR opt-in, scriptblo
 
 **SureCookie** is de standaard cookie-consent plugin voor nieuwe sites (premium lifetime). Pressidium alleen op bestaande sites laten staan tot je bewust migreert.
 
+<Callout kind="info" title="Dit is een SOP">
+  Onderdeel van [SOP: Nieuwe WordPress-site](/sops/nieuwe-wordpress-site). Zie **Af** onderaan.
+</Callout>
+
 Export: `wordpress/configs/surecookie.json`  
 (Bronexport: christoffelvenray.nl — logo en merkkleuren zijn projectspecifiek.)
 
@@ -88,6 +92,15 @@ Logo en kleuren: per project (theme primary). In de export: custom palette mode 
     Na livegang: [xCloud page/Redis cache](/hosting/caching) + Hummingbird purge; test in incognito.
   </Step>
 </Steps>
+
+## Af
+
+- [ ] `wp_body_open()` aanwezig direct na `<body>`
+- [ ] SureCookie actief; preset/import of settings volgens standaard (GDPR opt-in, blocking, GCM)
+- [ ] Logo + merkkleuren projectspecifiek
+- [ ] Cookiebeleid-pagina met `[surecookie_cookie_policy_content]`
+- [ ] Reconsent in footer (`[surecookie_reconsent_button]` of cookie-dropdown)
+- [ ] Banner zichtbaar in incognito; caches gepurged
 
 ## Shortcodes
 
