@@ -22,16 +22,6 @@
                 "title": "Introductie",
                 "path": "introduction",
                 "icon": "home"
-              },
-              {
-                "title": "Onboarding",
-                "path": "sops/onboarding",
-                "icon": "user-plus"
-              },
-              {
-                "title": "Offboarding",
-                "path": "sops/offboarding",
-                "icon": "user-minus"
               }
             ]
           },
@@ -348,16 +338,6 @@
             "icon": "rocket"
           },
           {
-            "title": "Onboarding",
-            "path": "sops/onboarding",
-            "icon": "user-plus"
-          },
-          {
-            "title": "Offboarding",
-            "path": "sops/offboarding",
-            "icon": "user-minus"
-          },
-          {
             "group": "Kickoff",
             "icon": "flag",
             "expandable": true,
@@ -518,6 +498,23 @@
                 "path": "help-center/troubleshooting/cookiebanner-verschijnt-niet"
               }
             ]
+          }
+        ]
+      },
+      {
+        "tab": "Intern",
+        "icon": "lock",
+        "public": false,
+        "pages": [
+          {
+            "title": "Onboarding",
+            "path": "sops/onboarding",
+            "icon": "user-plus"
+          },
+          {
+            "title": "Offboarding",
+            "path": "sops/offboarding",
+            "icon": "user-minus"
           }
         ]
       },
