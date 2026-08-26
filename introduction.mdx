@@ -9,9 +9,13 @@ description: Welkom bij de kennisbank — een startpunt voor nieuwe werknemers e
 
 ## Wat is dit?
 
-Hier staat vastgelegd hoe we werken: WordPress-thema's, ACF/pagebuilder, hosting, Git, e-mailsetup en klantprojecten. Gebruik deze docs als bron van waarheid — niet als losse notities of chatgeschiedenis.
+Hier staat vastgelegd hoe we werken: custom WordPress-thema's, ACF, hosting, Git, e-mailsetup en klantprojecten. Gebruik deze docs als bron van waarheid — niet als losse notities of chatgeschiedenis.
 
 Je hoeft niet alles in één keer te lezen. Begin met de basis hieronder en duik dieper zodra je een taak krijgt.
+
+<Callout kind="info" title="Geen Elementor / Bricks / Divi">
+  We gebruiken **geen** kant-en-klare pagebuilders (Elementor, Bricks, Divi, Oxygen, enz.). Pagina’s bouwen we met een **eigen pagebuilder** op basis van **ACF Flexible Content**: developers maken blokken in PHP/Tailwind; redacteuren zetten die secties op een pagina. Zie [Pagebuilder](/acf/pagebuilder).
+</Callout>
 
 ## Waar begin je?
 
@@ -21,7 +25,7 @@ Je hoeft niet alles in één keer te lezen. Begin met de basis hieronder en duik
 
 <Steps>
   <Step title="Begrijp de stack" icon="layers">
-    We bouwen custom WordPress-thema's met **ACF Pro**, een **pagebuilder** en **Tailwind CSS**. Het startpunt voor elk nieuw thema is de [KJ-Boilerplate](/client-projects/kj-boilerplate).
+    Custom WordPress-thema's met **ACF Pro**, **Tailwind CSS**, en een **zelfgebouwde pagebuilder** (ACF Flexible Content — niet Elementor/Bricks). Startpunt: [KJ-Boilerplate](/client-projects/kj-boilerplate). Hoe de builder werkt: [Pagebuilder](/acf/pagebuilder).
   </Step>
   <Step title="Zet je lokale omgeving op" icon="laptop">
     Volg [Lokale Ontwikkelomgeving](/devops/local-dev). Sites draaien op een `.local` domein (bijv. `projectnaam.local`). Themamappen staan in `/DEV/<projectnaam>/wp-content/themes/<projectnaam>`.
@@ -38,7 +42,7 @@ Je hoeft niet alles in één keer te lezen. Begin met de basis hieronder en duik
 
 <Columns cols={2}>
   <Card title="WordPress Development" icon="code" href="/wordpress/database">
-    Basis (database, bestanden, config), thema-opbouw, pagebuilder, ACF, Tailwind en plugins.
+    Basis, thema-opbouw, ACF-pagebuilder (eigen blokken), Tailwind en plugins.
   </Card>
   <Card title="Hosting" icon="server" href="/hosting/server-setup">
     Servers, deployments, caching, backups en security.
@@ -53,6 +57,7 @@ Je hoeft niet alles in één keer te lezen. Begin met de basis hieronder en duik
 
 ## Tips voor je eerste weken
 
+- **Geen Elementor-achtige builders** — pagebuilder = ACF-blokken die wij zelf bouwen. Zie [Pagebuilder](/acf/pagebuilder).
 - **Productie-login is `/beheer`** — niet `/wp-admin`. Zie [WP Defender](/wordpress/plugins/wp-defender).
 - **Vraag bij twijfel na in de docs** — FAQ en Troubleshooting in het Helpcentrum, plus de pluginpresets.
 - **Kijk eerst naar een bestaand project** — klantprojecten laten zien hoe we conventies in de praktijk toepassen.
