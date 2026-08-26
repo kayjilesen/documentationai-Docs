@@ -1,0 +1,47 @@
+---
+title: "WP Defender"
+description: "Standaard WP Defender-preset — Mask Login via /beheer, scans, lockouts en security headers."
+---
+
+Preset: **Kay Jilesen | 2026 | Weekly** — import via Defender configs of WPMU DEV Hub.
+
+Export: `wordpress/configs/wp-defender.json`
+
+## Mask Login (verplicht)
+
+| Instelling | Waarde |
+|------------|--------|
+| Mask Login Area | **Aan** |
+| Custom login slug | **`beheer`** |
+| Redirect verkeer vanaf oude login | Uit |
+
+Productie-inlog: `https://domein.nl/beheer`
+
+<Callout kind="warning">
+  Deel `/wp-admin` niet als inloglink. Stuur collega's en klanten altijd naar `/beheer`.
+</Callout>
+
+## Overige kerninstellingen
+
+| Module | Status | Notities |
+|--------|--------|----------|
+| Security scan | Aan | Wekelijks (zondag 04:00), e-mailrapport aan |
+| Login protection | Aan | 5 pogingen / 300s → lockout 300s |
+| 404 detection | Aan | 10 hits / 300s → lockout 300s |
+| Username blacklist | Aan | `admin`, `administrator`, `webmaster` |
+| User agent banning | Aan | Standaard bot-whitelist actief |
+| Global IP list | Aan | Autosync blocklist |
+| Antibot | Aan | |
+| Security headers | Aan | X-Frame sameorigin, XSS sanitize, nosniff, HSTS 30d, referrer same-origin |
+| Audit logging | Aan | Opslag 7 dagen |
+| Pwned passwords | Aan | Alle standaard rollen |
+| 2FA | Uit | |
+| Force strong password | Uit | |
+| Session protection | Uit | |
+| Blocklist monitor | Uit | |
+| Security tweaks | Alle recommendations fixed | o.a. XML-RPC uit, hide errors, prevent user enum, disable file editor |
+
+## Gerelateerd
+
+- [Plugins Overzicht](/wordpress/plugins/overzicht)
+- [Hosting Security](/hosting/security)

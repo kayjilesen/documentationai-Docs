@@ -82,9 +82,26 @@
                 "icon": "git-branch"
               },
               {
-                "title": "Backups & Security",
-                "path": "hosting/backups-security",
-                "icon": "shield"
+                "group": "Instellingen",
+                "icon": "settings",
+                "expandable": true,
+                "pages": [
+                  {
+                    "title": "Caching",
+                    "path": "hosting/caching",
+                    "icon": "zap"
+                  },
+                  {
+                    "title": "Backups",
+                    "path": "hosting/backups",
+                    "icon": "hard-drive"
+                  },
+                  {
+                    "title": "Security",
+                    "path": "hosting/security",
+                    "icon": "shield"
+                  }
+                ]
               }
             ]
           },
@@ -98,9 +115,36 @@
                 "icon": "layout"
               },
               {
-                "title": "Standaard Instellingen",
-                "path": "wordpress/standaard-instellingen",
-                "icon": "settings"
+                "group": "Plugins",
+                "icon": "puzzle",
+                "expandable": true,
+                "pages": [
+                  {
+                    "title": "Overzicht",
+                    "path": "wordpress/plugins/overzicht",
+                    "icon": "list"
+                  },
+                  {
+                    "title": "WP Defender",
+                    "path": "wordpress/plugins/wp-defender",
+                    "icon": "shield"
+                  },
+                  {
+                    "title": "WP Switchboard",
+                    "path": "wordpress/plugins/wp-switchboard",
+                    "icon": "sliders"
+                  },
+                  {
+                    "title": "Smush Pro",
+                    "path": "wordpress/plugins/smush",
+                    "icon": "image"
+                  },
+                  {
+                    "title": "Hummingbird",
+                    "path": "wordpress/plugins/hummingbird",
+                    "icon": "feather"
+                  }
+                ]
               },
               {
                 "title": "Pagebuilder Systeem",

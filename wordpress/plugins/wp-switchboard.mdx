@@ -1,0 +1,62 @@
+---
+title: "WP Switchboard Pro"
+description: "Standaard Switchboard-modules voor admin-cleanup, bloat removal en kleine security/performance-opties."
+---
+
+Standaardmodules gebaseerd op recente productiesites (o.a. Hoexsystems).
+
+Export: `wordpress/configs/wpswitchboard.json`
+
+## Altijd aan
+
+| Module | Doel |
+|--------|------|
+| `move-switchboard-to-tools` | Switchboard onder Tools i.p.v. top-level menu |
+| `site-identity-login` | Login-scherm met site-branding |
+| `disable-comments` | Comments uit |
+| `duplicate-post-button` | Posts/pages dupliceren |
+| `disable-dashicons-frontend` | Dashicons niet laden op front-end |
+| `disable-emoji` | WP emoji-scripts uit |
+| `disable-feeds` | Feeds uit |
+| `transients-cleaner` | Verlopen transients opruimen |
+| `disable-author-archives` | Author archives uit |
+| `disable-file-editing` | Theme/plugin editor in admin uit |
+| `disable-xmlrpc` | XML-RPC uit |
+| `hide-wp-version` | WP-versie verbergen |
+| `last-login-column` | Laatste login in users-lijst |
+| `revisions-control` | Revisielimiet (**5**) |
+| `clean-admin-bar` | Admin bar opschonen (zie settings) |
+| `active-plugins-first` | Actieve plugins bovenaan |
+| `disable-dashboard-widgets-select` | Standaard dashboard widgets verbergen |
+| `download-plugin-zip` | Plugin als zip downloaden |
+| `quick-debug-toggle` | Snelle debug-toggle |
+| `security-headers` | Extra security headers |
+
+## Module-settings (standaard)
+
+**clean-admin-bar** — verberg: updates, comments, new content, howdy, help tab, screen options. Laat staan: WP logo, site name, customize.
+
+**disable-dashboard-widgets-select** — o.a. Right Now, Activity, Quick Press, Primary, Welcome, Recent Comments/Drafts, Secondary.
+
+**revisions-control** — limit: `5`
+
+## Optioneel per project
+
+| Module | Wanneer |
+|--------|---------|
+| `disable-gutenberg` | Classic editor / pagebuilder-sites (vaak pages + custom CPT's) |
+| `disable-embeds` | Geen oEmbeds nodig |
+| `svg-support` | SVG-uploads toestaan |
+| `media-categories` | Media organiseren in categorieën |
+| `heartbeat-control` | Admin-heartbeat beperken |
+| `username-blacklist` | Extra naast Defender |
+| `disable-admin-bar-frontend` | Geen admin bar op de front-end |
+
+<Callout kind="warning">
+  Licentiekeys horen niet in de docs of in Git. Activeer Switchboard Pro per site via je eigen licentie.
+</Callout>
+
+## Gerelateerd
+
+- [Plugins Overzicht](/wordpress/plugins/overzicht)
+- [WP Defender](/wordpress/plugins/wp-defender)

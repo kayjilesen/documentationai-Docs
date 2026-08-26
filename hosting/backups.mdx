@@ -1,0 +1,62 @@
+---
+title: "Backups"
+description: "Standaard xCloud remote backups — incremental, weekly full, daily incremental, 30 dagen retention."
+---
+
+## Overzicht
+
+Gebruik op productie altijd **Remote Backup** (niet alleen lokaal).
+
+| Instelling | Standaard |
+|------------|-----------|
+| Backup type | **Incremental** |
+| Bucket | **xcloud** |
+| Automatic Full Backup | Aan — **Weekly** |
+| Backup Retention | Aan — **Delete After Days: 30** |
+| Automatic Incremental Backup | Aan — **Daily** |
+| Database Backup | Aan (**Take Database Backup**) |
+| File Backup | Aan (**Take File Backup**) |
+
+**Exclude Paths** (file backup):
+
+```text
+wp-admin
+wp-includes
+wp-content/plugins
+wp-content/uploads
+```
+
+Core, plugins en uploads zitten dus niet in de file-backup (herstel via WordPress/plugins of media). Database + overige sitebestanden (o.a. theme) wel. Uploads/media apart borgen waar nodig (bijv. WPvivid).
+
+---
+
+## Configureren
+
+<Steps>
+  <Step title="Remote Backup openen" icon="settings">
+    Ga naar **Site > Backups** → tabblad **Remote Backup**.
+  </Step>
+  <Step title="Type en bucket" icon="database">
+    Zet **Backup Type** op **Incremental** en kies bucket **xcloud**.
+  </Step>
+  <Step title="Schema en retention" icon="clock">
+    - Automatic Full Backup: **Weekly**
+    - Automatic Incremental Backup: **Daily**
+    - Backup Retention: **30** days
+  </Step>
+  <Step title="Database + files" icon="folder">
+    Schakel **Take Database Backup** en **Take File Backup** in. Vul de exclude paths hierboven in.
+  </Step>
+</Steps>
+
+<Callout kind="warning" title="Lokale backups">
+  Lokale backups staan op dezelfde server. Gebruik altijd **remote backup** als primaire strategie.
+</Callout>
+
+Server-level snapshots: zie **Server > Backup Management** / Hetzner Cloud Console voor extra zekerheid.
+
+## Gerelateerd
+
+- [Caching](/hosting/caching)
+- [Security](/hosting/security)
+- [Deployments](/hosting/deployments)

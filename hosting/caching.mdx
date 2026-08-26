@@ -1,0 +1,34 @@
+---
+title: "Caching"
+description: "Standaard xCloud caching — FastCGI Nginx page cache en Redis Object Cache."
+---
+
+## Overzicht
+
+Standaard caching per site in xCloud: **Site > Caching**.
+
+| Module | Standaard |
+|--------|-----------|
+| **Page Caching** | Aan — methode **FastCGI Nginx**, cache duration **60 Minutes** |
+| **Redis Object Cache** | Aan (credentials komen van xCloud per site) |
+| **Object Cache Pro** | Uit |
+| **Cloudflare Edge Cache** | Uit |
+
+xCloud serveert gecachte pagina's via NGINX (buiten PHP/WordPress) en zet browser-cache headers op CSS, JS en images.
+
+<Callout kind="tip">
+  Na deploys of ACF/theme-wijzigingen: **Purge Cache** voor page cache én Redis object cache.
+</Callout>
+
+## Checklist nieuwe site
+
+1. Page Caching aan → **FastCGI Nginx** → **60 Minutes**
+2. Redis Object Cache aan (plugin Redis Object Cache / Nginx Helper waar nodig)
+3. Object Cache Pro en Cloudflare Edge Cache uit laten
+
+## Gerelateerd
+
+- [Backups](/hosting/backups)
+- [Security](/hosting/security)
+- [Hummingbird](/wordpress/plugins/hummingbird)
+- [Deployments](/hosting/deployments)

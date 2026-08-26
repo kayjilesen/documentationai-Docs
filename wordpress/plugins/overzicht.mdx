@@ -1,0 +1,38 @@
+---
+title: "Plugins Overzicht"
+description: "Standaard WordPress pluginstack en presets voor nieuwe productiesites."
+---
+
+## Overzicht
+
+Elke productiesite krijgt dezelfde basis-plugins met vaste presets. Config-exports staan in `wordpress/configs/`.
+
+| Plugin | Rol | Pagina |
+|--------|-----|--------|
+| **WP Defender** | Security, login via `/beheer` | [Defender](/wordpress/plugins/wp-defender) |
+| **WP Switchboard Pro** | Admin-cleanup, bloat, kleine security/perf | [Switchboard](/wordpress/plugins/wp-switchboard) |
+| **Smush Pro** | Image compressie, lazy load, AVIF | [Smush](/wordpress/plugins/smush) |
+| **Hummingbird** | Asset optimization | [Hummingbird](/wordpress/plugins/hummingbird) |
+
+Ook vaak aanwezig: WPMU DEV Dashboard, Redis Object Cache, Nginx Helper, plus projectplugins (ACF Pro, Rank Math, FluentSMTP, WPvivid, …).
+
+<Callout kind="info" title="Login-URL">
+  Op productie is de WordPress-login altijd **`/beheer`** (via Defender Mask Login). Zie [WP Defender](/wordpress/plugins/wp-defender).
+</Callout>
+
+## Nieuwe site checklist
+
+<Steps>
+  <Step title="xCloud klaarzetten" icon="server">
+    Caching, backups en security volgens [Hosting > Instellingen](/hosting/caching).
+  </Step>
+  <Step title="Plugins installeren" icon="package">
+    Defender, Switchboard Pro, Smush Pro, Hummingbird (+ projectplugins).
+  </Step>
+  <Step title="Presets toepassen" icon="download">
+    Importeer configs uit `wordpress/configs/` of zet modules handmatig volgens de pluginpagina's.
+  </Step>
+  <Step title="Login controleren" icon="log-in">
+    Bevestig dat `https://domein.nl/beheer` werkt.
+  </Step>
+</Steps>

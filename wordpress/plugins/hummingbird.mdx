@@ -1,0 +1,37 @@
+---
+title: "Hummingbird"
+description: "Standaard Hummingbird Asset Optimization — Speedy minify/combine en Delay JS."
+---
+
+Export dekt **Asset Optimization** (niet per se alle Hummingbird-modules).
+
+Export: `wordpress/configs/hummingbird-asset-optimization.json`
+
+## Asset Optimization
+
+| Instelling | Waarde |
+|------------|--------|
+| Minify | Aan |
+| Mode | **Speedy** |
+| Compress | Aan |
+| Combine | Aan |
+| Assets | Styles + scripts + fonts |
+| Delay JS | Aan (timeout 20s) |
+| Critical CSS | Uit |
+| Font optimization | Uit (`font-display: swap` wel aan) |
+| CDN | Uit |
+| View | Basic |
+
+**Niet minifien / niet combinen (o.a.):** `jquery`, `wphb-global`, plus diverse `wp-block-*` / global styles.
+
+Delay JS heeft een lange standaard exclusion-lijst (lazy load, forms, trackers, theme-scripts). Importeer de JSON bij twijfel i.p.v. handmatig na te bouwen.
+
+<Callout kind="tip">
+  Na theme-deploy: clear Hummingbird én [xCloud page/Redis cache](/hosting/caching). Test formulieren + pagebuilder-JS. Bij layout-breaks: delay/minify uitzonderingen uitbreiden.
+</Callout>
+
+## Gerelateerd
+
+- [Plugins Overzicht](/wordpress/plugins/overzicht)
+- [Smush Pro](/wordpress/plugins/smush)
+- [xCloud Caching](/hosting/caching)
