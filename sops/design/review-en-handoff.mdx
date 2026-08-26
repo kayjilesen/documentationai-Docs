@@ -1,27 +1,50 @@
 ---
 title: "Design — Review & handoff"
-description: "Design met klant afronden en schoon overdragen naar development."
+description: "Design delen via Figma prototype, review met klant, en handoff naar development."
 ---
 
-<Callout kind="info" title="Dit is een SOP (opzet)">
-  Handoff = development kan starten zonder Slack-archaeologie.
+<Callout kind="info" title="Dit is een SOP">
+  Handoff = development kan starten zonder Slack-archaeologie. Klantreview via **prototype-link**, niet via het bewerkbestand.
 </Callout>
 
 ## Doel
 
 Akkoord op richting (of expliciete “bouw door op basis van vX”) plus een Figma die leesbaar is voor builders.
 
-## Stappen
+## Prototype delen (standaard)
+
+Zo deel je het design met de klant of reviewers:
+
+<Steps>
+  <Step title="Present openen" icon="play">
+    Open in Figma het scherm **Present** (presentatiemodus / prototype view).
+  </Step>
+  <Step title="Fit width + start Homepagina" icon="maximize">
+    Kies **Fit width**. Zet het startscherm op de **Homepage** (eerste pagina van het prototype).
+  </Step>
+  <Step title="Share prototype" icon="share">
+    Kies **Share prototype**.
+  </Step>
+  <Step title="Anyone + link" icon="link">
+    Bij **Who has access** kies **Anyone**. Klik **Copy link** en deel die URL (mail/chat) — niet de editor-link tenzij iemand moet meewerken in Figma.
+  </Step>
+</Steps>
+
+<Callout kind="tip">
+  Prototype-link = kijken/klikken. Editor-toegang alleen voor team of externe designers die mogen wijzigen.
+</Callout>
+
+## Stappen (review & handoff)
 
 <Steps>
   <Step title="Interne check" icon="search">
     Check t.o.v. [Merk & Figma](/sops/design/merk-en-figma): 1920 + grid 12×110 / gutter 40, components, namen `Section - …` / `Card - …`, responsive, haalbaarheid pagebuilder.
   </Step>
   <Step title="Klantreview" icon="users">
-    Deel Figma-link of presentatie. Verzamel feedback op één plek (niet verspreid over 4 kanalen).
+    Deel via **Share prototype** (stappen hierboven). Verzamel feedback op één plek (niet verspreid over 4 kanalen).
   </Step>
   <Step title="Wijzigingen verwerken" icon="refresh-cw">
-    Werk Figma bij; markeer wat “final voor bouw v1” is vs later.
+    Werk Figma bij; markeer wat “final voor bouw v1” is vs later. Deel zonodig opnieuw dezelfde prototype-flow.
   </Step>
   <Step title="Handoff-annotaties" icon="pen-tool">
     Spacing/afwijkingen, interacties, breakpoints, asset-export. Component-namen (`Section - FAQ`, `Card - Project`, …) zijn de bloknamen voor development.
@@ -33,6 +56,7 @@ Akkoord op richting (of expliciete “bouw door op basis van vX”) plus een Fig
 
 ## Af
 
+- [ ] Prototype gedeeld: Present → Fit width → start Homepage → Share prototype → Anyone → Copy link
 - [ ] Feedbackronde gedaan (of bewust overgeslagen met reden)
 - [ ] Figma volgens standaard (1920, 12×110 / gutter 40, components, `Section -` / `Card -` namen)
 - [ ] Assets exporteerbaar / aanwezig
