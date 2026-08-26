@@ -1,0 +1,150 @@
+---
+title: "Onboarding"
+description: "Toegang en accounts voor teamleden/stagiaires — plus checklist voor Kay bij aannemen."
+---
+
+<Callout kind="info" title="Dit is een SOP">
+  Dag 1: accounts en toegang. Credentials altijd in **Proton Pass** — nooit in chat, mail of docs. Werkmail via **Google Workspace**.
+</Callout>
+
+## Doel
+
+Nieuwe collega (of jij zelf na reset) kan inloggen op alles wat nodig is om mee te werken — zonder zoektocht naar wachtwoorden.
+
+---
+
+## Deel A — Teamlid / stagiaire
+
+### Wat je krijgt
+
+| Systeem | Waarvoor |
+|---------|----------|
+| **Google Workspace** | Werkmail, Agenda, Drive (docs/delen) |
+| **Proton Pass** | Alle logins (WP `/beheer`, xCloud, Cloudflare, hosting, API-keys, …) |
+| **GitHub** | Code + documentatie-repo |
+| **Figma** | Design / FigJam (view of edit naar gelang rol) |
+| **Cursor** (of editor) | Ontwikkelen met docs/skills |
+| **MAMP PRO** | Lokale sites (eigen machine) |
+| **xCloud** | Staging/productie bekijken of deploy (rechten beperkt tenzij afgesproken) |
+| **Cloudflare** | Alleen als je DNS-taken krijgt (anders Kay) |
+| **Deze kennisbank** | SOP’s + Documentatie |
+
+### Stappen (teamlid)
+
+<Steps>
+  <Step title="Google Workspace" icon="mail">
+    Je ontvangt een uitnodiging / account op **`…@…`** (werkdomein).  
+
+    - Log in op [Google](https://workspace.google.com) / Gmail  
+    - Zet **2FA / MFA** aan  
+    - Check Agenda + Drive-toegang tot teammap(en) indien gedeeld  
+  </Step>
+  <Step title="Proton Pass" icon="key">
+    - Installeer **Proton Pass** (browser + app)  
+    - Accepteer uitnodiging tot de **team-/gedeelde vault(s)**  
+    - Sla *jouw* Workspace-login daar op; gebruik daarna Pass voor alle projectlogins  
+    - Deel nooit vault-items via Slack/WhatsApp — nodig iets nieuws: vraag Kay, item in Pass  
+  </Step>
+  <Step title="GitHub" icon="github">
+    - Account met 2FA  
+    - Uitnodiging tot org/repo’s accepteren  
+    - SSH-key of HTTPS + credential helper; clone docs-repo en/of toegewezen theme-repo  
+  </Step>
+  <Step title="Figma" icon="figma">
+    - Account + uitnodiging tot team/bestanden  
+    - Check of je Design-template / actieve projectfiles ziet  
+  </Step>
+  <Step title="Lokale machine" icon="laptop">
+    - **MAMP PRO**, Git, Node (voor theme-build), Cursor  
+    - Volg daarna [Lokaal — Omgeving](/sops/lokaal/omgeving)  
+  </Step>
+  <Step title="Kennisbank + eerste taak" icon="book">
+    - Lees [Introductie](/introduction)  
+    - SOP-traject: [Overzicht](/sops/overzicht)  
+    - Vraag om één concreet project of ticket — niet alles tegelijk  
+  </Step>
+</Steps>
+
+### Af — Teamlid
+
+- [ ] Google Workspace: mail + MFA werkt
+- [ ] Proton Pass: app/extensie + toegang tot gedeelde vault(s)
+- [ ] GitHub: org/repo’s + 2FA; kan clonen
+- [ ] Figma: project/team zichtbaar
+- [ ] MAMP + editor lokaal bruikbaar
+- [ ] Docs gelezen: Introductie + SOP Overzicht
+- [ ] Eerste taak / project toegewezen
+
+### Wat je níet zelf doet (tenzij expliciet)
+
+- Domeinverhuizing / nameservers cutover  
+- Productie `wp-config` / SMTP-keys zonder review  
+- PAX8 / Microsoft 365 partner-stappen  
+- Cloudflare-zone aanmaken voor klanten zonder afstemming  
+- Credentials in chat of in Git zetten  
+
+Zie bij twijfel [Kickoff](/sops/kickoff) en vraag na.
+
+---
+
+## Deel B — Kay (bij aannemen / offboarding)
+
+Checklist wanneer iemand start of stopt. Jij bent owner van toegang.
+
+### Onboarding (jij regelt)
+
+<Steps>
+  <Step title="Google Workspace-gebruiker" icon="user-plus">
+    Maak user aan in Admin → mailadres, groepen (team), MFA afdwingen. Deel eerste login veilig (bijv. tijdelijk Pass-item of eenmalige setup).
+  </Step>
+  <Step title="Proton Pass vaults" icon="share">
+    Nodig uit tot de juiste **gedeelde vault(s)** (algemeen team + eventueel projectvaults). Geen “alles forever” als stagiaire alleen 1 project nodig heeft.
+  </Step>
+  <Step title="GitHub" icon="github">
+    Org-uitnodiging; repo-rechten (docs + toegewezen themes). Geen admin tenzij nodig.
+  </Step>
+  <Step title="Figma" icon="figma">
+    Seat / projecttoegang; Design-template zichtbaar maken.
+  </Step>
+  <Step title="xCloud / Cloudflare" icon="server">
+    Alleen als de rol het vraagt. Stagiaire vaak: staging-URL + Pass-item voor `/beheer`, geen full server-root.
+  </Step>
+  <Step title="Kick-off gesprek" icon="message-square">
+    Wijs eerste project + [SOP Overzicht](/sops/overzicht). Spreek af: vragen via welk kanaal, review vóór productie-deploy.
+  </Step>
+</Steps>
+
+### Af — Kay (start)
+
+- [ ] Workspace-user + MFA
+- [ ] Proton Pass: juiste vault(s) gedeeld
+- [ ] GitHub + Figma geregeld
+- [ ] xCloud/Cloudflare alleen indien nodig + Pass-items
+- [ ] Eerste taak + docs-pad gedeeld
+- [ ] Kanaal voor vragen afgesproken
+
+### Offboarding (kort)
+
+- [ ] Workspace: suspend/delete of doorsturen mail
+- [ ] Proton Pass: vault-toegang intrekken; gedeelde items rotaten als die persoon enig wachtwoord kende dat kritiek is
+- [ ] GitHub / Figma / xCloud / Cloudflare: toegang uit
+- [ ] Lokale/staging-accounts projectspecifiek resetten indien nodig
+
+---
+
+## Proton Pass — werkafspraak
+
+| Doen | Niet doen |
+|------|-----------|
+| Projectlogins (`/beheer`, staging, DNS) in Pass | Wachtwoorden in Notion, mail, WhatsApp, docs |
+| Duidelijke item-namen (`Klant — WP beheer`) | Één note met 20 wachtwoorden in platte tekst |
+| MFA-codes in Pass waar ondersteund | Screenshots van QR’s in Drive |
+
+Klantcredentials na oplevering: in Pass + kort noemen in oplevering; niet in klantproject-MDX.
+
+---
+
+## Volgende
+
+Teamlid: [Introductie](/introduction) → [Lokaal — Omgeving](/sops/lokaal/omgeving) of toegewezen project.  
+Kay: deze Af af → collega naar Deel A sturen.

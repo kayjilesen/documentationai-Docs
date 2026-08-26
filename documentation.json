@@ -22,6 +22,11 @@
                 "title": "Introductie",
                 "path": "introduction",
                 "icon": "home"
+              },
+              {
+                "title": "Onboarding",
+                "path": "sops/onboarding",
+                "icon": "user-plus"
               }
             ]
           },
@@ -311,6 +316,11 @@
             "title": "Het traject",
             "path": "sops/nieuwe-wordpress-site",
             "icon": "rocket"
+          },
+          {
+            "title": "Onboarding",
+            "path": "sops/onboarding",
+            "icon": "user-plus"
           },
           {
             "group": "Kickoff",
