@@ -1,72 +1,79 @@
 ---
 title: "Design — Structuur & content"
-description: "Website-structuur in FigJam: hoofdpagina's met secties en CTA's, plus CPT's en content."
+description: "Website-structuur in FigJam: bestaande board kopiëren; hoofdpagina's met secties en CTA's."
 ---
 
 <Callout kind="info" title="Dit is een SOP">
-  Structuur werk je uit in **FigJam** — niet alleen een platte sitemap-lijst. Elke hoofdpagina toont **secties** en **CTA’s**, zodat Design (Figma) en Bouwen weten wat er per pagina komt.
+  Structuur werk je uit in **FigJam**. Start door een **bestaande FigJam te kopiëren** (niet leeg beginnen). Elke hoofdpagina toont **secties** en **CTA’s**.
 </Callout>
 
 ## Doel
 
 Eén FigJam-overzicht als bron van waarheid voor IA: pagina’s, volgorde van secties, CTA’s, en wat later CPT/archief wordt.
 
-## FigJam-structuur
+## Start: bestaande FigJam kopiëren
+
+1. Open een recente / canonieke FigJam-structuur (bijv. vorig vergelijkbaar project).  
+2. **Duplicate** / kopieer het board.  
+3. Hernoem naar het huidige project; wis of herschrijf pagina’s/secties naar de nieuwe scope.
+
+Zo behoud je de werkwijze (kolommen per pagina, CTA-blokken, legal onderaan) zonder het format opnieuw uit te vinden.
+
+## FigJam-inhoud per pagina
 
 Per **hoofdpagina** (kolom of cluster):
 
 1. **Paginanaam** (bijv. Home, Over ons, Projecten, Contact)  
-2. **Secties** in volgorde (bijv. Hero, Voor wie?, FAQ) — namen bij voorkeur al in de trant van `Section - …` waar dat helpt  
-3. **CTA’s** expliciet (bijv. Call to Action → Kom in contact, Download, Bekijk vacatures)  
-4. **Doorklikken** naar child-templates (bijv. Projectdetail, Artikel) als eigen blokken  
+2. **Secties** in volgorde — bij voorkeur al richting `Section - …`  
+3. **CTA’s** expliciet (doel + bestemming)  
+4. **Child-templates** (Projectdetail, Artikel, …) als eigen blokken  
 
-Legal/tekstpagina’s (Disclaimer, Privacy & Cookies) ook opnemen, al is het kort.
+Legal (Disclaimer, Privacy & Cookies) ook opnemen.
 
-**Voorbeeld-opbouw** (zoals bij projecten als Hoex): Home met Hero → korte over ons → … → CTA; landings met Informatie / FAQ / Succesverhaal / CTA; archieven met filtering; singles met details + gerelateerd + CTA.
+**Voorbeeld-opbouw:** Home met Hero → korte over ons → … → CTA; landings met info / FAQ / succesverhaal / CTA; archieven met filtering; singles met details + gerelateerd + CTA.
 
 ## Stappen
 
 <Steps>
-  <Step title="FigJam starten" icon="map">
-    Nieuw FigJam (of board in het projectbestand). Alle hoofdpagina’s + primaire navigatie.
+  <Step title="FigJam kopiëren" icon="copy">
+    Bestaande structuur-FigJam dupliceren → projectnaam. Geen leeg board vanaf nul.
   </Step>
   <Step title="Secties per pagina" icon="layers">
-    Onder elke pagina de secties in scroll-volgorde. Herhaalbare patronen (FAQ, CTA, succesverhaal) consequent benoemen.
+    Onder elke pagina de secties in scroll-volgorde. Herhaalbare patronen consequent benoemen.
   </Step>
   <Step title="CTA’s markeren" icon="mouse-pointer-click">
-    Elke pagina: welke CTA(‘s), waarheen (contact, download, externe vacature-pagina, …). Geen “impliciete” CTA’s alleen in Figma.
+    Elke pagina: welke CTA(‘s), waarheen. Geen alleen-in-Figma impliciete CTA’s.
   </Step>
   <Step title="CPT’s & templates" icon="database">
-    Wat is pagina vs archief vs single (projecten, blog, …)? Alleen CPT’s die de klant beheert. Filtergedrag noteren indien relevant.
+    Pagina vs archief vs single. Alleen CPT’s die de klant beheert.
   </Step>
   <Step title="Formulieren" icon="mail">
-    Welke forms op welke pagina? Standaard [SureForms](/wordpress/plugins/formulieren); Gravity alleen bij harde feature-eis.
+    Welke forms waar? Standaard [SureForms](/wordpress/plugins/formulieren).
   </Step>
   <Step title="Content" icon="file-text">
-    Wie levert teksten/foto’s? Deadlines? Placeholders OK tot staging; juridische claims niet verzinnen.
+    Wie levert teksten/foto’s? Deadlines? Placeholders OK tot staging.
   </Step>
   <Step title="Akkoord" icon="check">
-    Intern (en zo nodig klant) FigJam als go voor Figma UI. Link in projectdossier / kickoff-notities.
+    FigJam-go voor UI in Figma. Link in projectdossier.
   </Step>
 </Steps>
 
 ## Af
 
-- [ ] FigJam met alle hoofdpagina’s
-- [ ] Per pagina: secties in volgorde
-- [ ] Per pagina: CTA’s benoemd (doel + bestemming)
-- [ ] Child-templates (single project/artikel, …) zichtbaar waar nodig
+- [ ] FigJam gestart door **bestaande te kopiëren**
+- [ ] Alle hoofdpagina’s + secties in volgorde
+- [ ] CTA’s per pagina (doel + bestemming)
+- [ ] Child-templates zichtbaar waar nodig
 - [ ] Legal-pagina’s opgenomen
 - [ ] CPT’s/taxonomieën besloten (of “geen”)
-- [ ] Formulierenlijst + plugin-keuze (default SureForms)
+- [ ] Formulierenlijst + plugin-keuze
 - [ ] Contentverantwoordelijke + timing bekend
 - [ ] FigJam-link bereikbaar voor design + development
 
 ## Koppeling naar Figma
 
-FigJam = **wat** op welke pagina. Daarna [Merk & Figma](/sops/design/merk-en-figma): UI op 1920/12-grid, components, `Section - …` / `Card - …`.
+FigJam = **wat** op welke pagina. Daarna [Merk & Figma](/sops/design/merk-en-figma): **Design-template dupliceren**, pages Brand / Components / Design.
 
 ## Volgende
 
-→ [Review & handoff](/sops/design/review-en-handoff) (na of parallel met Figma UI)  
-→ Of eerst [Merk & Figma](/sops/design/merk-en-figma) als FigJam akkoord is
+→ [Merk & Figma](/sops/design/merk-en-figma)

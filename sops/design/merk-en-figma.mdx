@@ -1,19 +1,41 @@
 ---
 title: "Design — Merk & Figma"
-description: "Merkassets, Figma-componenten, naamgeving, 1920 artboard en 12-koloms grid."
+description: "Design-template dupliceren, pagina's Brand/Components/Design, components, grid en naamgeving."
 ---
 
 <Callout kind="info" title="Dit is een SOP">
-  Onderdeel van fase Design. Geldt of we zelf ontwerpen of Figma van klant/bureau ontvangen — zet aangeleverde files zo nodig om naar deze conventies.
+  Start altijd vanaf de **Design-template** (dupliceren) — grid en artboards staan daarin al goed. Aangeleverde Figma van klant/bureau: omzetten naar deze conventies of beperking documenteren.
 </Callout>
 
 ## Doel
 
-Developers hebben een Figma-bestand dat 1:1 aansluit op hoe we bouwen: herbruikbare **components**, duidelijke **Section / Card**-namen, desktop op **1920** met **12-koloms grid**.
+Een project-Figma dat 1:1 aansluit op hoe we bouwen: template-basis, vaste **pagina’s**, herbruikbare **components**, `Section -` / `Card -`-namen, desktop **1920** met grid **12 × 110 / gutter 40**.
 
-Bron: **zelf**, **klant**, of **bureau**. Alleen PDF/screenshots? Omzetten naar Figma of de beperking in het projectdossier zetten.
+## Start: template dupliceren
+
+1. Open de KJ **Design-template** in Figma (team/files — niet vanaf een leeg bestand).  
+2. **Duplicate** / kopieer naar het klantproject (juiste naam, bijv. projectnaam).  
+3. Grid, 1920-artboards en basisstructuur blijven staan — pas daarna merk en UI aan.
+
+<Callout kind="warning">
+  Geen nieuw leeg Figma-bestand “from scratch” voor standaard WordPress-sites. Template = bron van waarheid voor canvas/grid.
+</Callout>
+
+## Pagina’s in het bestand
+
+Houd (minimaal) deze Figma-**pages** aan:
+
+| Page | Inhoud |
+|------|--------|
+| **Brand** | Logo’s, kleuren, fonts, eventueel fotostijl / tokens |
+| **Components** | Buttons, header, footer, pills, cards, overige herbruikbare UI |
+| **Design** | Pagina-artboards (Home, landings, …) opgebouwd uit component-instances |
+
+Volgorde in de sidebar mag Brand → Components → Design (of zoals in de template). Niet alles op één page dumpen.
 
 ## Canvas & grid
+
+(Al in de template; ter referentie / bij herstel:)
 
 | Instelling | Standaard |
 |------------|-----------|
@@ -21,22 +43,22 @@ Bron: **zelf**, **klant**, of **bureau**. Alleen PDF/screenshots? Omzetten naar 
 | **Kolommen** | **12** |
 | **Kolombreedte** | **110px** |
 | **Gutter** | **40px** |
-| Mobiel / tablet | Eigen frames (niet alles op één collage) |
+| Mobiel / tablet | Eigen frames |
 
-Contentbreedte = (12 × 110) + (11 × 40) = **1760px** → op 1920 resteert **80px** margin links én rechts. Zet dit als layout grid op het 1920-frame. Secties en cards alignen op dit grid.
+Contentbreedte = (12 × 110) + (11 × 40) = **1760px** → op 1920 **80px** margin L/R.
 
-## Components (verplicht waar relevant)
+## Components
 
-Gebruik Figma **components** (geen losse gekopieerde frames) voor o.a.:
+Op page **Components** — Figma components (geen losse kopieën op Design-pages):
 
 | Type | Voorbeelden |
 |------|-------------|
 | **Chrome** | Header, Footer, navigatie |
 | **UI** | Buttons (primary/secondary/ghost), pills/tags, inputs |
 | **Cards** | Projectcard, teaser, USP, blogcard, … |
-| **Overig** | Icon+tekst rijen, CTA-blokken die vaak terugkomen |
+| **Overig** | Icon+tekst, terugkerende CTA-blokken |
 
-Variants voor states (default / hover / disabled) waar het de bouw helpt. Instance gebruiken op pagina’s — niet detachten tenzij bewust uitzondering.
+Variants voor states waar nuttig. Op **Design** alleen **instances** — niet detachen tenzij bewuste uitzondering.
 
 ## Benaming
 
@@ -44,52 +66,49 @@ Patroon: **`Soort - Naam`** (spaties rond de streep, Title Case).
 
 | Soort | Voorbeelden |
 |-------|-------------|
-| **Section - …** | `Section - FAQ`, `Section - Hero`, `Section - USP's`, `Section - Contact` |
+| **Section - …** | `Section - FAQ`, `Section - Hero`, `Section - USP's` |
 | **Card - …** | `Card - Project`, `Card - Team`, `Card - Review` |
 | **Button - …** | `Button - Primary`, `Button - Secondary` |
 | **Pill - …** | `Pill - Tag`, `Pill - Status` |
-| **Header / Footer** | `Header`, `Footer` (of `Header - Main` als er varianten zijn) |
+| **Header / Footer** | `Header`, `Footer` (of `Header - Main`) |
 
-Deze namen worden bij handoff de leidraad voor **pagebuilder-blokken** en PHP-components. Houd Figma en code-namen zo gelijk mogelijk.
+Namen = leidraad voor pagebuilder-blokken / PHP-components.
 
 ## Stappen
 
 <Steps>
-  <Step title="Merkassets verzamelen" icon="palette">
-    Logo (SVG/PNG), kleuren, fonts, fotostijl, huisstijlgids indien aanwezig.
+  <Step title="Template dupliceren" icon="copy">
+    Design-template → duplicate naar projectbestand. Pages Brand / Components / Design intact laten.
   </Step>
-  <Step title="Tokens vastleggen" icon="droplet">
-    Primary/secondary, neutrals, fonts — later → Tailwind. Hex/waarden in Figma-styles of een tokens-frame.
+  <Step title="Brand vullen" icon="palette">
+    Logo, kleuren, fonts op page **Brand**. Styles/tokens voor Tailwind later.
   </Step>
-  <Step title="Artboard + grid" icon="layout">
-    Desktop-frames op **1920px** met 12 kolommen (**110px**), gutter **40px** (margins ±80px). Daarna mobiele frames voor kernpagina’s.
+  <Step title="Components projectspecifiek" icon="box">
+    Op **Components**: merkkleuren/fonts doorvoeren; buttons, header, footer, pills, cards bijwerken of aanvullen.
   </Step>
-  <Step title="Component library" icon="box">
-    Bouw of importeer components: buttons, header, footer, pills, cards, … volgens de tabel hierboven.
+  <Step title="Design-pagina’s bouwen" icon="figma">
+    Op **Design**: artboards o.b.v. [FigJam-structuur](/sops/design/structuur-en-content). Secties als `Section - …`, cards als instances.
   </Step>
-  <Step title="Pagina’s met Sections" icon="figma">
-    Samenstellen uit instances. Elke grote sectie = component of duidelijk gelabeld frame: `Section - …`.
-  </Step>
-  <Step title="States & edge cases" icon="alert-circle">
-    Lege states, lange titels, 2 vs 6 cards, hover waar relevant.
+  <Step title="Mobiel + states" icon="smartphone">
+    Kernpagina’s ook mobiel; lege states / lange content / hover waar relevant.
   </Step>
 </Steps>
 
 ## Af
 
-- [ ] Logo + kleuren + fonts beschikbaar
-- [ ] Figma bereikbaar voor het team
-- [ ] Desktop-artboards **1920px** + grid **12 × 110px**, gutter **40px**
-- [ ] Kernschermen ook mobiel (aparte frames)
-- [ ] Buttons, header, footer (en relevante pills/cards) als **components**
-- [ ] Secties/cards benoemd als `Section - …` / `Card - …`
-- [ ] Tokens bruikbaar voor Tailwind-mapping
+- [ ] Gestart vanuit **Design-template** (gedupliceerd), niet leeg bestand
+- [ ] Pages aanwezig: **Brand**, **Components**, **Design**
+- [ ] Brand: logo + kleuren + fonts
+- [ ] Desktop **1920** + grid **12 × 110**, gutter **40** (zoals template)
+- [ ] Buttons, header, footer (+ relevante pills/cards) als components op **Components**
+- [ ] Secties/cards: `Section - …` / `Card - …`
+- [ ] Kernschermen desktop + mobiel op **Design**
 
 ## Naslag
 
-- [Structuur & content](/sops/design/structuur-en-content) · [Review & handoff](/sops/design/review-en-handoff)
-- Bouw: [Tailwind CSS Setup](/wordpress/tailwind-setup) · [Pagebuilder](/acf/pagebuilder) · [Components](/acf/components)
+- [Structuur & content](/sops/design/structuur-en-content) (FigJam) · [Review & handoff](/sops/design/review-en-handoff)
+- Bouw: [Tailwind](/wordpress/tailwind-setup) · [Pagebuilder](/acf/pagebuilder) · [Components](/acf/components)
 
 ## Volgende
 
-→ [Structuur & content](/sops/design/structuur-en-content)
+→ [Review & handoff](/sops/design/review-en-handoff) (prototype delen)
