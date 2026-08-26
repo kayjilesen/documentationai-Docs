@@ -1,49 +1,92 @@
 ---
 title: "Design — Merk & Figma"
-description: "Merkassets, design tokens en UI in Figma klaarzetten voor development."
+description: "Merkassets, Figma-componenten, naamgeving, 1920 artboard en 12-koloms grid."
 ---
 
-<Callout kind="info" title="Dit is een SOP (opzet)">
-  Onderdeel van fase Design. Geldt of we zelf ontwerpen of Figma van een externe partij ontvangen.
+<Callout kind="info" title="Dit is een SOP">
+  Onderdeel van fase Design. Geldt of we zelf ontwerpen of Figma van klant/bureau ontvangen — zet aangeleverde files zo nodig om naar deze conventies.
 </Callout>
 
 ## Doel
 
-Developers hebben een bruikbaar Figma-bestand met merk, componenten en kernschermen — geen losse screenshots in chat.
+Developers hebben een Figma-bestand dat 1:1 aansluit op hoe we bouwen: herbruikbare **components**, duidelijke **Section / Card**-namen, desktop op **1920** met **12-koloms grid**.
 
-Bron mag zijn: **zelf ontworpen**, **aangeleverd door de klant**, of **bureau** — de checklist is hetzelfde. Ontvang je alleen PDF/screenshots: zet om naar Figma of noteer expliciet de beperking in het projectdossier.
+Bron: **zelf**, **klant**, of **bureau**. Alleen PDF/screenshots? Omzetten naar Figma of de beperking in het projectdossier zetten.
+
+## Canvas & grid
+
+| Instelling | Standaard |
+|------------|-----------|
+| **Basis-artboard (desktop)** | **1920px** breed |
+| **Grid** | **12 kolommen** |
+| Mobiel / tablet | Eigen frames (niet alles op één collage) |
+
+Zet het 12-koloms grid aan op het 1920-frame (layout grid). Secties en cards alignen op dit grid — zo mapt spacing later schoner naar Tailwind/pagebuilder.
+
+## Components (verplicht waar relevant)
+
+Gebruik Figma **components** (geen losse gekopieerde frames) voor o.a.:
+
+| Type | Voorbeelden |
+|------|-------------|
+| **Chrome** | Header, Footer, navigatie |
+| **UI** | Buttons (primary/secondary/ghost), pills/tags, inputs |
+| **Cards** | Projectcard, teaser, USP, blogcard, … |
+| **Overig** | Icon+tekst rijen, CTA-blokken die vaak terugkomen |
+
+Variants voor states (default / hover / disabled) waar het de bouw helpt. Instance gebruiken op pagina’s — niet detachten tenzij bewust uitzondering.
+
+## Benaming
+
+Patroon: **`Soort - Naam`** (spaties rond de streep, Title Case).
+
+| Soort | Voorbeelden |
+|-------|-------------|
+| **Section - …** | `Section - FAQ`, `Section - Hero`, `Section - USP's`, `Section - Contact` |
+| **Card - …** | `Card - Project`, `Card - Team`, `Card - Review` |
+| **Button - …** | `Button - Primary`, `Button - Secondary` |
+| **Pill - …** | `Pill - Tag`, `Pill - Status` |
+| **Header / Footer** | `Header`, `Footer` (of `Header - Main` als er varianten zijn) |
+
+Deze namen worden bij handoff de leidraad voor **pagebuilder-blokken** en PHP-components. Houd Figma en code-namen zo gelijk mogelijk.
 
 ## Stappen
 
 <Steps>
   <Step title="Merkassets verzamelen" icon="palette">
-    Logo (SVG/PNG), kleuren, fonts, fotostijl, bestaande huisstijlgids indien aanwezig.
+    Logo (SVG/PNG), kleuren, fonts, fotostijl, huisstijlgids indien aanwezig.
   </Step>
   <Step title="Tokens vastleggen" icon="droplet">
-    Primary/secondary, neutrals, fonts — later mappen naar Tailwind in het theme. Noteer hex/waarden in Figma of een kort tokens-overzicht.
+    Primary/secondary, neutrals, fonts — later → Tailwind. Hex/waarden in Figma-styles of een tokens-frame.
   </Step>
-  <Step title="UI in Figma" icon="figma">
-    Desktop + mobiel voor kernpagina’s. Gebruik frames/breakpoints die aansluiten op hoe we bouwen (niet één collage).
+  <Step title="Artboard + grid" icon="layout">
+    Desktop-frames op **1920px** met **12-koloms grid**. Daarna mobiele frames voor kernpagina’s.
   </Step>
-  <Step title="Herbruikbare secties" icon="layout">
-    Markeer herhaalbare blocks (hero, USP’s, CTA, team, FAQ, …) — dat worden pagebuilder-blokken.
+  <Step title="Component library" icon="box">
+    Bouw of importeer components: buttons, header, footer, pills, cards, … volgens de tabel hierboven.
+  </Step>
+  <Step title="Pagina’s met Sections" icon="figma">
+    Samenstellen uit instances. Elke grote sectie = component of duidelijk gelabeld frame: `Section - …`.
   </Step>
   <Step title="States & edge cases" icon="alert-circle">
-    Lege states, lange titels, 2 vs 6 cards, hover/focus waar relevant. Voorkomt “werkt alleen met perfecte demo-content”.
+    Lege states, lange titels, 2 vs 6 cards, hover waar relevant.
   </Step>
 </Steps>
 
 ## Af
 
 - [ ] Logo + kleuren + fonts beschikbaar
-- [ ] Figma (of opvolger) bereikbaar voor het team
-- [ ] Kernschermen desktop én mobiel
-- [ ] Herbruikbare secties herkenbaar gelabeld
+- [ ] Figma bereikbaar voor het team
+- [ ] Desktop-artboards **1920px** + **12-koloms grid**
+- [ ] Kernschermen ook mobiel (aparte frames)
+- [ ] Buttons, header, footer (en relevante pills/cards) als **components**
+- [ ] Secties/cards benoemd als `Section - …` / `Card - …`
 - [ ] Tokens bruikbaar voor Tailwind-mapping
 
 ## Naslag
 
-- Later in bouw: [Tailwind CSS Setup](/wordpress/tailwind-setup), [Pagebuilder](/acf/pagebuilder)
+- [Structuur & content](/sops/design/structuur-en-content) · [Review & handoff](/sops/design/review-en-handoff)
+- Bouw: [Tailwind CSS Setup](/wordpress/tailwind-setup) · [Pagebuilder](/acf/pagebuilder) · [Components](/acf/components)
 
 ## Volgende
 
