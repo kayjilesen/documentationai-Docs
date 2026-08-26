@@ -99,28 +99,6 @@
             "icon": "code",
             "pages": [
               {
-                "group": "Basis",
-                "icon": "book-open",
-                "expandable": true,
-                "pages": [
-                  {
-                    "title": "Database",
-                    "path": "wordpress/database",
-                    "icon": "database"
-                  },
-                  {
-                    "title": "Bestanden",
-                    "path": "wordpress/bestanden",
-                    "icon": "folder"
-                  },
-                  {
-                    "title": "Configuratie",
-                    "path": "wordpress/configuratie",
-                    "icon": "settings"
-                  }
-                ]
-              },
-              {
                 "title": "Theme Architectuur",
                 "path": "wordpress/theme-architecture",
                 "icon": "layout"
@@ -297,6 +275,55 @@
         ]
       },
       {
+        "tab": "Kennis",
+        "icon": "graduation-cap",
+        "groups": [
+          {
+            "group": "Overzicht",
+            "icon": "list",
+            "pages": [
+              {
+                "title": "Wat vind je hier",
+                "path": "kennis/overzicht",
+                "icon": "home"
+              }
+            ]
+          },
+          {
+            "group": "WordPress",
+            "icon": "code",
+            "pages": [
+              {
+                "title": "Database",
+                "path": "wordpress/database",
+                "icon": "database"
+              },
+              {
+                "title": "Bestanden",
+                "path": "wordpress/bestanden",
+                "icon": "folder"
+              },
+              {
+                "title": "Configuratie",
+                "path": "wordpress/configuratie",
+                "icon": "settings"
+              }
+            ]
+          },
+          {
+            "group": "DNS",
+            "icon": "globe",
+            "pages": [
+              {
+                "title": "Basis",
+                "path": "kennis/dns",
+                "icon": "book-open"
+              }
+            ]
+          }
+        ]
+      },
+      {
         "tab": "Klantprojecten",
         "icon": "folder",
         "pages": [
@@ -344,6 +371,31 @@
             "title": "Hoex Systems",
             "path": "client-projects/hoexsystems",
             "icon": "leaf"
+          },
+          {
+            "title": "St. Christoffel",
+            "path": "client-projects/st-christoffel",
+            "icon": "folder"
+          },
+          {
+            "title": "Frietfeest",
+            "path": "client-projects/frietfeest",
+            "icon": "folder"
+          },
+          {
+            "title": "2Brüder",
+            "path": "client-projects/2bruder",
+            "icon": "folder"
+          },
+          {
+            "title": "CDK Company",
+            "path": "client-projects/cdkcompany",
+            "icon": "folder"
+          },
+          {
+            "title": "CosyHeat",
+            "path": "client-projects/cosyheat",
+            "icon": "folder"
           }
         ]
       },

@@ -31,7 +31,7 @@ Je hoeft niet alles in één keer te lezen. Begin met de basis hieronder en duik
     Volg [Lokale Ontwikkelomgeving](/devops/local-dev). Sites draaien op een `.local` domein (bijv. `projectnaam.local`). Themamappen staan in `/DEV/<projectnaam>/wp-content/themes/<projectnaam>`.
   </Step>
   <Step title="Leer de conventies" icon="file-text">
-    Begrijp eerst de WordPress-basis: [Database](/wordpress/database), [Bestanden](/wordpress/bestanden) en [Configuratie](/wordpress/configuratie). Daarna [Theme Architectuur](/wordpress/theme-architecture) en [Naamgeving](/wordpress/naming-conventions).
+    Achtergrond in tab **[Kennis](/kennis/overzicht)**: [Database](/wordpress/database), [Bestanden](/wordpress/bestanden), [Configuratie](/wordpress/configuratie), [DNS](/kennis/dns). Daarna in Documentatie: [Theme Architectuur](/wordpress/theme-architecture) en [Naamgeving](/wordpress/naming-conventions).
   </Step>
   <Step title="Werk via Git" icon="git-branch">
     Alle wijzigingen (code én documentatie) gaan via Git. Zie [Git Workflow](/devops/git-workflow) en [Deployments](/hosting/deployments) (meestal Deployer for Git).
@@ -41,14 +41,14 @@ Je hoeft niet alles in één keer te lezen. Begin met de basis hieronder en duik
 ## Wat vind je waar?
 
 <Columns cols={2}>
-  <Card title="WordPress" icon="code" href="/wordpress/database">
-    Basis, thema-opbouw, ACF-pagebuilder (eigen blokken), Tailwind en plugins.
+  <Card title="Kennis" icon="graduation-cap" href="/kennis/overzicht">
+    WordPress-basis (database, bestanden, config) en DNS — begrip vóór je bouwt.
+  </Card>
+  <Card title="WordPress" icon="code" href="/wordpress/theme-architecture">
+    Thema-opbouw, ACF-pagebuilder (eigen blokken), Tailwind en plugins.
   </Card>
   <Card title="Hosting" icon="server" href="/hosting/server-setup">
     Servers, deployments, caching, backups en security.
-  </Card>
-  <Card title="DevOps & Tools" icon="terminal" href="/devops/local-dev">
-    Lokale setup, Git, CI/CD en deployment-workflows.
   </Card>
   <Card title="Klantprojecten" icon="folder" href="/client-projects/kj-boilerplate">
     Projectdossiers met stack, structuur en bijzonderheden per klant.
