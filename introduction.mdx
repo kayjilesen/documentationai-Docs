@@ -1,116 +1,59 @@
 ---
 title: Introductie
-description: Krijg een overzicht van de documentatieruimte, de belangrijkste functies voor het organiseren van projectdocumentatie, en hoe je door het platform navigeert.
+description: Welkom bij de kennisbank — een startpunt voor nieuwe werknemers en stagiaires bij Kay Jilesen.
 ---
 
-<Callout kind="info" title="Starterskit Template">
-  Deze documentatie is gegenereerd als starterskit-template op basis van jouw merk. Bekijk en pas de inhoud aan zodat het de functies, API's en mogelijkheden van jouw product correct weergeeft.
+<Callout kind="info" title="Welkom in het team">
+  Deze kennisbank is je naslagwerk voor hoe we websites bouwen, hosten en opleveren. Lees dit eerst door voordat je aan een project begint.
 </Callout>
 
-## Overzicht
+## Wat is dit?
 
-Welkom in de documentatieruimte. Je gebruikt dit platform om al je projectdocumentatie voor webdesign, development en WordPress-projecten te organiseren, beheren en delen. Het biedt een centraal punt waar je gestructureerde documenten maakt, samenwerkt met klanten of teams, en alles up-to-date houdt.
+Hier staat vastgelegd hoe we werken: WordPress-thema's, ACF/pagebuilder, hosting, Git, e-mailsetup en klantprojecten. Gebruik deze docs als bron van waarheid — niet als losse notities of chatgeschiedenis.
 
-Deze ruimte ondersteunt markdown-gebaseerde bewerking, versiegeschiedenis en zoekfunctionaliteit, waardoor het eenvoudig is om alles te documenteren — van strategieplannen tot code-implementaties. Of je nu werkt aan custom websites of complexe digitale oplossingen, deze documentatie helpt je om duidelijke dossiers bij te houden en professionele oplevering te garanderen.
+Je hoeft niet alles in één keer te lezen. Begin met de basis hieronder en duik dieper zodra je een taak krijgt.
 
-## Belangrijkste functies
-
-Ontdek de kernmogelijkheden die deze documentatieruimte krachtig maken voor je freelance projecten.
-
-<Columns cols={3}>
-  <Card title="Markdown bewerking" icon="edit-3" href="#markdown-ondersteuning">
-    Schrijf documenten met bekende markdown-syntax, live preview en syntax highlighting.
-  </Card>
-  <Card title="Versiebeheer" icon="git-branch" href="#versiebeheer">
-    Volg wijzigingen door de tijd heen met ingebouwd versiebeheer, zodat je nooit projectgeschiedenis verliest.
-  </Card>
-  <Card title="Zoeken & navigatie" icon="search" href="#navigatie">
-    Vind snel content in alle projecten met volledige tekstzoekfunctie en een overzichtelijk menu.
-  </Card>
-</Columns>
-
-<Columns cols={2}>
-  <Card title="Samenwerkingstools" icon="users" href="#samenwerking">
-    Deel documenten veilig met klanten en nodig teamleden uit voor feedback.
-  </Card>
-  <Card title="Aangepaste thema's" icon="palette" href="#themas">
-    Pas je merkkleuren toe, zoals `#1A2D35`, voor een professionele uitstraling.
-  </Card>
-</Columns>
-
-## Aan de slag via Git
-
-Deze documentatie beheer je volledig via de Git-repository. Er is geen los dashboard nodig om pagina's toe te voegen of te wijzigen.
+## Waar begin je?
 
 <Steps>
-  <Step title="Clone of open de docs-repo" icon="git-branch">
-    Open de repository lokaal en werk vanuit je favoriete editor in de map met `.mdx` bestanden.
+  <Step title="Begrijp de stack" icon="layers">
+    We bouwen custom WordPress-thema's met **ACF Pro**, een **pagebuilder** en **Tailwind CSS**. Het startpunt voor elk nieuw thema is de [KJ-Boilerplate](/client-projects/kj-boilerplate).
   </Step>
-  <Step title="Pas content aan" icon="edit-3">
-    Werk bestaande pagina's bij of maak nieuwe pagina's aan. Gebruik duidelijke titels, beschrijvingen en een consistente structuur.
-
-    ```markdown
-    # Projectstrategie
-    ## Doelen
-    - Conversies verhogen met 20%
-    - Sitesnelheid verbeteren
-    ```
+  <Step title="Zet je lokale omgeving op" icon="laptop">
+    Volg [Lokale Ontwikkelomgeving](/devops/local-dev). Sites draaien op een `.local` domein (bijv. `projectnaam.local`). Themamappen staan in `/DEV/<projectnaam>/wp-content/themes/<projectnaam>`.
   </Step>
-  <Step title="Commit en push" icon="upload">
-    Commit je wijzigingen en push naar de hoofdbranch. De documentatie wordt daarna automatisch gesynchroniseerd.
+  <Step title="Leer de conventies" icon="file-text">
+    Bekijk [Theme Architectuur](/wordpress/theme-architecture) en [Naamgevingsconventies](/wordpress/naming-conventions). Zo schrijf je code die past bij de rest van het team.
+  </Step>
+  <Step title="Werk via Git" icon="git-branch">
+    Alle wijzigingen (code én documentatie) gaan via Git. Zie [Git Workflow](/devops/git-workflow) en [Deployment](/devops/deployment).
   </Step>
 </Steps>
 
-## Navigatiegids
+## Wat vind je waar?
 
-Krijg snel toegang tot belangrijke secties via deze gidsen.
+<Columns cols={2}>
+  <Card title="WordPress Development" icon="code" href="/wordpress/theme-architecture">
+    Thema-opbouw, pagebuilder-blokken, ACF-patronen en Tailwind.
+  </Card>
+  <Card title="Hosting" icon="server" href="/hosting/server-setup">
+    Servers, sitebeheer, deployments, backups en security.
+  </Card>
+  <Card title="DevOps & Tools" icon="terminal" href="/devops/local-dev">
+    Lokale setup, Git, CI/CD en deployment-workflows.
+  </Card>
+  <Card title="Klantprojecten" icon="folder" href="/client-projects/kj-boilerplate">
+    Projectdossiers met stack, structuur en bijzonderheden per klant.
+  </Card>
+</Columns>
 
-<Tabs>
-  <Tab title="Hoofdpagina's" icon="book-open">
-    Begin hier voor de basis:
+## Tips voor je eerste weken
 
-    | Sectie | Beschrijving |
-    |--------|-------------|
-    | [Git Workflow](/devops/git-workflow) | Werk documentatie bij via commits |
-    | [Authenticatie](/authentication) | Beveiligde toegang instellen |
-    | [Changelog](/changelog) | Laatste updates |
-  </Tab>
-  <Tab title="Projectvoorbeelden" icon="globe">
-    Bekijk voorbeeldstructuren:
-
-    <CodeGroup tabs="WordPress,Custom Site">
-    ````markdown
-    # WordPress Projectdocument
-    ## Strategie
-    Doelen en doelgroep bepalen.
-
-    ## Gebruikte plugins
-    - Yoast SEO
-    - WooCommerce
-    ````
-
-    ````markdown
-    # Custom Site Document
-    ## Tech Stack
-    - Next.js frontend
-    - Tailwind CSS
-    - API-integraties
-    ````
-    </CodeGroup>
-  </Tab>
-</Tabs>
-
-<Expandable title="Voordelen voor projectteams" default-open="true">
-  Deze documentatieruimte schaalt mee voor solo-freelancers of kleine teams. Je profiteert van:
-
-  - Gecentraliseerde kennisbank verkort de inwerkperiode voor nieuwe klanten.
-  - Versiebeheerde documenten zorgen voor compliance en audit trails.
-  - Doorzoekbare content versnelt het opzoeken tijdens onderhoud.
-  - Exportopties voor PDF- of HTML-oplevering.
-
-  Pas secties aan op je workflow, van "Strategie"-planning tot de uiteindelijke "Code"-oplevering.
-</Expandable>
+- **Vraag bij twijfel na in de docs** — veel antwoorden staan al hier (FAQ en Troubleshooting in het Helpcentrum).
+- **Kijk eerst naar een bestaand project** — klantprojecten laten zien hoe we conventies in de praktijk toepassen.
+- **Kopieer patronen, niet uitvinden** — hergebruik boilerplate, blokken en helpers in plaats van iets nieuws te bedenken.
+- **Documenteer wat je leert** — mis je iets of klopt iets niet? Update de docs via Git zodat de volgende collega het wel vindt.
 
 <Callout kind="tip">
-  Klaar om dieper te duiken? Bekijk de [Git Workflow](/devops/git-workflow) voor het complete proces van branchen, committen en deployen.
+  Eerste concrete taak? Start bij [Lokale Ontwikkelomgeving](/devops/local-dev) en vraag daarna om een projecttoegewezen thema of ticket.
 </Callout>
