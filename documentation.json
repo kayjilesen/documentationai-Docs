@@ -27,6 +27,11 @@
                 "title": "Onboarding",
                 "path": "sops/onboarding",
                 "icon": "user-plus"
+              },
+              {
+                "title": "Offboarding",
+                "path": "sops/offboarding",
+                "icon": "user-minus"
               }
             ]
           },
@@ -321,6 +326,11 @@
             "title": "Onboarding",
             "path": "sops/onboarding",
             "icon": "user-plus"
+          },
+          {
+            "title": "Offboarding",
+            "path": "sops/offboarding",
+            "icon": "user-minus"
           },
           {
             "group": "Kickoff",

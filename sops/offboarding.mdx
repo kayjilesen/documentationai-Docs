@@ -1,0 +1,151 @@
+---
+title: "Offboarding"
+description: "Kay-checklist: alle toegang intrekken — Workspace, Pass, GitHub, Cloudflare, OpenProvider, WPMU DEV, CRM, enz."
+---
+
+<Callout kind="info" title="Dit is een SOP">
+  Alleen voor **Kay** (owner). Bij vertrek van teamlid/stagiaire: loop **alles** na wat ooit gedeeld kan zijn — niet alleen mail en GitHub.
+</Callout>
+
+## Doel
+
+Geen resttoegang tot systemen, vaults, domeinen, hosting of klantprojecten. Kritieke shared secrets geroteerd waar nodig.
+
+## Vooraf
+
+- [ ] Offboard-datum en laatste werkdag bekend
+- [ ] Welke **projecten** had deze persoon? (lijst maken)
+- [ ] Was er **admin**/owner-recht ergens? (extra aandacht + rotatie)
+
+---
+
+## 1. Identiteit & wachtwoorden
+
+| Systeem | Actie |
+|---------|--------|
+| **Google Workspace** (`@kayjilesen.nl`) | User **suspend** of verwijderen; mail doorsturen/alias indien nodig; MFA/devices intrekken; Drive-eigendom overdragen |
+| **Proton Pass** | Vault-uitnodigingen / membership **intrekken**; shared items die *alleen* via die persoon liepen → wachtwoord **roteren** + nieuw item |
+
+- [ ] Workspace afgehandeld
+- [ ] Proton Pass: geen toegang meer
+- [ ] Geroteerde credentials weer in Pass + getest
+
+---
+
+## 2. Code & docs
+
+| Systeem | Actie |
+|---------|--------|
+| **GitHub** | Org/repo-toegang uit; deploy keys / SSH keys / PATs die van die persoon zijn **revoken**; open PR’s overdragen of sluiten |
+| **Documentation.ai** / docs-repo | Zelfde als GitHub-toegang; eventuele docs-dashboard seats |
+
+- [ ] GitHub org + alle relevante repo’s
+- [ ] SSH/PAT/deploy keys gecheckt
+- [ ] Docs-platform seats (indien apart)
+
+---
+
+## 3. Design
+
+| Systeem | Actie |
+|---------|--------|
+| **Figma** | Team/project seat intrekken; eventuele gedeelde links laten staan (view) is OK |
+
+- [ ] Figma team/project toegang uit
+
+---
+
+## 4. Hosting & infra
+
+| Systeem | Actie |
+|---------|--------|
+| **xCloud** | User/team-member verwijderen; geen server- of site-rechten meer |
+| **Hetzner** | Console-user / API-tokens van die persoon intrekken (indien ooit gedeeld) |
+| **Cloudflare** | Account members / zone invites intrekken; API-tokens van die persoon revoken |
+| **OpenProvider** | Gebruiker / contacttoegang tot registrar-account intrekken |
+
+- [ ] xCloud
+- [ ] Hetzner (indien van toepassing)
+- [ ] Cloudflare
+- [ ] OpenProvider
+
+---
+
+## 5. WordPress-ecosysteem & plugins
+
+| Systeem | Actie |
+|---------|--------|
+| **WPMU DEV** | Hub-user / site-toegang / Agency-seats intrekken |
+| **WP `/beheer` per project** | Wachtwoorden **wijzigen** voor accounts die die persoon kende; of user verwijderen; Pass bijwerken |
+| Overige plugin-accounts (Smush hub, enz. via WPMU) | Meenemen in WPMU DEV-check |
+
+- [ ] WPMU DEV
+- [ ] Alle project-WP-users / wachtwoorden nagelopen (lijst uit “Vooraf”)
+
+---
+
+## 6. E-mail & DNS-diensten (indien toegang)
+
+| Systeem | Actie |
+|---------|--------|
+| **Maileroo** | Team-user / API-keys intrekken of roteren |
+| **Amazon AWS / SES** | IAM-user of keys van die persoon deactiveren |
+| **PAX8 / Microsoft 365 partner** | Partner-user rechten intrekken |
+| **MXRoute** e.d. | Accounttoegang intrekken indien gedeeld |
+
+- [ ] Maileroo / SES / PAX8 / overige mail — nagekeken
+
+---
+
+## 7. CRM & business
+
+| Systeem | Actie |
+|---------|--------|
+| **CRM** | User deactiveren; leads/owner herverdelen; API-tokens intrekken |
+| Facturatie / boekhouding (indien gedeeld) | Toegang uit |
+| Agenda-booking / intake-tools (indien gedeeld) | Toegang uit |
+
+- [ ] CRM
+- [ ] Overige business-tools die in Pass onder die persoon stonden
+
+---
+
+## 8. Communicatie & alerts
+
+| Systeem | Actie |
+|---------|--------|
+| **Pushover** (of andere alert-apps) | Device/user ontkoppelen; FluentSMTP-alert ontvanger checken |
+| Chat / projectkanalen | Uit teamgroepen; geen klantgroepen meer |
+
+- [ ] Alerts niet meer naar ex-collega
+- [ ] Chat/projectgroepen opgeschoond
+
+---
+
+## 9. AI & lokale tools
+
+| Systeem | Actie |
+|---------|--------|
+| **Cursor** / AI-seats | Team seat intrekken |
+| Machine van ex-collega | Herinneren: lokale WP’s, SSH-keys, clones verwijderen/ontkoppelen (hun verantwoordelijkheid + jij revoke keys) |
+
+- [ ] Cursor/AI seat
+- [ ] SSH keys op servers gecheckt (authorized_keys)
+
+---
+
+## 10. Afronden
+
+- [ ] Proton Pass doorzocht op items “gedeeld met …” / notes over deze persoon
+- [ ] Geen openstaande invites (mail) meer
+- [ ] Offboard genoteerd (datum + wie) voor jezelf — niet per se in publieke docs
+- [ ] Bij twijfel: roteer liever één key te veel dan één te weinig
+
+<Callout kind="warning">
+  Shared root-wachtwoorden of “één login met z’n tweeën” → **altijd roteren** bij offboard, ook als je denkt dat ze “het niet meer gebruiken”.
+</Callout>
+
+## Gerelateerd
+
+- [Onboarding](/sops/onboarding) — wat je bij start deelt, trek je hier in  
+- [Oplevering](/sops/livegang/oplevering) — klantcreds blijven in Pass, niet bij ex-collega
