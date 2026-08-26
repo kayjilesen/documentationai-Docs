@@ -18,10 +18,12 @@ Bron: **zelf**, **klant**, of **bureau**. Alleen PDF/screenshots? Omzetten naar 
 | Instelling | Standaard |
 |------------|-----------|
 | **Basis-artboard (desktop)** | **1920px** breed |
-| **Grid** | **12 kolommen** |
+| **Kolommen** | **12** |
+| **Kolombreedte** | **110px** |
+| **Gutter** | **40px** |
 | Mobiel / tablet | Eigen frames (niet alles op één collage) |
 
-Zet het 12-koloms grid aan op het 1920-frame (layout grid). Secties en cards alignen op dit grid — zo mapt spacing later schoner naar Tailwind/pagebuilder.
+Contentbreedte = (12 × 110) + (11 × 40) = **1760px** → op 1920 resteert **80px** margin links én rechts. Zet dit als layout grid op het 1920-frame. Secties en cards alignen op dit grid.
 
 ## Components (verplicht waar relevant)
 
@@ -60,7 +62,7 @@ Deze namen worden bij handoff de leidraad voor **pagebuilder-blokken** en PHP-co
     Primary/secondary, neutrals, fonts — later → Tailwind. Hex/waarden in Figma-styles of een tokens-frame.
   </Step>
   <Step title="Artboard + grid" icon="layout">
-    Desktop-frames op **1920px** met **12-koloms grid**. Daarna mobiele frames voor kernpagina’s.
+    Desktop-frames op **1920px** met 12 kolommen (**110px**), gutter **40px** (margins ±80px). Daarna mobiele frames voor kernpagina’s.
   </Step>
   <Step title="Component library" icon="box">
     Bouw of importeer components: buttons, header, footer, pills, cards, … volgens de tabel hierboven.
@@ -77,7 +79,7 @@ Deze namen worden bij handoff de leidraad voor **pagebuilder-blokken** en PHP-co
 
 - [ ] Logo + kleuren + fonts beschikbaar
 - [ ] Figma bereikbaar voor het team
-- [ ] Desktop-artboards **1920px** + **12-koloms grid**
+- [ ] Desktop-artboards **1920px** + grid **12 × 110px**, gutter **40px**
 - [ ] Kernschermen ook mobiel (aparte frames)
 - [ ] Buttons, header, footer (en relevante pills/cards) als **components**
 - [ ] Secties/cards benoemd als `Section - …` / `Card - …`
