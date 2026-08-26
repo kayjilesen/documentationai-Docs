@@ -70,9 +70,15 @@ De boilerplate bevat 2 voorbeeldblocks om mee te starten:
 | Block | Beschrijving |
 |-------|-------------|
 | `hero` | Hero sectie met titel, content, buttons, en achtergrondafbeelding |
-| `text-image` | Tekst naast afbeelding (links/rechts wisselbaar) |
+| `text-image` | Tekst naast afbeelding (links/rechts wisselbaar), inclusief Styling-tab |
 
 Nieuwe blocks aanmaken: zie [Pagebuilder Systeem](/wordpress/pagebuilder-blocks).
+
+### Sectie styling (padding)
+
+Elk standaard pagebuilder-blok clonet `group_section_styling`: een tab **Styling** met toggles *Padding boven* en *Padding onder* (standaard aan). In de template via `kj_section_styling()` — default classes `pt-12 md:pt-16 lg:pt-[88px]` / dezelfde `pb-*`. Full-bleed heroes laten de clone weg.
+
+Zet **geen** eigen padding-velden in een layout-JSON.
 
 ---
 
@@ -83,8 +89,9 @@ kj-boilerplate/
 ├── acf-json/                        # ACF veldgroepen
 │   ├── group_pagebuilder.json       # Hoofd flexible content
 │   ├── group_layout_hero.json       # Hero velden
-│   ├── group_layout_text-image.json # Text-Image velden
-│   └── group_button_fields.json     # Button component velden
+│   ├── group_layout_text_image.json # Text-Image velden
+│   ├── group_button_fields.json     # Button component velden
+│   └── group_section_styling.json   # Gedeelde Styling-tab (padding)
 ├── assets/
 │   ├── css/
 │   │   ├── input.css                # Tailwind bronbestand
@@ -106,7 +113,8 @@ kj-boilerplate/
 │   ├── acf.php
 │   ├── custom-header.php
 │   ├── scripts.php
-│   └── template-functions.php
+│   ├── template-functions.php
+│   └── tracking.php
 ├── scripts/
 │   └── build-pagebuilder-js.js
 ├── functions.php

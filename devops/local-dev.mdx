@@ -1,11 +1,11 @@
 ---
 title: "Lokale Ontwikkelomgeving"
-description: "Lokale WordPress ontwikkelomgeving opzetten met MAMP, theme koppelen, en build tools."
+description: "Lokale WordPress ontwikkelomgeving opzetten met .local domeinen, themamap aanmaken, en theme starten via KJ-Boilerplate."
 ---
 
 ## Overzicht
 
-Voor lokale ontwikkeling wordt een WordPress installatie gebruikt met de themabestanden gekoppeld. De standaard setup gebruikt MAMP of een vergelijkbare lokale server.
+Voor lokale ontwikkeling draait WordPress onder een `.local` domein. Elk nieuw theme begint als een lege map in `/DEV/`; Claude zet die daarna op basis van de [KJ-Boilerplate](/client-projects/kj-boilerplate).
 
 ---
 
@@ -16,34 +16,47 @@ Voor lokale ontwikkeling wordt een WordPress installatie gebruikt met de themabe
 | **MAMP / Local** | Lokale webserver (Apache + MySQL + PHP) | Laatste versie |
 | **Node.js** | NPM voor Tailwind en build tools | v18+ |
 | **Git** | Versiebeheer | Laatste versie |
-| **Code editor** | VS Code aanbevolen | Laatste versie |
+| **Code editor** | VS Code / Cursor aanbevolen | Laatste versie |
 
 ---
 
 ## Setup Stappen
 
 <Steps>
-  <Step title="Installeer lokale server" icon="server">
-    Installeer MAMP (of Local by Flywheel) en maak een nieuwe site aan.
+  <Step title="Maak de lokale site aan" icon="server">
+    Installeer MAMP (of Local by Flywheel) en maak een nieuwe WordPress site aan.
 
-    Standaard lokale URL: `localhost:8888` of een subdomein.
+    Gebruik altijd een `.local` domein, bijvoorbeeld `projectnaam.local`.
+
+    <Callout kind="info">
+      Poort-URL's zoals `localhost:8888` worden niet gebruikt. Standaard is `https://projectnaam.local` (of `http://` afhankelijk van je lokale SSL-setup).
+    </Callout>
   </Step>
   <Step title="Installeer WordPress" icon="code">
     Download WordPress en installeer via de standaard wizard. Kies taal, database, en admin credentials.
   </Step>
-  <Step title="Clone het theme" icon="git-branch">
-    Clone de theme repository naar `wp-content/themes/`:
+  <Step title="Maak de themamap aan" icon="folder">
+    Maak handmatig een lege themamap aan in `/DEV/` met de juiste projectnaam:
 
     ```bash
-    cd /pad/naar/wordpress/wp-content/themes/
-    git clone <repo-url> theme-naam
+    mkdir /DEV/projectnaam
     ```
 
-    Of voor een nieuw project: kopieer de KJ-Boilerplate.
+    Gebruik dezelfde naam als het project (lowercase, zonder spaties), bijvoorbeeld `/DEV/perfectfinish` of `/DEV/vdbrand`.
+  </Step>
+  <Step title="Laat Claude het theme opzetten" icon="zap">
+    Vraag Claude om het nieuwe theme in te richten op basis van de KJ-Boilerplate. Bijvoorbeeld:
+
+    > Zet `/DEV/projectnaam` op als nieuw WordPress theme op basis van kj-boilerplate.
+
+    Claude kopieert de boilerplate-structuur, past metadata aan (`style.css`, text domain, versieconstanten) en legt de basisbestanden klaar.
+  </Step>
+  <Step title="Koppel of plaats het theme in WordPress" icon="git-branch">
+    Zorg dat de themamap beschikbaar is onder `wp-content/themes/` van je lokale WordPress installatie (direct of via symlink vanuit `/DEV/projectnaam`).
   </Step>
   <Step title="Installeer dependencies" icon="package">
     ```bash
-    cd wp-content/themes/theme-naam
+    cd /DEV/projectnaam
     npm install
     ```
   </Step>
@@ -55,7 +68,7 @@ Voor lokale ontwikkeling wordt een WordPress installatie gebruikt met de themabe
     Laat dit draaien tijdens ontwikkeling — Tailwind hercompileert automatisch bij wijzigingen.
   </Step>
   <Step title="Activeer het theme" icon="check-circle">
-    Ga naar **WordPress admin > Weergave > Thema's** en activeer het theme.
+    Ga naar **WordPress admin > Weergave > Thema's** op `projectnaam.local` en activeer het theme.
   </Step>
   <Step title="Installeer verplichte plugins" icon="package">
     Installeer minimaal:
@@ -71,18 +84,38 @@ Voor lokale ontwikkeling wordt een WordPress installatie gebruikt met de themabe
 
 ## Omgeving Detectie
 
-Alle themes bevatten een `kj_is_live_domain()` functie die detecteert of de site lokaal draait:
+Alle themes bevatten een `kj_is_live_domain()` functie in `inc/helpers.php`. Die bepaalt of de huidige request op productie draait.
+
+Lokaal, CLI/cron zonder host, en staging-subdomeinen tellen **niet** als live. `www.` wordt gestript zodat apex en www als hetzelfde host gelden.
 
 ```php
 function kj_is_live_domain() {
-    $host = $_SERVER['HTTP_HOST'] ?? '';
-    // Lokaal als poort 8888 of subdomein
-    if (strpos($host, ':8888') !== false) return false;
+    $host = strtolower( (string) ( $_SERVER['HTTP_HOST'] ?? '' ) );
+    if ( '' === $host ) {
+        return false;
+    }
+
+    $host = preg_replace( '/:\d+$/', '', $host );
+    $host = preg_replace( '/^www\./', '', $host );
+
+    if ( 'localhost' === $host || str_contains( $host, '.local' ) ) {
+        return false;
+    }
+
+    // Staging/dev subdomains, e.g. staging.hoexsystems.nl
+    if ( preg_match( '/\.(hoexsystems\.nl)$/', $host ) ) {
+        return false;
+    }
+
     return true;
 }
 ```
 
-Op lokale omgevingen worden automatische updates voor plugins en core ingeschakeld. Op productie zijn ze uitgeschakeld.
+<Callout kind="info">
+  De staging-check is projectspecifiek. In de [KJ-Boilerplate](/client-projects/kj-boilerplate) staat `kayjilesen.dev`; per project vervang je dat door het eigen domein (zoals `hoexsystems.nl`).
+</Callout>
+
+Op niet-live omgevingen (lokaal + staging) worden automatische updates voor plugins, core, themes en vertalingen ingeschakeld. Op productie blijven ze uit.
 
 ---
 
@@ -90,13 +123,14 @@ Op lokale omgevingen worden automatische updates voor plugins en core ingeschake
 
 ```bash
 # 1. Open terminal in theme directory
-cd wp-content/themes/theme-naam
+cd /DEV/projectnaam
 
 # 2. Start Tailwind watch
 npm run dev
 
 # 3. Ontwikkel — wijzig PHP, CSS, JS bestanden
 #    Tailwind hercompileert automatisch
+#    Preview op https://projectnaam.local
 
 # 4. Voor commit/deploy: volledige build
 npm run build
@@ -139,4 +173,10 @@ git commit -m "Add nieuwe feature"
   ```bash
   node --version  # Check huidige versie
   ```
+</Expandable>
+
+<Expandable title="Site is niet bereikbaar op .local" default-open="false">
+  **Oorzaak:** Hosts-entry of virtuele host ontbreekt.
+
+  **Oplossing:** Controleer dat `projectnaam.local` naar `127.0.0.1` wijst en dat je lokale server (MAMP/Local) het domein correct serveert.
 </Expandable>
