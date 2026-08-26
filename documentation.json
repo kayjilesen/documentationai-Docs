@@ -183,19 +183,9 @@
                 ]
               },
               {
-                "title": "Pagebuilder Systeem",
-                "path": "wordpress/pagebuilder-blocks",
-                "icon": "layers"
-              },
-              {
                 "title": "Naamgevingsconventies",
                 "path": "wordpress/naming-conventions",
                 "icon": "file-text"
-              },
-              {
-                "title": "ACF Patronen & Conventies",
-                "path": "wordpress/acf-patterns",
-                "icon": "database"
               },
               {
                 "title": "Tailwind CSS Setup",
@@ -207,6 +197,7 @@
           {
             "group": "Shopify",
             "icon": "shopping-bag",
+            "expandable": true,
             "pages": [
               {
                 "title": "Overzicht",
@@ -238,6 +229,7 @@
           {
             "group": "E-mail Setup",
             "icon": "mail",
+            "expandable": true,
             "pages": [
               {
                 "title": "Microsoft 365 (PAX8)",
