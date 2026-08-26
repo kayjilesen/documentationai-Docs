@@ -23,7 +23,7 @@ Code draait op een deelbare URL via Git. Hosting-standaarden staan al goed (zelf
     - Type: **A** (of zoals xCloud voorschrijft)
     - Name: **`projectnaam`** (wordt `projectnaam.kayjilesen.dev`)
     - Value: IP van de xCloud-server
-    - Proxy: naar gelang teamafspraak (vaak DNS-only / grijs voor originele SSL via Let's Encrypt op de server; oranje als jullie CF-proxy standaard gebruiken)
+    - Proxy: **DNS only** (grijs wolkje) — SSL via Let's Encrypt op de server, niet via Cloudflare-proxy
 
     Wacht tot de record resolve’t vóór je SSL forceert.
   </Step>
@@ -51,7 +51,7 @@ Code draait op een deelbare URL via Git. Hosting-standaarden staan al goed (zelf
 ## Af
 
 - [ ] xCloud-site aangemaakt; server-IP bekend
-- [ ] Cloudflare A-record voor `projectnaam.kayjilesen.dev` gezet en resolve’t
+- [ ] Cloudflare A-record voor `projectnaam.kayjilesen.dev` (**DNS only** / grijs) gezet en resolve’t
 - [ ] Domein + SSL in xCloud OK → `https://projectnaam.kayjilesen.dev` bereikbaar
 - [ ] Theme/code via Git-deploy
 - [ ] Caching + Redis volgens standaard
