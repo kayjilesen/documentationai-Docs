@@ -1,0 +1,264 @@
+{
+    "strings": {
+        "scan": [
+            "Active",
+            "Email reports sending weekly"
+        ],
+        "iplockout": [
+            "Login Protection active",
+            "404 Detection active",
+            "Custom IP List active",
+            "User Agent Banning active"
+        ],
+        "two_factor": [
+            "Inactive"
+        ],
+        "mask_login": [
+            "Active"
+        ],
+        "settings": [],
+        "security_headers": [
+            "Active"
+        ],
+        "audit": [
+            "Active"
+        ],
+        "blocklist_monitor": [
+            "Inactive"
+        ],
+        "pwned_passwords": [
+            "Active"
+        ],
+        "force_strong_password": [
+            "Inactive"
+        ],
+        "session_protection": [
+            "Inactive"
+        ],
+        "security_tweaks": [
+            "All available recommendations activated"
+        ]
+    },
+    "configs": {
+        "scan": {
+            "integrity_check": true,
+            "check_core": true,
+            "check_plugins": true,
+            "check_known_vuln": true,
+            "scan_malware": true,
+            "filesize": 10,
+            "check_abandoned_plugin": true,
+            "scheduled_scanning": true,
+            "day": "sunday",
+            "day_n": 30,
+            "time": "4:00",
+            "frequency": "weekly",
+            "report": "enabled",
+            "always_send": "",
+            "report_subscribers": {
+                "in_house_recipients": [
+                    {
+                        "name": "kay",
+                        "id": "1",
+                        "email": "dev@kayjilesen.nl",
+                        "role": "Administrator",
+                        "avatar": "https:\/\/secure.gravatar.com\/avatar\/eb49db65c6e526ab6817273a9485d7ad5694a5d2aef57dd97445b679f54714fb?s=96&d=mm&r=g",
+                        "status": "subscribed"
+                    }
+                ]
+            },
+            "dry_run": false,
+            "notification": "disabled",
+            "always_send_notification": "",
+            "error_send": "",
+            "notification_subscribers": [],
+            "email_subject_issue_not_found": "Scan of {SITE_URL} complete. {ISSUES_COUNT} issues found.",
+            "email_subject_issue_found": "Scan of {SITE_URL} complete. {ISSUES_COUNT} issues found.",
+            "email_subject_error": "Couldn\u2019t scan {SITE_URL} for vulnerabilities. ",
+            "email_content_issue_not_found": "Hi {USER_NAME},\n\n\n\nWP Defender here, reporting back from the front.\n\n\n\nI've finished scanning {SITE_URL} for vulnerabilities and I found nothing. Well done for running such a tight ship!\n\n\n\n\t\tKeep up the good work! With regular security scans and a well-hardened installation you'll be just fine.\n\n\n\nStay safe,\n\nWP Defender\n\nWPMU DEV Superhero\n\n",
+            "email_content_issue_found": "Hi {USER_NAME},\n\n\n\nWP Defender here, reporting back from the front.\n\n\n\nI've finished scanning {SITE_URL} for vulnerabilities and I found {ISSUES_COUNT} issues that you should take a closer look at!\n\n{ISSUES_LIST}\n\n\n\nStay Safe,\n\nWP Defender\n\nWPMU DEV Superhero\n\n",
+            "email_content_error": "Hi {USER_NAME},\n\n\n\nWP Defender here, reporting back from the front.\n\n\n\nI couldn\u2019t scan {SITE_URL} for vulnerabilities. Please {follow this link} and check the logs to see what casued the failure.\n\n\n\nStay Safe,\n\nWP Defender\n\nWPMU DEV Superhero\n\n"
+        },
+        "iplockout": {
+            "login_protection": true,
+            "login_protection_login_attempt": 5,
+            "login_protection_lockout_timeframe": 300,
+            "login_protection_lockout_ban": "timeframe",
+            "login_protection_lockout_duration": 300,
+            "login_protection_lockout_duration_unit": "seconds",
+            "login_protection_lockout_message": "U bent buitengesloten omdat er te veel ongeldige inlogpogingen zijn gedaan.",
+            "username_blacklist": "admin\nadministrator\nwebmaster",
+            "detect_404": true,
+            "detect_404_threshold": 10,
+            "detect_404_timeframe": 300,
+            "detect_404_lockout_ban": "timeframe",
+            "detect_404_lockout_duration": 300,
+            "detect_404_lockout_duration_unit": "seconds",
+            "detect_404_lockout_message": "U bent geblokkeerd omdat u te vaak hebt geprobeerd toegang te krijgen tot een bestand dat niet bestaat.",
+            "detect_404_blacklist": "",
+            "detect_404_whitelist": "",
+            "detect_404_logged": false,
+            "ip_blacklist": "",
+            "ip_whitelist": "",
+            "country_blacklist": [],
+            "country_whitelist": [],
+            "ip_lockout_message": "The administrator has blocked your IP from accessing this website.",
+            "login_lockout_notification": "",
+            "ip_lockout_notification": "",
+            "notification": "disabled",
+            "notification_subscribers": [],
+            "cooldown_enabled": "",
+            "cooldown_number_lockout": "3",
+            "cooldown_period": "24",
+            "report": "disabled",
+            "report_subscribers": [],
+            "report_frequency": "weekly",
+            "day": "sunday",
+            "day_n": 1,
+            "report_time": "4:00",
+            "dry_run": false,
+            "storage_days": 30,
+            "geoIP_db": "",
+            "maxmind_license_key": "",
+            "ip_blocklist_cleanup_interval": "never",
+            "ua_banning_enabled": true,
+            "ua_banning_message": "You have been blocked from accessing this website.",
+            "ua_banning_blacklist": "",
+            "ua_banning_whitelist": "a6-indexer\nadsbot-google\naolbuild\napis-google\nbaidu\nbingbot\nbingpreview\nbutterfly\ncloudflare\nchrome\nduckduckbot\nembedly\nfacebookexternalhit\nfacebot\ngoogle page speed\ngooglebot\nia_archiver\nlinkedinbot\nmediapartners-google\nmsnbot\nnetcraftsurvey\noutbrain\npinterest\nquora\nslackbot\nslurp\ntweetmemebot\ntwitterbot\nuptimerobot\nurlresolver\nvkshare\nw3c_validator\nwordpress\nwp rocket\nyandex",
+            "ua_banning_empty_headers": false,
+            "global_ip_list": true,
+            "global_ip_list_blocklist_autosync": true,
+            "antibot": true
+        },
+        "two_factor": {
+            "enabled": false,
+            "lost_phone": true,
+            "force_auth": false,
+            "force_auth_mess": "You are required to setup two-factor authentication to use this site.",
+            "user_roles": [],
+            "force_auth_roles": [],
+            "custom_graphic": false,
+            "custom_graphic_type": "upload",
+            "custom_graphic_url": "https:\/\/asbestverwijdering.com\/wp-content\/plugins\/wp-defender\/assets\/img\/2factor-disabled.svg",
+            "custom_graphic_link": "",
+            "email_subject": "Your OTP code",
+            "email_sender": "admin",
+            "email_body": "Hi {{display_name}},\n\n\n\nYour temporary login passcode is <strong>{{passcode}}<\/strong>.\n\n\n\nCopy and paste the passcode into the input field on the login screen to complete logging in.\n\n\n\nRegards,\n\nAdministrator",
+            "app_title": "Averex",
+            "detect_woo": false
+        },
+        "mask_login": {
+            "mask_url": "beheer",
+            "redirect_traffic": "off",
+            "redirect_traffic_url": "",
+            "redirect_traffic_page_id": 0,
+            "enabled": true
+        },
+        "settings": {
+            "translate": "Nederlands",
+            "usage_tracking": false,
+            "uninstall_data": "keep",
+            "uninstall_settings": "preserve",
+            "high_contrast_mode": false,
+            "uninstall_quarantine": "keep"
+        },
+        "security_headers": {
+            "sh_xframe": true,
+            "sh_xframe_mode": "sameorigin",
+            "sh_xss_protection": true,
+            "sh_xss_protection_mode": "sanitize",
+            "sh_content_type_options": true,
+            "sh_content_type_options_mode": "nosniff",
+            "sh_strict_transport": true,
+            "hsts_preload": 0,
+            "include_subdomain": 0,
+            "hsts_cache_duration": "30 days",
+            "sh_referrer_policy": true,
+            "sh_referrer_policy_mode": "same-origin",
+            "sh_feature_policy": false,
+            "sh_feature_policy_mode": "self",
+            "sh_feature_policy_urls": ""
+        },
+        "audit": {
+            "enabled": true,
+            "report": "disabled",
+            "subscribers": [],
+            "frequency": "weekly",
+            "day": "sunday",
+            "day_n": 1,
+            "time": "4:00",
+            "dry_run": false,
+            "storage_days": "7 days"
+        },
+        "blocklist_monitor": {
+            "enabled": false,
+            "status": "-1"
+        },
+        "pwned_passwords": {
+            "enabled": true,
+            "user_roles": [
+                "administrator",
+                "editor",
+                "author",
+                "contributor",
+                "subscriber"
+            ],
+            "custom_message": "U moet uw wachtwoord wijzigen omdat het wachtwoord dat u gebruikt voorkomt in de gegevens van een datalek."
+        },
+        "force_strong_password": {
+            "enabled": false,
+            "user_roles": [
+                "administrator",
+                "editor",
+                "author",
+                "contributor",
+                "subscriber"
+            ],
+            "message": "You are required to change your password because your password doesn't meet the strong password guidelines set by the administrator."
+        },
+        "session_protection": {
+            "enabled": false,
+            "user_roles": [
+                "administrator"
+            ],
+            "lock_properties": [],
+            "idle_timeout": 1,
+            "login_duration": 14
+        },
+        "security_tweaks": {
+            "notification_repeat": "weekly",
+            "subscribers": [],
+            "notification": "disabled",
+            "data": [],
+            "fixed": [
+                "disable-xml-rpc",
+                "wp-version",
+                "hide-error",
+                "php-version",
+                "replace-admin-username",
+                "security-key",
+                "login-duration",
+                "disable-trackback",
+                "prevent-enum-users",
+                "disable-file-editor",
+                "protect-information",
+                "prevent-php-executed"
+            ],
+            "issues": [],
+            "ignore": [],
+            "automate": "",
+            "enabled_user_enums": [
+                "enum-rest",
+                "enum-oembed",
+                "enum-sitemap"
+            ],
+            "security_key": []
+        }
+    },
+    "hub_id": 55073,
+    "name": "Kay Jilesen | 2026 | Weekly",
+    "description": "",
+    "immortal": false,
+    "is_removable": true,
+    "key": "wp_defender_config_hub_55073"
+}

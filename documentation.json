@@ -82,6 +82,11 @@
                 "icon": "git-branch"
               },
               {
+                "title": "Standaard Instellingen",
+                "path": "hosting/standaard-instellingen",
+                "icon": "settings"
+              },
+              {
                 "title": "Backups & Security",
                 "path": "hosting/backups-security",
                 "icon": "shield"

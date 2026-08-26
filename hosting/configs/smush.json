@@ -1,0 +1,100 @@
+{
+  "id": 1778658983489,
+  "name": "Kay Jilesen | 2026",
+  "description": "",
+  "config": {
+    "configs": {
+      "settings": {
+        "auto": true,
+        "lossy": 1,
+        "strip_exif": true,
+        "resize": true,
+        "detection": false,
+        "original": true,
+        "backup": false,
+        "no_scale": false,
+        "png_to_jpg": true,
+        "nextgen": false,
+        "s3": false,
+        "gutenberg": false,
+        "js_builder": false,
+        "gform": false,
+        "cdn": false,
+        "auto_resizing": false,
+        "usage": false,
+        "accessible_colors": false,
+        "keep_data": true,
+        "lazy_load": true,
+        "webp_mod": false,
+        "background_email": false,
+        "webp_direct_conversion": true,
+        "webp_fallback": true,
+        "disable_streams": false,
+        "avif_mod": true,
+        "avif_fallback": true,
+        "image_dimensions": true,
+        "preload_images": true
+      },
+      "resize_sizes": {
+        "width": 1920,
+        "height": 1920
+      },
+      "lazy_load": {
+        "format": {
+          "jpeg": true,
+          "png": true,
+          "webp": true,
+          "gif": true,
+          "svg": true,
+          "iframe": true,
+          "embed_video": false
+        },
+        "output": {
+          "content": true,
+          "widgets": true,
+          "thumbnails": true,
+          "gravatars": true
+        },
+        "animation": {
+          "selected": "none"
+        },
+        "include": {
+          "frontpage": true,
+          "home": true,
+          "page": true,
+          "single": true,
+          "archive": true,
+          "category": true,
+          "tag": true,
+          "project": true,
+          "vacature": true,
+          "sureforms_form": true
+        },
+        "footer": true,
+        "native": false,
+        "noscript_fallback": false
+      }
+    },
+    "strings": {
+      "bulk_smush": [
+        "Smush Mode - Super\nAutomatic compression - Active\nMetadata - Active\nLarge Image Resizing - Active\nOriginal Images - Active\nBackup Original Images - Inactive\nPNG to JPEG Conversion - Active\nDisable Scaled Images - Inactive\nEmail Notification - Inactive\nFull images max-sizes to resize - Max-width: 1920. Max height: 1920"
+      ],
+      "lazy_load": [
+        "Lazy Load - Active\nMedia Types - jpeg, png, webp, gif, svg\nEmbedded Content - Yes\nOutput Locations - content, widgets, thumbnails, gravatars\nAuto Resizing - Inactive\nAdd Missing Image Dimensions - Active\nIncluded Post Types - frontpage, home, page, single, archive, category, tag, project, vacature, sureforms_form\nDisplay And Animation - Selected: none\nLoad Scripts In Footer - Yes\nPreload Critical Images - Active"
+      ],
+      "cdn": [
+        "Inactive"
+      ],
+      "next_gen": [
+        "Next-Gen Formats - AVIF\nTransform Mode - Direct Conversion\nLegacy Browser Support - Active"
+      ],
+      "integrations": [
+        "Gutenberg Support - Inactive\nGravity Forms - Inactive\nWPBakery Page Builder - Inactive\nAmazon S3 - Inactive\nNextGen Gallery - Inactive"
+      ],
+      "settings": [
+        "Color Accessibility - Inactive\nUsage Tracking - Inactive\nKeep Data On Uninstall - Active\ndisable_streams - Active"
+      ]
+    }
+  },
+  "date": "1778658983489"
+}

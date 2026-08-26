@@ -1,0 +1,230 @@
+---
+title: "Standaard Instellingen"
+description: "Standaard xCloud- en pluginconfiguratie (Defender, Smush, Hummingbird) — inclusief login via /beheer en config-exports."
+---
+
+## Overzicht
+
+Elke nieuwe productiesite krijgt dezelfde basis: xCloud-hostingdefaults + WPMU DEV-plugins met vaste presets. Config-exports staan in `hosting/configs/` zodat je ze kunt importeren of vergelijken.
+
+| Onderdeel | Bron / export |
+|-----------|----------------|
+| **WP Defender** | `hosting/configs/wp-defender.json` |
+| **Smush Pro** | `hosting/configs/smush.json` |
+| **Hummingbird** (Asset Optimization) | `hosting/configs/hummingbird-asset-optimization.json` |
+
+<Callout kind="info" title="Login-URL">
+  Op productie is de WordPress-login altijd **`/beheer`** (niet `/wp-admin`). Dit wordt gezet via Defender → Mask Login Area.
+</Callout>
+
+---
+
+## xCloud standaard
+
+Checklist bij elke nieuwe site (details in [Server Setup](/hosting/server-setup), [Site Management](/hosting/site-management) en [Backups & Security](/hosting/backups-security)):
+
+| Instelling | Standaard |
+|------------|-----------|
+| Provider | Hetzner via xCloud |
+| Webserver | NGINX |
+| PHP | Actuele stabiele 8.x |
+| Database | MySQL 8 / MariaDB |
+| Page cache | FastCGI Nginx, 60 minuten |
+| Object cache | Redis Object Cache aan |
+| Object Cache Pro | Uit |
+| Cloudflare Edge Cache | Uit |
+| SSL | Let's Encrypt + HTTPS aan |
+| Firewall | UFW (22 / 80 / 443) |
+| WAF | 8G (of 7G) actief op site-niveau |
+| Backups | Remote Incremental (zie hieronder) |
+| Staging | Optioneel per site |
+| Deploy | Meestal [Deployer for Git](/hosting/deployments) of xCloud Git |
+
+### Caching (Site > Caching)
+
+| Module | Standaard |
+|--------|-----------|
+| **Page Caching** | Aan — methode **FastCGI Nginx**, cache duration **60 Minutes** |
+| **Redis Object Cache** | Aan (credentials komen van xCloud per site) |
+| **Object Cache Pro** | Uit |
+| **Cloudflare Edge Cache** | Uit |
+
+xCloud serveert gecachte pagina's via NGINX (buiten PHP/WordPress) en zet browser-cache headers op CSS, JS en images.
+
+<Callout kind="tip">
+  Na deploys of ACF/theme-wijzigingen: **Purge Cache** voor page cache én Redis object cache.
+</Callout>
+
+### Remote Backup (Site > Backups > Remote Backup)
+
+| Instelling | Standaard |
+|------------|-----------|
+| Backup type | **Incremental** |
+| Bucket | **xcloud** |
+| Automatic Full Backup | Aan — **Weekly** |
+| Backup Retention | Aan — **Delete After Days: 30** |
+| Automatic Incremental Backup | Aan — **Daily** |
+| Database Backup | Aan (**Take Database Backup**) |
+| File Backup | Aan (**Take File Backup**) |
+
+**Exclude Paths** (file backup):
+
+```text
+wp-admin
+wp-includes
+wp-content/plugins
+wp-content/uploads
+```
+
+Core, plugins en uploads zitten dus niet in de file-backup (die herstel je via WordPress/plugins of media); database + overige sitebestanden (o.a. theme) wel. Uploads/media apart borgen waar nodig (bijv. WPvivid of object storage).
+
+---
+
+## Standaard plugin-stack
+
+Typische WPMU DEV / performance / security-set op productie (exacte set kan per project verschillen):
+
+| Plugin | Rol |
+|--------|-----|
+| **WP Defender** | Security, login mask (`/beheer`), lockouts, scans |
+| **Smush Pro** | Image compressie, lazy load, AVIF |
+| **Hummingbird** | Asset optimization (minify/combine/delay JS) |
+| **WPMU DEV Dashboard** | Updates / Hub configs |
+| **Redis Object Cache** | Object caching (met xCloud Redis) |
+| **Nginx Helper** | Cache purge bij NGINX |
+| Overig per project | ACF Pro, Rank Math, FluentSMTP, WPvivid, enz. |
+
+---
+
+## WP Defender
+
+Preset: **Kay Jilesen | 2026 | Weekly** — import via Defender configs of Hub.
+
+### Mask Login (verplicht)
+
+| Instelling | Waarde |
+|------------|--------|
+| Mask Login Area | **Aan** |
+| Custom login slug | **`beheer`** |
+| Redirect verkeer vanaf oude login | Uit |
+
+Productie-inlog: `https://domein.nl/beheer`
+
+<Callout kind="warning">
+  Deel `/wp-admin` niet als inloglink. Stuur collega's en klanten altijd naar `/beheer`.
+</Callout>
+
+### Overige kerninstellingen
+
+| Module | Status | Notities |
+|--------|--------|----------|
+| Security scan | Aan | Wekelijks (zondag 04:00), e-mailrapport aan |
+| Login protection | Aan | 5 pogingen / 300s → lockout 300s |
+| 404 detection | Aan | 10 hits / 300s → lockout 300s |
+| Username blacklist | Aan | `admin`, `administrator`, `webmaster` |
+| User agent banning | Aan | Standaard bot-whitelist actief |
+| Global IP list | Aan | Autosync blocklist |
+| Antibot | Aan | |
+| Security headers | Aan | X-Frame sameorigin, XSS sanitize, nosniff, HSTS 30d, referrer same-origin |
+| Audit logging | Aan | Opslag 7 dagen |
+| Pwned passwords | Aan | Alle standaard rollen |
+| 2FA | Uit | |
+| Force strong password | Uit | |
+| Session protection | Uit | |
+| Blocklist monitor | Uit | |
+| Security tweaks | Alle recommendations fixed | o.a. XML-RPC uit, hide errors, prevent user enum, disable file editor |
+
+Export: [`hosting/configs/wp-defender.json`](/hosting/configs/wp-defender.json)
+
+---
+
+## Smush Pro
+
+Preset: **Kay Jilesen | 2026**
+
+| Instelling | Waarde |
+|------------|--------|
+| Auto compress | Aan (Super / lossy) |
+| Strip EXIF | Aan |
+| Large image resize | Aan — max **1920 × 1920** |
+| Original images | Aan |
+| Backup originals | Uit |
+| PNG → JPEG | Aan |
+| Lazy load | Aan (jpeg/png/webp/gif/svg + iframes) |
+| Missing image dimensions | Aan |
+| Preload critical images | Aan |
+| Next-gen | **AVIF** (direct conversion + fallback) |
+| WebP module | Uit (AVIF i.p.v. WebP) |
+| CDN | Uit |
+| Keep data on uninstall | Aan |
+
+Lazy load post types in de export o.a.: frontpage, home, page, single, archive, category, tag, plus project-CPT's waar aanwezig.
+
+Export: [`hosting/configs/smush.json`](/hosting/configs/smush.json)
+
+---
+
+## Hummingbird — Asset Optimization
+
+Export dekt **Asset Optimization** (niet per se alle Hummingbird-modules).
+
+| Instelling | Waarde |
+|------------|--------|
+| Minify | Aan |
+| Mode | **Speedy** |
+| Compress | Aan |
+| Combine | Aan |
+| Assets | Styles + scripts + fonts |
+| Delay JS | Aan (timeout 20s) |
+| Critical CSS | Uit |
+| Font optimization | Uit (`font-display: swap` wel aan) |
+| CDN | Uit |
+| View | Basic |
+
+**Niet minifien / niet combinen (o.a.):** `jquery`, `wphb-global`, plus diverse `wp-block-*` / global styles.
+
+Delay JS heeft een lange standaard exclusion-lijst (lazy load, forms, trackers, theme-scripts). Importeer de JSON bij twijfel i.p.v. handmatig na te bouwen.
+
+Export: [`hosting/configs/hummingbird-asset-optimization.json`](/hosting/configs/hummingbird-asset-optimization.json)
+
+<Callout kind="tip">
+  Na theme-deploy: clear Hummingbird/NGINX/Redis cache en test formulieren + pagebuilder-JS. Bij layout-breaks: delay/minify uitzonderingen uitbreiden.
+</Callout>
+
+---
+
+## Nieuwe site checklist
+
+<Steps>
+  <Step title="xCloud site klaarzetten" icon="server">
+    PHP, SSL, WAF, **FastCGI Nginx + Redis**, en **remote incremental backups** volgens de xCloud-sectie hierboven.
+  </Step>
+  <Step title="Plugins installeren" icon="package">
+    Defender, Smush Pro, Hummingbird (+ overige projectplugins).
+  </Step>
+  <Step title="Configs importeren" icon="download">
+    Importeer de JSON-presets uit `hosting/configs/` (of via WPMU DEV Hub configs met dezelfde namen).
+  </Step>
+  <Step title="Login controleren" icon="log-in">
+    Bevestig dat `https://domein.nl/beheer` werkt en `/wp-login.php` gemaskeerd is.
+  </Step>
+  <Step title="Performance check" icon="zap">
+    Smush bulk/lazy load oké; Hummingbird AO aan; caches legen; homepage + formulieren testen.
+  </Step>
+</Steps>
+
+---
+
+## Gerelateerd
+
+<Columns cols={3}>
+  <Card title="Backups & Security" icon="shield" href="/hosting/backups-security">
+    xCloud WAF, SSL en backups.
+  </Card>
+  <Card title="Deployments" icon="git-branch" href="/hosting/deployments">
+    Deployer for Git en ACF sync.
+  </Card>
+  <Card title="Site Management" icon="globe" href="/hosting/site-management">
+    Domeinen, SSL en staging.
+  </Card>
+</Columns>

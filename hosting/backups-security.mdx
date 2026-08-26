@@ -45,30 +45,37 @@ xCloud biedt twee niveaus van backups:
 
 ## Site backup configureren
 
+### Onze standaard (Remote Backup)
+
+Gebruik op productie altijd **Remote Backup** met deze defaults (zie ook [Standaard Instellingen](/hosting/standaard-instellingen)):
+
+| Instelling | Waarde |
+|------------|--------|
+| Type | Incremental |
+| Bucket | xcloud |
+| Full backup | Weekly (aan) |
+| Incremental | Daily (aan) |
+| Retention | 30 dagen |
+| Database | Aan |
+| Files | Aan |
+| Exclude paths | `wp-admin`, `wp-includes`, `wp-content/plugins`, `wp-content/uploads` |
+
+### Stappen
+
 <Steps>
   <Step title="Backup instellingen openen" icon="settings">
-    Ga naar **Site > Backups** in het xCloud dashboard.
+    Ga naar **Site > Backups** in het xCloud dashboard en open het tabblad **Remote Backup**.
   </Step>
-  <Step title="Backup type kiezen" icon="database">
-    Kies welke onderdelen je wilt backuppen:
-
-    - **Database backup** — de WordPress database
-    - **Files backup** — thema's, plugins, uploads en overige bestanden
-
-    Je kunt één of beide opties inschakelen.
+  <Step title="Type en bucket" icon="database">
+    Zet **Backup Type** op **Incremental** en kies bucket **xcloud**.
   </Step>
-  <Step title="Schema instellen" icon="clock">
-    Stel de backup frequentie in (dagelijks, wekelijks) en het aantal te bewaren backups.
+  <Step title="Schema en retention" icon="clock">
+    - Automatic Full Backup: **Weekly**
+    - Automatic Incremental Backup: **Daily**
+    - Backup Retention: **30** days
   </Step>
-  <Step title="Remote storage koppelen (optioneel)" icon="cloud">
-    Voor externe opslag kun je een storage provider koppelen:
-
-    | Provider | Beschrijving |
-    |----------|-------------|
-    | **Hetzner Object Storage** | S3-compatibele opslag bij Hetzner |
-    | **Google Drive** | Backups opslaan in Google Drive |
-    | **Cloudflare R2** | S3-compatibele opslag via Cloudflare |
-    | **DigitalOcean Spaces** | Object storage bij DigitalOcean |
+  <Step title="Database + files" icon="folder">
+    Schakel **Take Database Backup** en **Take File Backup** in. Vul de exclude paths hierboven in.
   </Step>
 </Steps>
 
@@ -158,13 +165,16 @@ Gebruik deze checklist voor een veilige setup:
 | WordPress updates | Core, thema's en plugins up-to-date |
 | Ongebruikte plugins | Verwijderd (niet alleen gedeactiveerd) |
 | Database prefix | Geen standaard `wp_` prefix |
-| Admin URL | Overweeg een custom login URL |
+| Admin URL | Altijd **`/beheer`** via [Defender Mask Login](/hosting/standaard-instellingen) |
 
 ---
 
 ## Gerelateerd
 
-<Columns cols={3}>
+<Columns cols={2}>
+  <Card title="Standaard Instellingen" icon="settings" href="/hosting/standaard-instellingen">
+    Plugin-presets (Defender, Smush, Hummingbird) en /beheer.
+  </Card>
   <Card title="Server Setup" icon="server" href="/hosting/server-setup">
     Hetzner server opzetten via xCloud.
   </Card>
