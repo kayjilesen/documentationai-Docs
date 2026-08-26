@@ -45,11 +45,27 @@ Voor lokale ontwikkeling draait WordPress onder een `.local` domein. Elk nieuw t
     Voorbeelden: `/DEV/perfectfinish/wp-content/themes/perfectfinish` of `/DEV/vdbrand/wp-content/themes/vdbrand`.
   </Step>
   <Step title="Laat Claude het theme opzetten" icon="zap">
-    Vraag Claude om het nieuwe theme in te richten op basis van de KJ-Boilerplate. Bijvoorbeeld:
+    Plak onderstaande prompt in Claude/Cursor (vervang de placeholders):
 
-    > Zet `/DEV/projectnaam/wp-content/themes/projectnaam` op als nieuw WordPress theme op basis van kj-boilerplate.
+    ```text
+    Zet een nieuw WordPress theme op op basis van kj-boilerplate.
 
-    Claude kopieert de boilerplate-structuur, past metadata aan (`style.css`, text domain, versieconstanten) en legt de basisbestanden klaar.
+    Doelmap (leeg, handmatig aangemaakt):
+    /DEV/<projectnaam>/wp-content/themes/<projectnaam>
+
+    Bron:
+    /DEV/kj-boilerplate
+
+    Doe het volgende:
+    1. Kopieer de boilerplate-structuur naar de doelmap
+    2. Update style.css (Theme Name, Description, Text Domain) naar <projectnaam>
+    3. Pas text domain, prefixes en versieconstanten aan naar het project
+    4. Update kj_is_live_domain() staging-check naar het productiedomein van dit project
+    5. Laat Tailwind/npm scripts intact; ik doe zelf npm install + npm run dev
+    6. Geef een korte checklist van wat ik hierna nog handmatig moet doen (activeren theme, ACF Pro, ACF sync)
+    ```
+
+    Claude kopieert de boilerplate-structuur, past metadata aan en legt de basisbestanden klaar.
   </Step>
   <Step title="Installeer dependencies" icon="package">
     ```bash

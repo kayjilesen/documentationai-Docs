@@ -247,6 +247,11 @@
             "title": "CMS Energy",
             "path": "client-projects/energiesystemen",
             "icon": "zap"
+          },
+          {
+            "title": "Hoex Systems",
+            "path": "client-projects/hoexsystems",
+            "icon": "leaf"
           }
         ]
       },

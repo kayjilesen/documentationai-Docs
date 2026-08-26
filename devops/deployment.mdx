@@ -37,13 +37,13 @@ graph LR
     ```
   </Step>
   <Step title="Deploy naar server" icon="upload">
-    De deploy wordt automatisch getriggerd via GitHub Actions (bij push naar `main`) of handmatig via de Deployer for Git plugin in WordPress.
+    De deploy wordt getriggerd via GitHub Actions (bij push naar `main`) of via **Deployer for Git** (handmatig in WP-admin of automatisch via webhook).
   </Step>
   <Step title="Controleer productie" icon="check-circle">
     Open de live site en controleer of alle wijzigingen correct zijn doorgevoerd. Let op:
     - CSS correct geladen (cache busting via `filemtime()`)
     - Nieuwe blocks zichtbaar
-    - ACF velden gesynchroniseerd
+    - **ACF veldgroepen gesynchroniseerd** op productie (ACF > Sync)
   </Step>
 </Steps>
 
@@ -63,15 +63,19 @@ graph LR
     Zie de CI/CD skill documentatie voor volledige setup.
   </Tab>
   <Tab title="Deployer for Git" icon="upload">
-    De **Deployer for Git** WordPress plugin deployt automatisch vanuit een Git repository naar de server.
+    De **Deployer for Git** WordPress plugin synchroniseert een Git-repository naar productie. Dit is een vaak gebruikte optie.
+
+    **Triggers:**
+    - **Handmatig** — deploy starten vanuit WP-admin
+    - **Webhook** — push naar de gekoppelde branch werkt de code automatisch bij
 
     **Setup:**
     1. Installeer de plugin op de productieserver
-    2. Koppel de GitHub repository
-    3. Configureer welke branch (meestal `main`) wordt gedeployed
-    4. Bij een push naar de gekoppelde branch wordt de code automatisch gesynchroniseerd
+    2. Koppel de Git-repository en branch (meestal `main`)
+    3. Optioneel: webhook configureren voor automatische updates
+    4. Na deploy: **ACF > Sync** op de productiesite als er veldgroepen zijn gewijzigd
 
-    Dit is de eenvoudigste optie voor projecten zonder CI/CD pipeline.
+    Zie ook [Hosting > Deployments](/hosting/deployments) voor de volledige workflow.
   </Tab>
 </Tabs>
 
