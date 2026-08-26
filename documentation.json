@@ -502,8 +502,8 @@
         ]
       },
       {
-        "tab": "Intern",
-        "icon": "lock",
+        "tab": "Organisatie",
+        "icon": "building-2",
         "public": false,
         "pages": [
           {
