@@ -11,27 +11,6 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "SOP's",
-        "icon": "clipboard-check",
-        "pages": [
-          {
-            "title": "Overzicht",
-            "path": "sops/overzicht",
-            "icon": "list"
-          },
-          {
-            "title": "Nieuwe WordPress-site",
-            "path": "sops/nieuwe-wordpress-site",
-            "icon": "rocket"
-          },
-          {
-            "title": "Oplevering",
-            "path": "sops/oplevering",
-            "icon": "check-circle"
-          }
-        ]
-      },
-      {
         "tab": "Documentatie",
         "icon": "book",
         "groups": [
@@ -316,6 +295,27 @@
             "title": "Hoex Systems",
             "path": "client-projects/hoexsystems",
             "icon": "leaf"
+          }
+        ]
+      },
+      {
+        "tab": "SOP's",
+        "icon": "clipboard-check",
+        "pages": [
+          {
+            "title": "Overzicht",
+            "path": "sops/overzicht",
+            "icon": "list"
+          },
+          {
+            "title": "Nieuwe WordPress-site",
+            "path": "sops/nieuwe-wordpress-site",
+            "icon": "rocket"
+          },
+          {
+            "title": "Oplevering",
+            "path": "sops/oplevering",
+            "icon": "check-circle"
           }
         ]
       },
