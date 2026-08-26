@@ -1,0 +1,46 @@
+{
+    "name": "Kay Jilesen | Switchboard Standard",
+    "source": "hoexsystems",
+    "exported_at": "2026-08-26",
+    "active_modules": [
+        "active-plugins-first",
+        "clean-admin-bar",
+        "disable-dashboard-widgets-select",
+        "move-switchboard-to-tools",
+        "site-identity-login",
+        "disable-comments",
+        "duplicate-post-button",
+        "disable-dashicons-frontend",
+        "disable-emoji",
+        "transients-cleaner",
+        "disable-author-archives",
+        "disable-file-editing",
+        "hide-wp-version",
+        "last-login-column",
+        "download-plugin-zip",
+        "quick-debug-toggle",
+        "disable-feeds",
+        "revisions-control",
+        "disable-xmlrpc",
+        "security-headers"
+    ],
+    "module_settings": {
+        "clean-admin-bar": {
+            "updates": "1",
+            "comments": "1",
+            "new_content": "1",
+            "howdy": "1",
+            "help_tab": "1",
+            "screen_options": "1",
+            "wp_logo": "0",
+            "site_name": "0",
+            "customize": "0"
+        },
+        "disable-dashboard-widgets-select": {
+            "widgets": "dashboard_right_now,dashboard_activity,dashboard_quick_press,dashboard_primary,welcome,dashboard_recent_comments,dashboard_recent_drafts,dashboard_secondary"
+        },
+        "revisions-control": {
+            "limit": "5"
+        }
+    }
+}

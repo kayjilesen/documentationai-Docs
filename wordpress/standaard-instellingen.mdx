@@ -1,17 +1,20 @@
 ---
 title: "Standaard Instellingen"
-description: "Standaard xCloud- en pluginconfiguratie (Defender, Smush, Hummingbird) — inclusief login via /beheer en config-exports."
+description: "Standaard WordPress pluginpresets (Defender, Switchboard, Smush, Hummingbird) plus xCloud caching/backups — inclusief login via /beheer."
 ---
 
 ## Overzicht
 
-Elke nieuwe productiesite krijgt dezelfde basis: xCloud-hostingdefaults + WPMU DEV-plugins met vaste presets. Config-exports staan in `hosting/configs/` zodat je ze kunt importeren of vergelijken.
+Elke nieuwe productiesite krijgt dezelfde WordPress-basis: vaste pluginpresets + dezelfde xCloud caching/backup-defaults. Config-exports staan in `wordpress/configs/`.
+
+Dit staat onder **WordPress Development** (stack & plugins). Server, DNS en SSL blijven onder [Hosting](/hosting/server-setup).
 
 | Onderdeel | Bron / export |
 |-----------|----------------|
-| **WP Defender** | `hosting/configs/wp-defender.json` |
-| **Smush Pro** | `hosting/configs/smush.json` |
-| **Hummingbird** (Asset Optimization) | `hosting/configs/hummingbird-asset-optimization.json` |
+| **WP Defender** | `wordpress/configs/wp-defender.json` |
+| **Smush Pro** | `wordpress/configs/smush.json` |
+| **Hummingbird** (Asset Optimization) | `wordpress/configs/hummingbird-asset-optimization.json` |
+| **WP Switchboard Pro** | `wordpress/configs/wpswitchboard.json` |
 
 <Callout kind="info" title="Login-URL">
   Op productie is de WordPress-login altijd **`/beheer`** (niet `/wp-admin`). Dit wordt gezet via Defender → Mask Login Area.
@@ -87,6 +90,7 @@ Typische WPMU DEV / performance / security-set op productie (exacte set kan per 
 | Plugin | Rol |
 |--------|-----|
 | **WP Defender** | Security, login mask (`/beheer`), lockouts, scans |
+| **WP Switchboard Pro** | Admin-cleanup, bloat removal, kleine security/perf modules |
 | **Smush Pro** | Image compressie, lazy load, AVIF |
 | **Hummingbird** | Asset optimization (minify/combine/delay JS) |
 | **WPMU DEV Dashboard** | Updates / Hub configs |
@@ -134,7 +138,7 @@ Productie-inlog: `https://domein.nl/beheer`
 | Blocklist monitor | Uit | |
 | Security tweaks | Alle recommendations fixed | o.a. XML-RPC uit, hide errors, prevent user enum, disable file editor |
 
-Export: [`hosting/configs/wp-defender.json`](/hosting/configs/wp-defender.json)
+Export: [`wordpress/configs/wp-defender.json`](/wordpress/configs/wp-defender.json)
 
 ---
 
@@ -160,7 +164,7 @@ Preset: **Kay Jilesen | 2026**
 
 Lazy load post types in de export o.a.: frontpage, home, page, single, archive, category, tag, plus project-CPT's waar aanwezig.
 
-Export: [`hosting/configs/smush.json`](/hosting/configs/smush.json)
+Export: [`wordpress/configs/smush.json`](/wordpress/configs/smush.json)
 
 ---
 
@@ -185,10 +189,67 @@ Export dekt **Asset Optimization** (niet per se alle Hummingbird-modules).
 
 Delay JS heeft een lange standaard exclusion-lijst (lazy load, forms, trackers, theme-scripts). Importeer de JSON bij twijfel i.p.v. handmatig na te bouwen.
 
-Export: [`hosting/configs/hummingbird-asset-optimization.json`](/hosting/configs/hummingbird-asset-optimization.json)
+Export: [`wordpress/configs/hummingbird-asset-optimization.json`](/wordpress/configs/hummingbird-asset-optimization.json)
 
 <Callout kind="tip">
   Na theme-deploy: clear Hummingbird/NGINX/Redis cache en test formulieren + pagebuilder-JS. Bij layout-breaks: delay/minify uitzonderingen uitbreiden.
+</Callout>
+
+---
+
+## WP Switchboard Pro
+
+Standaardmodules gebaseerd op recente productiesites (o.a. Hoexsystems). Activeer deze modules in Switchboard; details + settings staan in de export.
+
+### Altijd aan
+
+| Module | Doel |
+|--------|------|
+| `move-switchboard-to-tools` | Switchboard onder Tools i.p.v. top-level menu |
+| `site-identity-login` | Login-scherm met site-branding |
+| `disable-comments` | Comments uit |
+| `duplicate-post-button` | Posts/pages dupliceren |
+| `disable-dashicons-frontend` | Dashicons niet laden op front-end |
+| `disable-emoji` | WP emoji-scripts uit |
+| `disable-feeds` | Feeds uit |
+| `transients-cleaner` | Verlopen transients opruimen |
+| `disable-author-archives` | Author archives uit |
+| `disable-file-editing` | Theme/plugin editor in admin uit |
+| `disable-xmlrpc` | XML-RPC uit |
+| `hide-wp-version` | WP-versie verbergen |
+| `last-login-column` | Laatste login in users-lijst |
+| `revisions-control` | Revisielimiet (**5**) |
+| `clean-admin-bar` | Admin bar opschonen (zie settings) |
+| `active-plugins-first` | Actieve plugins bovenaan |
+| `disable-dashboard-widgets-select` | Standaard dashboard widgets verbergen |
+| `download-plugin-zip` | Plugin als zip downloaden |
+| `quick-debug-toggle` | Snelle debug-toggle |
+| `security-headers` | Extra security headers |
+
+### Module-settings (standaard)
+
+**clean-admin-bar** — verberg: updates, comments, new content, howdy, help tab, screen options. Laat staan: WP logo, site name, customize.
+
+**disable-dashboard-widgets-select** — o.a. Right Now, Activity, Quick Press, Primary, Welcome, Recent Comments/Drafts, Secondary.
+
+**revisions-control** — limit: `5`
+
+### Optioneel per project
+
+| Module | Wanneer |
+|--------|---------|
+| `disable-gutenberg` | Classic editor / pagebuilder-sites (vaak pages + custom CPT's) |
+| `disable-embeds` | Geen oEmbeds nodig |
+| `svg-support` | SVG-uploads toestaan |
+| `media-categories` | Media organiseren in categorieën |
+| `heartbeat-control` | Admin-heartbeat beperken |
+| `username-blacklist` | Extra naast Defender |
+| `disable-admin-bar-frontend` | Geen admin bar op de front-end |
+
+Export: [`wordpress/configs/wpswitchboard.json`](/wordpress/configs/wpswitchboard.json)
+
+<Callout kind="warning">
+  Licentiekeys horen niet in de docs of in Git. Activeer Switchboard Pro per site via je eigen licentie.
 </Callout>
 
 ---
@@ -200,10 +261,10 @@ Export: [`hosting/configs/hummingbird-asset-optimization.json`](/hosting/configs
     PHP, SSL, WAF, **FastCGI Nginx + Redis**, en **remote incremental backups** volgens de xCloud-sectie hierboven.
   </Step>
   <Step title="Plugins installeren" icon="package">
-    Defender, Smush Pro, Hummingbird (+ overige projectplugins).
+    Defender, Switchboard Pro, Smush Pro, Hummingbird (+ overige projectplugins).
   </Step>
   <Step title="Configs importeren" icon="download">
-    Importeer de JSON-presets uit `hosting/configs/` (of via WPMU DEV Hub configs met dezelfde namen).
+    Importeer de JSON-presets uit `wordpress/configs/` (Defender/Smush/Hummingbird via Hub of import; Switchboard-modules volgens `wpswitchboard.json`).
   </Step>
   <Step title="Login controleren" icon="log-in">
     Bevestig dat `https://domein.nl/beheer` werkt en `/wp-login.php` gemaskeerd is.
