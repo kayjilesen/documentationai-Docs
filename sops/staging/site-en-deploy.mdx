@@ -1,24 +1,34 @@
 ---
 title: "Staging — Site & deploy"
-description: "Staging-site in xCloud op projectnaam.kayjilesen.dev — Git-deploy en hosting-standaarden."
+description: "Staging-site in xCloud op projectnaam.kayjilesen.dev — Cloudflare DNS, Git-deploy, hosting-standaarden."
 ---
 
 <Callout kind="info" title="Dit is een SOP">
-  Staging = **aparte xCloud-site** op de live-server, URL-patroon: **`projectnaam.kayjilesen.dev`**. Bij livegang wordt deze site meestal omgezet naar het klant-domein.
+  Staging = **aparte xCloud-site** op de live-server, URL: **`projectnaam.kayjilesen.dev`**. DNS voor dat subdomein zet je in **Cloudflare** (zone `kayjilesen.dev`).
 </Callout>
 
 ## Doel
 
-Code draait op een deelbare URL via Git — niet via FTP. Hosting-standaarden staan al goed (zelfde machine als later live).
+Code draait op een deelbare URL via Git. Hosting-standaarden staan al goed (zelfde machine als later live).
 
 ## Stappen
 
 <Steps>
   <Step title="Site aanmaken" icon="server">
-    In xCloud op de **productieserver**: nieuwe WordPress-site, PHP 8.2+, label = projectnaam. Zie [Site Management](/hosting/site-management).
+    In xCloud op de **productieserver**: nieuwe WordPress-site, PHP 8.2+, label = projectnaam. Zie [Site Management](/hosting/site-management). Noteer het **server-IP** (nodig voor DNS).
   </Step>
-  <Step title="Domein & SSL" icon="lock">
-    Koppel **`projectnaam.kayjilesen.dev`** (bijv. `hoexsystems.kayjilesen.dev`) + Let's Encrypt.
+  <Step title="DNS in Cloudflare" icon="cloud">
+    In Cloudflare → zone **`kayjilesen.dev`**:
+
+    - Type: **A** (of zoals xCloud voorschrijft)
+    - Name: **`projectnaam`** (wordt `projectnaam.kayjilesen.dev`)
+    - Value: IP van de xCloud-server
+    - Proxy: naar gelang teamafspraak (vaak DNS-only / grijs voor originele SSL via Let's Encrypt op de server; oranje als jullie CF-proxy standaard gebruiken)
+
+    Wacht tot de record resolve’t vóór je SSL forceert.
+  </Step>
+  <Step title="Domein & SSL in xCloud" icon="lock">
+    Koppel **`projectnaam.kayjilesen.dev`** aan de site + Let's Encrypt. Zonder Cloudflare-record faalt cert/domein.
   </Step>
   <Step title="Git / Deployer" icon="git-branch">
     Koppel repo; deploy theme met [Deployer for Git](/hosting/deployments). Eerste push vanaf gebouwde slice.
@@ -34,19 +44,22 @@ Code draait op een deelbare URL via Git — niet via FTP. Hosting-standaarden st
     Na deploy met JSON-wijzigingen: **ACF > Sync**. Purge page cache + Redis.
   </Step>
   <Step title="Domein-helper" icon="globe">
-    Dit `*.kayjilesen.dev`-host opnemen in `kj_is_live_domain()` / project-equivalent.
+    Dit `*.kayjilesen.dev`-host opnemen in `kj_is_live_domain()` / project-equivalent (optioneel vroeg).
   </Step>
 </Steps>
 
 ## Af
 
-- [ ] `https://projectnaam.kayjilesen.dev` bereikbaar (HTTPS)
+- [ ] xCloud-site aangemaakt; server-IP bekend
+- [ ] Cloudflare A-record voor `projectnaam.kayjilesen.dev` gezet en resolve’t
+- [ ] Domein + SSL in xCloud OK → `https://projectnaam.kayjilesen.dev` bereikbaar
 - [ ] Theme/code via Git-deploy
 - [ ] Caching + Redis volgens standaard
 - [ ] WAF + remote backups aan
 - [ ] ACF Sync gedaan indien nodig; caches gepurged
-- [ ] Staging-host in theme-helper
 
 ## Volgende
 
 → [Stack & testen](/sops/staging/stack-en-testen)
+
+Klant-domein / overname? Zie [Productie & DNS](/sops/livegang/productie-en-dns) (Cloudflare + nameservers **vóór** verhuizen).

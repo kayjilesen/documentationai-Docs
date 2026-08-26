@@ -1,54 +1,87 @@
 ---
 title: "Livegang — Productie & DNS"
-description: "Staging-site omzetten naar klant-domein — DNS, SSL, mail-DNS, redirects."
+description: "Staging omzetten naar klant-domein — Cloudflare eerst, nameservers, daarna pas domeinverhuizing."
 ---
 
 <Callout kind="info" title="Dit is een SOP">
-  Standaard: de site op **`projectnaam.kayjilesen.dev`** staat al op de live-server. Livegang = **omzetten** naar het klant-domein (primair domein wisselen + DNS), niet een tweede site bouwen.
+  Standaard: site op **`projectnaam.kayjilesen.dev`** staat al op de live-server. Livegang = **omzetten** naar het klant-domein. DNS beheersen we via **Cloudflare**.
 </Callout>
 
 ## Doel
 
-Publiek klant-domein wijst naar dezelfde xCloud-site; SSL en mail-DNS kloppen; oude URL’s redirecten waar nodig.
+Publiek klant-domein wijst naar dezelfde xCloud-site; SSL en mail-DNS kloppen; bij overnames eerst Cloudflare/NS, pas daarna de domeinverhuizing.
 
-## Stappen
+## Domeinovername / nieuw onder Cloudflare (volgorde)
+
+Bij site-overgangen, domeinovernames of “DNS komt onze kant op”:
+
+<Steps>
+  <Step title="Domein in Cloudflare" icon="cloud">
+    Voeg het **klant-domein** toe als site/zone in Cloudflare. Importeer of zet de benodigde records (minimaal wat nu nog moet blijven werken: mail, www, enz.).
+  </Step>
+  <Step title="Nameservers omzetten" icon="server">
+    Zet bij de **huidige registrar** de nameservers op die van Cloudflare. Doe dit **vóór** je het domein verhuist/overneemt.
+  </Step>
+  <Step title="Wachten op propagatie" icon="clock">
+    Controleer tot Cloudflare de zone **Active** toont en NS wereldwijd kloppen. Pas dan verder met verhuizen.
+  </Step>
+  <Step title="Daarna pas domeinnaam verhuizen" icon="truck">
+    Registrar-transfer / overname naar jullie of klant-account gebeurt **pas** als NS overal op Cloudflare staan. Zo blijft DNS stabiel tijdens de verhuizing.
+  </Step>
+</Steps>
+
+<Callout kind="warning" title="Niet omdraaien">
+  Eerst domein verhuizen en daarna pas Cloudflare/NS = risico op downtime en lastige DNS bij de oude partij. **Cloudflare + NS eerst, verhuizen daarna.**
+</Callout>
+
+Staging-subdomeinen (`*.kayjilesen.dev`) blijven in de zone **kayjilesen.dev** — zie [Site & deploy](/sops/staging/site-en-deploy).
+
+## Livegang — site omzetten
 
 <Steps>
   <Step title="Laatste deploy op staging" icon="upload">
     [Deployments](/hosting/deployments): finale build, Deployer, **ACF > Sync**, cache purge. Go van [Feedback](/sops/staging/feedback).
   </Step>
-  <Step title="Primair domein wisselen" icon="globe">
-    In xCloud: klant-domein toevoegen als primair (of naast `*.kayjilesen.dev`). Staging-subdomein mag tijdelijk blijven voor nazorg.
+  <Step title="Primair domein in xCloud" icon="globe">
+    Klant-domein toevoegen als primair (of naast `*.kayjilesen.dev`). Staging-URL mag tijdelijk blijven voor nazorg.
   </Step>
-  <Step title="DNS" icon="server">
-    A/AAAA of nameservers volgens xCloud. TTL vooraf verlagen helpt. Eigenaar DNS = uit [Kickoff](/sops/kickoff).
+  <Step title="DNS in Cloudflare (klantzone)" icon="cloud">
+    A/AAAA (of CNAME) naar het xCloud-server-IP volgens xCloud. TTL desnoods vooraf verlagen. Zone hoort al op Cloudflare te staan (zie volgorde hierboven).
   </Step>
   <Step title="SSL" icon="lock">
-    Let's Encrypt op klant-domein; force HTTPS. Oude `*.kayjilesen.dev` cert laten staan zolang dat host actief is.
+    Let's Encrypt op klant-domein; force HTTPS. `*.kayjilesen.dev` laten staan zolang dat host actief is.
   </Step>
   <Step title="Mail DNS" icon="mail">
     SPF/DKIM/DMARC voor Maileroo (`noreply@klant`). Let op overlap met [klant-e-mail](/sops/extra/klant-email) (één samenhangend SPF).
   </Step>
   <Step title="Hosting check" icon="shield">
-    Caching / backups / WAF stonden al op staging — steekproef of alles nog klopt na domeinwissel.
+    Caching / backups / WAF — steekproef na domeinwissel.
   </Step>
   <Step title="Redirects / migratie" icon="corner-down-right">
-    Bij migratie: volg [Migratie oude WordPress](/sops/extra/migratie-wordpress). Anders: bekende oude URL’s 301’en. Oude hosting pas uitzetten ná verificatie.
+    Bij migratie: [Migratie oude WordPress](/sops/extra/migratie-wordpress). Oude hosting pas uitzetten ná verificatie.
   </Step>
   <Step title="Helpers & credentials" icon="key">
-    Klant-domein in `kj_is_live_domain()`. `/beheer` + credentials in 1Password.
+    Klant-domein in helper indien gebruikt. `/beheer` + credentials in 1Password.
   </Step>
 </Steps>
 
 ## Af
 
-- [ ] Klant-domein resolve’t naar deze xCloud-site
-- [ ] HTTPS OK op klant-domein
-- [ ] Laatste deploy + ACF Sync + cache purge vóór/na cutover
-- [ ] Mail DNS (Maileroo) gezet of follow-up met DNS-eigenaar
-- [ ] Cache / backup / WAF nog OK na omzetting
+**Overname / Cloudflare**
+
+- [ ] Klant-domein als zone in Cloudflare
+- [ ] Nameservers bij registrar → Cloudflare; zone Active / NS gepropageerd
+- [ ] Domein pas **daarna** verhuisd (indien van toepassing)
+
+**Cutover**
+
+- [ ] Klant-domein resolve’t naar deze xCloud-site (records in Cloudflare)
+- [ ] HTTPS OK
+- [ ] Laatste deploy + ACF Sync + cache purge
+- [ ] Mail DNS (Maileroo) gezet of follow-up met eigenaar
+- [ ] Cache / backup / WAF OK na omzetting
 - [ ] `/beheer` + credentials in wachtwoordmanager
-- [ ] Redirects gedaan of bewust niet van toepassing
+- [ ] Redirects gedaan of n.v.t.
 
 ## Volgende
 

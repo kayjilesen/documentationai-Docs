@@ -39,7 +39,9 @@ Iedereen weet *wat* er gebouwd wordt, *waar* bestanden/repos/hosting komen, en *
     - Eventueel oude WP / hosting voor migratie
   </Step>
   <Step title="Statuscheck infra" icon="server">
-    Noteer: domein al van klant? E-mail (M365 / Google / anders — zie [Klant-e-mail](/sops/extra/klant-email))? Hosting nieuw op onze servers? **Migratie** oude site? → [Migratie](/sops/extra/migratie-wordpress).
+    Noteer: domein al van klant? DNS/Cloudflare-status? E-mail (M365 / Google — zie [Klant-e-mail](/sops/extra/klant-email))? Hosting nieuw op onze servers? **Migratie** oude site? → [Migratie](/sops/extra/migratie-wordpress).
+
+    Bij domeinovername: eerst Cloudflare + nameservers, **pas daarna** verhuizen — zie [Productie & DNS](/sops/livegang/productie-en-dns).
   </Step>
   <Step title="Start klantproject-notitie" icon="file-text">
     Maak of plan een dossier onder [Klantprojecten](/client-projects/kj-boilerplate) (kan stub zijn): stack, URL’s, bijzonderheden. Vul bij tijdens het traject.
