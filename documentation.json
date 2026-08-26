@@ -45,11 +45,6 @@
                 "icon": "layers"
               },
               {
-                "title": "Pagebuilder Systeem",
-                "path": "wordpress/pagebuilder-blocks",
-                "icon": "layers"
-              },
-              {
                 "title": "Components",
                 "path": "acf/components",
                 "icon": "puzzle"
@@ -60,9 +55,9 @@
                 "icon": "settings"
               },
               {
-                "title": "ACF werkwijze",
+                "title": "Werkwijze",
                 "path": "wordpress/acf-patterns",
-                "icon": "database"
+                "icon": "list-checks"
               }
             ]
           },
