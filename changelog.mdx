@@ -14,7 +14,8 @@ description: Volg de laatste updates, nieuwe features en verbeteringen in het do
 ## Nieuwe content
 
 - **[Database](wordpress/database)** — Core-tabellen, posts/meta/options, ACF in de DB, media = DB + bestanden
-- **[wp-content & uploads](wordpress/wp-content)** — Mapstructuur, wat in Git hoort, uploads jaar/maand, attachments
+- **[Bestanden](wordpress/bestanden)** — `wp-content`, wat in Git hoort, uploads jaar/maand, attachments (was: wp-content & uploads)
+- **[Configuratie](wordpress/configuratie)** — `wp-config.php`: DB, debug, prefix, secrets (SMTP)
 - **[Onboarding](sops/onboarding)** / **[Offboarding](sops/offboarding)** — Workspace `@kayjilesen.nl`, Proton Pass; offboard-lijst incl. Cloudflare, OpenProvider, WPMU DEV, CRM, GitHub, …
 - **[SOP's](sops/overzicht)** — Tab met fases: Kickoff, Design, Lokaal, Staging, Livegang, Doorlopend ([Het traject](sops/nieuwe-wordpress-site))
 - **[Formulieren](wordpress/plugins/formulieren)** — SureForms standaard; Gravity Forms alleen bij features die SureForms niet biedt
@@ -26,7 +27,7 @@ description: Volg de laatste updates, nieuwe features en verbeteringen in het do
 ## Navigatie
 
 - Tab **SOP's** (na Documentatie en Klantprojecten), uitgesplitst in fase-groepen
-- **WordPress Development → Basis** (dropdown): Database, wp-content & uploads
+- **WordPress Development → Basis** (dropdown): Database, Bestanden, Configuratie
 - Verwijderd: Features, Integraties, API Referentie, DevOps Deployment, dashboard Help-guides
 - Helpcentrum opgeschoond naar FAQ + cookiebanner-troubleshooting
 
@@ -34,8 +35,8 @@ description: Volg de laatste updates, nieuwe features en verbeteringen in het do
 
 - Af-checklists op local-dev, Defender, FluentSMTP, SureCookie, Formulieren, Deployments, hosting-instellingen
 - **[Introductie](introduction)** — Links naar WordPress-basis + SOP Kickoff / traject
-- **[Theme Architectuur](wordpress/theme-architecture)** — Cross-link naar Database en wp-content
-- **[ACF Patronen](wordpress/acf-patterns)** — Canonieke workflow: JSON in Git + Sync op productie
+- **[Theme Architectuur](wordpress/theme-architecture)** — Cross-link naar Database, Bestanden, Configuratie
+- **[ACF werkwijze](wordpress/acf-patterns)** — JSON in Git + Sync op productie
 - **[Hoex Systems](client-projects/hoexsystems)** / **[Bestelportaal](client-projects/bestelportaal-gezellig)** — `/beheer` en `.local`
 - **[WP Switchboard](wordpress/plugins/wp-switchboard)** — Standaardpreset uitgebreid; Defender-overlap optioneel
 - **[Project: KJ-Boilerplate](client-projects/kj-boilerplate)** — Gedeelde Styling-tab (`group_section_styling`)

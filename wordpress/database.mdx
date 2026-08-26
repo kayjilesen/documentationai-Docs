@@ -8,7 +8,7 @@ description: "WordPress-databasetabellen, relatie tussen posts/meta/opties, en w
 WordPress bewaart content, gebruikers, instellingen en plugin-data in MySQL/MariaDB. Standaard prefix: **`wp_`** (op productie soms aangepast — check `wp-config.php`).
 
 <Callout kind="info" title="Waarom dit kennen?">
-  Bij migraties, broken media, ACF-problemen of “waar staat dit eigenlijk?” denk je eerst: staat het in de **database**, in **bestanden** (`wp-content`), of in **beide**?
+  Bij migraties, broken media, ACF-problemen of “waar staat dit eigenlijk?” denk je eerst: **database**, **bestanden** (`wp-content`), of **config** (`wp-config.php`) — zie ook [Bestanden](/wordpress/bestanden) en [Configuratie](/wordpress/configuratie).
 </Callout>
 
 ---
@@ -112,7 +112,7 @@ ACF slaat veld**waarden** op als postmeta (of termmeta / options, afhankelijk va
 | Veld**groepen** (definitie) | Bij ons: JSON in het theme (`acf-json/`), niet als bron van waarheid in de DB |
 
 <Callout kind="tip" title="JSON + Sync">
-  Definitie leeft in Git (`acf-json/`). Op een omgeving: **ACF → Sync**. Zie [ACF Patronen](/wordpress/acf-patterns).
+  Definitie leeft in Git (`acf-json/`). Op een omgeving: **ACF → Sync**. Zie [ACF werkwijze](/wordpress/acf-patterns).
 </Callout>
 
 ---
@@ -121,7 +121,7 @@ ACF slaat veld**waarden** op als postmeta (of termmeta / options, afhankelijk va
 
 Een upload is **twee dingen**:
 
-1. **Bestand** onder `wp-content/uploads/…` — zie [wp-content & uploads](/wordpress/wp-content)
+1. **Bestand** onder `wp-content/uploads/…` — zie [Bestanden](/wordpress/bestanden)
 2. **Attachment-post** in `wp_posts` (`post_type = attachment`) + meta (`_wp_attached_file`, `_wp_attachment_metadata`)
 
 Als alleen het bestand ontbreekt → broken image. Als alleen de DB-rij ontbreekt → bestand “onzichtbaar” in de mediabibliotheek.
@@ -166,7 +166,8 @@ wp post meta list <post_id>
 
 ## Naslag
 
-- [wp-content & uploads](/wordpress/wp-content) — wat op schijf staat vs. in de DB
+- [Bestanden](/wordpress/bestanden) — wat op schijf staat vs. in de DB
+- [Configuratie](/wordpress/configuratie) — `wp-config.php`, prefix, debug
 - [Theme Architectuur](/wordpress/theme-architecture) — theme-bestanden (Git)
 - [Migratie oude WordPress](/sops/extra/migratie-wordpress) — content/media overzetten
 - [Lokale Ontwikkelomgeving](/devops/local-dev) — waar de lokale DB hoort

@@ -60,7 +60,7 @@
                 "icon": "settings"
               },
               {
-                "title": "ACF Patronen & Conventies",
+                "title": "ACF werkwijze",
                 "path": "wordpress/acf-patterns",
                 "icon": "database"
               }
