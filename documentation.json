@@ -410,14 +410,14 @@
         "icon": "briefcase",
         "pages": [
           {
-            "title": "KJ-Boilerplate",
-            "path": "client-projects/kj-boilerplate",
-            "icon": "copy"
+            "title": "2Brüder",
+            "path": "client-projects/2bruder",
+            "icon": "beer"
           },
           {
-            "title": "Perfect Finish",
-            "path": "client-projects/perfect-finish",
-            "icon": "paintbrush"
+            "title": "Affecty",
+            "path": "client-projects/affecty",
+            "icon": "party-popper"
           },
           {
             "title": "Asbestverwijdering",
@@ -425,9 +425,144 @@
             "icon": "hard-hat"
           },
           {
+            "title": "Bestelportaal - Gezellig",
+            "path": "client-projects/bestelportaal-gezellig",
+            "icon": "shopping-cart"
+          },
+          {
+            "title": "CDK Company",
+            "path": "client-projects/cdkcompany",
+            "icon": "drama"
+          },
+          {
+            "title": "CMS Energy",
+            "path": "client-projects/energiesystemen",
+            "icon": "zap"
+          },
+          {
+            "title": "Conscribo",
+            "path": "client-projects/conscribo",
+            "icon": "clipboard-list"
+          },
+          {
+            "title": "CosyHeat",
+            "path": "client-projects/cosyheat",
+            "icon": "flame"
+          },
+          {
+            "title": "Create Lean",
+            "path": "client-projects/createlean",
+            "icon": "workflow"
+          },
+          {
+            "title": "De Expertgroep",
+            "path": "client-projects/expertgroep",
+            "icon": "calculator"
+          },
+          {
+            "title": "Digitaal Talent Nederland",
+            "path": "client-projects/digitaaltalentnederland",
+            "icon": "graduation-cap"
+          },
+          {
             "title": "ecoXbouw",
             "path": "client-projects/ecoxbouw",
             "icon": "trees"
+          },
+          {
+            "title": "Effecty",
+            "path": "client-projects/effecty",
+            "icon": "target"
+          },
+          {
+            "title": "Events MetEvi",
+            "path": "client-projects/eventsmetevi",
+            "icon": "calendar"
+          },
+          {
+            "title": "Frietfeest",
+            "path": "client-projects/frietfeest",
+            "icon": "truck"
+          },
+          {
+            "title": "Hoex Systems",
+            "path": "client-projects/hoexsystems",
+            "icon": "leaf"
+          },
+          {
+            "title": "Hotel Janssen",
+            "path": "client-projects/hoteljanssen",
+            "icon": "hotel"
+          },
+          {
+            "title": "KJ-Boilerplate",
+            "path": "client-projects/kj-boilerplate",
+            "icon": "copy"
+          },
+          {
+            "title": "Knapper bij Meagen",
+            "path": "client-projects/knapperbijmeagen",
+            "icon": "scissors"
+          },
+          {
+            "title": "Lola Beckers",
+            "path": "client-projects/lolabeckers",
+            "icon": "camera"
+          },
+          {
+            "title": "Olli",
+            "path": "client-projects/olli",
+            "icon": "rocket"
+          },
+          {
+            "title": "Osch",
+            "path": "client-projects/osch",
+            "icon": "sun"
+          },
+          {
+            "title": "Perfect Finish",
+            "path": "client-projects/perfect-finish",
+            "icon": "paintbrush"
+          },
+          {
+            "title": "Peter Verberk",
+            "path": "client-projects/peterverberk",
+            "icon": "building-2"
+          },
+          {
+            "title": "Reintjes Systems",
+            "path": "client-projects/reintjessystems",
+            "icon": "cog"
+          },
+          {
+            "title": "Ruud Lenssen",
+            "path": "client-projects/ruudlenssen",
+            "icon": "clapperboard"
+          },
+          {
+            "title": "RW Recruitment",
+            "path": "client-projects/rwrecruitment",
+            "icon": "user-search"
+          },
+          {
+            "title": "St. Christoffel",
+            "path": "client-projects/st-christoffel",
+            "icon": "church"
+          },
+          {
+            "title": "SV Tuinplanten",
+            "path": "client-projects/svtuinplanten",
+            "icon": "sprout"
+          },
+          {
+            "title": "The Sacrifice",
+            "path": "client-projects/thesacrifice",
+            "icon": "film"
+          },
+          {
+            "title": "Timmermans Agri Service",
+            "path": "client-projects/timmermans",
+            "icon": "tractor"
           },
           {
             "title": "Van den Brand Fysio",
@@ -440,144 +575,9 @@
             "icon": "mic"
           },
           {
-            "title": "Bestelportaal - Gezellig",
-            "path": "client-projects/bestelportaal-gezellig",
-            "icon": "shopping-cart"
-          },
-          {
-            "title": "CMS Energy",
-            "path": "client-projects/energiesystemen",
-            "icon": "zap"
-          },
-          {
-            "title": "Hoex Systems",
-            "path": "client-projects/hoexsystems",
-            "icon": "leaf"
-          },
-          {
-            "title": "St. Christoffel",
-            "path": "client-projects/st-christoffel",
-            "icon": "church"
-          },
-          {
-            "title": "Frietfeest",
-            "path": "client-projects/frietfeest",
-            "icon": "truck"
-          },
-          {
-            "title": "2Brüder",
-            "path": "client-projects/2bruder",
-            "icon": "beer"
-          },
-          {
-            "title": "CDK Company",
-            "path": "client-projects/cdkcompany",
-            "icon": "drama"
-          },
-          {
-            "title": "CosyHeat",
-            "path": "client-projects/cosyheat",
-            "icon": "flame"
-          },
-          {
-            "title": "Hotel Janssen",
-            "path": "client-projects/hoteljanssen",
-            "icon": "hotel"
-          },
-          {
-            "title": "Knapper bij Meagen",
-            "path": "client-projects/knapperbijmeagen",
-            "icon": "scissors"
-          },
-          {
-            "title": "Peter Verberk",
-            "path": "client-projects/peterverberk",
-            "icon": "building-2"
-          },
-          {
-            "title": "Digitaal Talent Nederland",
-            "path": "client-projects/digitaaltalentnederland",
-            "icon": "graduation-cap"
-          },
-          {
-            "title": "RW Recruitment",
-            "path": "client-projects/rwrecruitment",
-            "icon": "user-search"
-          },
-          {
-            "title": "Timmermans Agri Service",
-            "path": "client-projects/timmermans",
-            "icon": "tractor"
-          },
-          {
-            "title": "Osch",
-            "path": "client-projects/osch",
-            "icon": "sun"
-          },
-          {
-            "title": "Effecty",
-            "path": "client-projects/effecty",
-            "icon": "target"
-          },
-          {
-            "title": "Affecty",
-            "path": "client-projects/affecty",
-            "icon": "party-popper"
-          },
-          {
-            "title": "Conscribo",
-            "path": "client-projects/conscribo",
-            "icon": "clipboard-list"
-          },
-          {
-            "title": "De Expertgroep",
-            "path": "client-projects/expertgroep",
-            "icon": "calculator"
-          },
-          {
-            "title": "Create Lean",
-            "path": "client-projects/createlean",
-            "icon": "workflow"
-          },
-          {
-            "title": "Lola Beckers",
-            "path": "client-projects/lolabeckers",
-            "icon": "camera"
-          },
-          {
-            "title": "Events MetEvi",
-            "path": "client-projects/eventsmetevi",
-            "icon": "calendar"
-          },
-          {
-            "title": "Ruud Lenssen",
-            "path": "client-projects/ruudlenssen",
-            "icon": "clapperboard"
-          },
-          {
-            "title": "The Sacrifice",
-            "path": "client-projects/thesacrifice",
-            "icon": "film"
-          },
-          {
-            "title": "SV Tuinplanten",
-            "path": "client-projects/svtuinplanten",
-            "icon": "sprout"
-          },
-          {
-            "title": "Reintjes Systems",
-            "path": "client-projects/reintjessystems",
-            "icon": "cog"
-          },
-          {
             "title": "YouSeeq",
             "path": "client-projects/youseeq",
             "icon": "users"
-          },
-          {
-            "title": "Olli",
-            "path": "client-projects/olli",
-            "icon": "rocket"
           }
         ]
       },
