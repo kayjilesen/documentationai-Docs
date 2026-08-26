@@ -1,0 +1,38 @@
+---
+title: "E-mail: mailbox vs transactioneel"
+description: "Verschil tussen klantmailboxen (M365/Google) en site-mail (FluentSMTP / Maileroo)."
+---
+
+## Twee werelden
+
+| | **Mailbox** (mensen) | **Transactioneel** (de website) |
+|--|----------------------|----------------------------------|
+| **Voorbeeld** | `info@klant.nl`, Outlook/Gmail | “Bedankt voor je bericht”, wachtwoordreset |
+| **Tool bij ons** | [M365](/email/microsoft-365) / [Google](/email/google-workspace) / [MXRoute](/email/mxroute) | [FluentSMTP](/wordpress/plugins/fluent-smtp) + **Maileroo** (+ SES backup) |
+| **DNS** | MX + SPF/DKIM/DMARC | Vaak extra SPF include + DKIM van Maileroo |
+| **SOP** | [Klant-e-mail](/sops/extra/klant-email) | [Staging — Stack](/sops/staging/stack-en-testen) |
+
+<Callout kind="warning">
+  Server-`mail()` van PHP gebruiken we **niet**. Alles via FluentSMTP.
+</Callout>
+
+## SPF opnieuw
+
+Eén SPF-record moet **beide** mogen dekken als mailbox én site-mail vanaf hetzelfde domein gaan. Details: [DNS — Basis](/kennis/dns).
+
+## From-adressen (site)
+
+- Primair: `noreply@klantdomein.nl` (Maileroo)  
+- Backup: `…@kayjilesen.dev` (Amazon SES)  
+
+Keys in `wp-config` via xCloud — niet in Git.
+
+## Af (begrip)
+
+- [ ] Je snapt: inbox ≠ formulierbevestiging  
+- [ ] Je weet welke stack voor welke soort mail  
+- [ ] Je linkt SPF niet per ongeluk kapot met een tweede SPF-TXT  
+
+## Gerelateerd
+
+- [FluentSMTP](/wordpress/plugins/fluent-smtp) · [DNS](/kennis/dns) · [Email](/email/microsoft-365) (Overig)

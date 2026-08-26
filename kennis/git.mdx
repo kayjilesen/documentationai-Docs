@@ -1,0 +1,63 @@
+---
+title: "Git — basis"
+description: "Clone, branch, commit, push — genoeg Git om mee te werken zonder jargon-overload."
+---
+
+## Waarom Git?
+
+Git bewaart **versies** van code (en docs). Meerdere mensen werken parallel; fouten kun je terugdraaien. Bij ons: theme + documentatie via GitHub — geen “definitief-final-v3.zip” over WhatsApp.
+
+## Kernbegrippen
+
+| Term | Betekenis |
+|------|-----------|
+| **Repository (repo)** | Projectmap met geschiedenis |
+| **Clone** | Repo lokaal downloaden |
+| **Commit** | Momentopname + korte uitleg |
+| **Branch** | Zijlijn om veilig te experimenteren |
+| **Push** | Jouw commits naar GitHub sturen |
+| **Pull** | Andermans commits ophalen |
+
+## Minimale workflow
+
+```bash
+# Eenmalig: repo ophalen
+git clone git@github.com:ORG/REPO.git
+cd REPO
+
+# Dagelijks: laatste stand
+git pull
+
+# Wijzigingen opslaan
+git status
+git add .
+git commit -m "Korte uitleg wat je deed"
+git push
+```
+
+<Callout kind="tip">
+  Commit-messages: zeg **waarom/wat** (“Add FAQ block”), niet “update” of “fix”.
+</Callout>
+
+## Branches (kort)
+
+- `main` = stabiel / productie-richting  
+- Feature-branch: `git checkout -b feature/faq-block` → werken → push → (later) mergen  
+
+Voor kleine docs-fixes mag vaak direct op `main` — volg [Git Workflow](/devops/git-workflow) en teamafspraak.
+
+## Nooit committen
+
+- Wachtwoorden, API-keys, `.env`  
+- `node_modules/`, uploads, dumps  
+- Zie `.gitignore` in het theme  
+
+## Af (begrip)
+
+- [ ] Je kunt clonen, pullen, committen, pushen  
+- [ ] Je weet wat `git status` laat zien  
+- [ ] Je zet geen secrets in Git  
+
+## Gerelateerd
+
+- [Git Workflow](/devops/git-workflow) · [Deployments](/hosting/deployments)

@@ -1,0 +1,51 @@
+---
+title: "HTML & CSS — basis"
+description: "Net genoeg markup en styling om Figma en Tailwind-templates te volgen."
+---
+
+## HTML = structuur
+
+HTML beschrijft **wat** er is: koppen, paragrafen, links, afbeeldingen, secties.
+
+```html
+<section class="hero">
+  <h1>Welkom</h1>
+  <p>Tekst hier.</p>
+  <a href="/contact">Contact</a>
+</section>
+```
+
+Belangrijk:
+
+- **Eén `h1`** per pagina (meestal)  
+- Koppen in volgorde (`h2` → `h3`, niet springen)  
+- Links met zinvolle tekst (niet “klik hier”)  
+- Afbeeldingen: `alt` — zie [Accessibility](/kennis/accessibility)  
+
+In onze themes staat HTML vooral in PHP-templates (`hero.php`, enz.).
+
+## CSS = uiterlijk
+
+CSS zegt **hoe** het eruitziet: kleur, afstand, layout.
+
+Vroeger veel eigen CSS-bestanden; bij ons vooral **[Tailwind](/kennis/tailwind)** (classes in de HTML/PHP).
+
+```html
+<h1 class="text-3xl font-bold text-primary mb-4">Welkom</h1>
+```
+
+Custom CSS alleen als Tailwind tekortschiet (`assets/css` of block-`.css`).
+
+## Box model (onthouden)
+
+Inhoud → padding → border → margin. “Waarom staat dit zo ver uit elkaar?” = vaak margin/padding.
+
+## Af (begrip)
+
+- [ ] Je herkent tags: `section`, `h1`–`h3`, `a`, `img`, `div`  
+- [ ] Je snapt: classes sturen Tailwind/CSS  
+- [ ] Je weet waar templates in het theme staan  
+
+## Gerelateerd
+
+- [Tailwind](/kennis/tailwind) · [Thema](/wordpress/theme-architecture) · [Naamgeving](/wordpress/naming-conventions)

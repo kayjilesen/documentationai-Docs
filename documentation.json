@@ -99,7 +99,7 @@
             "icon": "code",
             "pages": [
               {
-                "title": "Theme Architectuur",
+                "title": "Thema",
                 "path": "wordpress/theme-architecture",
                 "icon": "layout"
               },
@@ -311,13 +311,95 @@
             ]
           },
           {
-            "group": "DNS",
-            "icon": "globe",
+            "group": "Web & tools",
+            "icon": "laptop",
             "pages": [
               {
-                "title": "Basis",
+                "title": "Git — basis",
+                "path": "kennis/git",
+                "icon": "git-branch"
+              },
+              {
+                "title": "Terminal",
+                "path": "kennis/terminal",
+                "icon": "terminal"
+              },
+              {
+                "title": "Browser DevTools",
+                "path": "kennis/browser",
+                "icon": "monitor"
+              },
+              {
+                "title": "HTML & CSS",
+                "path": "kennis/html-css",
+                "icon": "code"
+              },
+              {
+                "title": "Tailwind",
+                "path": "kennis/tailwind",
+                "icon": "palette"
+              },
+              {
+                "title": "API & AJAX",
+                "path": "kennis/api-ajax",
+                "icon": "zap"
+              },
+              {
+                "title": "Figma voor developers",
+                "path": "kennis/figma",
+                "icon": "figma"
+              }
+            ]
+          },
+          {
+            "group": "Infrastructuur",
+            "icon": "server",
+            "pages": [
+              {
+                "title": "DNS — Basis",
                 "path": "kennis/dns",
-                "icon": "book-open"
+                "icon": "globe"
+              },
+              {
+                "title": "Hosting-lagen",
+                "path": "kennis/hosting-lagen",
+                "icon": "layers"
+              },
+              {
+                "title": "E-mail: mailbox vs transactioneel",
+                "path": "kennis/email-soorten",
+                "icon": "mail"
+              },
+              {
+                "title": "Security-hygiëne",
+                "path": "kennis/security",
+                "icon": "shield"
+              }
+            ]
+          },
+          {
+            "group": "Content & web",
+            "icon": "file-text",
+            "pages": [
+              {
+                "title": "Cookies & tracking",
+                "path": "kennis/cookies-tracking",
+                "icon": "cookie"
+              },
+              {
+                "title": "Images & media",
+                "path": "kennis/images-media",
+                "icon": "image"
+              },
+              {
+                "title": "Accessibility — kort",
+                "path": "kennis/accessibility",
+                "icon": "accessibility"
+              },
+              {
+                "title": "SEO — basis",
+                "path": "kennis/seo",
+                "icon": "search"
               }
             ]
           }

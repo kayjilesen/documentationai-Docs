@@ -64,9 +64,11 @@ Lokaal: na de installatiewizard (of gekopieerd van `wp-config-sample.php`) het *
 define( 'WP_DEBUG', true );
 define( 'WP_DEBUG_LOG', true );
 define( 'WP_DEBUG_DISPLAY', false ); // errors in debug.log, niet op het scherm
+ini_set( 'display_errors', 0 );      // 0 = uit (veilig); 1 = aan (fouten op het scherm)
 
 // Productie — verplicht uit voor bezoekers
 define( 'WP_DEBUG', false );
+ini_set( 'display_errors', 0 );
 ```
 
 <Callout kind="warning" title="Go-live">

@@ -1,0 +1,38 @@
+---
+title: "Security-hygiëne"
+description: "Wachtwoorden, phishing, /beheer, secrets — basisgedrag voor iedereen in het team."
+---
+
+## Creds
+
+- Alles in **Proton Pass** — niet in chat, mail, Notion of docs  
+- Unieke wachtwoorden; MFA overal waar kan  
+- Klantcredentials na oplevering via Pass, niet in Markdown-dossiers  
+
+## Phishing & social engineering
+
+- Onverwachte “login hier”-mails → URL checken  
+- Nooit keys/wachtwoorden doorsturen omdat iemand “dringend” vraagt  
+- Bij twijfel: Kay vragen  
+
+## WordPress
+
+- Productie-login: **`/beheer`** (Defender) — niet `/wp-admin` delen  
+- Geen admin-accounts “test123” laten staan  
+- WP_DEBUG uit op live  
+
+## Git & servers
+
+- Geen API-keys in commits  
+- `wp-config`-secrets via xCloud, niet in de repo  
+- SSH-keys persoonlijk; bij vertrek intrekken ([Offboarding](/sops/offboarding))  
+
+## Af (begrip)
+
+- [ ] Pass is default voor geheimen  
+- [ ] Je deelt `/beheer`, niet wp-admin, met klanten  
+- [ ] Je commit geen secrets  
+
+## Gerelateerd
+
+- [Onboarding](/sops/onboarding) · [WP Defender](/wordpress/plugins/wp-defender) · [Hosting Security](/hosting/security)

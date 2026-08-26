@@ -1,0 +1,31 @@
+---
+title: "Accessibility — kort"
+description: "Basis a11y zodat Figma → code niet onbruikbaar wordt voor toetsenbord en screenreaders."
+---
+
+## Minimale lat
+
+| Onderwerp | Doe dit |
+|-----------|---------|
+| **Koppen** | Logische hiërarchie (`h1` → `h2` → `h3`) |
+| **Links** | Beschrijvende tekst |
+| **Contrast** | Tekst leesbaar op achtergrond (check in Figma/design) |
+| **Alt-tekst** | Zinvol bij inhoudsbeelden |
+| **Focus** | Toetsenbord: zichtbare focus, geen `outline: none` zonder alternatief |
+| **Buttons** | Echte `<button>` of link — niet alleen klikbare `div` |
+
+## In onze stack
+
+- Semantiek in pagebuilder-templates  
+- Cookie/banner en formulieren moeten bedienbaar blijven  
+- Icon-only knoppen: toegankelijke naam (`aria-label` of visueel + sr-only tekst)  
+
+## Af (begrip)
+
+- [ ] Je controleert koppenstructuur op een pagina  
+- [ ] Je zet niet alles in `div`s “omdat het kan”  
+- [ ] Je denkt aan alt/contrast bij oplevering  
+
+## Gerelateerd
+
+- [HTML & CSS](/kennis/html-css) · [Go-live checks](/sops/livegang/go-live-checks)

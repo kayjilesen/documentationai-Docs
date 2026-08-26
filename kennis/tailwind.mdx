@@ -1,0 +1,59 @@
+---
+title: "Tailwind — in 15 minuten"
+description: "Utility-classes, responsive prefixes, en waar je ze in ons theme zet."
+---
+
+## Idee
+
+In plaats van `.hero-title { font-size: … }` schrijf je classes **direct** op het element:
+
+```html
+<h2 class="text-2xl md:text-4xl font-bold text-primary mb-6">Titel</h2>
+```
+
+| Class | Betekenis (voorbeeld) |
+|-------|------------------------|
+| `text-2xl` | Lettergrootte |
+| `font-bold` | Vet |
+| `text-primary` | Merkkleur uit `tailwind.config.js` |
+| `mb-6` | Margin onder |
+| `flex` / `grid` | Layout |
+| `md:text-4xl` | Vanaf breakpoint `md` groter |
+
+## Responsive
+
+Prefixes: `sm:`, `md:`, `lg:`, `xl:` — “vanaf deze breedte”.
+
+Mobiel-first: basis = klein scherm; `md:` = tablet/desktop.
+
+## Waar in ons project
+
+| Bestand | Rol |
+|---------|-----|
+| `tailwind.config.js` | Kleuren, fonts, tokens uit Figma |
+| `assets/css/input.css` | `@tailwind` + `@font-face` |
+| `assets/css/style.css` | **Gegenereerd** — niet handmatig editen |
+| Templates | Classes in PHP |
+
+```bash
+npm run dev    # watch tijdens bouwen
+npm run build  # voor commit/deploy
+```
+
+Zie [Tailwind CSS Setup](/wordpress/tailwind-setup).
+
+## Doe dit niet
+
+- Willekeurige custom CSS terwijl Tailwind het kan  
+- Media queries in block-CSS i.p.v. `md:` / `lg:`  
+- `style.css` committen zonder build als classes “missen”  
+
+## Af (begrip)
+
+- [ ] Je kunt een `md:`-class uitleggen  
+- [ ] Je weet dat tokens in `tailwind.config.js` horen  
+- [ ] Je draait `npm run dev` als nieuwe classes niet verschijnen  
+
+## Gerelateerd
+
+- [HTML & CSS](/kennis/html-css) · [Tailwind Setup](/wordpress/tailwind-setup) · [Merk & Figma](/sops/design/merk-en-figma)

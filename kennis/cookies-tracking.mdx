@@ -1,0 +1,33 @@
+---
+title: "Cookies & tracking (AVG-light)"
+description: "Waarom consent, wat SureCookie doet, en hoe GTM/GA4 daaraan hangen."
+---
+
+## Kernregel
+
+**Geen niet-essentiële scripts vóór toestemming.** Marketing/analytics pas na opt-in (GDPR).
+
+Bij ons: **[SureCookie](/wordpress/plugins/surecookie)** — banner, blocking, Google Consent Mode waar van toepassing.
+
+## Wat de bezoeker ziet
+
+1. Banner (incognito testen)  
+2. Keuze opslaan  
+3. Voorkeuren later opnieuw openen (footer / reconsent)  
+4. Cookiebeleid-pagina met shortcode  
+
+## Tracking
+
+- Scripts via theme/GTM moeten **consent** respecteren  
+- Formulier-conversies: consent-aware events — niet “stiekem” vóór opt-in  
+- Troubleshooting: [Cookiebanner verschijnt niet](/help-center/troubleshooting/cookiebanner-verschijnt-niet)  
+
+## Af (begrip)
+
+- [ ] Je weet waarom je niet “even GTM in de header plakt” zonder consent  
+- [ ] Je test banners in incognito + na cache purge  
+- [ ] Je kent SureCookie als standaard  
+
+## Gerelateerd
+
+- [SureCookie](/wordpress/plugins/surecookie) · [Formulieren](/wordpress/plugins/formulieren)

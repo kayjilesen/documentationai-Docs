@@ -1,0 +1,35 @@
+---
+title: "Images & media"
+description: "Uploads, resolutie, optimalisatie (Smush), en wat in Git hoort vs de mediabibliotheek."
+---
+
+## Waar staan beelden?
+
+| Plek | Inhoud |
+|------|--------|
+| **Mediabibliotheek** | `wp-content/uploads/…` — **niet** in Git |
+| **Theme** | `assets/images/` — iconen/UI die bij code horen, wél in Git |
+| **Database** | Attachment-posts koppelen URL ↔ media — [Database](/wordpress/database) |
+
+Zie [Bestanden](/wordpress/bestanden).
+
+## Praktijk
+
+- Lever/export uit Figma: niet nodeloos 5000px-breed voor een card  
+- **Smush Pro** comprimeert op de site — [Smush](/wordpress/plugins/smush)  
+- `srcset` / juiste crop: theme of core responsive images  
+- WebP: via Smush/instellingen waar standaard  
+
+## Alt-tekst
+
+Zinvolle `alt` voor betekenisvolle beelden; decoratief mag leeg — [Accessibility](/kennis/accessibility).
+
+## Af (begrip)
+
+- [ ] Uploads ≠ Git  
+- [ ] Je kent Smush als standaard  
+- [ ] Je overdrijft export-resoluties niet  
+
+## Gerelateerd
+
+- [Bestanden](/wordpress/bestanden) · [Smush](/wordpress/plugins/smush) · [Figma voor developers](/kennis/figma)

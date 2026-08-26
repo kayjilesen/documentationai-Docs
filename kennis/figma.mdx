@@ -1,0 +1,45 @@
+---
+title: "Figma voor developers"
+description: "Inspecteren, components lezen, exporteren — genoeg om van design naar theme te bouwen."
+---
+
+## Wat je nodig hebt
+
+- Toegang tot het **projectbestand** (niet alleen een screenshot)  
+- Pages: **Brand**, **Components**, **Design** — zie [Merk & Figma](/sops/design/merk-en-figma)  
+- Desktop-artboards **1920** + grid 12×110 / gutter 40  
+
+## Inspecteren
+
+1. Selecteer een frame/laag  
+2. Rechterpaneel: afmetingen, kleuren, fonts, gaps  
+3. Noteer tokens → `tailwind.config.js`  
+
+Dev Mode (als aan): handig voor CSS-achtige waarden — vertaal naar Tailwind-utilities, niet 1:1 plakken.
+
+## Components vs instances
+
+- **Components** (page Components): buttons, cards, header — bron  
+- Op **Design**-pages: **instances** (kopieën die de bron volgen)  
+
+Namen zoals `Section - FAQ`, `Card - Project` → pagebuilder-blokken. Zie [Naamgeving](/wordpress/naming-conventions) / design-SOP.
+
+## Export
+
+- Logo’s: SVG waar mogelijk  
+- Iconen: SVG of sprite-afspraak in het theme  
+- Foto’s: redelijke resolutie — zie [Images & media](/kennis/images-media)  
+
+## Prototype (klant)
+
+Niet de editor-link delen: **Present → Fit width → Share prototype → Anyone**. Zie [Review & handoff](/sops/design/review-en-handoff).
+
+## Af (begrip)
+
+- [ ] Je vindt Brand / Components / Design  
+- [ ] Je kunt kleur/spacing uit Figma naar Tailwind vertalen  
+- [ ] Je herkent Section/Card-namen als blokkandidaten  
+
+## Gerelateerd
+
+- [Merk & Figma](/sops/design/merk-en-figma) · [Structuur (FigJam)](/sops/design/structuur-en-content) · [Tailwind](/kennis/tailwind)

@@ -1,0 +1,44 @@
+---
+title: "API & AJAX — basis"
+description: "Wat een API is, wat AJAX doet in WordPress, en wanneer je Network-tab nodig hebt."
+---
+
+## API (simpel)
+
+Een **API** is een afspraak: “als je X vraagt, krijg je Y terug” (vaak JSON). Voorbeelden:
+
+- WordPress **REST API** (`/wp-json/…`)  
+- Externe diensten (Maileroo, Stripe, …)  
+- Interne endpoints in een theme/plugin  
+
+Jij “praat” niet altijd zelf met een API — plugins en JS doen dat achter de schermen.
+
+## AJAX
+
+**AJAX** = de pagina vraagt **op de achtergrond** data op, zonder volledige herlaad.
+
+Voorbeelden in WP:
+
+- Formulier versturen zonder nieuwe pagina  
+- “Meer laden”-knoppen  
+- Admin-schermen die live opslaan  
+
+Vaak via `admin-ajax.php` of de REST API. In DevTools → **Network** zie je die requests (status 200 = OK, 4xx/5xx = fout).
+
+## Waarom dit ertoe doet
+
+| Situatie | Check |
+|----------|--------|
+| Formulier “doet niets” | Console-fouten? Network-request rood? Consent-cookies? |
+| Werkt zonder cookies, faalt mét | Tracking/scripts geblokkeerd — [SureCookie](/wordpress/plugins/surecookie) |
+| 403 / nonce-fout | Security / ingelogde sessie / cache |
+
+## Af (begrip)
+
+- [ ] API ≈ vraag/antwoord tussen systemen  
+- [ ] AJAX ≈ update zonder volledige reload  
+- [ ] Je kunt Network-tab gebruiken bij een kapot formulier  
+
+## Gerelateerd
+
+- [Browser](/kennis/browser) · [Formulieren](/wordpress/plugins/formulieren) · [Cookies & tracking](/kennis/cookies-tracking)
