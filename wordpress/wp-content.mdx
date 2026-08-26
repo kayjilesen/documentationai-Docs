@@ -1,0 +1,166 @@
+---
+title: "wp-content & uploads"
+description: "Structuur van wp-content, wat in Git hoort, en hoe de WordPress uploads-map werkt (bestanden + mediabibliotheek)."
+---
+
+## Overzicht
+
+Alles wat **niet** WordPress-core is, leeft onder `wp-content/`: themes, plugins, uploads en (optioneel) mu-plugins / cache.
+
+```
+/DEV/projectnaam/                    # document root (lokaal)
+├── wp-admin/                        # Core — niet aanpassen
+├── wp-includes/                     # Core — niet aanpassen
+├── wp-config.php                    # Omgevingsconfig (niet in theme-repo)
+├── index.php
+└── wp-content/
+    ├── themes/                      # Themes (ons custom theme hier)
+    ├── plugins/                     # Plugins
+    ├── mu-plugins/                  # Must-use plugins (optioneel)
+    ├── uploads/                     # Media van de mediabibliotheek
+    ├── languages/                   # Vertalingen (optioneel)
+    ├── upgrade/                     # Tijdelijk bij core/plugin updates
+    └── cache/ of wphb-cache/ e.d.   # Plugin-caches (niet committen)
+```
+
+<Callout kind="info" title="Core vs. content">
+  `wp-admin` en `wp-includes` updaten via WordPress zelf. **Jouw werk** zit in `wp-content/themes/<project>/` (Git) en in data: database + `uploads/`.
+</Callout>
+
+---
+
+## Mappen in detail
+
+| Pad | Rol | In theme-Git? |
+|-----|-----|----------------|
+| `themes/<projectnaam>/` | Custom theme (boilerplate-stack) | **Ja** — dit is de repo |
+| `themes/twentytwenty*/` | Default WP themes | Nee (mag blijven als fallback) |
+| `plugins/` | ACF Pro, Defender, Smush, … | Meestal **nee** — via hosting/deploy of handmatig; licenties/serverspecifiek |
+| `mu-plugins/` | Altijd-geladen plugins | Alleen als het project dat bewust gebruikt |
+| `uploads/` | Alle mediabibliotheek-bestanden | **Nee** — te groot, omgeving-specifiek |
+| `languages/` | `.mo` / `.po` | Soms gedeeld; vaak server-side |
+| Cache-mappen | Hummingbird e.d. | **Nooit** committen |
+
+Zie [Theme Architectuur](/wordpress/theme-architecture) voor wat er **in** de themamap hoort.
+
+---
+
+## Wat deploy je waarheen?
+
+| Onderdeel | Lokaal | Staging / productie |
+|-----------|--------|---------------------|
+| Theme-code | Map onder `wp-content/themes/` | Deploy via [Deployer for Git](/hosting/deployments) |
+| Plugins | Zelfde set als afgesproken stack | Installeren/updaten op de server ([Plugins-overzicht](/wordpress/plugins/overzicht)) |
+| Database | Lokale MySQL (MAMP) | Eigen DB per omgeving |
+| Uploads | Lokale `uploads/` | Eigen `uploads/` — sync alleen bij migratie/content-copy |
+
+<Callout kind="tip" title="Geen uploads in Git">
+  Media hoort niet in de theme-repo. Nodig op een andere omgeving? Exporteer/importeer, kopieer `uploads/`, of gebruik een migratietool — zie [Migratie](/sops/extra/migratie-wordpress).
+</Callout>
+
+---
+
+## Uploads (`wp-content/uploads`)
+
+Standaard organiseert WordPress uploads op **jaar/maand**:
+
+```
+wp-content/uploads/
+├── 2024/
+│   └── 11/
+│       ├── hero.jpg
+│       ├── hero-300x200.jpg      # gegenereerde size
+│       └── hero-1536x1024.jpg
+├── 2025/
+│   └── 08/
+│       └── brochure.pdf
+└── sites/                        # alleen bij multisite
+    └── 2/
+        └── 2025/...
+```
+
+### Bestand + database
+
+Elke upload krijgt:
+
+1. **Fysieke bestanden** in `uploads/JJJJ/MM/` (origineel + image sizes)
+2. Een **`attachment`**-post in `wp_posts`
+3. Meta in `wp_postmeta`, o.a.:
+   - `_wp_attached_file` → relatief pad, bijv. `2025/08/hero.jpg`
+   - `_wp_attachment_metadata` → sizes, width/height, file info
+
+Details: [Database](/wordpress/database).
+
+### Image sizes
+
+WordPress (en het theme via `add_image_size` in `inc/settings.php`) maakt bij upload extra formaten. Smush kan compressie/WebP doen — zie [Smush Pro](/wordpress/plugins/smush).
+
+| Situatie | Gevolg |
+|----------|--------|
+| Nieuw formaat in theme toegevoegd | Bestaande uploads hebben die size nog niet → regenereren (plugin of WP-CLI) |
+| Alleen bestand op schijf gezet | Verschijnt **niet** in mediabibliotheek (geen attachment-post) |
+| Alleen DB, bestand weg | Broken image / 404 op de URL |
+| Verkeerde permissions | Upload faalt in admin |
+
+### URL’s
+
+Publieke media-URL’s volgen meestal:
+
+```text
+https://domein.nl/wp-content/uploads/2025/08/hero.jpg
+```
+
+Lokaal:
+
+```text
+http://projectnaam.local/wp-content/uploads/2025/08/hero.jpg
+```
+
+Na domeinwijziging moeten URL’s in content/meta kloppen (search-replace of migratietool) — anders blijven oude hosts in HTML of serialized data hangen.
+
+---
+
+## Rechten & veiligheid
+
+| Onderwerp | Praktijk |
+|-----------|----------|
+| Schrijfbaar | Webserver moet in `uploads/` kunnen schrijven (en soms cache-mappen) |
+| Uitvoerbaar PHP | `uploads/` mag **geen** PHP uitvoeren — hosting/security (Defender, server) blokkeert dit |
+| Back-ups | Database **én** `uploads/` — theme staat al in Git; zie [Backups](/hosting/backups) |
+| Gevoelige bestanden | Geen secrets in uploads; geen `wp-config` dumps in de mediabibliotheek |
+
+---
+
+## Veelvoorkomende situaties
+
+<Expandable title="Media werkt lokaal wel, op staging niet" default-open="false">
+  Uploads zijn omgeving-specifiek. Staging heeft een eigen lege of andere `uploads/`. Oplossing: media opnieuw uploaden, of `uploads/` (+ DB-attachment data) meenemen bij content-sync.
+</Expandable>
+
+<Expandable title="Afbeelding in pagebuilder “leeg” terwijl bestand er is" default-open="false">
+  ACF bewaart vaak een **attachment ID**, niet alleen een pad. Als de ID op die omgeving niet bestaat (andere DB), breekt de image helper. Sync content/DB of kies de media opnieuw in admin.
+</Expandable>
+
+<Expandable title="Theme-assets vs. uploads" default-open="false">
+  Statische theme-beelden (logo in header-component, icons) horen in `themes/.../assets/images/` en gaan mee in Git. **Content**-beelden van de klant horen in de mediabibliotheek → `uploads/`.
+</Expandable>
+
+---
+
+## Checklist bij een nieuwe omgeving
+
+- [ ] Theme staat in `wp-content/themes/<projectnaam>/` en is geactiveerd
+- [ ] Benodigde plugins staan in `wp-content/plugins/` en zijn actief
+- [ ] `uploads/` bestaat en is schrijfbaar
+- [ ] Test-upload in Media → bibliotheek verschijnt + bestand landt onder `uploads/JJJJ/MM/`
+- [ ] Geen cache-/upload-mappen in de theme-Git-status
+
+---
+
+## Naslag
+
+- [Database](/wordpress/database) — tabellen, attachments, options
+- [Theme Architectuur](/wordpress/theme-architecture)
+- [Lokale Ontwikkelomgeving](/devops/local-dev)
+- [Deployments](/hosting/deployments)
+- [Migratie oude WordPress](/sops/extra/migratie-wordpress)
