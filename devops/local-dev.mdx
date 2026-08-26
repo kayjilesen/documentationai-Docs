@@ -97,38 +97,20 @@ Voor lokale ontwikkeling draait WordPress onder een `.local` domein. Elk nieuw t
 
 ## Omgeving Detectie
 
-Alle themes bevatten een `kj_is_live_domain()` functie in `inc/helpers.php`. Die bepaalt of de huidige request op productie draait.
+Themes gebruiken `kj_is_live_domain()` in `inc/helpers.php` om te bepalen of de request op productie draait.
 
-Lokaal, CLI/cron zonder host, en staging-subdomeinen tellen **niet** als live. `www.` wordt gestript zodat apex en www als hetzelfde host gelden.
+**Niet live (auto-updates aan):**
+- Lokaal: `localhost` of `*.local`
+- CLI/cron zonder host
+- Staging/dev-subdomeinen (projectspecifiek)
 
-```php
-function kj_is_live_domain() {
-    $host = strtolower( (string) ( $_SERVER['HTTP_HOST'] ?? '' ) );
-    if ( '' === $host ) {
-        return false;
-    }
-
-    $host = preg_replace( '/:\d+$/', '', $host );
-    $host = preg_replace( '/^www\./', '', $host );
-
-    if ( 'localhost' === $host || str_contains( $host, '.local' ) ) {
-        return false;
-    }
-
-    // Staging/dev subdomains, e.g. staging.hoexsystems.nl
-    if ( preg_match( '/\.(hoexsystems\.nl)$/', $host ) ) {
-        return false;
-    }
-
-    return true;
-}
-```
+**Live:** het productiedomein (apex en `www` tellen als hetzelfde).
 
 <Callout kind="info">
-  De staging-check is projectspecifiek. In de [KJ-Boilerplate](/client-projects/kj-boilerplate) staat `kayjilesen.dev`; per project vervang je dat door het eigen domein (zoals `hoexsystems.nl`).
+  De staging-check is projectspecifiek. In de [KJ-Boilerplate](/client-projects/kj-boilerplate) staat `kayjilesen.dev`; per project vervang je dat door het eigen domein (zoals `hoexsystems.nl`). De actuele implementatie staat in de theme-code, niet hier.
 </Callout>
 
-Op niet-live omgevingen (lokaal + staging) worden automatische updates voor plugins, core, themes en vertalingen ingeschakeld. Op productie blijven ze uit.
+Op niet-live omgevingen worden automatische updates voor plugins, core, themes en vertalingen ingeschakeld. Op productie blijven ze uit.
 
 ---
 
