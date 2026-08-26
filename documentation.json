@@ -26,22 +26,6 @@
             ]
           },
           {
-            "group": "Core Concepts",
-            "icon": "layers",
-            "pages": [
-              {
-                "title": "Features",
-                "path": "features",
-                "icon": "file-text"
-              },
-              {
-                "title": "Integraties",
-                "path": "integrations",
-                "icon": "plug"
-              }
-            ]
-          },
-          {
             "group": "Advanced Custom Fields",
             "icon": "database",
             "pages": [
@@ -153,6 +137,11 @@
                     "title": "FluentSMTP",
                     "path": "wordpress/plugins/fluent-smtp",
                     "icon": "mail"
+                  },
+                  {
+                    "title": "Formulieren",
+                    "path": "wordpress/plugins/formulieren",
+                    "icon": "clipboard"
                   }
                 ]
               },
@@ -245,11 +234,6 @@
                 "icon": "git-branch"
               },
               {
-                "title": "Deployment",
-                "path": "devops/deployment",
-                "icon": "upload"
-              },
-              {
                 "title": "CI/CD Setup",
                 "path": "devops/ci-cd",
                 "icon": "play-circle"
@@ -315,17 +299,6 @@
         ]
       },
       {
-        "tab": "API Referentie",
-        "icon": "code",
-        "groups": [
-          {
-            "group": "Endpoints",
-            "openapi": "api-reference/openapi.yaml",
-            "pages": []
-          }
-        ]
-      },
-      {
         "tab": "Helpcentrum",
         "icon": "help-circle",
         "pages": [
@@ -351,23 +324,8 @@
             "expandable": false,
             "pages": [
               {
-                "title": "Pagina's niet bewerkbaar",
-                "path": "help-center/troubleshooting/cannot-edit-docs"
-              },
-              {
                 "title": "Cookiebanner verschijnt niet",
                 "path": "help-center/troubleshooting/cookiebanner-verschijnt-niet"
-              }
-            ]
-          },
-          {
-            "group": "Guides",
-            "icon": "book-open",
-            "expandable": false,
-            "pages": [
-              {
-                "title": "Nieuwe pagina aanmaken",
-                "path": "help-center/guides/create-new-doc"
               }
             ]
           }

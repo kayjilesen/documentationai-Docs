@@ -176,25 +176,25 @@ bestelportal/
 | Omgeving | URL | Opmerking |
 |----------|-----|-----------|
 | **Productie** | `gezellig-bestellen.nl` | Live site |
-| **Lokaal** | `localhost:8888` of subdomein | Detectie via `is_live_domain()` |
+| **Lokaal** | `gezellig-bestellen.local` (of project-`.local`) | Detectie via `is_live_domain()` / `.local` |
 
 <Callout kind="info" title="Omgeving detectie">
-  De functie `is_live_domain()` in `functions.php` detecteert of de site lokaal draait (poort 8888 of subdomein). Op lokale omgevingen worden automatische updates voor plugins, core en thema's ingeschakeld.
+  Lokale detectie gebeurt via het hostdomein (o.a. `.local`), niet via poort `:8888`. Zie [Lokale Ontwikkelomgeving](/devops/local-dev).
 </Callout>
 
 ---
 
 ## SMTP & E-mail
 
-<Callout kind="warning" title="SMTP configuratie">
-  SMTP-configuratie nog vast te stellen. Controleer of er een SMTP-plugin is geïnstalleerd (bijv. WP Mail SMTP, FluentSMTP) en documenteer de provider en instellingen hier.
+<Callout kind="info" title="SMTP">
+  Transactionele mail via [FluentSMTP](/wordpress/plugins/fluent-smtp) (Maileroo + SES-backup). Documenteer provider/from in dit projectdossier zodra bekend; geen credentials hier.
 </Callout>
 
 | Item | Waarde |
 |------|--------|
-| **SMTP Plugin** | *Nog te bepalen* |
-| **Provider** | *Nog te bepalen* |
-| **Poort** | *Nog te bepalen* |
+| **SMTP Plugin** | FluentSMTP (verwacht) |
+| **Provider** | *Projectspecifiek — zie FluentSMTP-standaard* |
+| **From** | *Nog te documenteren* |
 
 ---
 
@@ -286,7 +286,8 @@ graph TD
   Sla geen wachtwoorden op in de documentatie. Verwijs naar de wachtwoordmanager of beveiligde opslag.
 </Callout>
 
-- **WordPress admin**: `gezellig-bestellen.nl/wp-admin`
+- **WordPress admin (productie)**: bij voorkeur `/beheer` als Defender Mask Login actief is; anders `/wp-admin` (controleer live)
+- **Inloggegevens**: wachtwoordmanager
 - **Git repo**: `github.com/kayjilesen/gezellig-bestellen`
 - **Inloggegevens**: Opgeslagen in wachtwoordmanager
 

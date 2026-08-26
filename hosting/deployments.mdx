@@ -11,7 +11,7 @@ Code gaat naar productie via Git — niet via handmatige (S)FTP-uploads. In de p
 |---------|---------|
 | **Deployer for Git** (WordPress-plugin) | Meest gebruikt: theme/repo bijwerken op productie, handmatig of via webhook |
 | **xCloud Git deployment** | Site gekoppeld aan Git in het xCloud dashboard (auto deploy / staging) |
-| **GitHub Actions** | CI/CD met build + rsync — zie [Deployment](/devops/deployment) en [CI/CD Setup](/devops/ci-cd) |
+| **GitHub Actions** | CI/CD met build + rsync — zie [CI/CD Setup](/devops/ci-cd) |
 
 ```mermaid
 graph LR
@@ -144,8 +144,8 @@ Bij xCloud vind je logs onder **Site > Deployment Logs** (tijdstip, status, bran
 ## Gerelateerd
 
 <Columns cols={3}>
-  <Card title="Deployment (DevOps)" icon="upload" href="/devops/deployment">
-    Overzicht van GitHub Actions vs Deployer for Git.
+  <Card title="CI/CD Setup" icon="play-circle" href="/devops/ci-cd">
+    Optionele GitHub Actions-pipeline.
   </Card>
   <Card title="Site Management" icon="globe" href="/hosting/site-management">
     Sites aanmaken, domeinen en SSL.

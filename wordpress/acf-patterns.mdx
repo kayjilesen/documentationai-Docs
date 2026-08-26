@@ -11,31 +11,25 @@ Alle projecten gebruiken **ACF Pro** met JSON sync. Veldgroepen worden als JSON-
 
 ## JSON Sync Workflow
 
+De bron van waarheid is `/acf-json/` in Git. Op productie: na een deploy **ACF > Sync** als er sync beschikbaar is.
+
 <Steps>
-  <Step title="Bewerk JSON bestanden" icon="code">
-    Alle ACF veldgroepen staan in `/acf-json/`. Bewerk deze bestanden direct (niet via de WordPress admin).
+  <Step title="Wijzig veldgroepen" icon="edit-3">
+    Bewerk in de WordPress-admin (lokaal) **of** pas JSON in `/acf-json/` aan. Admin-wijzigingen schrijven automatisch terug naar JSON (mits save-point correct staat).
   </Step>
-  <Step title="Update de timestamp" icon="clock">
-    Na **elke** wijziging: update het `"modified"` veld met de huidige Unix timestamp.
-
-    ```bash
-    # Huidige Unix timestamp ophalen
-    date +%s
-    # Voorbeeld output: 1708963200
-    ```
-
-    Plak deze waarde in het `"modified"` veld van het JSON bestand.
+  <Step title="JSON + timestamp" icon="clock">
+    Zorg dat de JSON in Git staat. Bij handmatige JSON-edits: update `"modified"` met de huidige Unix timestamp (`date +%s`), anders ziet WP de wijziging niet.
   </Step>
-  <Step title="Sync in WordPress" icon="database">
-    WordPress detecteert de gewijzigde timestamp en synchroniseert de velden automatisch vanuit JSON naar de database.
+  <Step title="Commit en deploy" icon="git-branch">
+    Commit de JSON-bestanden. Deploy via [Deployer for Git](/hosting/deployments) (of CI/CD).
   </Step>
-  <Step title="Commit naar Git" icon="git-branch">
-    Commit de JSON bestanden zodat alle teamleden dezelfde veldconfiguratie hebben.
+  <Step title="Sync op productie" icon="database">
+    Op de **live** site: **ACF > Sync** voor alle groepen met “Sync beschikbaar”. Zonder deze stap blijven nieuwe velden op prod weg.
   </Step>
 </Steps>
 
-<Callout kind="warning" title="Timestamp verplicht">
-  Als je de `"modified"` timestamp niet update, detecteert WordPress de wijzigingen niet en worden ze niet gesynchroniseerd.
+<Callout kind="warning" title="Niet alleen de database">
+  Nooit veldgroepen alleen in de productie-database laten leven zonder JSON in Git. Anders mist de volgende deploy/omgeving je wijzigingen.
 </Callout>
 
 ---

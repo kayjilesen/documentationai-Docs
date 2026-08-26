@@ -9,27 +9,35 @@ description: Volg de laatste updates, nieuwe features en verbeteringen in het do
   Bekijk deze changelog om op de hoogte te blijven van nieuwe features, bugfixes en verbeteringen aan de documentatieruimte. We brengen regelmatig updates uit om je ervaring met het beheren van projectdocumentatie te verbeteren.
 </Callout>
 
-<Update label="2026-08-26" description="Documentatie update" tags={["update", "project", "content"]}>
+<Update label="2026-08-26" description="Documentatie update" tags={["update", "project", "content", "improvement"]}>
 
 ## Nieuwe content
 
+- **[Formulieren](wordpress/plugins/formulieren)** — SureForms standaard; Gravity Forms alleen bij features die SureForms niet biedt
 - **[SureCookie](wordpress/plugins/surecookie)** — Standaard cookie consent (GDPR opt-in, blocking, GCM); export in `wordpress/configs/surecookie.json`
 - **[FluentSMTP](wordpress/plugins/fluent-smtp)** — Maileroo (noreply@klant) primair + Amazon SES (@kayjilesen.dev, Stockholm) backup; keys in wp-config; Pushover
-- **[Plugins](wordpress/plugins/overzicht)** — Dropdown onder WordPress Development: Overzicht, Defender, Switchboard, Smush, Hummingbird, SureCookie, FluentSMTP
+- **[Plugins](wordpress/plugins/overzicht)** — Plugin-dropdown incl. SureCookie, FluentSMTP, Formulieren
 - **[Hosting > Instellingen](hosting/caching)** — Dropdown: Caching, Backups, Security (xCloud-standaarden)
+
+## Navigatie
+
+- Verwijderd: Features, Integraties, API Referentie, DevOps Deployment, dashboard Help-guides
+- Helpcentrum opgeschoond naar FAQ + cookiebanner-troubleshooting
+
+## Bijgewerkte content
+
+- **[Introductie](introduction)** — Deploy-link naar Hosting Deployments; tip over `/beheer`
+- **[ACF Patronen](wordpress/acf-patterns)** — Canonieke workflow: JSON in Git + Sync op productie
+- **[Hoex Systems](client-projects/hoexsystems)** / **[Bestelportaal](client-projects/bestelportaal-gezellig)** — `/beheer` en `.local` i.p.v. verouderde URL's
+- **[WP Switchboard](wordpress/plugins/wp-switchboard)** — Standaardpreset uitgebreid; Defender-overlap optioneel
+- **[Project: KJ-Boilerplate](client-projects/kj-boilerplate)** — Gedeelde Styling-tab (`group_section_styling`)
+- **[Lokale Ontwikkelomgeving](devops/local-dev)** — `.local`, themamap, Claude-prompt
+- **[Deployments](hosting/deployments)** — Deployer for Git + ACF sync; WP CLI verwijderd
+- **[Getting Started FAQ](help-center/faq/getting-started)** — Git-workflow
 
 ## Klantprojecten
 
 - **[Hoex Systems](client-projects/hoexsystems)** — Prefab HSB/steelframe-theme: 27 pagebuilder-blokken, 5 CPT's, SureForms, content seeder
-
-## Bijgewerkte content
-
-- **[WP Switchboard](wordpress/plugins/wp-switchboard)** — Standaardpreset uitgebreid (o.a. embeds, Gutenberg, heartbeat, admin bar front-end); Defender-overlap en dev-only modules naar optioneel
-- **[Project: KJ-Boilerplate](client-projects/kj-boilerplate)** — Gedeelde Styling-tab (`group_section_styling`) met padding boven/onder als standaard voor pagebuilder-blokken
-- **[Lokale Ontwikkelomgeving](devops/local-dev)** — Workflow bijgewerkt naar `.local` domeinen, themamap in `/DEV/<project>/wp-content/themes/<project>`, kant-en-klare Claude-prompt, en actuele `kj_is_live_domain()` (zoals in Hoexsystems)
-- **[Introductie](introduction)** — Herschreven als onboarding voor nieuwe werknemers en stagiaires
-- **[Deployments](hosting/deployments)** — Deployer for Git (handmatig of webhook) als veelgebruikte optie, inclusief ACF sync op productie; WP CLI verwijderd
-- **[Getting Started FAQ](help-center/faq/getting-started)** — Dashboard-stappen vervangen door Git-workflow
 
 </Update>
 

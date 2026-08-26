@@ -1,0 +1,64 @@
+---
+title: "Formulieren"
+description: "Wanneer SureForms vs Gravity Forms — standaard SureForms (lifetime), Gravity alleen bij features die SureForms niet biedt."
+---
+
+## Overzicht
+
+Voor formulieren op nieuwe sites is **SureForms** de standaard (lifetime-licentie, geen extra kosten per project). **Gravity Forms** alleen als de klant een specifieke feature nodig heeft die SureForms niet (goed) ondersteunt — dan is de aparte licentiekost gerechtvaardigd.
+
+| | **SureForms** (standaard) | **Gravity Forms** (uitzondering) |
+|--|---------------------------|----------------------------------|
+| Licentie | Lifetime, al afbetaald | Betaald per site / uitbreidingen |
+| Gebruik | Simpele tot middelzware contact-/aanvraagformulieren | Speciale features die SureForms mist |
+| Koppeling mail | Via [FluentSMTP](/wordpress/plugins/fluent-smtp) | Idem |
+| Cookie/scripts | Let op blocking in [SureCookie](/wordpress/plugins/surecookie) | Idem |
+
+## Keuze maken
+
+<Steps>
+  <Step title="Start bij SureForms" icon="check-circle">
+    Bouw het formulier in SureForms zolang velden, conditional logic, uploads en notificaties voldoende zijn.
+  </Step>
+  <Step title="Escaleer alleen bij harde eisen" icon="zap">
+    Schakel over op **Gravity Forms** als de klant iets nodig heeft dat SureForms niet dekt (bijv. specifieke add-ons, complexe multi-step/payment-flows, of bestaande GF-integraties).
+  </Step>
+  <Step title="Documenteer de keuze" icon="file-text">
+    Noteer in het klantproject *waarom* GF is gekozen, zodat de volgende collega niet onnodig migreert of dubbel bouwt.
+  </Step>
+</Steps>
+
+<Callout kind="tip">
+  Twijfel je? Bouw eerst in SureForms. Alleen upgraden naar Gravity als er een concrete blocker is — niet “voor de zekerheid”.
+</Callout>
+
+## SureForms (standaard)
+
+- Installeer **SureForms** (+ Pro indien nodig voor jullie lifetime-stack)
+- Plaats formulieren via shortcode/block in pagebuilder-content
+- Notificaties naar een adres op het klantdomein; aflevering via FluentSMTP
+- Test na cookie-setup: formulier-JS mag niet geblokkeerd blijven hangen zonder consent waar dat wel nodig is
+
+## Gravity Forms (betaald, feature-gedreven)
+
+Gebruik wanneer SureForms tekortschiet, bijvoorbeeld:
+
+- Specifieke Gravity add-ons die de klant eist
+- Complexe workflows / integraties die al op GF gebaseerd zijn
+- Features die SureForms aantoonbaar niet ondersteunt
+
+Dan: Gravity Forms-licentie activeren, formulier bouwen, zelfde SMTP- en cookie-checks als bij SureForms.
+
+## Checklist oplevering
+
+- [ ] Juiste plugin gekozen (SureForms tenzij GF-feature nodig)
+- [ ] FluentSMTP testmail OK
+- [ ] Succes-/foutberichten in NL en merktonaliteit
+- [ ] Spam-bescherming (honeypot/reCAPTCHA naar gelang setup)
+- [ ] Live test in incognito + na cookie-keuzes
+
+## Gerelateerd
+
+- [Plugins Overzicht](/wordpress/plugins/overzicht)
+- [FluentSMTP](/wordpress/plugins/fluent-smtp)
+- [SureCookie](/wordpress/plugins/surecookie)
