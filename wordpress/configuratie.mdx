@@ -1,0 +1,133 @@
+---
+title: "Configuratie"
+description: "wp-config.php: lokaal als bestand editen, op staging/live via xCloud — debug, prefix, secrets."
+---
+
+## Overzicht
+
+`wp-config.php` staat in de **document root** (naast `wp-content/`), niet in het theme. Per omgeving een eigen bestand — **nooit** committen in de theme-repo.
+
+```
+/DEV/projectnaam/
+├── wp-config.php          ← hier (omgeving-specifiek)
+├── wp-content/
+│   └── themes/projectnaam/  ← Git (theme)
+├── wp-admin/
+└── wp-includes/
+```
+
+## Hoe bewerk je wp-config?
+
+| Omgeving | Hoe |
+|----------|-----|
+| **Lokaal** | Bestand openen en editen: `/DEV/projectnaam/wp-config.php` (Cursor of andere editor) |
+| **Staging** | Via de **beheeromgeving in xCloud** (config / file editor voor `wp-config.php`) |
+| **Live** | Idem: **xCloud**, niet via SFTP als standaardroute |
+
+<Callout kind="tip" title="Zelfde bestand, andere toegang">
+  Het is altijd hetzelfde PHP-bestand met `define()`’s. Lokaal pak je het op schijf; op staging en live via xCloud, zodat je niet via losse FTP-sessies aan credentials zit.
+</Callout>
+
+## Drie plekken
+
+| Laag | Waar | Voorbeeld |
+|------|------|-----------|
+| Config | `wp-config.php` | DB-credentials, `WP_DEBUG`, SMTP-keys |
+| Bestanden | `wp-content/` | Theme, plugins, uploads — [Bestanden](/wordpress/bestanden) |
+| Database | MySQL | Content, opties — [Database](/wordpress/database) |
+
+<Callout kind="info" title="Niet in het theme">
+  `wp-config.php` is omgeving-specifiek. Het theme in Git bevat hem niet.
+</Callout>
+
+---
+
+## Wat hoort in wp-config?
+
+| Onderdeel | Doel |
+|-----------|------|
+| Database | `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `DB_HOST` |
+| Salts / keys | `AUTH_KEY`, `SECURE_AUTH_KEY`, … (security cookies) |
+| Table prefix | `$table_prefix` — standaard `'wp_'`; op productie soms custom |
+| Debug | `WP_DEBUG`, `WP_DEBUG_LOG`, `WP_DEBUG_DISPLAY` |
+| Secrets / integraties | o.a. FluentSMTP constants — zie [FluentSMTP](/wordpress/plugins/fluent-smtp) |
+| Overige defines | Cache, memory limit, custom constanten van hosting |
+
+Lokaal: na de installatiewizard (of gekopieerd van `wp-config-sample.php`) het **bestand** zelf bijwerken. Staging/live: dezelfde wijzigingen via **xCloud**.
+
+---
+
+## Debug: lokaal aan, productie uit
+
+```php
+// Lokaal / staging (typisch)
+define( 'WP_DEBUG', true );
+define( 'WP_DEBUG_LOG', true );
+define( 'WP_DEBUG_DISPLAY', false ); // errors in debug.log, niet op het scherm
+
+// Productie — verplicht uit voor bezoekers
+define( 'WP_DEBUG', false );
+```
+
+<Callout kind="warning" title="Go-live">
+  Op productie: `WP_DEBUG` uit. Staat op de [go-live checks](/sops/livegang/go-live-checks) en [oplevering](/sops/livegang/oplevering). Wijziging via xCloud.
+</Callout>
+
+Logbestand (als `WP_DEBUG_LOG` aan staat): meestal `wp-content/debug.log` — niet committen, wel handig bij PHP-fouten.
+
+---
+
+## Secrets (SMTP e.d.)
+
+Credentials voor mail en andere API’s horen in **`wp-config.php`**, **niet** in:
+
+- de database (FluentSMTP “opslaan in DB”)
+- Git / theme / docs
+- chat
+
+**Lokaal:** `define()`-regels in het bestand zetten.  
+**Staging / live:** dezelfde constants toevoegen via de xCloud-beheeromgeving.
+
+Voorbeeldpatroon (placeholders — echte waarden alleen op de juiste omgeving):
+
+```php
+define( 'FLUENTMAIL_SMTP_USERNAME', '…' );
+define( 'FLUENTMAIL_SMTP_PASSWORD', '…' );
+define( 'FLUENTMAIL_AWS_ACCESS_KEY_ID', '…' );
+define( 'FLUENTMAIL_AWS_SECRET_ACCESS_KEY', '…' );
+```
+
+Details en checklist: [FluentSMTP](/wordpress/plugins/fluent-smtp).
+
+---
+
+## Table prefix & URL’s
+
+| Onderwerp | Waar |
+|-----------|------|
+| `$table_prefix` | `wp-config.php` — moet matchen met echte tabellen (`wp_posts` vs. `xyz_posts`) |
+| Site-URL’s (`home`, `siteurl`) | Meestal **`wp_options`** in de database, niet in wp-config |
+| `WP_HOME` / `WP_SITEURL` | Optioneel in wp-config om URL’s te forceren (handig bij migratie; daarna liever options opschonen) |
+
+Verkeerde prefix = “Error establishing a database connection” of lege site terwijl de DB wél data heeft.
+
+---
+
+## Checklist
+
+- [ ] `wp-config.php` staat buiten Git (theme-repo bevat hem niet)
+- [ ] Lokaal: bestand `/DEV/projectnaam/wp-config.php` — DB-gegevens kloppen met MAMP ([Omgeving](/sops/lokaal/omgeving))
+- [ ] Staging / live: wijzigingen via **xCloud**-beheeromgeving; SMTP-keys als constants
+- [ ] Productie: `WP_DEBUG` uit
+- [ ] Geen echte keys in tickets, chat of documentatie
+
+---
+
+## Naslag
+
+- [Database](/wordpress/database)
+- [Bestanden](/wordpress/bestanden)
+- [FluentSMTP](/wordpress/plugins/fluent-smtp)
+- [Lokaal — Omgeving](/sops/lokaal/omgeving)
+- [Site Management](/hosting/site-management)
+- [Security](/hosting/security)

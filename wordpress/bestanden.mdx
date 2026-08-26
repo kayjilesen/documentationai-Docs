@@ -1,11 +1,11 @@
 ---
-title: "wp-content & uploads"
-description: "Structuur van wp-content, wat in Git hoort, en hoe de WordPress uploads-map werkt (bestanden + mediabibliotheek)."
+title: "Bestanden"
+description: "WordPress op schijf: core vs. wp-content, wat in Git hoort, en hoe uploads (mediabibliotheek) werken."
 ---
 
 ## Overzicht
 
-Alles wat **niet** WordPress-core is, leeft onder `wp-content/`: themes, plugins, uploads en (optioneel) mu-plugins / cache.
+Alles wat **niet** WordPress-core is, leeft onder `wp-content/`: themes, plugins, uploads en (optioneel) mu-plugins / cache. Samen met de [database](/wordpress/database) en [configuratie](/wordpress/configuratie) bepaalt dit hoe een site draait.
 
 ```
 /DEV/projectnaam/                    # document root (lokaal)
@@ -160,6 +160,7 @@ Na domeinwijziging moeten URL’s in content/meta kloppen (search-replace of mig
 ## Naslag
 
 - [Database](/wordpress/database) — tabellen, attachments, options
+- [Configuratie](/wordpress/configuratie) — `wp-config.php`, debug, secrets
 - [Theme Architectuur](/wordpress/theme-architecture)
 - [Lokale Ontwikkelomgeving](/devops/local-dev)
 - [Deployments](/hosting/deployments)
