@@ -1,0 +1,184 @@
+---
+title: "Project: Conscribo"
+description: "WordPress theme voor Conscribo — SaaS voor verenigingen met kennisbank, functionaliteiten, pakketten en Gravity Forms."
+---
+
+## Project Overzicht
+
+| Detail | Waarde |
+|--------|--------|
+| **Klant** | Conscribo |
+| **Type** | SaaS-marketingwebsite (ledenadministratie + boekhouding) |
+| **Status** | Actief |
+| **Pad** | `/DEV/conscribo/wp-content/themes/conscribo/` |
+| **Lokaal** | `conscribo.local` |
+
+Marketing- en kennisplatform voor Conscribo: functionaliteiten, pakketten, kennisbank, productupdates (ontwikkelingen), reviews en demo-formulieren.
+
+---
+
+## Tech Stack
+
+<Columns cols={3}>
+  <Card title="WordPress + ACF Pro" icon="code">
+    Pagebuilder met 25 layouts (clone-pattern)
+  </Card>
+  <Card title="Tailwind CSS 3.4" icon="palette">
+    Groen/oranje palet + knop-gradients
+  </Card>
+  <Card title="Gravity Forms + Husky" icon="terminal">
+    Formulieren; ESLint/PHPCS pre-commit
+  </Card>
+</Columns>
+
+---
+
+## Huisstijl / Design Tokens
+
+<Tabs>
+  <Tab title="Kleuren" icon="palette">
+    | Token | Hex | Gebruik |
+    |-------|-----|---------|
+    | `primary` / `orange-500` | `#FB7E25` | Primaire CTA |
+    | `orange-400` | `#E9993D` | Oranje gradient-midden |
+    | `secondary` / `dark` / `green-900` | `#1D501E` | Topbar, footer, CTA-band |
+    | `accent` / `green-500` | `#61B83B` | Accent, tegels |
+    | `green-700` | `#248326` | Groene knop-gradient |
+    | `green-50` / `light` | `#F1F8EE` | Lichte secties |
+    | `ink` | `#161616` | Navigatie + body |
+  </Tab>
+  <Tab title="Typografie" icon="file-text">
+    | Type | Font | Gebruik |
+    |------|------|---------|
+    | **Title** (`font-title`) | Host Grotesk 700 | Koppen (H1 48 / H2 36 / H3 24) |
+    | **Sans** (`font-sans`) | DM Sans | Body 18px, UI, knoppen |
+
+    Fonts self-hosted in `assets/fonts/`.
+  </Tab>
+  <Tab title="Knoppen & radius" icon="layout">
+    | Token | Waarde |
+    |-------|--------|
+    | `rounded-btn` | `6px` |
+    | `rounded-tile` | `8px` |
+    | `rounded-card` | `16px` |
+    | `bg-btn-primary` | Oranje gradient (96deg) |
+    | `bg-btn-secondary` | Groene gradient |
+    | `bg-btn-accent` | Lichtgroene accent-gradient |
+
+    Varianten: `btn--primary`, `btn--secondary`, `btn--accent`, `btn--white`, `btn--link`.
+  </Tab>
+</Tabs>
+
+---
+
+## Pagebuilder Blocks (25)
+
+| Block | Beschrijving |
+|-------|-------------|
+| `hero` | Hero |
+| `page-header` | Pagina-header |
+| `punten` | Puntenlijst |
+| `text-image` | Tekst ↔ afbeelding |
+| `cta` | Call-to-action |
+| `logos` | Partnerlogo's |
+| `cijfers` | Statistieken |
+| `feature-cards` | Feature-kaarten |
+| `accordion` | Accordion |
+| `functionaliteiten` | Functionaliteiten-grid (CPT) |
+| `voor-wie` | Doelgroepsectie |
+| `bestuurders` | Bestuurders-sectie |
+| `review` | Reviews uit CPT |
+| `pakketten` | Prijspakketten |
+| `vergelijkingstabel` | Vergelijkingstabel |
+| `volume-module` | Volume-module |
+| `team` | Team |
+| `herken-je-dit` | Herkenning / pijnpunten |
+| `handleiding-cta` | Handleiding CTA |
+| `tekst-faq` | Tekst + FAQ |
+| `kennisbank-zoek` | Kennisbank zoek |
+| `nieuws` | Nieuwsuitgelicht |
+| `changelog` | Productupdates |
+| `contact` | Contact |
+| `demo-form` | Demo-aanvraag (Gravity Forms) |
+
+Doelgroepen zijn **pagina's** onder `/voor-wie/`, geen CPT.
+
+---
+
+## Custom Post Types
+
+<Expandable title="Kennisbank (kennisbank)" default-open="true">
+  | Eigenschap | Waarde |
+  |-----------|--------|
+  | **Rewrite / archive** | `/kennisbank/` |
+  | **Taxonomy** | `kennisbank_categorie` (hiërarchisch) |
+  | **Supports** | title, editor, excerpt, page-attributes, revisions |
+</Expandable>
+
+<Expandable title="Ontwikkelingen (ontwikkeling)" default-open="false">
+  | Eigenschap | Waarde |
+  |-----------|--------|
+  | **Rewrite / archive** | `/ontwikkelingen/` |
+  | **Doel** | Changelog / productupdates |
+</Expandable>
+
+<Expandable title="Functionaliteiten (functionaliteit)" default-open="false">
+  | Eigenschap | Waarde |
+  |-----------|--------|
+  | **Rewrite** | `/functionaliteiten/` |
+  | **Archive** | Nee |
+  | **Supports** | title, thumbnail, excerpt, page-attributes (pagebuilder) |
+</Expandable>
+
+<Expandable title="Reviews (review)" default-open="false">
+  | Eigenschap | Waarde |
+  |-----------|--------|
+  | **Publiek** | Nee — alleen via review-block |
+  | **Supports** | title, thumbnail, page-attributes |
+</Expandable>
+
+Native `post` → `/nieuws/` (categorieën o.a. Nieuws, Tips, Klantverhalen).
+
+---
+
+## Architectuur
+
+```mermaid
+graph TD
+    A["WordPress"] --> B["Custom Theme: conscribo"]
+    B --> C["ACF Pro Pagebuilder"]
+    B --> D["Tailwind CSS 3.4"]
+    B --> E["Gravity Forms"]
+    C --> F["25 layouts via clone fields"]
+    B --> G["CPTs"]
+    G --> H["Kennisbank + categorie"]
+    G --> I["Ontwikkelingen"]
+    G --> J["Functionaliteiten"]
+    G --> K["Reviews"]
+    B --> L["Content seeder"]
+```
+
+---
+
+## Build & Development
+
+```bash
+npm run dev            # Tailwind watch
+npm run build          # CSS minify + pagebuilder JS
+npm run lint           # ESLint + php -l
+npm run lint:js:fix    # ESLint auto-fix
+composer install && vendor/bin/phpcs
+```
+
+Husky: `lint-staged` + `npm run build` bij commit.
+
+---
+
+## Bijzonderheden
+
+- Functieprefix `kj_`; text domain `conscribo`
+- Pagebuilder: **nooit** velden direct in `group_pagebuilder.json` — altijd `group_layout_{slug}` + seamless clone
+- Options: Thema instellingen (algemeen, topbar, header, footer, defaults, tracking)
+- Content seeder: wp-admin → Hulpmiddelen, of `kj_seed_run_all()` — overschrijft pagebuilder-inhoud idempotent
+- Figma: "Design | Conscribo" (`9cYMwWTV4JSleA9XfrmQ2B`)
+- Gedeelde clones: `group_button_fields`, `group_section_styling`

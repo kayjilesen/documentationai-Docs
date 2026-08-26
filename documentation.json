@@ -396,6 +396,106 @@
             "title": "CosyHeat",
             "path": "client-projects/cosyheat",
             "icon": "folder"
+          },
+          {
+            "title": "Hotel Janssen",
+            "path": "client-projects/hoteljanssen",
+            "icon": "folder"
+          },
+          {
+            "title": "Knapper bij Meagen",
+            "path": "client-projects/knapperbijmeagen",
+            "icon": "folder"
+          },
+          {
+            "title": "Peter Verberk",
+            "path": "client-projects/peterverberk",
+            "icon": "folder"
+          },
+          {
+            "title": "Digitaal Talent Nederland",
+            "path": "client-projects/digitaaltalentnederland",
+            "icon": "folder"
+          },
+          {
+            "title": "RW Recruitment",
+            "path": "client-projects/rwrecruitment",
+            "icon": "folder"
+          },
+          {
+            "title": "Timmermans Agri Service",
+            "path": "client-projects/timmermans",
+            "icon": "folder"
+          },
+          {
+            "title": "Osch",
+            "path": "client-projects/osch",
+            "icon": "folder"
+          },
+          {
+            "title": "Effecty",
+            "path": "client-projects/effecty",
+            "icon": "folder"
+          },
+          {
+            "title": "Affecty",
+            "path": "client-projects/affecty",
+            "icon": "folder"
+          },
+          {
+            "title": "Conscribo",
+            "path": "client-projects/conscribo",
+            "icon": "folder"
+          },
+          {
+            "title": "De Expertgroep",
+            "path": "client-projects/expertgroep",
+            "icon": "folder"
+          },
+          {
+            "title": "Create Lean",
+            "path": "client-projects/createlean",
+            "icon": "folder"
+          },
+          {
+            "title": "Lola Beckers",
+            "path": "client-projects/lolabeckers",
+            "icon": "folder"
+          },
+          {
+            "title": "Events MetEvi",
+            "path": "client-projects/eventsmetevi",
+            "icon": "folder"
+          },
+          {
+            "title": "Ruud Lenssen",
+            "path": "client-projects/ruudlenssen",
+            "icon": "folder"
+          },
+          {
+            "title": "The Sacrifice",
+            "path": "client-projects/thesacrifice",
+            "icon": "film"
+          },
+          {
+            "title": "SV Tuinplanten",
+            "path": "client-projects/svtuinplanten",
+            "icon": "sprout"
+          },
+          {
+            "title": "Reintjes Systems",
+            "path": "client-projects/reintjessystems",
+            "icon": "cog"
+          },
+          {
+            "title": "YouSeeq",
+            "path": "client-projects/youseeq",
+            "icon": "users"
+          },
+          {
+            "title": "Olli",
+            "path": "client-projects/olli",
+            "icon": "rocket"
           }
         ]
       },
