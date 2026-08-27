@@ -100,6 +100,17 @@ Gedeeld + B2B-only (alleen als `kj_market_is( 'b2b' )`):
   | **Taxonomy** | `dienst` |
 </Expandable>
 
+<Expandable title="Events (event) — beide markten" default-open="true">
+  | Eigenschap | Waarde |
+  |-----------|--------|
+  | **Rewrite** | `/events/` — geen archief |
+  | **Velden** | `event_date` (verplicht, Ymd) + linktype: eigen pagina óf externe website (`group_cpt_event`) |
+  | **Single** | Pagebuilder-gedreven (`single-event.php`, parent); externe link → 302-redirect (`kj_redirect_event_single()`) |
+  | **Front-end** | "Upcoming events"-kaart in het Actualiteiten-blok (`news`) |
+
+  De kaart staat **standaard aan** per Actualiteiten-sectie (`show_events`, plus `events_title` / `events_link`) en toont max 5 events vanaf vandaag, eerstkomende eerst, als 3e grid-item (kolom 3). Zonder aankomende events verdwijnt de kaart vanzelf; bij 1–2 events schuift er een extra post-kaart onder. Dark/light: navy kaart op een light-blok, surface-token op dark — de witte event-rijen blijven in beide modi gelijk.
+</Expandable>
+
 <Expandable title="Training / Workshop / Keynote (B2B)" default-open="true">
   | CPT | Archive slug |
   |-----|--------------|
@@ -133,7 +144,7 @@ graph TD
     C --> F["Case pagebuilder"]
     C --> G["CPTs + taxonomieën"]
     C --> H["WPML / Mautic / Tracking"]
-    G --> I["case, team, review, klant, partner"]
+    G --> I["case, event, team, review, klant, partner"]
     G --> J["training, workshop, keynote"]
     K["effecty-source legacy"] -.->|"gemigreerd"| C
 ```
