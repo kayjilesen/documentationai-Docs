@@ -39,10 +39,10 @@ De boilerplate is alleen een themamap — geen complete WP-installatie.
     /DEV/kj-boilerplate
 
     Doe het volgende:
-    1. Kopieer de boilerplate-structuur naar de doelmap
+    1. Kopieer de boilerplate-structuur naar de doelmap (inclusief `wp-cli.yml`)
     2. Update style.css (Theme Name, Description, Text Domain) naar <projectnaam>
     3. Pas text domain, function-prefixes en versieconstanten aan naar het project
-    4. Laat build-tooling (package.json / Tailwind) intact
+    4. Laat build-tooling (package.json / Tailwind) en `wp-cli.yml` intact
     5. Geef een korte checklist: theme activeren, ACF Pro, ACF Sync
     ```
   </Step>
@@ -99,6 +99,7 @@ projectnaam/
 ├── scripts/
 │   └── build-pagebuilder-js.js
 ├── functions.php             # alleen requires — geen business logic
+├── wp-cli.yml                # path → WP-root; `wp` werkt vanuit de theme-map
 ├── header.php
 ├── footer.php
 ├── page.php                  # pagebuilder-pagina’s
@@ -116,6 +117,7 @@ projectnaam/
 |-----------|------------|-------------|
 | `style.css` (header) | **Moet** | Theme Name, Text Domain = project |
 | `functions.php` | **Moet** | Laadt alle `inc/*` + component-requires |
+| `wp-cli.yml` | **Moet** | `path: ../../..` zodat `wp` vanuit de theme-map werkt |
 | `header.php` / `footer.php` | **Moet** | Chrome; later merkspecifiek |
 | `page.php` + `templates/pagebuilder/loop.php` | **Moet** | Pagebuilder-pagina’s renderen |
 | `acf-json/` | **Moet** | Minstens pagebuilder + starter layouts + button + section styling |
@@ -153,7 +155,7 @@ Na **ACF → Sync** verwacht je o.a.:
 ## Af
 
 - [ ] Themamap gevuld vanuit kj-boilerplate (niet half leeg)
-- [ ] Structuur klopt: `acf-json/`, `assets/`, `templates/`, `inc/`, root-templates, `functions.php`, `style.css`
+- [ ] Structuur klopt: `acf-json/`, `assets/`, `templates/`, `inc/`, root-templates, `functions.php`, `style.css`, `wp-cli.yml`
 - [ ] `style.css` + text domain / prefixes projectspecifiek
 - [ ] Theme **geactiveerd** op `projectnaam.local`
 - [ ] ACF Pro actief; **Sync** gedaan voor aanwezige JSON

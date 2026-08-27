@@ -40,6 +40,15 @@ npm run dev      # Tailwind watch
 npm run build    # productie-build
 ```
 
+## WP-CLI (theme)
+
+Elk KJ-theme heeft `wp-cli.yml` met `path: ../../..`. Daardoor werkt `wp` **direct vanuit de theme-map** — geen `cd` naar de WP-root of `--path` nodig.
+
+```bash
+wp option get siteurl
+wp post list --post_type=page
+```
+
 ## Handig
 
 | Commando | Doel |
@@ -51,8 +60,9 @@ npm run build    # productie-build
 
 - [ ] Je kunt naar de themamap `cd`-en  
 - [ ] Je start `npm run dev` en stopt met Ctrl+C  
+- [ ] Je runt `wp` vanuit de theme-map (via `wp-cli.yml`)  
 - [ ] Je runt basis-git zonder paniek  
 
 ## Gerelateerd
 
-- [Lokaal — Omgeving](/sops/lokaal/omgeving) · [Git](/kennis/git) · [Tailwind](/kennis/tailwind)
+- [Lokaal — Omgeving](/sops/lokaal/omgeving) · [Git](/kennis/git) · [Tailwind](/kennis/tailwind) · [KJ-Boilerplate](/client-projects/kj-boilerplate)

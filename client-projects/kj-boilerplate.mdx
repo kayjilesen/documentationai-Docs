@@ -118,6 +118,7 @@ kj-boilerplate/
 ├── scripts/
 │   └── build-pagebuilder-js.js
 ├── functions.php
+├── wp-cli.yml                       # path → WP-root; `wp` vanuit theme-map
 ├── header.php
 ├── footer.php
 ├── page.php
@@ -149,6 +150,17 @@ npm run build
 | `build` | `build:css && build:js` | Volledige build |
 | `build:css` | `tailwindcss ... --minify` | CSS compilatie |
 | `build:js` | `node scripts/build-pagebuilder-js.js` | JS bundeling |
+
+### WP-CLI
+
+`wp-cli.yml` zet `path: ../../..` naar de WordPress-installatie. Daardoor werkt `wp` **direct vanuit de theme-map** — geen `cd` of `--path` nodig.
+
+```bash
+wp option get siteurl
+wp post list --post_type=page
+```
+
+Altijd meenemen bij nieuwe themes (zit in de boilerplate).
 
 ---
 
@@ -198,6 +210,7 @@ npm run build
 | Fonts | `tailwind.config.js` | Stel projectfonts in |
 | `@font-face` | `assets/css/input.css` | Voeg webfonts toe |
 | Versie constant | `functions.php` | Update `_KAYJILESEN_VERSION` naam |
+| WP-CLI | `wp-cli.yml` | Behouden (`path: ../../..`) — niet verwijderen |
 | CPTs | `inc/post-types.php` | Maak bestand aan indien nodig |
 | ACF optiepagina | `inc/acf.php` | Configureer footer/header opties |
 | Favicon | WordPress admin | Upload via Customizer |
