@@ -552,6 +552,11 @@
                 "icon": "rocket"
               },
               {
+                "title": "Online Loods Bouwen",
+                "path": "client-projects/onlineloodsbouwen",
+                "icon": "warehouse"
+              },
+              {
                 "title": "Osch",
                 "path": "client-projects/osch",
                 "icon": "sun"
