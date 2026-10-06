@@ -420,6 +420,11 @@
                 "icon": "copy"
               },
               {
+                "title": "Verbong Tweewielers",
+                "path": "client-projects/verbongtweewielers",
+                "icon": "bike"
+              },
+              {
                 "title": "Hoex Systems",
                 "path": "client-projects/hoexsystems",
                 "icon": "leaf"
@@ -768,6 +773,24 @@
               {
                 "title": "Cookiebanner verschijnt niet",
                 "path": "help-center/troubleshooting/cookiebanner-verschijnt-niet"
+              },
+              {
+                "group": "WooCommerce",
+                "icon": "shopping-cart",
+                "expandable": true,
+                "pages": [
+                  {
+                    "group": "MyParcel",
+                    "icon": "package",
+                    "expandable": true,
+                    "pages": [
+                      {
+                        "title": "Order zonder verzendadres",
+                        "path": "help-center/troubleshooting/woocommerce/myparcel/leeg-verzendadres"
+                      }
+                    ]
+                  }
+                ]
               }
             ]
           }

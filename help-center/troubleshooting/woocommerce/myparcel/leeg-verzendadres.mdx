@@ -1,0 +1,99 @@
+---
+title: WooCommerce order zonder verzendadres (MyParcel)
+description: Orders komen binnen met "Geen verzendadres ingesteld" en MyParcel zet elke zending op Pakket. Oorzaak is de optie voor aparte adresvelden in de MyParcel plugin.
+---
+
+## Symptomen
+
+- Op de order staat bij Verzending "Geen verzendadres ingesteld", terwijl het factuuradres wel gevuld is
+- Het telefoonnummer is wel overgenomen naar Verzending, het adres niet
+- MyParcel zet elke zending op "Pakket", brievenbuspakketten moeten per order handmatig worden omgezet
+- In de checkout werkt alles normaal: het vinkje "Verzenden naar een ander adres?" staat er en toont de verzendvelden
+
+## Mogelijke oorzaken
+
+- **Aparte adresvelden in de MyParcel plugin (v5+)**: verreweg de waarschijnlijkste oorzaak als vinkje en velden gewoon werken
+- Het product (of de variatie) staat op "Virtueel", waardoor WooCommerce geen verzendadres vraagt
+- Een filter op `woocommerce_cart_needs_shipping_address` (`__return_false`) in het child theme of een snippet-plugin
+- Verzendvelden verwijderd via een checkout field plugin of het filter `woocommerce_checkout_fields`
+- Koppeling tussen verzendmethode en pakkettype is verloren gegaan bij de migratie van MyParcel v4 naar v5 (alleen het pakkettype-probleem)
+
+## Waarom dit gebeurt
+
+Als de klant het vinkje "Verzenden naar een ander adres?" niet aanzet, kopieert WooCommerce het factuuradres naar het verzendadres. WooCommerce kopieert alleen velden die in de checkout bestaan. De MyParcel plugin vervangt het standaard adresveld door aparte velden (straat, huisnummer, toevoeging), en in die combinatie komt het adres niet in het verzendadres terecht.
+
+Het lege adres ontstaat dus al bij het afrekenen, vóórdat er een label wordt aangemaakt. Het zit in het checkout-deel van MyParcel, niet in het labels-deel.
+
+<Callout kind="info">
+  Dat alleen het telefoonnummer wel wordt overgenomen is de aanwijzing: het kopiëren werkt, alleen de adresvelden die MyParcel aanpast gaan mis.
+</Callout>
+
+## Snelle oplossing
+
+<Steps>
+  <Step title="Zet de aparte adresvelden uit">
+    Ga naar **WooCommerce > MyParcel > Checkout** en schakel de optie voor aparte adresvelden uit.
+  </Step>
+  <Step title="Laat de verzendbestemming staan">
+    Bij **WooCommerce > Instellingen > Verzending > Verzendopties** hoort "Standaard naar factuuradres klant" te staan. Zo blijft een ander verzendadres mogelijk.
+
+    <Callout kind="warning">
+      "Forceer verzending naar het factuuradres van de klant" vult het verzendadres ook, maar haalt de mogelijkheid voor een ander verzendadres weg. Alleen gebruiken als de klant dat nooit nodig heeft.
+    </Callout>
+  </Step>
+  <Step title="Doe een testbestelling">
+    Controleer op de order of het verzendadres gevuld is. Test daarna ook met het vinkje aan en met een adres met toevoeging (bijv. 16A), en kijk of het label in MyParcel klopt.
+  </Step>
+</Steps>
+
+## Testen zonder te betalen
+
+Het verzendadres wordt opgeslagen zodra de order wordt aangemaakt, dus een betaling is niet nodig.
+
+| Methode | Wanneer gebruiken |
+| --- | --- |
+| iDEAL starten en bij de bank annuleren | Snelle check of het verzendadres gevuld is |
+| Kortingscode van 100% incl. gratis verzending | Volledig afgeronde order, ook om MyParcel en pakkettype te testen |
+| Bankoverschrijving tijdelijk aanzetten | Alternatief, maar echte klanten zien de optie dan ook |
+
+Geef de winkeleigenaar vooraf een seintje, verwijder de testorders daarna en let op de voorraad.
+
+## Als het daarna nog niet klopt
+
+<Expandable title="Brievenbuspakket staat nog steeds op Pakket" default-open="false">
+  Koppel de verzendmethode of verzendklasse opnieuw aan "Brievenbuspakket" bij **WooCommerce > MyParcel > Checkout**. Per product kan het ook in het MyParcel-tabje (pakkettype en "past in brievenbus").
+</Expandable>
+
+<Expandable title="Verzendadres blijft leeg" default-open="false">
+  Deactiveer MyParcel tijdelijk op staging en doe een testbestelling. Blijft het adres leeg, dan is het een andere plugin of een filter:
+
+  ```bash
+  grep -rn "woocommerce_cart_needs_shipping_address\|woocommerce_checkout_fields" --include="*.php" wp-content/themes wp-content/plugins
+  ```
+
+  Zet daarna plugins die de checkout aanpassen één voor één uit en test steeds opnieuw.
+</Expandable>
+
+<Expandable title="Huisnummer ontbreekt op het label" default-open="false">
+  Met één adresveld moet MyParcel straat en huisnummer zelf splitsen, en klanten vergeten het huisnummer vaker. Zet "Straat + huisnummer" als placeholder op het adresveld.
+</Expandable>
+
+<Expandable title="Oude orders zonder verzendadres" default-open="false">
+  Bestaande orders blijven leeg. Open de order, klik op het potloodje bij Verzending en kies "Factuuradres kopiëren".
+</Expandable>
+
+## Preventie
+
+<Callout kind="tip" title="Testbestelling na elke MyParcel-update">
+  Doe na een update van de MyParcel plugin een testbestelling en controleer verzendadres en pakkettype. Wil je de aparte adresvelden terug, test dat dan na een update opnieuw en meld het anders op [GitHub](https://github.com/myparcelnl/woocommerce/issues).
+</Callout>
+
+## Voorgekomen bij
+
+- **[by-peet.nl](https://by-peet.nl)** (oktober 2026): WoodMart + WooCommerce + MyParcel v5. Opgelost door de aparte adresvelden uit te zetten. Product was niet virtueel en de verzendbestemming stond goed.
+
+## Gerelateerd
+
+- [MyParcel plugin](https://wordpress.org/plugins/woocommerce-myparcel/) op WordPress.org
+- [MyParcel v5 release notes](https://github.com/myparcelnl/woocommerce/issues/996) met meerdere checkout-fixes rond adresvelden
+- [Plugins](/wordpress/plugins/overzicht): standaard pluginstack
