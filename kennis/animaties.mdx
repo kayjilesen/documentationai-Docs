@@ -1,0 +1,60 @@
+---
+title: "Animaties — soorten en technieken"
+description: "Welke animaties bestaan er, hoe maak je ze (CSS, JavaScript, GSAP) en wanneer is een library het waard?"
+---
+
+## Waarom dit ertoe doet
+
+Een animatie moet iets doen voor de bezoeker. Eerst indrukwekkend, na de vijfde site gewoon. Kijk daarom vooral of hij **helpt** (laat zien dat iets klikbaar is, wat er opent) of alleen **mooi** is, en of tekst nog goed leesbaar blijft.
+
+## Soorten animaties
+
+Ingedeeld op wat ze start.
+
+| Start door | Soort | Helpt of mooi? |
+|------------|-------|----------------|
+| **Pagina openen** | Laadanimatie | Beide: vult het wachten op |
+| **Automatisch** | Bewegende tekst, bewegend 3D-object | Vooral mooi |
+| **Scrollen** | Parallax, zijwaarts bewegen, kaarten stapelen | Parallax mooi; stapelen helpt: toont onderdelen één voor één |
+| **Muis erboven** | Knopanimatie, afbeelding bij hover, bewegende letters | Knop en afbeelding helpen: je ziet dat je kunt klikken of krijgt een voorproefje |
+| **Muis bewegen** | Bewegend 3D-beeld, spoor achter de muis, beeld onthullen | Vooral mooi en speels |
+| **Klik** | Menuanimatie, paginaovergang | Menu helpt: je ziet dat het opent. Overgang is mooi en rustiger |
+| **Overgang tussen onderdelen** | Vorm die in een andere overgaat | Vooral mooi |
+
+Veelvoorkomend zijn bewegende knoppen en scroll-animaties. Een bewegend 3D-object past vooral bij een site die wil opvallen.
+
+## Technieken
+
+| Techniek | Wat kun je ermee | Minder geschikt voor | Zwaar of moeilijk? |
+|----------|------------------|----------------------|--------------------|
+| **CSS** (`transition`, `keyframes`) | Knoppen, tekst verschuiven, dingen laten verschijnen | Bewegingen die de muis volgen | Licht en makkelijk |
+| **JavaScript / Web Animations API** | Bewegingen starten, stoppen en aanpassen, de muis volgen | Veel animaties precies achter elkaar | Geen library, meer eigen code |
+| **GSAP** (+ ScrollTrigger) | Tekst, afbeeldingen en menu's bewegen, beweging koppelen aan scrollen | Echte 3D; één simpele knop | Extra bestanden, even leren |
+| **CSS-scrollanimaties** | Parallax of schuivende blokken zonder JavaScript | Muis- of klikgestuurde beweging | Nog niet overal ondersteund |
+| **View Transitions** | Vloeiende overgang tussen twee weergaven | Doorlopende animaties | Eenvoudig, binnen één pagina breed ondersteund |
+| **SVG met CSS of GSAP** | Getekende vormen en lijnen bewegen | Foto's vervormen, echte 3D | Simpele vormen licht |
+| **Lottie** | Een kant-en-klare animatie afspelen (laadicoon) | Een hele site laten bewegen | Afspelen makkelijk, zelf ontwerpen lastig |
+| **Three.js / WebGL** | Echte 3D-objecten en scènes | Simpele knoppen en tekst | Zwaar en moeilijk |
+
+## Welke techniek kies je?
+
+- **Gaat het om een simpele beweging** (knop, tekst die verschijnt, een menu)? Gebruik **CSS**, eventueel met een beetje JavaScript voor openen en sluiten. Dat scheelt code.
+- **Zijn het veel samenhangende bewegingen of scroll-animaties?** Dan is **GSAP** de moeite waard. Zie [GSAP in het thema](/wordpress/gsap).
+- **Is het één bewegende knop?** Een library is te veel.
+- **Echte 3D?** Three.js, maar laad het pas als het nodig is, zodat de pagina snel blijft (zie [Mori Matcha](/client-projects/mori-matcha)).
+
+## Let op
+
+- Laat tekst leesbaar blijven: een grote schuivende naam kan afleiden van de rest.
+- Hover bestaat niet op touch: bedenk wat er op een telefoon gebeurt.
+- Houd bewegingen kort en reken met mensen die "minder beweging" hebben ingesteld.
+- Weet niet welke techniek een andere site gebruikt: je kunt het namaken, maar niet zeker weten.
+
+## Af (begrip)
+
+- [ ] Je kunt een animatie indelen naar wat hem start
+- [ ] Je weet wanneer CSS genoeg is en wanneer GSAP de moeite waard is
+
+## Gerelateerd
+
+- [GSAP in het thema](/wordpress/gsap) · [HTML & CSS](/kennis/html-css) · [Browser DevTools](/kennis/browser)

@@ -22,6 +22,11 @@
                 "title": "Introductie",
                 "path": "introduction",
                 "icon": "home"
+              },
+              {
+                "title": "De eerste dag",
+                "path": "eerste-dag",
+                "icon": "sunrise"
               }
             ]
           },
@@ -147,6 +152,16 @@
                     "title": "Formulieren",
                     "path": "wordpress/plugins/formulieren",
                     "icon": "clipboard"
+                  },
+                  {
+                    "title": "SureRank",
+                    "path": "wordpress/plugins/surerank",
+                    "icon": "search"
+                  },
+                  {
+                    "title": "WPMU DEV Hub",
+                    "path": "wordpress/plugins/wpmu-dev-hub",
+                    "icon": "layout-dashboard"
                   }
                 ]
               },
@@ -159,6 +174,16 @@
                 "title": "Tailwind CSS Setup",
                 "path": "wordpress/tailwind-setup",
                 "icon": "palette"
+              },
+              {
+                "title": "Escaping",
+                "path": "wordpress/escaping",
+                "icon": "shield"
+              },
+              {
+                "title": "GSAP in het thema",
+                "path": "wordpress/gsap",
+                "icon": "zap"
               }
             ]
           },
@@ -269,6 +294,11 @@
                 "title": "Skills Overzicht",
                 "path": "claude/skills-overview",
                 "icon": "zap"
+              },
+              {
+                "title": "SureRank met Claude",
+                "path": "claude/surerank-mcp",
+                "icon": "search"
               }
             ]
           }
@@ -307,6 +337,11 @@
                 "title": "Configuratie",
                 "path": "wordpress/configuratie",
                 "icon": "settings"
+              },
+              {
+                "title": "Posttype of veld?",
+                "path": "kennis/posttype-of-veld",
+                "icon": "layers"
               }
             ]
           },
@@ -348,6 +383,11 @@
                 "title": "Figma voor developers",
                 "path": "kennis/figma",
                 "icon": "figma"
+              },
+              {
+                "title": "Animaties",
+                "path": "kennis/animaties",
+                "icon": "sparkles"
               }
             ]
           },
@@ -400,6 +440,16 @@
                 "title": "SEO — basis",
                 "path": "kennis/seo",
                 "icon": "search"
+              },
+              {
+                "title": "WooCommerce — basis",
+                "path": "kennis/woocommerce",
+                "icon": "shopping-cart"
+              },
+              {
+                "title": "Webshop en wetgeving",
+                "path": "kennis/webshop-en-wet",
+                "icon": "scale"
               }
             ]
           }
@@ -418,6 +468,21 @@
                 "title": "KJ-Boilerplate",
                 "path": "client-projects/kj-boilerplate",
                 "icon": "copy"
+              },
+              {
+                "title": "Mori Matcha",
+                "path": "client-projects/mori-matcha",
+                "icon": "coffee"
+              },
+              {
+                "title": "Smedts Workgroup",
+                "path": "client-projects/smedts-workgroup",
+                "icon": "factory"
+              },
+              {
+                "title": "Solea",
+                "path": "client-projects/solea",
+                "icon": "flower-2"
               },
               {
                 "title": "Verbong Tweewielers",
@@ -672,6 +737,38 @@
                 "title": "Bouwen",
                 "path": "sops/lokaal/bouwen",
                 "icon": "code"
+              },
+              {
+                "group": "Blokken en posttypes",
+                "icon": "layers",
+                "expandable": true,
+                "pages": [
+                  {
+                    "title": "Nieuw pagebuilder-blok",
+                    "path": "wordpress/pagebuilder-blocks",
+                    "icon": "plus-circle"
+                  },
+                  {
+                    "title": "Sectie omzetten naar blok",
+                    "path": "sops/lokaal/sectie-omzetten-naar-blok",
+                    "icon": "repeat"
+                  },
+                  {
+                    "title": "Tweede pagebuilder",
+                    "path": "sops/lokaal/tweede-pagebuilder",
+                    "icon": "layers"
+                  },
+                  {
+                    "title": "Posttype registreren",
+                    "path": "sops/lokaal/posttype-registreren",
+                    "icon": "file-text"
+                  },
+                  {
+                    "title": "Andere items tonen",
+                    "path": "sops/lokaal/andere-items-tonen",
+                    "icon": "list"
+                  }
+                ]
               }
             ]
           },
@@ -684,6 +781,11 @@
                 "title": "Site & deploy",
                 "path": "sops/staging/site-en-deploy",
                 "icon": "upload"
+              },
+              {
+                "title": "Lokaal naar staging",
+                "path": "sops/staging/lokaal-naar-staging",
+                "icon": "database"
               },
               {
                 "title": "Stack & testen",
@@ -745,6 +847,16 @@
                 "title": "Klant-e-mail",
                 "path": "sops/extra/klant-email",
                 "icon": "mail"
+              },
+              {
+                "title": "Herbouw en vergelijken",
+                "path": "sops/extra/herbouw-vergelijken",
+                "icon": "replace"
+              },
+              {
+                "title": "WooCommerce-shop",
+                "path": "sops/extra/woocommerce-shop",
+                "icon": "shopping-cart"
               }
             ]
           }
@@ -792,6 +904,35 @@
                       {
                         "title": "Order zonder verzendadres",
                         "path": "help-center/troubleshooting/woocommerce/myparcel/leeg-verzendadres"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "group": "WordPress",
+                "icon": "layout",
+                "expandable": true,
+                "pages": [
+                  {
+                    "group": "Thema",
+                    "icon": "layout",
+                    "expandable": true,
+                    "pages": [
+                      {
+                        "title": "PHP-waarschuwingen na verwijderen thema's",
+                        "path": "help-center/troubleshooting/wordpress/thema/php-waarschuwingen-na-verwijderen-themas"
+                      }
+                    ]
+                  },
+                  {
+                    "group": "SureCookie",
+                    "icon": "cookie",
+                    "expandable": true,
+                    "pages": [
+                      {
+                        "title": "Scherm blijft laden",
+                        "path": "help-center/troubleshooting/wordpress/surecookie/scherm-blijft-laden"
                       }
                     ]
                   }

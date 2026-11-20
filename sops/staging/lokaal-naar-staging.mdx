@@ -1,0 +1,94 @@
+---
+title: "Staging — Lokaal naar staging"
+description: "De inhoud van een lokale site (database en uploads) naar de staging-site in xCloud zetten. Het thema gaat via Git."
+---
+
+<Callout kind="info" title="Dit is een SOP">
+  Het **thema** gaat via Git en [Deployer for Git](/hosting/deployments). De **inhoud** (database en uploads) zit niet in Git en moet apart mee. Dat doe je met deze SOP, nadat de staging-site bestaat ([Site & deploy](/sops/staging/site-en-deploy)).
+</Callout>
+
+## Doel
+
+De staging-site toont dezelfde pagina's, menu's en afbeeldingen als de lokale site, met werkende URL's.
+
+## Kies een methode
+
+| Methode | Wanneer |
+|---------|---------|
+| **A. Plugin (Duplicator)** | Standaard. Eén pakket met database en bestanden, geen handwerk in de database. |
+| **B. Handmatig** | Als een plugin niet kan of wil. Meer stappen en meer kans op fouten. |
+
+## Methode A: Duplicator
+
+<Steps>
+  <Step title="Maak een pakket lokaal" icon="package">
+    Installeer **Duplicator** op de lokale site, kies **Nieuwe toevoegen** en laat database én bestanden aangevinkt. Lees het scanrapport: groen is goed, geel mag je meestal negeren, rood moet je eerst oplossen. Download daarna de **installer** en het **archief** (zip).
+  </Step>
+  <Step title="Maak de staging-map leeg" icon="trash-2">
+    Open in xCloud bij de site **Access Data → File Manager**, selecteer de standaard WordPress-bestanden en verwijder ze. De map moet leeg zijn.
+  </Step>
+  <Step title="Upload installer en archief" icon="upload">
+    Upload beide bestanden in de File Manager en controleer of ze in de lijst staan.
+  </Step>
+  <Step title="Hernoem de installer" icon="pencil">
+    Duplicator geeft de installer een lange naam (met een datum en code). Hernoem hem via het potlood-icoon naar precies `installer.php`. Anders vind je hem niet op de URL.
+  </Step>
+  <Step title="Draai de installer" icon="play">
+    Open `https://projectnaam.kayjilesen.dev/installer.php`. Kies bij de database **Empty Database**, host `localhost`, en vul database, gebruiker en wachtwoord in uit xCloud (**Access Data**). De adressen (New Site URL, New Path) staan vanzelf goed: laat ze staan. Klik **Validate**.
+  </Step>
+  <Step title="Rond af en laat opruimen" icon="log-in">
+    Laat bij Step 2 het vinkje **Auto delete installer files after login** aanstaan en klik **Admin Login**. Zo verdwijnen de installatiebestanden van de server. Blijven ze staan, dan kan iemand de site opnieuw installeren.
+  </Step>
+</Steps>
+
+## Methode B: handmatig
+
+<Steps>
+  <Step title="Exporteer de lokale database" icon="download">
+    In phpMyAdmin: kies de database, tabblad **Exporteren**, laat het op Snel/SQL staan en klik **Start**.
+  </Step>
+  <Step title="Maak de staging-database leeg en importeer" icon="database">
+    Open in xCloud bij **Access Data → Database** de beheertool (Adminer of phpMyAdmin), selecteer alle standaardtabellen en verwijder ze. Importeer daarna het `.sql`-bestand.
+  </Step>
+  <Step title="Pas de tabelprefix aan" icon="settings">
+    De nieuwe site heeft een eigen prefix, de geïmporteerde tabellen heten meestal `wp_`. Pas `$table_prefix` in `wp-config.php` aan. Zie [Configuratie](/wordpress/configuratie).
+  </Step>
+  <Step title="Zet de uploads over" icon="folder">
+    Alleen `wp-content/uploads` (de mediabibliotheek). Thema en plugins komen via Git en de Hub, niet via deze weg. Zie [Bestanden](/wordpress/bestanden).
+  </Step>
+  <Step title="Vervang het lokale adres" icon="refresh-cw">
+    Open in xCloud **Open Terminal** en draai (met de juiste adressen):
+
+    ```bash
+    wp search-replace 'https://projectnaam.local' 'https://projectnaam.kayjilesen.dev' --all-tables
+    ```
+
+    Je ziet een tabel met per databasetabel hoeveel regels zijn aangepast.
+  </Step>
+</Steps>
+
+## Na het overzetten (beide methodes)
+
+- Zet de formulier-ontvanger en het beheerdersadres op een eigen adres, zodat een test nooit bij de klant aankomt. Zie [FluentSMTP](/wordpress/plugins/fluent-smtp).
+- Koppel het thema aan Git en deploy ([Deployments](/hosting/deployments)), doe **ACF > Sync** en purge de caches.
+- Controleer of de sitemap, de OpenGraph-afbeelding en de privacypagina nog naar het lokale adres wijzen. Dat gaat mis zodra er een adres in een tekst of instelling is blijven staan.
+
+## Waar het misgaat
+
+- Installer niet hernoemd: de URL geeft een 404.
+- Prefix niet aangepast: "Error establishing a database connection" of een lege site.
+- Nog een lokaal adres in teksten of instellingen: foute links en een sitemap met `.local`-adressen.
+
+## Af
+
+- [ ] Pagina's, menu's en afbeeldingen staan op staging
+- [ ] Geen lokaal adres meer in links, sitemap en OpenGraph
+- [ ] Installatiebestanden zijn verwijderd (methode A)
+- [ ] Ontvanger en beheerdersadres op een eigen adres
+- [ ] Thema via Git gedeployed, ACF-sync gedaan, caches gepurged
+
+## Volgende
+
+→ [Stack & testen](/sops/staging/stack-en-testen)
+
+*Bron: Rayan — werklog "Live Omgeving" (methode 1 en 2).*

@@ -19,3 +19,24 @@ description: Stappen om aan de slag te gaan met het documentatieportaal.
 ## Publiceren
 
 - Push naar de hoofdbranch om je wijzigingen live te zetten
+
+<Callout kind="warning" title="Push niet zomaar naar de hoofdbranch">
+  Alles wat op de live-branch (standaard `main`) komt, wordt automatisch gepubliceerd. Werk daarom in een **eigen branch** en laat Kay die samenvoegen.
+</Callout>
+
+## Een pagina bekijken voordat hij live staat
+
+1. **Werk in een eigen branch** en push die naar GitHub. De live site verandert niet.
+2. **Open een preview in het Documentation.AI-dashboard.** Elke branch die niet live is kan een eigen *preview site* met een eigen preview-link hebben. Kies de branch in de branch-selector bovenin de editor. De link verschijnt pas als de preview klaar is. Bij een pull request wordt de preview ook automatisch gebouwd.
+3. **Controleer de navigatie.** Een pagina moet in `documentation.json` staan om gepubliceerd te worden. Een `.mdx`-bestand dat er niet in staat, is een *niet-gepubliceerde pagina*: niet in de navigatie en niet in de sitemap. Zo'n pagina is dus op de live site niet bereikbaar en links ernaartoe geven een 404.
+4. **Kijk op de preview** of de pagina zichtbaar is, op de juiste plek staat en of de links werken.
+
+<Callout kind="info" title="Hangt af van het plan">
+  Previews zijn afhankelijk van het abonnement: heeft een plan er geen, dan toont het dashboard een upgrade-prompt. Er is geen lokale dev-server voor Documentation.AI gevonden. Je editor kan wel Markdown tonen, maar dat is niet de echte weergave. Controleer dit eenmalig in het dashboard van dit project.
+</Callout>
+
+## De live-branch aanpassen
+
+De branch die live gaat staat in het dashboard onder **Settings → Git Settings**. Wijzigen herdeployt de hele site vanaf die branch.
+
+*Bron: documentatie van Documentation.AI (Branches and previews, GitHub-integratie, Pages, navigatie), gelezen op 20 november 2026.*

@@ -1,0 +1,89 @@
+---
+title: "SureRank"
+description: "SEO-plugin SureRank: titelsjabloon, sitemap, OpenGraph-afbeelding en titel/omschrijving per pagina."
+---
+
+**SureRank** is de SEO-plugin die we gebruiken voor paginatitels, omschrijvingen, de sitemap en de afbeelding bij delen op social media. Wat SEO is en waarom, staat in [SEO — basis](/kennis/seo).
+
+<Callout kind="info" title="Dit is een SOP">
+  Instellen doe je lokaal, in de bouwfase. Controleer het op staging en live ([Go-live checks](/sops/livegang/go-live-checks)).
+</Callout>
+
+## Wat gaat mee naar staging
+
+Alles wat in SureRank zelf staat (scheidingsteken, titels, sitemap, noindex) zit in de database en gaat mee. Wat **niet** meegaat is alles wat aan het lokale adres vastzit. Een privacypagina met het lokale adres in de tekst moet je later aanpassen.
+
+## 1. Scheidingsteken en titelsjabloon
+
+<Steps>
+  <Step title="Open Meta-sjablonen" icon="settings">
+    SureRank → tabblad **Algemeen** → **Meta-sjablonen**. Het tabblad *Dashboard* toont alleen een overzicht van waarschuwingen, daar staan geen instellingen.
+  </Step>
+  <Step title="Klik op het teken tussen de twee blokjes" icon="mouse-pointer">
+    Bij **Zoekmachine titel** staan *Berichttitel* en *Sitenaam* naast elkaar met een teken ertussen. Dat teken **is** het scheidingsteken. Klik erop en typ bijvoorbeeld een verticale streep.
+  </Step>
+  <Step title="Controleer en sla op" icon="check">
+    Kijk in het vak **Zoekmachine voorbeeld** of het klopt en klik op **Opslaan**.
+  </Step>
+</Steps>
+
+**Waar het misgaat:** het scheidingsteken lijkt geen aparte instelling, maar zit verstopt tussen de twee blokjes. Het sjabloon werkt bovendien alleen voor pagina's die **nog geen eigen titel** hebben. Heeft een pagina al een handmatige titel, dan verandert daar niets.
+
+**Controle:** open een pagina zonder eigen titel in een privévenster, bekijk de bron en zoek op `title`.
+
+## 2. Sitemap opschonen
+
+<Steps>
+  <Step title="Bekijk de sitemap" icon="eye">
+    Ga naar `sitemap_index.xml` van de site (of **Bekijk Sitemap** in SureRank) en open elke sub-sitemap. Pas dan zie je wat erin staat.
+  </Step>
+  <Step title="Sluit uit wat er niet in hoort" icon="minus-circle">
+    SureRank → **Algemeen** → **Sitemaps**. Voeg bij **Verwerp Berichttype** de posttypes toe die je niet wilt (bijvoorbeeld *Berichten* als er geen blog is). Voeg bij **Verwerp Taxonomie** de taxonomieën toe die nergens een eigen goede pagina opleveren. Sla op.
+  </Step>
+  <Step title="Controleer opnieuw" icon="search">
+    De uitgesloten sub-sitemaps moeten weg zijn en de rest moet kloppen.
+  </Step>
+</Steps>
+
+**Waar het misgaat:** een naam als `archives-sitemap` lijkt over auteurs- of datumarchieven te gaan, maar kan het archief van je eigen posttype zijn, en dat hoort er wél in. Open dus altijd de sub-sitemap voor je hem uitsluit.
+
+## 3. OpenGraph-afbeelding
+
+SureRank → **Algemeen** → **Sociaal** → **Standaard sociale afbeelding**. Kies een **liggende** foto die het bedrijf goed laat zien. Social media snijden bij tot ongeveer 1200 × 630, dus een staande foto of close-up wordt lelijk uitgesneden. Is er geen aparte foto voor delen, kies er dan bewust een die ook liggend goed oogt.
+
+**Controle:** bekijk de bron van een pagina en zoek op `og:image`.
+
+## 4. Titel en omschrijving per pagina
+
+<Steps>
+  <Step title="Open het SureRank-paneel in de editor" icon="panel-right">
+    Rechts in de pagina-editor staan **Zoekmachine titel** en **Zoekmachinebeschrijving**.
+  </Step>
+  <Step title="Vervang de standaardwaarde" icon="pencil">
+    Vervang variabelen zoals *Berichttitel* door een eigen tekst over wat er écht op de pagina staat. Een titel die bijna gelijk is aan de H1 voegt weinig toe.
+  </Step>
+  <Step title="Let op de lengte" icon="ruler">
+    Titel tot ongeveer **60** tekens, omschrijving tot ongeveer **160**. Die grens komt van Google, niet van de plugin: langere tekst wordt afgeknipt met puntjes.
+  </Step>
+  <Step title="Homepage via Algemeen" icon="home">
+    De homepage is een gewone pagina die als voorpagina is aangewezen. SureRank heeft er geen apart veld voor: ga naar **Algemeen → Startpagina**, dat verwijst door naar die ene pagina.
+  </Step>
+</Steps>
+
+**Waar het misgaat:** dezelfde omschrijving op meerdere pagina's kan door Google als dubbele inhoud gezien worden.
+
+**Controle:** open de pagina in een privévenster, bekijk de bron en vergelijk `title` en `meta description` met wat je invulde, en met andere pagina's.
+
+## Af
+
+- [ ] Scheidingsteken en titelsjabloon ingesteld en gecontroleerd in de bron
+- [ ] Sitemap bevat alleen posttypes en taxonomieën die de site gebruikt
+- [ ] Standaard OpenGraph-afbeelding is een liggende foto; `og:image` klopt
+- [ ] Elke pagina heeft een eigen titel en omschrijving binnen de lengtegrenzen
+- [ ] Op staging: geen lokaal adres meer in sitemap of OpenGraph
+
+## Gerelateerd
+
+- [SEO — basis](/kennis/seo) · [SureRank koppelen aan Claude](/claude/surerank-mcp) · [Plugins Overzicht](/wordpress/plugins/overzicht)
+
+*Bron: Rayan — SEO-SOP's (scheidingsteken, sitemap, OpenGraph, titel en omschrijving) en werklog HOUS, SEO.*

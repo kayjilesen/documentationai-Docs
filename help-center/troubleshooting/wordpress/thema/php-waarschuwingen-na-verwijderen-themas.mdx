@@ -1,0 +1,35 @@
+---
+title: "PHP-waarschuwingen na het verwijderen van standaardthema's"
+description: "Na het opruimen van Twenty Twenty-thema's geeft wp-admin overal PHP-waarschuwingen en 'headers already sent'. Oplossing: transients en cache legen via WP-CLI."
+---
+
+## Symptomen
+
+- Direct nadat je de ongebruikte standaardthema's (Twenty Twenty-Drie/Vier/Vijf) hebt verwijderd, toont wp-admin op elke pagina PHP-waarschuwingen over **ontbrekende taalbestanden**
+- Daardoor verschijnt ook de fout **"headers already sent"**
+- De voorkant van de site kan er nog gewoon goed uitzien
+
+## Wat hielp
+
+Het legen van de opgeslagen (gecachete) gegevens via WP-CLI. Open in xCloud **Open Terminal** voor de site en draai:
+
+```bash
+wp transient delete --all
+wp cache flush
+```
+
+Ververs daarna wp-admin. De waarschuwingen waren weg. Meer over WP-CLI: [Terminal](/kennis/terminal).
+
+<Callout kind="info" title="Waarom dit werkt">
+  Dit is de oplossing die bij mij werkte. De exacte oorzaak is niet uitgezocht. Meest waarschijnlijk verwijst opgeslagen informatie nog naar de verwijderde thema's tot die cache is geleegd.
+</Callout>
+
+## Voorkomen
+
+Verwijder ongebruikte thema's en plugins vóór de livegang als onderdeel van de laatste controle ([Go-live checks](/sops/livegang/go-live-checks)) en leeg daarna meteen de caches ([Caching](/hosting/caching)).
+
+## Gerelateerd
+
+- [Configuratie](/wordpress/configuratie) (debug.log lezen) · [Oplevering](/sops/livegang/oplevering)
+
+*Bron: Rayan — werklog "Live Omgeving" (fase 7, probleem en oplossing).*

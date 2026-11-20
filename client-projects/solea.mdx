@@ -1,0 +1,91 @@
+---
+title: "Project: Solea"
+description: "One-page voor een massagesalon: behandelingen als posttype met prijsregels, zeven pagebuilder-blokken en één instellingenpagina."
+---
+
+## Project Overzicht
+
+| Detail | Waarde |
+|--------|--------|
+| **Klant** | Solea (massagesalon) |
+| **Type** | One-page met extern boekingssysteem |
+| **Status** | Gebouwd (fase 2) |
+| **Pad** | `wp-content/themes/solea/` |
+| **Repo** | github.com/kayjilesen/soleamassage |
+
+De site is één pagina (Home), opgebouwd uit blokken. Afspraken lopen via een extern boekingssysteem.
+
+---
+
+## Tech Stack
+
+<Columns cols={3}>
+  <Card title="WordPress + ACF Pro" icon="code">
+    Gebouwd op de KJ-Boilerplate, pagebuilder met 7 blokken
+  </Card>
+  <Card title="Tailwind CSS" icon="palette">
+    Tokens volgen de Figma-variabelen; Montserrat en Playfair self-hosted
+  </Card>
+  <Card title="Posttype + taxonomie" icon="database">
+    Behandelingen en behandelcategorieën
+  </Card>
+</Columns>
+
+---
+
+## Posttypes en taxonomieën
+
+| Wat | Slug | Waarom |
+|-----|------|--------|
+| Pagina's | `page` | Alleen **Home**, opgebouwd uit blokken |
+| Behandelingen | `behandeling` | De klant beheert ze zelf. Geen eigen openbare pagina (`public => false`) |
+| Behandelcategorieën | `behandelcategorie` | Head spa, Massage, Energetisch, Rituelen. Eén categorie per behandeling |
+
+Velden van een behandeling: naam, korte uitleg, uitgebreide uitleg (achter "Lees meer"), categorie, **duur en prijs** (herhaalbare regels, zodat één prijs te wijzigen is), optionele boekingslink, "alleen als aanvulling te boeken", volgorde en status (concept of gepubliceerd). Waarom een posttype en geen veld: zie [Posttype of veld?](/kennis/posttype-of-veld).
+
+---
+
+## Blokken
+
+| Blok | Inhoud |
+|------|--------|
+| `intro` | Label, titel, tekst, afbeelding, afspraakknop en tweede knop |
+| `over-mij` | Verhaal, citaat, twee afbeeldingen, uitklaptekst |
+| `fotostrook` | Vier sfeerfoto's met sleepbare volgorde |
+| `behandelingen` | Behandelingen per categorie, automatisch uit het posttype |
+| `cadeaubon` | Tekst, afbeelding, bestemming van de bestelknop |
+| `praktisch` | Herhaalbare lijst met icoon (vaste lijst), titel en tekst |
+| `huisregels` | Regels en link naar de voorwaarden |
+
+Elk blok heeft een tab **Instellingen** met het veld `anker`, zodat het menu naar "Over mij" of "Behandelingen" kan springen.
+
+---
+
+## Solea instellingen (options page)
+
+Eén pagina met tabs **Algemeen** (bedrijfsnaam, algemene boekingslink, logo's), **Contact** (adres, telefoon, e-mail, parkeren), **Header en menu**, **Footer** en **Links** (voorwaarden, privacy, cookies). Het jaartal in de footer is automatisch. Zie [Options Pages](/acf/options-pages).
+
+## Componenten
+
+Knop (Primair, Secundair, Licht, Tekstlink), label met punt, afbeelding, icoon met tekst, behandelrij en uitklapbare tekst. Uitklapteksten zijn echte `<button>`-elementen met `aria-expanded`, dus ze werken met Enter en Spatie.
+
+---
+
+## Afwijkingen van de eerste opzet
+
+1. **Geen blok Informatie en geen aparte pagina's** voor voorwaarden, privacy en cookies: de site is één pagina. De footer linkt naar een URL in *Solea instellingen → Links*.
+2. **Anker per blok** voor het menu.
+3. **Menu-items** hebben een bestemming (onderdeel op de pagina, boekingslink of eigen link) en een keuze voor header en/of footer.
+4. **Volgorde** van behandelingen en categorieën zijn gewone nummervelden, zodat de klant ze op de bewerkpagina ziet.
+5. **Tabelkoppen en knopteksten** ("Lees meer", "Minder lezen") zijn velden, zodat alle tekst aanpasbaar is.
+6. **404:** er is geen ontwerp, dus de pagina stuurt door naar Home.
+
+---
+
+## Open punten en afspraken
+
+- De algemene **boekingslink** staat niet in het ontwerp en moet de klant invullen.
+- **Prijzen op de site** veranderen niet mee in het boekingssysteem. De klant houdt ze op beide plekken bij.
+- **Cookiemelding:** nog niet gebouwd. De site zet zelf geen cookies. Zodra het boekingssysteem of statistieken erbij komt, is een melding nodig ([SureCookie](/wordpress/plugins/surecookie)).
+- **Privacy:** er is geen formulier en er wordt niets over klachten of gezondheid uitgevraagd op de site. Als het boekingssysteem dat wel doet, moet de klant daar zorgen voor veilige verwerking.
+- Bij een **naamswijziging**: oude en nieuwe adressen, doorsturen en het Google Bedrijfsprofiel moeten geregeld worden.

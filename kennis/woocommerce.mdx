@@ -1,0 +1,63 @@
+---
+title: "WooCommerce — basis"
+description: "Hoe WooCommerce werkt: producten, varianten, de weg van een bestelling, waar alles in de database staat en hoe je het aanpast."
+---
+
+## Productsoorten
+
+| Soort | Wat het is |
+|-------|-----------|
+| **Eenvoudig** (simple) | Eén product, één prijs |
+| **Variabel** (variable) | Eén product met varianten, bijvoorbeeld kleur of maat |
+| **Gegroepeerd** (grouped) | Een groep losse producten op één pagina |
+| **Extern** (external) | Een product dat je elders koopt |
+
+- **Categorie:** een indeling van producten (bepaalt waar ze in het overzicht staan).
+- **Attribuut:** een eigenschap van een product, zoals kleur.
+- **Variatie:** één combinatie van attributen binnen een variabel product, met eigen prijs en voorraad. Twee kleuren van dezelfde mat zijn dus twee variaties van één product.
+
+## De weg van een bestelling
+
+1. De klant voegt een product toe aan de winkelwagen en past eventueel aantal of variant aan.
+2. De klant gaat naar het afrekenen en vult gegevens in.
+3. De klant kiest een betaalmethode en plaatst de bestelling.
+4. WooCommerce maakt de bestelling aan met een status en stuurt een bevestigingsmail.
+5. Zodra er betaald is, wordt de status **verwerken** of **afgerond** en gaat er weer een mail naar de klant.
+
+### Bij bankoverschrijving
+
+De bestelling krijgt de status **in afwachting van betaling**. De shop weet niet automatisch of er betaald is. Je controleert het bankafschrift en zet de bestelling zelf op *verwerken* of *afgerond*.
+
+- **Voorraad:** gaat meteen omlaag zodra de bestelling geplaatst is, ook zonder betaling. Wordt er niet betaald, annuleer de bestelling dan: WooCommerce zet de voorraad terug.
+- **Terugbetalen:** WooCommerce past de bestelling aan (status *terugbetaald*), maar stuurt **geen geld** terug zonder betaalprovider. Dat doe je zelf via de bank. Voer daarna de terugbetaling in WooCommerce in en stuur de klant een bericht.
+
+## Waar staat het in de database?
+
+Zie ook [Database](/wordpress/database).
+
+| Wat | Waar |
+|-----|------|
+| Producten en varianten | `wp_posts` (variaties zijn gekoppeld aan het hoofdproduct) |
+| Categorieën en attributen | `wp_terms` en bijbehorende tabellen, net als gewone categorieën |
+| Prijs en voorraad | `wp_postmeta` (en een snellere tabel van WooCommerce zelf) |
+| Bestellingen | Eigen tabellen (HPOS), **niet** meer bij de gewone berichten |
+| Klantgegevens bij een bestelling | Eigen tabel. Een account is gewoon een gebruiker |
+
+Bestellingen in eigen tabellen is sneller, zeker bij veel bestellingen.
+
+## Hook of template overnemen?
+
+Je kunt WooCommerce op twee manieren aanpassen.
+
+- **Hook:** je past alleen iets aan (tekst, volgorde, iets weghalen). WooCommerce blijft meewerken met updates. **Kies dit meestal.**
+- **Template overnemen in je thema:** alleen als je de HTML echt anders wilt en een hook niet genoeg is. Jouw versie wordt altijd gebruikt, ook na een update. Wijzigingen van WooCommerce krijg je dus niet vanzelf. Je ziet een waarschuwing bij **WooCommerce → Status → Templates** als jouw versie verouderd is. Vergelijk dan zelf en werk je bestand bij.
+
+## Af (begrip)
+
+- [ ] Je weet het verschil tussen product, categorie, attribuut en variatie
+- [ ] Je kunt de weg van een bestelling en de status bij bankoverschrijving uitleggen
+- [ ] Je weet wanneer je een hook gebruikt en wanneer je een template overneemt
+
+## Gerelateerd
+
+- [WooCommerce-shop instellen](/sops/extra/woocommerce-shop) · [Webshop en wetgeving](/kennis/webshop-en-wet) · [Database](/wordpress/database)

@@ -1,0 +1,58 @@
+---
+title: "Extra — WooCommerce-shop instellen"
+description: "WooCommerce instellen voor een webshop: producten, btw, verzending, betalen, accounts, mail en testen."
+---
+
+<Callout kind="info" title="Dit is een SOP (opzet)">
+  Alleen als de scope in [Kickoff](/sops/kickoff) een **webshop** bevat. Wil je eerst begrijpen hoe WooCommerce werkt (producten, varianten, statussen)? Lees [WooCommerce — basis](/kennis/woocommerce). Wat de wet vraagt staat in [Webshop en wetgeving](/kennis/webshop-en-wet).
+</Callout>
+
+## Doel
+
+Een shop waarin een testbestelling van begin tot eind klopt: prijs, btw, verzendkosten, mails en voorraad.
+
+## Stappen
+
+<Steps>
+  <Step title="Producten" icon="package">
+    Stel voorraad, afmetingen, gewicht en reviews in. Zet kleurkeuzes of maten als **variabel product** met variaties, niet als losse producten.
+  </Step>
+  <Step title="Belasting (btw)" icon="percent">
+    Zet btw-berekening aan en toon prijzen inclusief btw als je aan consumenten verkoopt. Een voedingsmiddel heeft een ander tarief (9%) dan accessoires (21%). Laat de accountant bevestigen hoe producten met beide samen (een set) worden berekend.
+  </Step>
+  <Step title="Verzending" icon="truck">
+    Maak een verzendzone (bijvoorbeeld Nederland) met een vast tarief en eventueel gratis verzending vanaf een bedrag. De kosten moeten vóór het bestellen duidelijk zijn. Verzend je met MyParcel, lees dan [Order zonder verzendadres](/help-center/troubleshooting/woocommerce/myparcel/leeg-verzendadres).
+  </Step>
+  <Step title="Betalen" icon="credit-card">
+    Zet in de testfase alleen bankoverschrijving aan. Voor iDEAL, Bancontact en creditcard gebruik je Mollie in **testmodus**: de methodes verschijnen pas nadat je een testsleutel invult. Echte sleutels zet je nooit in Git of in de docs.
+  </Step>
+  <Step title="Accounts" icon="user">
+    Kies of klanten als gast kunnen bestellen. Bestellen zonder account houdt het afrekenen eenvoudig. Heeft de shop abonnementen of een klantomgeving, dan is een account nodig: beperk dan het aantal inlogpogingen en laat inloggen altijd dezelfde foutmelding geven.
+  </Step>
+  <Step title="Mail" icon="mail">
+    Zet het afzenderadres tijdens het testen op een eigen adres en stel de mails in via [FluentSMTP](/wordpress/plugins/fluent-smtp). Controleer ook de bestelbevestiging.
+  </Step>
+  <Step title="Pagina's en scripts" icon="layout">
+    Wil je het ontwerp 1:1 volgen, gebruik dan de klassieke WooCommerce-shortcodes en eigen templates in plaats van de blokken. Laad WooCommerce-scripts alleen op de pagina's die ze nodig hebben (kassa en account), voor een snelle productpagina.
+  </Step>
+  <Step title="Testbestelling" icon="shopping-cart">
+    Plaats een bestelling en controleer kleur/variant, prijs, btw, verzendkosten, mail en voorraad. Testen zonder te betalen: zie [Testen zonder te betalen](/help-center/troubleshooting/woocommerce/myparcel/leeg-verzendadres). Verwijder testbestellingen en testaccounts daarna, en zet de voorraad terug.
+  </Step>
+</Steps>
+
+## Waar het misgaat
+
+- **Btw nog uit** in de installatie, waardoor prijzen en totalen niet kloppen.
+- **Testbestellingen laten staan** (en testaccounts): de voorraad blijft verlaagd en echte rapporten tellen mee.
+- **Mail die niet aankomt** omdat er geen SMTP is ingesteld. Zie [FluentSMTP](/wordpress/plugins/fluent-smtp).
+- **Alleen bankoverschrijving** in een echte shop: klanten haken af omdat betalen moeite kost.
+
+## Af
+
+- [ ] Btw, verzending en betaalmethodes ingesteld volgens de afspraken
+- [ ] Testbestelling: prijs, btw, verzendkosten, mails en voorraad kloppen
+- [ ] Mail komt aan (SMTP getest)
+- [ ] Verplichte informatie en pagina's volgens [Webshop en wetgeving](/kennis/webshop-en-wet)
+- [ ] Testbestellingen en testaccounts verwijderd, voorraad hersteld
+
+*Bron: Rayan — werklog "Webshop" (fase 3 tot en met 5) en de besluiten bij Mori Matcha.*

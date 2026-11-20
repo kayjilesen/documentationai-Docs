@@ -1,0 +1,85 @@
+---
+title: "WPMU DEV Hub"
+description: "De WPMU DEV Hub: wat je er per site en in bulk mee doet, welke plugins we gebruiken en hoe je een site aansluit."
+---
+
+De **Hub** (wpmudev.com/hub2) is het dashboard waar alle sites onder beheer staan. Smush Pro en Defender Pro werken alleen als *Pro* wanneer de site aan de Hub gekoppeld is.
+
+<Callout kind="info" title="Dit is een SOP">
+  Aansluiten doe je meestal vlak voor of na de livegang. De instellingen voor automatisch bijwerken staan in [Doorlopend — onderhoud & updates](/sops/doorlopend).
+</Callout>
+
+## Wat zit er in de Hub
+
+| Onderdeel | Doel | Per site of bulk |
+|-----------|------|------------------|
+| **Overview** | Samenvatting van één site | Per site |
+| **Plugins & Themes** | Updates beheren | Per site of in bulk |
+| **Automate & Updates** | Wanneer en hoe automatisch bijgewerkt wordt | Per site, als profiel te hergebruiken |
+| **Security** (Defender) | Scans en firewall | Per site |
+| **Performance** (Hummingbird) | Snelheid en cache | Per site |
+| **SEO** (SmartCrawl) | SEO-instellingen | Per site |
+| **Link Checker** | Zoekt kapotte links | Per site |
+| **Backups** (Snapshot) | Back-ups plannen | Per site |
+| **Uptime** | Controleert of de site online is | Per site |
+| **Analytics** (Beehive) | Google Analytics in de Hub | Per site |
+| **Reports** | Rapport voor de klant | Kan meerdere sites bundelen |
+
+**Wat in bulk hoort:** updates, beveiligingsscans, uptime en back-ups. Dat is overal hetzelfde werk. **Wat niet:** inhoud, SEO-teksten en huisstijl. Dat is per site anders en je wilt het niet per ongeluk overschrijven.
+
+## Welke WPMU DEV-plugins gebruiken we?
+
+Een licentie met veel plugins betekent niet dat je ze allemaal gebruikt. Minder actieve plugins geeft minder kans op conflicten en een lichtere site.
+
+| Plugin | Gebruiken we? |
+|--------|---------------|
+| **Smush Pro** | Ja, zie [Smush](/wordpress/plugins/smush) |
+| **Defender Pro** | Ja, zie [WP Defender](/wordpress/plugins/wp-defender) |
+| **Hummingbird Pro** | Ja, zie [Hummingbird](/wordpress/plugins/hummingbird) |
+| SmartCrawl (SEO) | Nee, we gebruiken [SureRank](/wordpress/plugins/surerank) |
+| Forminator (formulieren) | Nee, we gebruiken [SureForms](/wordpress/plugins/formulieren) |
+| Snapshot (back-ups) | Nee, back-ups doet xCloud: [Backups](/hosting/backups) |
+| Shipper, Branda, Beehive, Hustle | Niet standaard |
+
+Eén leverancier voor alles heeft voordelen (alles werkt samen, één dashboard en één support-kanaal) en een risico: je zit vast aan die leverancier. Verhoogt die de prijs of zit er een lek in hun systeem, dan raakt dat al je sites tegelijk.
+
+## Een site aansluiten
+
+<Steps>
+  <Step title="Installeer het WPMU DEV Dashboard" icon="plug">
+    Installeer de plugin op de site en log in met het account. Zonder inloggen met het juiste account verschijnt de site niet in de Hub.
+  </Step>
+  <Step title="Controleer of hij in de Hub staat" icon="check">
+    Open de Hub → **Sites**. Pas als de site in de lijst staat is de koppeling gelukt.
+  </Step>
+  <Step title="Zet hem neer zoals de andere sites" icon="list">
+    Zelfde naamgeving, geen afwijkende indeling. Zo blijft het overzicht over honderd sites bruikbaar.
+  </Step>
+  <Step title="Stel automatisch bijwerken in" icon="refresh-cw">
+    Volg de standaard in [Doorlopend — onderhoud & updates](/sops/doorlopend). Test daarna met een update en bekijk het rapport van de safe-update-check.
+  </Step>
+</Steps>
+
+## White-label en rapporten
+
+Bij **Reports** en in de instellingen vind je white-label opties (eigen logo en naam in plaats van WPMU DEV). Een uptime-rapport mag een klant zien. Interne foutlogs en wachtwoorden niet.
+
+## Waar het misgaat
+
+- Denken dat de site vanzelf in de Hub verschijnt zonder in te loggen.
+- Updates op vrijdag of in het weekend laten draaien: een probleem valt dan pas maandag op.
+- Te weinig of de verkeerde pagina's kiezen voor de safe-update-check.
+- Zowel bij WPMU DEV als bij xCloud een back-up of uptime-check aanzetten. Dat is dubbel werk.
+
+## Af
+
+- [ ] Dashboard-plugin geïnstalleerd en ingelogd; site staat in de Hub
+- [ ] Naamgeving gelijk aan de andere sites
+- [ ] Automatische updates volgens de standaard; testupdate leverde een rapport op
+- [ ] Geen dubbele back-up of uptime-controle naast xCloud
+
+## Gerelateerd
+
+- [Plugins Overzicht](/wordpress/plugins/overzicht) · [Doorlopend](/sops/doorlopend) · [Backups](/hosting/backups)
+
+*Bron: Rayan — werklog "WPMU DEV" (fase 1 tot en met 5).*

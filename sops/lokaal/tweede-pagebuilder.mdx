@@ -1,0 +1,60 @@
+---
+title: "Lokaal — Tweede pagebuilder en gedeelde blokken"
+description: "Een eigen pagebuilder voor een custom posttype, en blokken die in beide builders beschikbaar zijn zonder dubbele code."
+---
+
+<Callout kind="info" title="Dit is een SOP">
+  Voor als een posttype (bijvoorbeeld projecten of trainingen) **andere blokken** nodig heeft dan gewone pagina's. Een voorbeeld uit de praktijk staat bij [Create Lean](/client-projects/createlean).
+</Callout>
+
+## Doel
+
+Pagina's bieden alleen paginablokken aan, het posttype alleen zijn eigen blokken, en een gedeeld blok (zoals een CTA) bestaat maar één keer in de code.
+
+## Waarom twee builders
+
+Met één builder kan een redacteur op een gewone contactpagina een projectblok kiezen dat daar niet hoort. Met twee builders blijft de keuzelijst per soort inhoud schoon.
+
+## Stappen
+
+<Steps>
+  <Step title="Controleer het posttype" icon="file-text">
+    Het posttype moet bestaan, zie [Posttype registreren](/sops/lokaal/posttype-registreren). De veldgroep koppel je er straks aan.
+  </Step>
+  <Step title="Maak een aparte veldgroep met een eigen veldnaam" icon="database">
+    Een nieuw Flexible Content-veld met een **andere naam** dan `pagebuilder` (bijvoorbeeld `project_builder`). Dezelfde naam voor beide velden haalt ze door elkaar.
+  </Step>
+  <Step title="Koppel hem aan het posttype" icon="link">
+    Locatieregel: **Berichttype is gelijk aan** het posttype. Zie [Locatieregels](/wordpress/acf-patterns). De builder verschijnt dan alleen daar.
+  </Step>
+  <Step title="Voeg de blokken van het posttype toe" icon="plus">
+    Elke layout clonet een losse blokveldgroep, net als in de gewone builder ([Nieuw pagebuilder-blok](/wordpress/pagebuilder-blocks)).
+  </Step>
+  <Step title="Maak een gedeeld blok in beide builders" icon="copy">
+    Voeg de layout (bijvoorbeeld `cta`) aan **beide** builders toe. Geef hem in beide dezelfde layoutnaam en laat beide clone-velden naar **dezelfde** veldgroep verwijzen. Dan komt de [loop](/acf/pagebuilder) bij hetzelfde template uit en bestaat het blok maar één keer.
+  </Step>
+  <Step title="Laat het posttype zijn eigen builder renderen" icon="code">
+    Het template van het posttype (`single-<posttype>.php`) moet dezelfde renderlogica gebruiken, maar dan met de veldnaam van de tweede builder. Kopieer de loop niet: geef de veldnaam mee als parameter. Controleer ook dat `page.php` de gewone `pagebuilder` blijft gebruiken.
+  </Step>
+</Steps>
+
+## Waar het misgaat
+
+- Beide Flexible Content-velden dezelfde naam geven.
+- De loop kopiëren terwijl alleen de veldnaam verschilt. De twee loops lopen daarna uit elkaar.
+- Twee CTA-veldgroepen of -templates maken. Ook die gaan later uit elkaar lopen.
+- Alleen de locatieregel van een builder aanpassen en verwachten dat daarmee de beschikbare layouts veranderen. Layouts pas je in de builder zelf aan.
+- Een layout verwijderen die bestaande pagina's nog gebruiken, zonder eerst te kijken wat dat met de inhoud doet.
+
+## Af
+
+- [ ] Gewone pagina: alleen paginablokken te kiezen, projectblokken ontbreken
+- [ ] Posttype: toont zijn eigen builder en rendert de opgeslagen blokken in de juiste volgorde
+- [ ] Gedeeld blok is in beide builders beschikbaar en gebruikt hetzelfde template
+- [ ] ACF-JSON gecommit en gesynct ([Deployments](/hosting/deployments))
+
+## Naslag
+
+- [Pagebuilder](/acf/pagebuilder) · [Werkwijze (ACF)](/wordpress/acf-patterns) · [Posttype registreren](/sops/lokaal/posttype-registreren)
+
+*Bron: Rayan — SOP's "Tweede pagebuilder voor een ander posttype" en "Blok in de ene pagebuilder wel en in de andere niet beschikbaar maken" (HOUS).*

@@ -1,0 +1,106 @@
+---
+title: "GSAP in het thema"
+description: "Naslag voor bewegingen met GSAP in een KJ-thema: hoe het erin zit, de zes patronen en waar het misgaat."
+---
+
+## Overzicht
+
+Kies eerst of je GSAP nodig hebt: zie [Animaties — soorten en technieken](/kennis/animaties). Voor een simpele knop of een tekst die verschijnt is CSS genoeg. GSAP is de moeite waard bij veel samenhangende bewegingen en bewegingen die aan scrollen gekoppeld zijn. Een voorbeeld op een echt project: [Knapper bij Meagen](/client-projects/knapperbijmeagen).
+
+## Hoe GSAP in het project zit
+
+GSAP komt op één van twee manieren in een project:
+
+| Manier | Wat het is | Let op |
+|--------|-----------|--------|
+| **Via npm in je build** | GSAP wordt met je eigen code gebundeld tot één bestand dat WordPress onderaan de pagina laadt | Je bepaalt zelf de versie en de site hangt niet af van een andere server. Na elke wijziging draai je de build opnieuw |
+| **Vendorbestanden kopiëren** | `npm run copy:gsap` zet de GSAP-bestanden in `assets/js/vendor/` | Gebruikt bij Knapper bij Meagen |
+
+De boilerplate bundelt blok-JS met `scripts/build-pagebuilder-js.js` en bouwt CSS met Tailwind. Controleer per project hoe GSAP daarin past voor je begint.
+
+## Volgorde van starten
+
+1. **Smooth scroll** (ScrollSmoother). Altijd als eerste, vóór ScrollTrigger.
+2. Pagina-animatie bovenaan
+3. Verschijnen bij scrollen
+4. Parallax
+5. Knoppen
+6. Menu
+
+## De zes patronen
+
+### Verschijnen bij scrollen
+
+Blokken, koppen en afbeeldingen komen rustig in beeld. Onderdelen na elkaar via een kleine vertraging.
+
+```js
+gsap.from(element, {
+  y: 40, opacity: 0, duration: 0.9, ease: 'power3.out',
+  scrollTrigger: { trigger: element, start: 'top 85%', once: true },
+});
+```
+
+Goed voor koppen, tekst, afbeeldingen en kaarten. Niet bovenaan de pagina: dat doet de pagina-animatie. **Let op:** zijwaarts schuiven kan op mobiel een scrollbalk links en rechts geven (knip wat buiten het blok valt af). Nieuwe kaarten na het filteren van een overzicht komen zonder animatie, tenzij je die opnieuw start.
+
+### Kop die binnenkomt
+
+De kop in de hero komt per regel omhoog onder een masker (SplitText). Per letter is druk, per woord rustig, per regel het rustigst. **Let op:** op mobiel breekt de kop anders af, dus laat SplitText opnieuw knippen als het scherm verandert, en verberg de kop tot het knippen klaar is om een flits te voorkomen.
+
+### Pagina-animatie (één tijdlijn)
+
+De hero bouwt op in volgorde: beeld, kop, intro, knoppen, met een beetje overlap (`gsap.timeline`). Laat het beeld niet faden, want dat laat het laden trager lijken. Een hero zonder afbeelding heeft een donkere achtergrond nodig, anders staat witte tekst op wit.
+
+### Smooth scroll
+
+ScrollSmoother met een vaste buitenste laag en een binnenste laag met de hele pagina erin.
+
+```js
+ScrollSmoother.create({
+  wrapper: '#smooth-wrapper', content: '#smooth-content',
+  smooth: 1.2, smoothTouch: false,
+});
+```
+
+**Let op:** dingen die vast moeten blijven (cookiebanner, lightbox, beheerbalk) staan **buiten** die lagen, anders breken ze. Ankerlinks werken via de smoother. Op telefoons scrolt het gewoon normaal, dat voelt beter.
+
+### Knop reageert op de muis
+
+De knop wordt 5% groter bij hover en 3% kleiner bij klikken (`gsap.to`, 0,25 s). **Let op:** alleen op apparaten met een muis, anders blijft de knop groot na een tik. Dit kan ook met alleen CSS.
+
+### Parallax op grote afbeeldingen
+
+De afbeelding beweegt iets langzamer dan de pagina (`scrub`, geen easing, anders voelt het niet gelijk met je scroll).
+
+```js
+gsap.fromTo(afbeelding, { scale: 1.15, yPercent: -7 }, {
+  yPercent: 7, ease: 'none',
+  scrollTrigger: { trigger: afbeelding.parentElement, scrub: true },
+});
+```
+
+**Let op:** de afbeelding moet in een vak zitten dat afknipt, anders loopt hij buiten het kader. Het kost rekenwerk bij scrollen, dus niet op veel afbeeldingen of kleine kaarten.
+
+### Menu schuift open (mobiel)
+
+Een tijdlijn waarin het paneel opent, de links na elkaar binnenkomen en het hamburgericoon een kruisje wordt. Een tweede klik draait alles terug. Laat Escape en een klik op een link het menu sluiten. Zonder JavaScript blijft het gewone menu staan, zodat je nooit vastzit.
+
+## Waar het misgaat
+
+- Smooth scroll starten na ScrollTrigger.
+- Elementen die vast moeten blijven binnen de smooth-lagen zetten.
+- Animaties die op touch blijven hangen (hover).
+- Te veel parallax of animaties tegelijk: de pagina wordt traag.
+- Vergeten de build te draaien na een wijziging.
+
+## Af
+
+- [ ] Je hebt eerst gecontroleerd of CSS genoeg is
+- [ ] GSAP komt via de build of `copy:gsap` in het project; de build is gedraaid
+- [ ] Smooth scroll staat als eerste, vaste elementen staan buiten de lagen
+- [ ] Getest op mobiel en met touch; de pagina scrolt zonder zijwaartse balk
+
+## Gerelateerd
+
+- [Animaties — soorten en technieken](/kennis/animaties) · [Thema](/wordpress/theme-architecture) · [Pagebuilder](/acf/pagebuilder)
+
+*Bron: Rayan — "Naslagdocument: animaties HOUS" (stageopdracht 8) en de vooropdracht animatie.*

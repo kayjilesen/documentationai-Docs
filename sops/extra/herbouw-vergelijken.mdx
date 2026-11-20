@@ -1,0 +1,73 @@
+---
+title: "Extra — Bestaande site herbouwen en vergelijken"
+description: "Een bestaande site (bijvoorbeeld op Avada) herbouwen in het KJ-thema en oud en nieuw naast elkaar leggen."
+---
+
+<Callout kind="info" title="Dit is een SOP (opzet)">
+  Voor een **herbouw** waarbij het ontwerp en de URL's blijven, zoals Verbong Tweewielers of [Smedts Workgroup](/client-projects/smedts-workgroup). Het overzetten van inhoud, media en redirects staat in [Migratie oude WordPress](/sops/extra/migratie-wordpress). Hier gaat het om het ontleden, bouwen en nameten.
+</Callout>
+
+## Doel
+
+De nieuwe site doet minstens wat de oude deed, en je kunt laten zien wat er beter is geworden.
+
+## Waarom vergelijken
+
+Ook na een zorgvuldige eerste versie ontbreekt er vrijwel altijd iets: kleuren per pagina, een kaart, een adresblok. Bij een site vanaf nul bepaal je zelf de structuur. Bij een herbouw moet je eerst de bestaande site volledig ontleden en achteraf controleren. Reken dus op meer controleren dan bouwen.
+
+## Stappen
+
+<Steps>
+  <Step title="Ontleed de oude site" icon="search">
+    Maak een lijst van alle pagina's en per pagina de secties. Markeer wat zich herhaalt (header, footer, contactsectie): dat worden blokken. Noteer wat centraal beheerd moet worden (contactgegevens, footerinhoud, navigatie): dat komt op een [options page](/acf/options-pages).
+  </Step>
+  <Step title="Maak een vervangingsplan" icon="clipboard-list">
+    Zet per onderdeel wat er voor in de plaats komt:
+
+    | Oud | Nieuw |
+    |-----|-------|
+    | Slider-plugin | Hero-blok (zit er maar één afbeelding in, dan is een slider overkill) |
+    | Page-builder-elementen | Eigen [pagebuilder-blokken](/acf/pagebuilder) |
+    | Formulier-plugin met reCAPTCHA | SureForms met honeypot, zie [Formulieren](/wordpress/plugins/formulieren) |
+    | Kaart | Pas laden na toestemming, zie [SureCookie](/wordpress/plugins/surecookie) |
+    | Sticky header via script | CSS `position: sticky` |
+    | Gekocht thema | De [KJ-Boilerplate](/client-projects/kj-boilerplate) |
+    | Tracking | Pas laden na toestemming |
+  </Step>
+  <Step title="Doe een nulmeting" icon="gauge">
+    Meet de oude site: aantal requests, paginagrootte en een Lighthouse-score. Kijk ook welke scripts en stijlen laden voor dingen die een bezoeker nooit ziet (een slider-plugin die een eigen iconenset laadt voor één plaatje).
+  </Step>
+  <Step title="Haal kleuren en fonts uit de live site" icon="palette">
+    Uit logo en CSS, niet uit je geheugen. Host fonts zelf (zie [Images & media](/kennis/images-media) en [Tailwind CSS Setup](/wordpress/tailwind-setup)).
+  </Step>
+  <Step title="Bouw en zet de inhoud over" icon="hammer">
+    Volg [Theme / boilerplate](/sops/lokaal/theme-boilerplate) en [Bouwen](/sops/lokaal/bouwen). Houd de URL's gelijk en zet SEO-titels en -omschrijvingen over. Zie [Migratie](/sops/extra/migratie-wordpress).
+  </Step>
+  <Step title="Vergelijk oud en nieuw" icon="columns">
+    Maak van beide sites schermafbeeldingen per sectie en leg ze naast elkaar. Vergelijk ook de berekende stijlen. Zo vind je wat je verkeerd had ingeschat. Meet daarna opnieuw met Lighthouse.
+  </Step>
+</Steps>
+
+## Wat je wel en niet eerlijk kunt vergelijken
+
+Een oude site draait op een echte server en je nieuwe versie op je laptop. Laadtijden (LCP, FCP, Speed Index) zijn daardoor niet eerlijk te vergelijken: een lokale server heeft geen netwerkvertraging. Het **aantal requests** en de **totale paginagrootte** zijn wel eerlijk, want die hangen af van wat er geladen wordt en niet van waar de site draait.
+
+## Waar het misgaat
+
+- Afgaan op wat je denkt dat er staat in plaats van de oude site te meten.
+- Een verhaal vertellen over laadtijden terwijl je lokaal meet.
+- De kaart of tracking laten laden vóór toestemming omdat het "zo was".
+
+## Af
+
+- [ ] Lijst van pagina's, secties, herhalende delen en centrale gegevens
+- [ ] Vervangingsplan en nulmeting vastgelegd
+- [ ] Kleuren en fonts uit de live site
+- [ ] Per sectie oud en nieuw vergeleken; verschillen opgelost
+- [ ] Nameting gedaan (requests en grootte), laadtijd niet lokaal vergeleken
+
+## Naslag
+
+- [Migratie oude WordPress](/sops/extra/migratie-wordpress) · [Go-live checks](/sops/livegang/go-live-checks)
+
+*Bron: Rayan — aantekeningen Smedts Workgroup (fase 2 tot en met 5).*

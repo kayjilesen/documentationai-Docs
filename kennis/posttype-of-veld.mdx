@@ -1,0 +1,36 @@
+---
+title: "Posttype of veld?"
+description: "Wanneer maak je van inhoud een eigen posttype, een taxonomie of gewoon een veld in een blok?"
+---
+
+## De keuze in één zin
+
+Een **posttype** is voor losse items die de klant zelf beheert. Een **veld** hoort bij één onderdeel. Een **taxonomie** deelt items in groepen in.
+
+| Wat | Wanneer | Voorbeeld |
+|-----|---------|-----------|
+| **Posttype** | Losse items die de klant toevoegt, wijzigt of verbergt | Projecten, behandelingen, teamleden |
+| **Taxonomie** | Items indelen in groepen of filteren | Behandelcategorieën (Massage, Head spa), projecttypes |
+| **Veld in een blok** | Inhoud die bij één sectie hoort | Een citaat, een knoptekst, een lijst met huisregels |
+
+## Vragen die je jezelf stelt
+
+1. **Moet de klant zelf items kunnen toevoegen, aanpassen of verbergen?** Ja: posttype.
+2. **Moeten de items op meerdere plekken terugkomen of automatisch in een overzicht?** Ja: posttype.
+3. **Heeft elk item een eigen pagina nodig?** Nee: posttype met `public` op `false`, de items staan dan alleen in een overzicht.
+4. **Is het een vaste lijst die bij één sectie hoort en zelden verandert?** Dan is een herhaalbaar veld in het blok genoeg.
+
+## Voorbeeld: Solea
+
+[Solea](/client-projects/solea) heeft **behandelingen**. De klant moet er zelf een kunnen toevoegen of een prijs kunnen wijzigen, dus dat is een posttype, ingedeeld met een taxonomie (de categorieën uit het ontwerp). Het verhaal van de eigenaar, de cadeaubon en de huisregels hebben geen eigen posttype nodig: dat zijn velden in een blok.
+
+Prijzen en duur horen **bij** de behandeling, als herhaalbare regel (45 min / 60 min / 90 min). Zo past de klant één prijs aan zonder de rest te raken.
+
+## Af (begrip)
+
+- [ ] Je kunt uitleggen waarom behandelingen een posttype zijn en een citaat een veld
+- [ ] Je weet wanneer een posttype geen eigen pagina nodig heeft
+
+## Gerelateerd
+
+- [Posttype registreren](/sops/lokaal/posttype-registreren) · [Werkwijze (ACF)](/wordpress/acf-patterns) · [Thema](/wordpress/theme-architecture)

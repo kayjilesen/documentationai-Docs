@@ -1,0 +1,53 @@
+---
+title: "Escaping"
+description: "Welke escape-functie je wanneer gebruikt, zodat ingevoerde tekst nooit onbedoeld code wordt."
+---
+
+## Wat en waarom
+
+Escapen betekent: gegevens veilig in de HTML zetten, zodat ingevoerde tekst geen code kan worden. Je escapet **zo dicht mogelijk bij de uitvoer**, en je kiest de functie op basis van de plek waar de waarde terechtkomt. Dezelfde waarde kan op de ene plek gewone tekst zijn en op een andere plek een attribuut.
+
+## Welke functie wanneer
+
+| Waar komt de waarde terecht | Functie | Voorbeeld |
+|-----------------------------|---------|-----------|
+| Gewone tekst tussen HTML-tags | `esc_html()` | `echo esc_html( $title );` |
+| Binnen een attribuut (`alt`, `title`, `aria-label`) | `esc_attr()` | `alt="<?php echo esc_attr( $alt ); ?>"` |
+| Een URL (`href`, `src`) | `esc_url()` | `href="<?php echo esc_url( $url ); ?>"` |
+| Opgemaakte tekst waarin bepaalde HTML mag blijven (alinea's, lijsten, links uit een WYSIWYG-veld) | `wp_kses_post()` | `echo wp_kses_post( $text );` |
+| Tussen de tags van een tekstvak | `esc_textarea()` | `<textarea><?php echo esc_textarea( $value ); ?></textarea>` |
+
+Zet de waarde van een attribuut altijd tussen aanhalingstekens. De helper `kj_acf()` escapet zelf al ([Components](/acf/components)), en voorbeelden in de [blokken](/wordpress/pagebuilder-blocks) gebruiken dezelfde functies.
+
+## Stappen
+
+<Steps>
+  <Step title="Zoek waar dynamische waarden worden getoond" icon="search">
+    Bijvoorbeeld bij `echo`, links, afbeeldingen en tekstvelden in een template. Op die plekken komen gegevens in de uiteindelijke HTML.
+  </Step>
+  <Step title="Kies de functie op basis van de plek" icon="check-circle">
+    Gebruik de tabel hierboven.
+  </Step>
+  <Step title="Test met lastige tekens" icon="beaker">
+    Probeer aanhalingstekens, een ampersand en tekst met HTML-tekens. De pagina moet heel blijven en de tekst moet verschijnen zoals bedoeld.
+  </Step>
+</Steps>
+
+## Waar het misgaat
+
+- **Overal `esc_html()` gebruiken.** Toegestane opmaak uit een WYSIWYG-veld verschijnt dan als losse HTML-tekst. Gebruik daar `wp_kses_post()`.
+- **Denken dat inhoud uit je eigen WordPress-beheer automatisch veilig is.**
+- **Een waarde twee keer escapen.** Functies zoals `get_the_post_thumbnail()` escapen al zelf.
+- **Escaping verwarren met invoercontrole.** Je moet bijvoorbeeld nog steeds controleren of een verplicht e-mailadres geldig is.
+
+## Af
+
+- [ ] Elke dynamische waarde in een template is geëscaped met de functie die bij de plek past
+- [ ] Gewone tekst verschijnt als tekst, toegestane opmaak blijft zichtbaar, links en afbeeldingen werken
+- [ ] Aanhalingstekens of HTML-tekens breken de paginastructuur niet
+
+## Gerelateerd
+
+- [Components](/acf/components) · [Thema](/wordpress/theme-architecture) · [Configuratie](/wordpress/configuratie) (fouten zoeken)
+
+*Bron: Rayan — SOP "Escaping: welke functie wanneer" (HOUS).*

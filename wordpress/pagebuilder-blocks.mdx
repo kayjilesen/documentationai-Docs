@@ -236,3 +236,24 @@ De meeste blocks hebben standaard UI-opties onder een "Witruimte" tab in ACF:
 <Callout kind="tip" title="Tabs regel">
   Als een block tabs gebruikt in ACF, moeten **alle** velden onder een tab staan. Start altijd met een "Content" tab, gevolgd door een "Witruimte" of "UI Opties" tab.
 </Callout>
+
+---
+
+## Waar het misgaat
+
+- **Layoutnaam en bestandsnaam sluiten niet aan.** ACF gebruikt underscores (`mijn_block`), de map en het template streepjes (`mijn-block`). De loop zet dat om; een andere spelling vindt geen template.
+- **Een clone met een andere naam** dan de layout. Geef de clone dezelfde naam als de layout.
+- **Het template maken maar het blok niet aan de builder toevoegen.** Het blok staat dan niet in de keuzelijst.
+- **`page.php` aanpassen voor elk nieuw blok.** Dat hoeft niet: de loop handelt het al af.
+
+**Controle:** het blok staat in de juiste keuzelijst, bewaart zijn inhoud en verschijnt op de voorkant. Een tweede exemplaar kan andere inhoud bevatten zonder het eerste te veranderen.
+
+## Verwante SOP's
+
+- [Sectie omzetten naar blok](/sops/lokaal/sectie-omzetten-naar-blok) — als de sectie nu vaste velden heeft
+- [Tweede pagebuilder en gedeelde blokken](/sops/lokaal/tweede-pagebuilder) — voor een eigen builder bij een posttype
+
+<Callout kind="info" title="Aangevuld — november 2026">
+  - **Nieuw:** "Waar het misgaat", de controle en de verwijzingen naar de nieuwe SOP's. De pagina staat nu weer in de navigatie, onder SOP's → Lokaal.
+  - **Bron:** Rayan — SOP "Nieuw pagebuilder-blok toevoegen" (HOUS).
+</Callout>

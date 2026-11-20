@@ -1,0 +1,45 @@
+---
+title: "SureRank koppelen aan Claude (MCP)"
+description: "Claude via een beveiligde verbinding laten meelezen op de lokale site en SEO-gegevens laten voorstellen, na jouw goedkeuring."
+---
+
+<Callout kind="info" title="Dit is een SOP">
+  Alleen voor **lokaal** gebruik, als je AI bewust wilt inzetten om SEO-teksten voor te laten stellen (bijvoorbeeld losse projecttitels). Niet voor inhoud die je zelf moet schrijven. Zie ook [Skills Overzicht](/claude/skills-overview).
+</Callout>
+
+## Doel
+
+Claude kan op de lokale site meelezen en, **alleen na jouw goedkeuring**, SEO-gegevens per pagina of item bijwerken met [SureRank](/wordpress/plugins/surerank).
+
+## Stappen
+
+<Steps>
+  <Step title="Installeer de MCP Adapter" icon="download">
+    Download de plugin als los zip-bestand van de officiële GitHub-pagina. Hij staat niet in de plugin-zoekfunctie van WordPress en is nodig voordat de MCP-server van SureRank iets doet. Upload hem via Plugins → Nieuwe plugin → Plugin uploaden en activeer hem.
+  </Step>
+  <Step title="Zet MCP aan in SureRank" icon="toggle-right">
+    Zet **Enable MCP** aan. Die ene schakelaar zet zowel de SEO-functies als de verbinding aan.
+  </Step>
+  <Step title="Kies de client en maak een Application Password" icon="key">
+    Kies in de wizard **Claude Code** en maak een Application Password aan. Dat is een aparte, beperkte sleutel voor deze koppeling. Je hoofdwachtwoord van WordPress gebruik je hier nooit voor.
+  </Step>
+  <Step title="Bewaar de config in .mcp.json" icon="file-json">
+    Kopieer de JSON die de wizard maakt, zet het echte wachtwoord op de plek van de placeholder en bewaar dit als `.mcp.json` in de projectmap. Herstart daarna de sessie.
+  </Step>
+  <Step title="Test de verbinding" icon="check-circle">
+    Vraag een simpele actie, bijvoorbeeld de lijst met inhoud. Komt er een geldig antwoord terug in plaats van een foutmelding, dan werkt het.
+  </Step>
+</Steps>
+
+<Callout kind="warning" title="Het bestand bevat een wachtwoord">
+  `.mcp.json` bevat een echt wachtwoord in platte tekst. Deel het nooit en zet het nooit in Git. Zet het in `.gitignore`, zie [Git Workflow](/devops/git-workflow).
+</Callout>
+
+## Af
+
+- [ ] MCP Adapter geïnstalleerd en actief; MCP aan in SureRank
+- [ ] Application Password aangemaakt; `.mcp.json` staat buiten Git
+- [ ] Een simpele testvraag geeft een geldig antwoord
+- [ ] Elke wijziging die Claude voorstelt is door jou gelezen en goedgekeurd
+
+*Bron: Rayan — SOP "MCP-koppeling met SureRank opzetten" (HOUS).*

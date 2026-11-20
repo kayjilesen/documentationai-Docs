@@ -1,0 +1,63 @@
+---
+title: "Lokaal — Sectie omzetten naar blok"
+description: "Een pagina met vaste ACF-velden (of een overgenomen thema) omzetten naar pagebuilder-blokken, zonder inhoud te verliezen."
+---
+
+<Callout kind="info" title="Dit is een SOP">
+  Alleen als een pagina nu **vaste velden** heeft en naar de [pagebuilder](/acf/pagebuilder) moet. Een nieuw blok vanaf nul maak je met [Nieuw pagebuilder-blok](/wordpress/pagebuilder-blocks).
+</Callout>
+
+## Doel
+
+Een vaste sectie is een los blok geworden dat de redacteur kan toevoegen, verplaatsen en hergebruiken — met dezelfde inhoud en opmaak als voorheen.
+
+## Waarom dit een eigen SOP is
+
+De oude veldwaarden verhuizen **niet** vanzelf naar de nieuwe structuur. Een vast veld leest zijn waarde van de pagina zelf. Een blok leest zijn waarde uit een rij van de pagebuilder. Dezelfde veldnaam of hetzelfde label betekent dus niet dat de inhoud op dezelfde plek staat.
+
+## Stappen
+
+<Steps>
+  <Step title="Leg vast wat er nu staat" icon="clipboard-list">
+    Noteer welke velden en welke inhoud de sectie gebruikt (screenshot of lijst). Maak een [back-up](/hosting/backups) voor je iets weghaalt. Zonder dit weet je straks niet meer wat er stond.
+  </Step>
+  <Step title="Maak de veldgroep van het blok" icon="database">
+    Maak een losse veldgroep met de velden van de sectie (`group_layout_<slug>.json`). Volg de stappen in [Nieuw pagebuilder-blok](/wordpress/pagebuilder-blocks) en de regels in [Werkwijze](/wordpress/acf-patterns).
+  </Step>
+  <Step title="Voeg de layout toe aan de pagebuilder" icon="plus">
+    Voeg een layout met een clone-veld toe aan `group_pagebuilder.json`, zoals bij elk nieuw blok.
+  </Step>
+  <Step title="Verplaats de markup naar een bloktemplate" icon="code">
+    Zet de HTML van de sectie in `templates/pagebuilder/<slug>/<slug>.php`. Pas het uitlezen aan: de oude code las vaste velden met `get_field()`, het blok leest ze met `get_sub_field()`.
+  </Step>
+  <Step title="Zet het blok op de pagina en neem de inhoud over" icon="copy">
+    Voeg het blok toe en vul de inhoud opnieuw in. Controleer ook de afbeeldingen en knoppen.
+  </Step>
+  <Step title="Vergelijk oud en nieuw" icon="search">
+    Leg de nieuwe weergave naast de oude, ook op mobiel. De omzetting mag geen inhoud of opmaak ongemerkt verliezen.
+  </Step>
+  <Step title="Ruim pas daarna op" icon="trash-2">
+    Haal de oude vaste uitvoer weg en zet de oude veldgroep uit. Doe je dit eerder, dan staat de sectie dubbel op de pagina of verdwijnt de oude versie voordat de nieuwe werkt.
+  </Step>
+</Steps>
+
+## Waar het misgaat
+
+- **De oude velden eerst verwijderen** en daarna ontdekken dat de inhoud nog niet is overgezet.
+- **In het nieuwe template nog `get_field()` gebruiken** in plaats van `get_sub_field()`. Het blok blijft dan leeg.
+- **De vaste sectie en het nieuwe blok laten staan.** De sectie verschijnt dan twee keer.
+
+## Af
+
+- [ ] Inhoud en velden van de oude sectie vastgelegd; back-up gemaakt
+- [ ] Veldgroep, layout en template van het blok staan er (ACF-JSON in Git)
+- [ ] Blok toont dezelfde inhoud als de oude sectie, ook op mobiel
+- [ ] De sectie verschijnt één keer en kan binnen de builder verplaatst worden
+- [ ] Oude vaste uitvoer en oude veldgroep opgeruimd
+
+## Naslag
+
+- [Pagebuilder](/acf/pagebuilder) · [Nieuw pagebuilder-block](/wordpress/pagebuilder-blocks) · [Werkwijze (ACF)](/wordpress/acf-patterns)
+- [Bouwen](/sops/lokaal/bouwen)
+
+*Bron: Rayan — SOP "Sectie omzetten naar een pagebuilder-blok" (HOUS) en de omzetting van Smedts Workgroup.*

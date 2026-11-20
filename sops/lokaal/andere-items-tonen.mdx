@@ -1,0 +1,72 @@
+---
+title: "Lokaal — Andere items automatisch tonen"
+description: "Recente of andere items uit een posttype zelf laten ophalen, met dezelfde kaartcomponent overal."
+---
+
+<Callout kind="info" title="Dit is een SOP">
+  Voor een blok met recente items op de homepage, of "Andere projecten" op een detailpagina. De klant hoeft geen kaarten meer handmatig samen te stellen. Het posttype moet bestaan: [Posttype registreren](/sops/lokaal/posttype-registreren).
+</Callout>
+
+## Doel
+
+De site haalt de items zelf uit de database op en toont ze op meerdere plekken op dezelfde manier.
+
+## Stappen
+
+<Steps>
+  <Step title="Maak één gedeelde functie" icon="code">
+    De homepage en de detailpagina hebben bijna dezelfde zoekopdracht nodig. Zet die in één functie in `inc/template-functions.php` (met `kj_`-prefix), zodat je hem niet twee keer schrijft.
+
+    ```php
+    function kj_get_projects( int $aantal = 3, array $uitsluiten = [] ) {
+        return get_posts( [
+            'post_type'      => 'project',
+            'post_status'    => 'publish',
+            'posts_per_page' => $aantal,
+            'orderby'        => 'date',
+            'order'          => 'DESC',
+            'post__not_in'   => $uitsluiten,
+        ] );
+    }
+    ```
+  </Step>
+  <Step title="Haal alleen gepubliceerde items op" icon="eye">
+    Concepten horen niet in een openbaar blok. Gebruik `'post_status' => 'publish'`.
+  </Step>
+  <Step title="Recente items: nieuwste eerst" icon="clock">
+    Bijvoorbeeld drie items, gesorteerd op publicatiedatum. Het blok werkt zichzelf bij zodra er iets nieuws gepubliceerd wordt.
+  </Step>
+  <Step title="Andere items: sluit het huidige item uit" icon="minus-circle">
+    Geef het ID van het huidige item mee aan `$uitsluiten`. De bezoeker moet andere items zien, niet het item dat al openstaat.
+  </Step>
+  <Step title="Toon ze met dezelfde kaartcomponent" icon="layout">
+    Gebruik overal de bestaande kaart ([Components](/acf/components)). Titel, afbeelding, link en opmaak zijn dan op alle plekken gelijk.
+  </Step>
+  <Step title="Ga om met weinig of geen resultaten" icon="alert-circle">
+    Zijn er minder dan drie items, toon dan alleen wat er is. Zijn er geen, sla het blok over. Zo krijg je geen lege kaarten of een lege sectie.
+  </Step>
+</Steps>
+
+## Optioneel: een favoriet item
+
+Mag de redacteur één item kiezen dat vooraan staat? Controleer dan dat het gekozen item gepubliceerd is, van het juiste posttype is en niet het huidige item. Vul de overige plekken automatisch aan, en toon een favoriet nooit dubbel.
+
+## Waar het misgaat
+
+- Het huidige item vergeten uit te sluiten.
+- Een favoriet nogmaals in de automatische resultaten tonen.
+- Altijd drie lege plekken maken terwijl er maar één resultaat is.
+- Na een eigen loop met `the_post()` vergeten `wp_reset_postdata()` aan te roepen. Met `get_posts()` en een kaart die het item meekrijgt is dat niet nodig.
+
+## Af
+
+- [ ] De homepage toont de nieuwste items
+- [ ] Op een detailpagina ontbreekt het huidige item bij "Andere"
+- [ ] Bij één of twee resultaten blijven de kaarten netjes staan; bij nul verschijnt geen leeg blok
+- [ ] Alle plekken gebruiken dezelfde kaartcomponent
+
+## Naslag
+
+- [Components](/acf/components) · [Thema](/wordpress/theme-architecture) · [Escaping](/wordpress/escaping)
+
+*Bron: Rayan — SOP "Automatisch recente of andere projecten tonen" (HOUS).*

@@ -1,0 +1,97 @@
+---
+title: "Project: Smedts Workgroup"
+description: "Herbouw van de Avada-site van Smedts Workgroup in een eigen thema: 5 pagina's, sectorpagina's, SureForms met honeypot en SureCookie."
+---
+
+## Project Overzicht
+
+| Detail | Waarde |
+|--------|--------|
+| **Klant** | Smedts Workgroup (smedts.nl) |
+| **Type** | Herbouw bedrijfswebsite (sectoren: staalindustrie, agro, bouw en montage) |
+| **Status** | Lokaal herbouwd en vergeleken met de live site |
+| **Pad** | `wp-content/themes/smedtsworkgroup/` |
+
+De bestaande site draaide op Avada met Fusion Builder, Revolution Slider, Contact Form 7 met reCAPTCHA en een Google Maps-kaart. De nieuwe versie gebruikt de [KJ-Boilerplate](/client-projects/kj-boilerplate) met dezelfde URL's. De aanpak staat in [Bestaande site herbouwen en vergelijken](/sops/extra/herbouw-vergelijken).
+
+---
+
+## Pagina's
+
+| Pagina | URL | Opbouw |
+|--------|-----|--------|
+| Home | `/` | Header, hero, 3 sectortegels met hover, tekstblok over ons, werkwijze in 5 stappen, contactformulier, footer |
+| Staalindustrie, Agro, Bouw en montage | `/staalindustrie/`, `/agro/`, `/bouw-en-montage/` | Zelfde opbouw: hero met titel en USP-lijst, diensten, contactformulier |
+| Contact | `/contact/` | Titel en adres, formulier (naam, e-mail, bericht), kaart |
+
+Herhalende delen werden blokken. Centraal beheerd (options): contactgegevens, footerinhoud (partnerlogo, sectorlinks, copyright, social) en de sectornavigatie.
+
+---
+
+## Huisstijl
+
+| Token | Hex |
+|-------|-----|
+| Blauw | `#2380BF` |
+| Donkerblauw | `#0C2B40` |
+| Lichtblauw | `#2EAAFF` |
+
+Kleuren uit logo en CSS van de live site. Roboto zelf gehost als woff2.
+
+---
+
+## Blokken
+
+| Blok | Beschrijving |
+|------|-------------|
+| `hero`, `text-image` | Uit de boilerplate |
+| `sector-tegels` | Tegels met hover (alleen home) |
+| `werkwijze` | Stappen met icoon, titel en tekst |
+| `contactformulier` | Kiest via een veld welk SureForms-formulier getoond wordt, herbruikbaar op elke pagina |
+| `contact-info` | Titelbalk en adres naast introtekst (adres uit de footer-instellingen) |
+| `icon-lijst` | Kleurveld en icoonkeuze per item |
+| USP-checklist | Titelbalk, lichtblauw vak en vinkjes; een kleurveld per sectorpagina |
+
+---
+
+## Plugins en privacy
+
+- **Formulier:** [SureForms](/wordpress/plugins/formulieren) met honeypot in plaats van reCAPTCHA (reCAPTCHA stuurt gegevens naar Google vóór toestemming)
+- **Kaart:** laadt pas na toestemming. De embed-URL is zo gekozen dat [SureCookie](/wordpress/plugins/surecookie) hem herkent en blokkeert tot "Accepteren & Laden"
+- **SureCookie:** Nederlandse teksten, categorieën, reconsent in de footer; eigen palet via de filter `surecookie_color_palette_codes` in `inc/surecookie.php`
+- **SureRank:** titel en omschrijving per pagina ([SureRank](/wordpress/plugins/surerank))
+- **GTM:** laadt pas na toestemming
+
+---
+
+## Vergelijking oud en nieuw
+
+| | Live (oud) | Lokaal (nieuw) |
+|--|-----------|----------------|
+| Performance | 56 | 64 |
+| Accessibility | 88 | 90 |
+| Best practices | 77 | 100 |
+| SEO | 100 | 100 |
+| Requests | 112 | 43 |
+| Paginagrootte | 2839 KiB | 1288 KiB |
+
+Laadtijden zijn niet eerlijk te vergelijken (een lokale server heeft geen netwerkvertraging). Requests en grootte wel: minder dan de helft.
+
+Na een eerste versie bleken onderdelen verkeerd ingeschat: kleuren per sectorpagina, de checklist-sectie, het adresblok en de kaart op de contactpagina.
+
+---
+
+## Verbeterpunten voor de klant
+
+- Geen directe contactknop in de hero (alleen "Kies uw branche")
+- Het formulier staat pas onderaan de pagina
+- Het formulier vraagt geen telefoonnummer (optioneel veld helpt bij terugbellen)
+- Geen vertrouwenselementen (jaren ervaring, aantal geplaatsten, klantnamen of quote)
+- Geen belofte over reactietijd bij het formulier
+
+---
+
+## Bijzonderheden
+
+- `footer.php` verwachtte velden die nergens bestonden (`footer_contact`, partnerlogo, developer credit). Die zijn toegevoegd aan de options
+- Als één URL toch verandert: 301 via de server of een stukje code in het thema, zie [Migratie](/sops/extra/migratie-wordpress)

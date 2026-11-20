@@ -1,0 +1,75 @@
+---
+title: "Lokaal — Posttype registreren"
+description: "Een custom posttype (CPT) toevoegen in inc/post-types.php, met archief en detailpagina."
+---
+
+<Callout kind="info" title="Dit is een SOP">
+  Voor inhoud met een andere functie dan pagina's of blogberichten en die de klant zelf beheert. Twijfel je of het een posttype of een veld moet zijn? Lees eerst [Posttype of veld?](/kennis/posttype-of-veld).
+</Callout>
+
+## Doel
+
+De inhoud staat als apart contenttype in WordPress, met eigen overzicht en (als dat nodig is) eigen detailpagina's.
+
+## Stappen
+
+<Steps>
+  <Step title="Gebruik inc/post-types.php" icon="file-code">
+    Het bestand hoort bij elk thema ([Thema](/wordpress/theme-architecture)). Bestaat het nog niet, maak het dan aan en laad het in `functions.php`. Zo blijft de registratie los van de templates.
+  </Step>
+  <Step title="Maak een functie met kj_-prefix op de init-hook" icon="code">
+    Posttypes worden geregistreerd tijdens het opstarten van WordPress, dus op `init`. Volg de [naamgeving](/wordpress/naming-conventions) (`kj_register_post_types()`).
+
+    ```php
+    function kj_register_post_types() {
+        register_post_type( 'project', [
+            'labels'      => [
+                'name'          => 'Woningen',
+                'singular_name' => 'Woning',
+                'add_new_item'  => 'Woning toevoegen',
+                'edit_item'     => 'Woning bewerken',
+            ],
+            'public'      => true,
+            'has_archive' => 'woningen',
+            'rewrite'     => [ 'slug' => 'woningen' ],
+            'supports'    => [ 'title', 'thumbnail', 'excerpt' ],
+        ] );
+    }
+    add_action( 'init', 'kj_register_post_types' );
+    ```
+  </Step>
+  <Step title="Kies de technische naam met zorg" icon="tag">
+    `project` is de technische naam. ACF, queries en templates gebruiken die. Verander je hem later, dan hoort bestaande inhoud niet meer bij het posttype. De labels ("Woningen") mogen wel anders heten.
+  </Step>
+  <Step title="Geef het Nederlandse labels" icon="languages">
+    De redacteur moet begrijpelijke namen zien in het beheer. Geen eigen openbare pagina nodig (bijvoorbeeld bij behandelingen die alleen in een overzicht staan)? Zet dan `public` op `false`.
+  </Step>
+  <Step title="Maak de templates" icon="layout">
+    `single-project.php` voor één item en `archive-project.php` voor het overzicht. WordPress koppelt deze bestandsnamen vanzelf aan het posttype.
+  </Step>
+  <Step title="Sla de permalinks eenmalig op" icon="link">
+    Ga na het toevoegen of wijzigen van de URL-structuur één keer naar Instellingen → Permalinks en klik op Opslaan, zodat WordPress de nieuwe URL-regels kent. Doe dit niet bij elk paginabezoek in code: dat is onnodig zwaar.
+  </Step>
+  <Step title="Voeg velden en een testitem toe" icon="plus">
+    Velden volgen de [Werkwijze](/wordpress/acf-patterns) (`group_<cpt>_fields.json`). Maak een testitem, publiceer het en bekijk het.
+  </Step>
+</Steps>
+
+## Waar het misgaat
+
+- De technische naam later veranderen.
+- Een pagina en een archief dezelfde URL geven.
+- Vergeten de permalinks op te slaan: het overzicht geeft dan een 404.
+
+## Af
+
+- [ ] Posttype staat in het beheermenu met Nederlandse labels
+- [ ] Een gepubliceerd item en het archief openen zonder 404
+- [ ] ACF-velden staan als JSON in Git
+- [ ] Toont het overzicht items automatisch? Zie [Andere items automatisch tonen](/sops/lokaal/andere-items-tonen)
+
+## Naslag
+
+- [Thema](/wordpress/theme-architecture) · [Naamgeving](/wordpress/naming-conventions) · [Tweede pagebuilder](/sops/lokaal/tweede-pagebuilder)
+
+*Bron: Rayan — SOP "Custom posttype registreren" (HOUS).*
