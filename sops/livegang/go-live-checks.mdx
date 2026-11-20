@@ -1,51 +1,156 @@
 ---
 title: "Livegang — Go-live checks"
-description: "Steekproef op productie: techniek, content, mail, cookies, tracking."
+description: "De volledige livegang-checklist: per punt hoe je het controleert en of dat automatisch (van buitenaf) of met de hand kan."
 ---
 
-<Callout kind="info" title="Dit is een SOP (opzet)">
-  Korte, harde checklist direct na DNS/SSL — vóór je “live” communiceert.
+<Callout kind="info" title="Dit is een SOP">
+  De checklist rond de livegang, van staging tot en met de eerste dag live. Je kunt hem aflopen zonder iets te vragen: bij elk punt staat **hoe je het controleert** en **of dat automatisch kan**. De stappen van de domeinwissel zelf staan in [Productie & DNS](/sops/livegang/productie-en-dns). Doe dit vóór je "live" communiceert.
 </Callout>
 
 ## Doel
 
-Geen verrassingen op het publieke domein die op staging wél werkten.
+Geen verrassingen op het publieke domein die op staging wél werkten, en niets vergeten wat bij eerdere livegangen (bijna) misging.
 
-## Checks
+## Zo lees je de lijst
 
-### Techniek
+| Label | Betekenis |
+|-------|-----------|
+| **Auto** | Kan van buitenaf, zonder in te loggen. Met `sitecheck test` (pagina's, menu, cookies), `wp-beveiligingscheck --url` (SSL, loginpagina, losse bestanden, headers) of één opzoeking of verzoek (bijvoorbeeld `dig`) |
+| **Hand** | Iemand moet inloggen, een mailbox openen of iets met eigen ogen bekijken |
+| **Beide** | Een deel kan automatisch, de rest met de hand |
 
-- [ ] Home + 2–3 kernpagina’s laden (desktop + mobiel)
-- [ ] Geen mixed content / duidelijke SSL-fouten
-- [ ] Login alleen delen als **`/beheer`**
-- [ ] WP_DEBUG uit op productie
-- [ ] Page cache + Redis actief; na deploy gepurged
+Punten met **Ging mis** zijn punten die bij een eerdere livegang of test (bijna) misgingen. Ze hebben een eigen regel, zodat je ze niet overslaat.
 
-### Theme & content
+## Voordat je automatisch controleert
 
-- [ ] Assets uit laatste `npm run build` zichtbaar (geen oude CSS)
-- [ ] Pagebuilder-blokken zonder fatale errors
-- [ ] Favicon / basismeta waar afgesproken
-- [ ] Formulieren zichtbaar op contact/landings
+| Punt | Hoe controleer je het | Auto? |
+|------|----------------------|-------|
+| **Ging mis** — je eigen controle blokkeert je | [WP Defender](/wordpress/plugins/wp-defender) blokkeert na 10 keer een 404 binnen 5 minuten. Een eerste testrun gaf 96 keer een 404 (twee ontbrekende lettertypen op 24 pagina's, op 2 apparaten). Zet je eigen IP op de allowlist, draai de tools één voor één (niet tegelijk met een eigen reeks `curl`-verzoeken) en let op het 404-budget | Hand |
+| **Ging mis** — vals alarm door een site in onderhoud | Direct na een update gaf een site een tijd lang een 503 "Maintenance". Geloof een rood resultaat pas als de site twee keer achter elkaar 200 geeft | Beide |
 
-### Mail & formulieren
+## 1. Op staging, vóór de domeinwissel
 
-- [ ] Testsubmit → mail via Maileroo
-- [ ] Backup-route SES getest of recent op staging bewezen + keys op prod aanwezig
-- [ ] Pushover gekoppeld op prod
+| Punt | Hoe controleer je het | Auto? |
+|------|----------------------|-------|
+| Feedback afgerond en go gegeven | De **Af**-lijst van [Feedback](/sops/staging/feedback) is groen en de go (of een bewust soft-launchplan) is genoteerd | Hand |
+| Defender staat goed | Defender: eerste scan gedraaid en issues afgehandeld, eigen IP op de allowlist. Inloggen via `/beheer` werkt en `/wp-login.php` geeft een 404 | Beide |
+| Back-up werkt echt | xCloud → Site Backup: de dagelijkse back-up staat erin. Doe één keer een test-restore en kijk of de site start. De file-backup slaat uploads over ([Backups](/hosting/backups)): controleer ook waar de mediabibliotheek veilig staat | Hand |
+| Cache staat goed | xCloud → Caching: page cache (FastCGI, 60 minuten) en Redis aan; Object Cache Pro en Cloudflare Edge Cache uit ([Caching](/hosting/caching)) | Hand |
+| Mail is bewezen | Per [FluentSMTP](/wordpress/plugins/fluent-smtp): testmail via Maileroo én via SES, het echte contactformulier, "Wachtwoord vergeten" op de inlogpagina en een Pushover-testalert | Hand |
+| Cookies blokkeren echt | `sitecheck test`: vóór akkoord en na weigeren laden er geen derde partijen of onnodige cookies. Zelf kijken: Nederlandse teksten en de reconsent-link in de footer | Beide |
+| Opruimen | Geen gebruiker `admin` (Gebruikers → Alle gebruikers), ongebruikte thema's en plugins weg, `WP_DEBUG` uit in `wp-config.php`, permalinks netjes (geen `?p=123`) | Hand |
+| **Ging mis** — wp-admin vol PHP-waarschuwingen na het opruimen | Na het verwijderen van de standaardthema's gaf wp-admin overal waarschuwingen en "headers already sent". Draai `wp transient delete --all` en `wp cache flush`, zie [PHP-waarschuwingen na verwijderen thema's](/help-center/troubleshooting/wordpress/thema/php-waarschuwingen-na-verwijderen-themas). Controleer daarna dat wp-admin schoon is | Hand |
+| Installatiebestanden van de verhuizing zijn weg | Bij Duplicator: `installer.php` en het archief moeten weg (laat "Auto delete installer files" aanstaan, zie [Lokaal naar staging](/sops/staging/lokaal-naar-staging)). Controleer dat `https://domein/installer.php` een 404 geeft | Auto |
 
-### Cookies & tracking
+## 2. Direct na de domeinwissel: domein, DNS en SSL
 
-- [ ] SureCookie in **incognito** op productiedomein
-- [ ] Reconsent / cookiebeleid
-- [ ] Tracking alleen na consent (GCM waar van toepassing)
+| Punt | Hoe controleer je het | Auto? |
+|------|----------------------|-------|
+| Domein wijst naar de xCloud-server | `dig +short klantdomein.nl` (en `www`) geeft het server-IP, of kijk op whatsmydns.net. Het kan tot 24 uur duren voor het overal klopt | Auto |
+| SSL geldig | Slotje zonder waarschuwing, certificaat niet bijna verlopen | Auto |
+| http gaat naar https | `http://klantdomein.nl` stuurt door naar `https://`. Ook `www` en zonder `www`: één stuurt door naar de ander | Auto |
+| Geen mixed content | Console leeg op de kernpagina's, geen bestanden die via `http://` laden | Auto |
+| Mail-DNS | SPF (maar **één** SPF-record, ook als er klantmailboxen zijn), DKIM en DMARC kloppen voor Maileroo. Zie [Klant-e-mail](/sops/extra/klant-email) | Auto |
 
-### SEO / hygiene (licht)
+## 3. Webadres en afscherming
 
-- [ ] Sitemap/robots niet per ongeluk “block all” (SureRank of equivalent)
-- [ ] Canonical/domein niet nog op staging-URL
+Dit is het deel waar een livegang het vaakst iets vergeet. De stappen staan in [Productie & DNS](/sops/livegang/productie-en-dns).
+
+| Punt | Hoe controleer je het | Auto? |
+|------|----------------------|-------|
+| Site wijst naar het klantdomein | Instellingen → Algemeen toont het klantdomein. In de bron van de homepage komt het staging-adres niet meer voor. Zo niet: `wp search-replace` en controleer `WP_HOME` en `WP_SITEURL` in `wp-config.php` | Beide |
+| **Ging mis** — oud adres in sitemap, OpenGraph en teksten | `/sitemap.xml` bevat alleen het klantdomein. `og:image` en `canonical` wijzen naar het klantdomein. In de privacy- en cookiepagina staat geen `.local`- of staging-adres (bij een eerdere site stond het lokale adres nog in de privacypagina) | Auto |
+| Wachtwoord op serverniveau staat uit | Het klantdomein geeft 200 en vraagt geen wachtwoord (geen 401) | Auto |
+| "Ontmoedig zoekmachines" staat uit | Geen `noindex` in de bron van de homepage en geen `Disallow: /` in `robots.txt` | Auto |
+| Google op de hoogte | Site toegevoegd in Search Console, `/sitemap.xml` ingediend, eventueel een her-crawl van de belangrijkste pagina's aangevraagd | Hand |
+
+## 4. Mail en formulieren
+
+| Punt | Hoe controleer je het | Auto? |
+|------|----------------------|-------|
+| **Ging mis** — ontvanger van het formulier staat nog op een testadres | Tijdens het testen staat de ontvanger op een eigen adres. Zet hem terug naar het echte adres (bij het formulierblok of de formulierinstellingen) en stuur een testmail. Vergeet je dit, dan krijgt de klant zijn formulieren niet | Hand |
+| **Ging mis** — beheerdersadres niet bevestigd | Instellingen → Algemeen: het echte adres staat erin **én** je hebt op de link in de bevestigingsmail geklikt. Anders verandert het niet echt en komt formuliermail soms niet aan | Hand |
+| Formulier werkt end-to-end | Op het publieke domein invullen, bevestiging zichtbaar, mail aangekomen (kijk ook in spam). Het formulier staat op de contact- en landingspagina's | Beide |
+| "Wachtwoord vergeten" werkt | De resetmail komt aan | Hand |
+| Back-up-route en keys | De `FLUENTMAIL_*`-regels staan in `wp-config.php` via xCloud. Testmail via connection 2 (SES) | Hand |
+| Pushover | Testalert ontvangen | Hand |
+| Spam-bescherming | Honeypot ingesteld, geen reCAPTCHA vóór toestemming ([Formulieren](/wordpress/plugins/formulieren)) | Hand |
+
+## 5. Cookies en tracking
+
+| Punt | Hoe controleer je het | Auto? |
+|------|----------------------|-------|
+| Banner en blokkeren | In een incognitovenster verschijnt de banner. Netwerk-tab: vóór akkoord geen externe scripts. `sitecheck test` doet dit ook, inclusief na weigeren | Auto |
+| **Ging mis** — kaart of embed laadt vóór toestemming | De kaart (bijvoorbeeld Google Maps) laadt pas na "Accepteren & Laden". Vóór akkoord is er geen verbinding met Google | Auto |
+| Reconsent en cookiebeleid | De footerlink opent de voorkeuren. `/cookiebeleid/` toont de cookietabel | Beide |
+| Tracking na toestemming | Het GA4/GTM-ID klopt en er komen pas events na akkoord (Consent Mode) | Hand |
+
+## 6. Techniek en inhoud
+
+| Punt | Hoe controleer je het | Auto? |
+|------|----------------------|-------|
+| Alle pagina's laden | `sitecheck test`: elke pagina uit de sitemap geeft 200, zonder fouten in de console en zonder bestanden die niet laden. Doe daarnaast zelf home en 2 tot 3 kernpagina's op desktop én mobiel | Beide |
+| Menu op telefoon | Het menu opent en een link werkt (`sitecheck test`) | Auto |
+| Pagebuilder-blokken | Geen PHP-meldingen of fatale fouten op de pagina | Auto |
+| `WP_DEBUG` uit, `debug.log` niet openbaar | Geen PHP-meldingen op de pagina. `/wp-content/debug.log` geeft een 404. De instelling zelf staat in `wp-config.php` ([Configuratie](/wordpress/configuratie)) | Beide |
+| Laatste build zichtbaar | `npm run build` gedraaid en gedeployed. Doe een harde refresh en kijk of de nieuwste wijziging zichtbaar is (geen oude CSS) | Hand |
+| Uiterlijk klopt | Vergelijk desktop en mobiel met het ontwerp en met staging | Hand |
+| Afbeeldingen | Netwerk-tab: de hero laadt direct met voorrang, de rest is lazy en komt in het nieuwe formaat | Hand |
+| Favicon, sitetitel en tagline | Het tabblad toont het favicon, Instellingen → Algemeen klopt | Beide |
+| 404-pagina | Een niet-bestaande URL geeft status 404 met een eigen pagina en een knop terug. Doe dit één keer: elke 404 telt mee voor Defender | Auto |
+| Contactgegevens en openingstijden | Vergelijk met de werkelijkheid of vraag de klant | Hand |
+| Snelheid | Lighthouse op mobiel: noteer prestaties, toegankelijkheid en best practices. Bij een herbouw: vergelijk requests en paginagrootte met de nulmeting ([Herbouw en vergelijken](/sops/extra/herbouw-vergelijken)) | Auto |
+| Redirects (alleen bij herbouw of migratie) | Oude top-URL's geven een 301 naar de nieuwe pagina ([Migratie](/sops/extra/migratie-wordpress)). Controleer een kort lijstje, niet alles tegelijk | Auto |
+
+## 7. SEO
+
+| Punt | Hoe controleer je het | Auto? |
+|------|----------------------|-------|
+| Titel en omschrijving per pagina | Bekijk de bron: elke pagina heeft een eigen `title` en `meta description`, geen dubbele | Auto |
+| Sitemap-inhoud | Alleen posttypes en taxonomieën die de site gebruikt ([SureRank](/wordpress/plugins/surerank)) | Auto |
+| SureRank-paneel | Groen op alle pagina's, alt-teksten ingevuld | Hand |
+| OpenGraph-afbeelding | `og:image` is een liggende foto die past bij het bedrijf | Auto |
+
+## 8. Beveiliging
+
+| Punt | Hoe controleer je het | Auto? |
+|------|----------------------|-------|
+| Login via `/beheer` | `/beheer` werkt, `/wp-login.php` geeft een 404, `/wp-admin` wordt niet als inloglink gedeeld | Auto |
+| Gebruikersnamen niet zichtbaar | `?author=1`, de REST-API, oEmbed en de sitemap verklappen geen gebruikersnaam | Auto |
+| Geen losse bestanden | `.env`, `.git`, `wp-config.php.bak` en `debug.log` zijn niet bereikbaar, en mappen zoals uploads zijn niet te openen | Auto |
+| Beveiligingsheaders | HSTS, `nosniff`, `X-Frame-Options` en `Referrer-Policy` staan aan | Auto |
+| 2FA en Defender | Defender actief, 2FA ingesteld voor beheerders als het project daarom vraagt | Hand |
+
+## 9. Cache en back-ups na de wissel
+
+| Punt | Hoe controleer je het | Auto? |
+|------|----------------------|-------|
+| Caches geleegd | Na de laatste deploy en de domeinwissel: page cache en Redis gepurged ([Caching](/hosting/caching)) | Hand |
+| Back-ups lopen | In xCloud staat de eerste back-up na de livegang ([Backups](/hosting/backups)) | Hand |
+
+## 10. Alleen bij een webshop
+
+| Punt | Hoe controleer je het | Auto? |
+|------|----------------------|-------|
+| Testbestellingen en testaccounts verwijderd | WooCommerce → Bestellingen en Gebruikers. De voorraad per product is hersteld | Hand |
+| Betalen staat live | Mollie met echte sleutels en testmodus uit. De sleutels staan nooit in Git of in de docs | Hand |
+| Mails van de shop komen aan | Bestelbevestiging via SMTP ontvangen. Zonder SMTP komen de mails van de shop niet aan | Hand |
+| Btw, verzending en prijzen | Prijzen inclusief btw, btw-tarieven per productsoort en verzendkosten kloppen op product, winkelwagen en kassa | Hand |
+| Verplichte informatie | Contact-, retour- en voorwaardenpagina bestaan, zie [Webshop en wetgeving](/kennis/webshop-en-wet) | Beide |
+| Compressie en caching | Het antwoord is gecomprimeerd (gzip of brotli) en css en js hebben een cache-header. Zonder dit zijn de snelheidscijfers veel slechter | Auto |
 
 ## Af
 
-- [ ] Alle secties hierboven groen of uitzondering bewust gedeeld
+- [ ] Alle secties hierboven groen, of een uitzondering is bewust gedeeld
+- [ ] Alle punten met **Ging mis** zijn afgevinkt
+- [ ] Wat automatisch kan is automatisch gecontroleerd, de rest met de hand
 - [ ] Klaar voor [Oplevering](/sops/livegang/oplevering)
+
+## Naslag
+
+- [Productie & DNS](/sops/livegang/productie-en-dns) · [Staging — Stack & testen](/sops/staging/stack-en-testen) · [Doorlopend](/sops/doorlopend)
+
+<Callout kind="info" title="Aangevuld — november 2026">
+  - **Nieuw:** de hele pagina is uitgebreid van een korte opzet naar de volledige checklist, met bij elk punt hoe je het controleert en of het **Auto**, **Hand** of **Beide** is. Nieuw zijn onder meer de secties voor staging vooraf, webadres en afscherming, beveiliging en webshop, en de punten met **Ging mis**.
+  - **Bron:** Rayan — livegang-checklist (opdracht 4), werklog "Live Omgeving" (inclusief Draaiboek), de Solea-livegangchecklist, de Smedts-aantekeningen, de besluiten bij Mori Matcha, de beveiligingscheck en de Playwright-sitechecks.
+</Callout>
