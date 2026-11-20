@@ -30,6 +30,13 @@ Code draait op een deelbare URL via Git. Hosting-standaarden staan al goed (zelf
   <Step title="Domein & SSL in xCloud" icon="lock">
     Koppel **`projectnaam.kayjilesen.dev`** aan de site + Let's Encrypt. Zonder Cloudflare-record faalt cert/domein.
   </Step>
+  <Step title="Staging afschermen" icon="shield">
+    Zet twee afschermingen aan: een **wachtwoord op serverniveau** in xCloud én bij Instellingen → Lezen het vinkje **Ontmoedig zoekmachines**.
+
+    Waarom allebei: het vinkje is alleen een verzoek aan nette zoekmachines. Bots en mensen met de link kunnen de site nog gewoon openen. Het wachtwoord houdt iedereen buiten, maar staat dat per ongeluk uit, dan zorgt het vinkje er nog voor dat Google de staging niet indexeert. Samen dekken ze elkaars zwakte.
+
+    Bij livegang haal je beide weer weg: zie [Productie & DNS](/sops/livegang/productie-en-dns). Het wachtwoord zelf hoort in Proton Pass, niet in de docs.
+  </Step>
   <Step title="Git / Deployer" icon="git-branch">
     Koppel repo; deploy theme met [Deployer for Git](/hosting/deployments). Eerste push vanaf gebouwde slice.
   </Step>
@@ -53,6 +60,7 @@ Code draait op een deelbare URL via Git. Hosting-standaarden staan al goed (zelf
 - [ ] xCloud-site aangemaakt; server-IP bekend
 - [ ] Cloudflare A-record voor `projectnaam.kayjilesen.dev` (**DNS only** / grijs) gezet en resolve’t
 - [ ] Domein + SSL in xCloud OK → `https://projectnaam.kayjilesen.dev` bereikbaar
+- [ ] Staging afgeschermd: wachtwoord op serverniveau én "Ontmoedig zoekmachines" aan
 - [ ] Theme/code via Git-deploy
 - [ ] Caching + Redis volgens standaard
 - [ ] WAF + remote backups aan
@@ -63,3 +71,8 @@ Code draait op een deelbare URL via Git. Hosting-standaarden staan al goed (zelf
 → [Stack & testen](/sops/staging/stack-en-testen)
 
 Klant-domein / overname? Zie [Productie & DNS](/sops/livegang/productie-en-dns) (Cloudflare + nameservers **vóór** verhuizen).
+
+<Callout kind="info" title="Aangevuld — november 2026">
+  - **Nieuw:** stap "Staging afschermen" (wachtwoord op server én zoekmachines weren, met het waarom) en een punt in de **Af**-lijst.
+  - **Bron:** Rayan — werklog "Live Omgeving", staging fase 1.
+</Callout>

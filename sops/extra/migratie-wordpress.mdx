@@ -20,18 +20,24 @@ Scope in [Kickoff](/sops/kickoff) bevat migratie (oude WP, andere CMS, of alleen
 <Steps>
   <Step title="Inventaris" icon="search">
     Oude URL’s (sitemap/export), plugins die content dragen, formulierinzendingen, redirects die al bestaan, wie DNS/hosting beheert.
+
+    Noteer ook per oude plugin of themaonderdeel wat er op de nieuwe site voor in de plaats komt (bijvoorbeeld een slider-plugin wordt een hero-blok, een formulier-plugin wordt SureForms). En meet de oude site (aantal requests, paginagrootte). Zo vergeet je niets en kun je na afloop laten zien wat er beter is geworden.
   </Step>
   <Step title="Toegang" icon="key">
     WP-admin of hosting/FTP/DB in **Proton Pass**. Geen credentials in chat/docs.
   </Step>
   <Step title="Contentstrategie" icon="copy">
     Wat komt 1:1 mee, wat herschrijven we in pagebuilder, wat archiveren we? Media: bulk-import vs selectief.
+
+    Waarom je de database vaak niet gewoon kunt overzetten: de inhoud van een pagina staat op de oude site vaak als shortcodes van een page builder (bijvoorbeeld Avada/Fusion Builder). Die werken alleen met het oude thema of de oude plugin. Het nieuwe thema gebruikt ACF-velden, dus de inhoud moet opnieuw in de blokken worden gezet.
   </Step>
   <Step title="Import / overzetten" icon="database">
     Tools naar gelang bron (WP export/import, WP All Import, handmatig in pagebuilder). Test eerst op **`projectnaam.kayjilesen.dev`**.
   </Step>
   <Step title="URL-mapping" icon="link">
     Oude → nieuwe paden in een lijst. 301’s op productie (plugin of server). Home en top-landings eerst.
+
+    Waarom: bezoekers en Google kennen de oude URL’s. Verandert een adres zonder 301, dan krijgen ze een 404 en gaat de opgebouwde ranking verloren. Houd URL’s waar mogelijk gelijk. Verandert er één, zet dan een 301 van oud naar nieuw. Dat kan op de server in xCloud (werkt al voordat WordPress laadt, ook als de site even plat ligt) of, bij een korte lijst, met een stukje code in het thema via de hook `template_redirect` (geen aparte plugin nodig).
   </Step>
   <Step title="Cutover" icon="flag">
     Bij [Livegang](/sops/livegang/productie-en-dns): DNS/omzetting, redirects live, oude site pas uitzetten na steekproef.
@@ -51,3 +57,8 @@ Scope in [Kickoff](/sops/kickoff) bevat migratie (oude WP, andere CMS, of alleen
 
 - [Livegang — Productie & DNS](/sops/livegang/productie-en-dns)
 - [Go-live checks](/sops/livegang/go-live-checks)
+
+<Callout kind="info" title="Aangevuld — november 2026">
+  - **Nieuw:** in de stappen Inventaris (vervangingsplan en nulmeting), Contentstrategie (waarom de database niet over kan) en URL-mapping (waarom URL's gelijk blijven en twee manieren voor een 301).
+  - **Bron:** Rayan — aantekeningen Smedts Workgroup (fase 2 en "Extra: Omleidingen").
+</Callout>

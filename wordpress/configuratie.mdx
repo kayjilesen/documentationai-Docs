@@ -77,6 +77,24 @@ ini_set( 'display_errors', 0 );
 
 Logbestand (als `WP_DEBUG_LOG` aan staat): meestal `wp-content/debug.log` — niet committen, wel handig bij PHP-fouten.
 
+### Zo controleer je een pagina
+
+Een pagina die er goed uitziet is nog niet foutloos. Controleer vóór staging of oplevering altijd allebei:
+
+<Steps>
+  <Step title="PHP-fouten: debug.log" icon="file-text">
+    Zet debug lokaal aan (zie hierboven), open de pagina en doe wat een bezoeker of redacteur doet: het menu openen, een formulier gebruiken, inhoud opslaan. Sommige fouten ontstaan pas dan. Kijk daarna in `wp-content/debug.log` naar nieuwe regels en let op het tijdstip, want oude meldingen blijven in het bestand staan.
+  </Step>
+  <Step title="JavaScript-fouten: console" icon="terminal">
+    Open in de browser Inspecteren → Console, maak de console leeg, ververs de pagina en test de onderdelen opnieuw. JavaScript-fouten staan hier en niet in `debug.log`.
+  </Step>
+  <Step title="Andere inhoud testen" icon="smartphone">
+    Probeer lege optionele velden, langere teksten en een smal scherm. Fouten vallen vaak pas op bij andere inhoud.
+  </Step>
+</Steps>
+
+**Waar het misgaat:** een melding wegklikken of verbergen lost de fout niet op. Een leeg `debug.log` bewijst niets als je niet zeker weet dat logging aanstaat. En alleen de pagina laden zonder knoppen en formulieren te testen mist de fouten die pas bij gebruik optreden. Zet debugging op productie uit en zorg dat `debug.log` niet openbaar bereikbaar is.
+
 ---
 
 ## Secrets (SMTP e.d.)
@@ -113,6 +131,8 @@ Details en checklist: [FluentSMTP](/wordpress/plugins/fluent-smtp).
 
 Verkeerde prefix = “Error establishing a database connection” of lege site terwijl de DB wél data heeft.
 
+Dit komt vaak voor bij het overzetten van een lokale database naar staging: de nieuwe xCloud-site heeft een eigen (willekeurige) prefix, terwijl de geïmporteerde tabellen `wp_` heten. Pas `$table_prefix` in `wp-config.php` aan naar de prefix van de geïmporteerde tabellen.
+
 ---
 
 ## Checklist
@@ -133,3 +153,8 @@ Verkeerde prefix = “Error establishing a database connection” of lege site t
 - [Lokaal — Omgeving](/sops/lokaal/omgeving)
 - [Site Management](/hosting/site-management)
 - [Security](/hosting/security)
+
+<Callout kind="info" title="Aangevuld — november 2026">
+  - **Nieuw:** de sectie "Zo controleer je een pagina" (debug.log, console, andere inhoud) en een alinea over de prefix na het overzetten van een database.
+  - **Bron:** Rayan — SOP "Pagina controleren met WP_DEBUG en de console" (HOUS) en werklog "Live Omgeving" (handmatig overzetten).
+</Callout>

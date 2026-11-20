@@ -33,6 +33,8 @@ Houd (minimaal) deze Figma-**pages** aan:
 
 Volgorde in de sidebar mag Brand → Components → Design (of zoals in de template). Niet alles op één page dumpen.
 
+**Waarom eerst Brand en Components, dan Design:** liggen kleuren, tekststijlen, afstanden en components vast, dan hoef je de pagina's alleen nog op te bouwen. Dat houdt alles consistent en maakt het bouwen sneller. Andersom moet je later overal losse waarden gelijktrekken.
+
 ## Canvas & grid
 
 (Al in de template; ter referentie / bij herstel:)
@@ -59,6 +61,18 @@ Op page **Components** — Figma components (geen losse kopieën op Design-pages
 | **Overig** | Icon+tekst, terugkerende CTA-blokken |
 
 Variants voor states waar nuttig. Op **Design** alleen **instances** — niet detachen tenzij bewuste uitzondering.
+
+### Knop als voorbeeld
+
+Een knop bouw je één keer als **variantenset**, zodat elke stijl en elke toestand erin zit:
+
+- Maak eerst de tekst en zet er **Auto Layout** omheen. Kies **Hug contents** voor de breedte, dan groeit de knop mee met een langere tekst.
+- Maak varianten met de eigenschappen **Style** (Primary, Secondary) en **State** (Normal, Hover, Focus). Dat zijn zes varianten.
+- Geef de focus-variant een duidelijk zichtbare rand, zodat iemand die met het toetsenbord werkt ziet waar hij is.
+
+**Waar het misgaat:** losse vormen kopiëren in plaats van een component maken, een vaste breedte (een lange tekst past dan niet meer) en verwachten dat hover vanzelf werkt in het prototype. Daarvoor stel je ook een interactie in.
+
+**Controle:** zet een langere tekst in de knop en wissel tussen Primary en Secondary. Verander daarna de hoofdvariant: de plekken op de Design-pagina's moeten meeveranderen.
 
 ## Benaming
 
@@ -112,3 +126,8 @@ Namen = leidraad voor pagebuilder-blokken / PHP-components.
 ## Volgende
 
 → [Review & handoff](/sops/design/review-en-handoff) (prototype delen)
+
+<Callout kind="info" title="Aangevuld — november 2026">
+  - **Nieuw:** "Waarom eerst Brand en Components, dan Design" en de sectie "Knop als voorbeeld" (variantenset, waar het misgaat, controle).
+  - **Bron:** Rayan — aantekeningen "Wordpress / Figma" en SOP "Button-component maken" (HOUS).
+</Callout>

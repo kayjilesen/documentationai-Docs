@@ -46,6 +46,19 @@ Productie-inlog: `https://domein.nl/beheer`
 | Blocklist monitor | Uit | |
 | Security tweaks | Alle recommendations fixed | o.a. XML-RPC uit, hide errors, prevent user enum, disable file editor |
 
+## Waarom deze instellingen — en waar het misgaat
+
+- **Eigen IP eerst op de allowlist.** Login protection en 404 detection blokkeren na een paar pogingen. Zet je eigen IP (kantoor) bij Firewalls → Custom Rules op de allowlist **voordat** je de lockouts aanzet, anders blokkeer je jezelf. Dit geldt ook voor tests die veel pagina's of ontbrekende bestanden opvragen: 10 keer een 404 binnen 5 minuten is al een blokkade.
+- **Eerste scan nalopen.** Verwijder losse oude bestanden die Defender meldt (bijvoorbeeld een oude uploadtool). Zet alleen op *Ignore* wat bij WordPress zelf hoort.
+- **2FA is in de preset uit.** Wil je extra beveiliging op een project, zet dan 2FA verplicht voor Administrators en stel het eerst voor jezelf in.
+- **Geo-blocking staat niet in de preset.** Het vraagt een gratis MaxMind-sleutel en de meeste klantsites hebben geen reden om bezoekers uit bepaalde landen te weren.
+- **Wijzig je de preset voor een project?** Bewaar de nieuwe instellingen onder Defender → Configs en exporteer ze, zodat de volgende site dezelfde opzet kan gebruiken.
+
+<Callout kind="info" title="Aangevuld — november 2026">
+  - **Nieuw:** de sectie "Waarom deze instellingen — en waar het misgaat" (eigen IP op de allowlist, eerste scan, 2FA, geo-blocking, config bewaren).
+  - **Bron:** Rayan — werklog "Live Omgeving", staging fase 2 (Defender).
+</Callout>
+
 ## Af
 
 - [ ] Defender actief; preset/import toegepast

@@ -46,16 +46,27 @@ Gebruik wanneer SureForms tekortschiet, bijvoorbeeld:
 
 Dan: Gravity Forms-licentie activeren, formulier bouwen, zelfde SMTP- en cookie-checks als bij SureForms.
 
+## Spam-bescherming zonder Google
+
+reCAPTCHA stuurt gegevens naar Google nog voordat de bezoeker toestemming heeft gegeven. Dat mag niet zomaar. Gebruik liever een **honeypot**: een verborgen veld dat alleen bots invullen. Zo houd je spam tegen zonder gegevens naar een derde partij te sturen. Wil je toch reCAPTCHA, laad het dan pas na toestemming via [SureCookie](/wordpress/plugins/surecookie).
+
+Tijdens het testen horen de ontvanger en het beheerdersadres op een eigen adres te staan, zie [FluentSMTP](/wordpress/plugins/fluent-smtp).
+
 ## Af
 
 - [ ] SureForms gebruikt, tenzij bewuste Gravity Forms-feature nodig is
 - [ ] Formulier(en) op de site geplaatst en in NL getest
 - [ ] Notificatiemail komt aan (FluentSMTP OK)
 - [ ] Werkt in incognito; cookie-keuzes breken submit niet onbedoeld
-- [ ] Spam-bescherming naar gelang setup
+- [ ] Spam-bescherming ingesteld (bij voorkeur een honeypot, geen reCAPTCHA vóór toestemming)
 
 ## Gerelateerd
 
 - [Plugins Overzicht](/wordpress/plugins/overzicht)
 - [FluentSMTP](/wordpress/plugins/fluent-smtp)
 - [SureCookie](/wordpress/plugins/surecookie)
+
+<Callout kind="info" title="Aangevuld — november 2026">
+  - **Nieuw:** de sectie "Spam-bescherming zonder Google" (honeypot in plaats van reCAPTCHA) en een aangescherpt punt in de **Af**-lijst.
+  - **Bron:** Rayan — aantekeningen Smedts (fase 2: reCAPTCHA en toestemming).
+</Callout>

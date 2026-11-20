@@ -41,10 +41,14 @@ De plugin **Deployer for Git** draait in WordPress op de productiesite en synchr
 <Steps>
   <Step title="Plugin installeren en koppelen" icon="plug">
     Installeer **Deployer for Git** op de productiesite. Koppel de Git-repository en kies de branch (meestal `main`).
+
+    Gebruik voor de koppeling een **fine-grained GitHub-token** met alleen toegang tot die ene repository en **Contents: alleen lezen**. Een token dat niets kan wijzigen, kan ook niets stukmaken als het lekt. Bewaar het token in Proton Pass.
   </Step>
   <Step title="Kies handmatig of webhook" icon="git-branch">
     - **Handmatig:** deploy alleen starten als je bewust wilt live gaan.
     - **Webhook:** configureer de webhook in GitHub/GitLab zodat pushes automatisch worden opgehaald.
+
+    Bij GitHub zet je de webhook onder Settings → Webhooks. Test hem met een kleine lokale wijziging: push en kijk of die vanzelf op de site verschijnt. Let op: met een webhook staat elke push naar die branch meteen live.
   </Step>
   <Step title="Deploy uitvoeren" icon="upload">
     Push je commits (bij webhook) of start de sync in de plugin (handmatig). Controleer of de bestanden op productie zijn bijgewerkt.
@@ -163,3 +167,8 @@ Bij xCloud vind je logs onder **Site > Deployment Logs** (tijdstip, status, bran
     Remote incremental backups.
   </Card>
 </Columns>
+
+<Callout kind="info" title="Aangevuld — november 2026">
+  - **Nieuw:** in "Deployer for Git" de rechten van het GitHub-token en hoe je de webhook instelt en test.
+  - **Bron:** Rayan — werklog "Live Omgeving", staging fase 1.
+</Callout>

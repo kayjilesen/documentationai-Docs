@@ -51,11 +51,26 @@ Staging-subdomeinen (`*.kayjilesen.dev`) blijven in de zone **kayjilesen.dev** �
   <Step title="SSL" icon="lock">
     Let's Encrypt op klant-domein; force HTTPS. `*.kayjilesen.dev` laten staan zolang dat host actief is.
   </Step>
+  <Step title="Webadres in de site controleren" icon="refresh-cw">
+    De site bewaart zijn eigen adres in de database. Controleer na de domeinwissel of links, afbeeldingen en de sitemap nog naar `projectnaam.kayjilesen.dev` wijzen (Instellingen → Algemeen is de snelste check). Staat het stagingadres er nog, vervang het dan in alle tabellen via WP-CLI ([Terminal](/kennis/terminal)):
+
+    ```bash
+    wp search-replace 'https://projectnaam.kayjilesen.dev' 'https://klantdomein.nl' --all-tables --dry-run
+    ```
+
+    Kijk of de aantallen kloppen en draai het commando daarna zonder `--dry-run`. Controleer ook `WP_HOME` en `WP_SITEURL` in `wp-config.php` ([Configuratie](/wordpress/configuratie)). Doe je dit niet, dan komen bezoekers via foute links op de stagingomgeving terecht.
+  </Step>
   <Step title="Mail DNS" icon="mail">
     SPF/DKIM/DMARC voor Maileroo (`noreply@klant`). Let op overlap met [klant-e-mail](/sops/extra/klant-email) (één samenhangend SPF).
   </Step>
   <Step title="Hosting check" icon="shield">
     Caching / backups / WAF — steekproef na domeinwissel.
+  </Step>
+  <Step title="Testadressen terugzetten" icon="mail">
+    Tijdens het testen staan de formulier-ontvanger en het beheerdersadres (Instellingen → Algemeen) op een eigen adres, zodat een testmail nooit bij de klant aankomt. Zet beide terug naar het echte adres en stuur een testmail. Vergeet je dit, dan krijgt de klant zijn formulieren niet. Een nieuw beheerdersadres wordt pas actief nadat je op de link in de bevestigingsmail klikt.
+  </Step>
+  <Step title="Afscherming eraf en Google laten indexeren" icon="eye">
+    Zet het wachtwoord op serverniveau in xCloud uit en haal bij Instellingen → Lezen het vinkje **Ontmoedig zoekmachines** weg (zie [Site & deploy](/sops/staging/site-en-deploy)). Voeg de site toe aan Google Search Console en dien de sitemap in. Zonder dit blijft de live site onzichtbaar in Google.
   </Step>
   <Step title="Redirects / migratie" icon="corner-down-right">
     Bij migratie: [Migratie oude WordPress](/sops/extra/migratie-wordpress). Oude hosting pas uitzetten ná verificatie.
@@ -77,12 +92,20 @@ Staging-subdomeinen (`*.kayjilesen.dev`) blijven in de zone **kayjilesen.dev** �
 
 - [ ] Klant-domein resolve’t naar deze xCloud-site (records in Cloudflare)
 - [ ] HTTPS OK
+- [ ] Webadres in de site wijst naar het klantdomein (geen stagingadres meer)
 - [ ] Laatste deploy + ACF Sync + cache purge
 - [ ] Mail DNS (Maileroo) gezet of follow-up met eigenaar
 - [ ] Cache / backup / WAF OK na omzetting
+- [ ] Formulier-ontvanger en beheerdersadres weer op het echte adres; testmail ontvangen
+- [ ] Wachtwoord op serverniveau uit, "Ontmoedig zoekmachines" uit, sitemap ingediend in Search Console
 - [ ] `/beheer` + credentials in wachtwoordmanager
 - [ ] Redirects gedaan of n.v.t.
 
 ## Volgende
 
 → [Go-live checks](/sops/livegang/go-live-checks)
+
+<Callout kind="info" title="Aangevuld — november 2026">
+  - **Nieuw:** drie stappen in "Livegang — site omzetten" (webadres in de site controleren, testadressen terugzetten, afscherming eraf en indexeren) en drie punten in de **Af**-lijst.
+  - **Bron:** Rayan — werklog "Live Omgeving" (Draaiboek) en de Solea-livegangchecklist.
+</Callout>

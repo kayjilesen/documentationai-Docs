@@ -22,6 +22,23 @@ Sites gezond houden zonder ad-hoc FTP of ongedocumenteerde uitzonderingen.
 | **Docs** | Leerpunten → SOP of Documentatie via Git |
 | **Klantproject-dossier** | URL’s, uitzonderingen, speciale plugins actueel houden |
 
+## Automatische updates (WPMU DEV Hub)
+
+Sites onder beheer werk je niet met de hand bij. In de Hub staat per site onder **Automate & Updates**:
+
+| Instelling | Standaard | Waarom |
+|------------|-----------|--------|
+| Core, plugins en thema's | Automatisch bijwerken | Geen site met de hand bijwerken |
+| Dagen | Maandag t/m donderdag | Gaat er iets stuk, dan is er nog tijd om het te herstellen terwijl iedereen werkt. Bij vrijdag of weekend zie je het pas maandag |
+| Safe update check | Aan, op de belangrijkste pagina's (bijvoorbeeld Home en Contact) | Visuele controle na elke update. Kies pagina's met veel blokken en de pagina met het formulier |
+| Back-up vooraf | Uit | xCloud maakt al dagelijks een [back-up](/hosting/backups) |
+| Samenvatting per mail | Uit | Bij veel sites loopt je inbox vol met updates die toch goed gaan, en mis je de mail die er wel toe doet |
+| Uptime-bewaking | Uit | Dat doet xCloud al op serverniveau |
+
+<Callout kind="warning" title="Wat de controle niet ziet">
+  De safe update check vergelijkt alleen hoe een pagina **eruitziet** voor en na de update. Een contactformulier dat daarna geen mail meer verstuurt, of een kapotte koppeling, ziet hij niet. Test na een update op een site met formulieren of een shop daarom altijd kort het formulier.
+</Callout>
+
 ## Af (na elke productie-wijziging)
 
 - [ ] Via Git/Deployer gegaan
@@ -29,9 +46,15 @@ Sites gezond houden zonder ad-hoc FTP of ongedocumenteerde uitzonderingen.
 - [ ] Caches gepurged
 - [ ] Steekproef op het gewijzigde onderdeel
 - [ ] Uitzondering of nieuwe afspraak in docs/dossier gezet indien nodig
+- [ ] Site onder de Hub: automatische updates volgens de standaard hierboven
 
 ## Naslag
 
 - [Git Workflow](/devops/git-workflow)
 - [Deployments](/hosting/deployments)
 - [SOP Overzicht](/sops/overzicht)
+
+<Callout kind="info" title="Aangevuld — november 2026">
+  - **Nieuw:** de sectie "Automatische updates (WPMU DEV Hub)" met de standaard, het waarom per instelling en wat de controle niet ziet, plus een punt in de **Af**-lijst.
+  - **Bron:** Rayan — werklog "WPMU DEV" (fase 3 en 5).
+</Callout>

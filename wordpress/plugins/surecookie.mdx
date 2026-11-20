@@ -94,6 +94,17 @@ Logo en kleuren: per project (theme primary). In de export: custom palette mode 
   </Step>
 </Steps>
 
+## Testen en veelvoorkomende problemen
+
+- **Test in incognito met de Netwerk-tab open.** Zonder toestemming mogen er geen externe scripts laden. Waarom: een banner die alleen een melding toont verandert niets, de scripts draaien dan al. Toestemming moet vooraf, niet achteraf.
+- **Cookies indelen.** Scan de site met de Trackingbeheerder en deel de gevonden cookies in categorieën in bij Cookies Beheren.
+- **Kaarten en embeds (zoals Google Maps) blokkeren tot toestemming.** Zodra het iframe laadt, maakt de browser verbinding met Google en stuurt het IP-adres mee, nog voor de bezoeker iets heeft aangeklikt. Kies een embed-URL die SureCookie herkent.
+
+| Probleem | Oplossing |
+|----------|-----------|
+| Het SureCookie-scherm blijft oneindig laden na het opslaan van Lay-out | Uitloggen en opnieuw inloggen in wp-admin |
+| Geen banner | Zie [Cookiebanner verschijnt niet](/help-center/troubleshooting/cookiebanner-verschijnt-niet) |
+
 ## Af
 
 - [ ] `wp_body_open()` aanwezig direct na `<body>`
@@ -102,6 +113,7 @@ Logo en kleuren: per project (theme primary). In de export: custom palette mode 
 - [ ] Cookiebeleid-pagina met `[surecookie_cookie_policy_content]`
 - [ ] Reconsent in footer (`[surecookie_reconsent_button]` of cookie-dropdown)
 - [ ] Banner zichtbaar in incognito; caches gepurged
+- [ ] Netwerk-tab in incognito: zonder toestemming geen externe scripts of embeds
 
 ## Shortcodes
 
@@ -120,3 +132,8 @@ Bestaande Pressidium-sites niet migreren zonder overleg — consent logs en bloc
 - [Cookiebanner verschijnt niet](/help-center/troubleshooting/cookiebanner-verschijnt-niet)
 - [Skills Overzicht](/claude/skills-overview) — skill `wp-cookies`
 - [xCloud Caching](/hosting/caching)
+
+<Callout kind="info" title="Aangevuld — november 2026">
+  - **Nieuw:** de sectie "Testen en veelvoorkomende problemen" (Netwerk-tab, cookies indelen, kaarten blokkeren, scherm blijft laden) en een punt in de **Af**-lijst.
+  - **Bron:** Rayan — werklog "Live Omgeving" (staging fase 5) en aantekeningen Smedts (kaart pas na toestemming).
+</Callout>

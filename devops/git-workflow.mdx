@@ -110,6 +110,41 @@ node_modules/
 - `assets/js/pagebuilder.js` (gebundeld JS)
 - `acf-json/` (ACF veldgroepen)
 
+**Niet committen:**
+- `wp-config.php`, de database, `wp-content/uploads/` en plugins — de repo bevat alleen de themamap
+- `.env` en `.mcp.json` — hierin staan wachtwoorden of sleutels in platte tekst
+- `debug.log` en andere logbestanden
+
+<Callout kind="warning" title="Waar het misgaat">
+  - **Git gestart in de hele WordPress-map** in plaats van in de themamap: dan staan core, uploads en `wp-config.php` straks in je repo. Open alleen de themamap en start daar.
+  - **`.gitignore` verwijdert niets** wat al gevolgd wordt. Staat een bestand er al in, haal het dan eerst uit Git (`git rm --cached`).
+  - **Een wachtwoord dat één keer gecommit is, blijft in de geschiedenis staan**, ook als je het later weghaalt. Vervang dan het wachtwoord zelf.
+</Callout>
+
+---
+
+## Opleveren in de repo
+
+Aan het eind van een fase en bij de definitieve oplevering moet iemand anders met de repo verder kunnen.
+
+<Steps>
+  <Step title="Controleer wat erin zit" icon="search">
+    `git status` en `git diff`: alleen de bedoelde bestanden, geen geheimen of logbestanden. Zo gaat er geen wachtwoord of half werkbestand mee naar GitHub.
+  </Step>
+  <Step title="README bijwerken" icon="file-text">
+    Zet erin wat nodig is om te starten: benodigde plugins, build-commando's en de mappenstructuur. Een README die naar commando's verwijst die niet meer bestaan is erger dan geen README.
+  </Step>
+  <Step title="Alles meenemen wat bij de code hoort" icon="package">
+    ACF-JSON, bronbestanden, `package-lock.json` en de gebouwde CSS/JS (zie "Wel committen"). Zonder de nieuwste JSON of build ziet de volgende omgeving iets anders dan jij.
+  </Step>
+  <Step title="Build draaien en testen" icon="terminal">
+    `npm run build`, daarna de site, het `debug.log` en de browserconsole nalopen — zie [Configuratie](/wordpress/configuratie).
+  </Step>
+  <Step title="Pushen en nakijken op GitHub" icon="upload">
+    Een lokale commit is nog niet gedeeld. Kijk op GitHub of de laatste commit er staat en of de ander toegang heeft tot de repo.
+  </Step>
+</Steps>
+
 ---
 
 ## Tips
@@ -118,3 +153,8 @@ node_modules/
 - Build altijd voor een commit (`npm run build`)
 - Review je `git diff` voor je commit — voorkom ongewenste wijzigingen
 - ACF JSON bestanden: controleer dat de `"modified"` timestamp is bijgewerkt
+
+<Callout kind="info" title="Aangevuld — november 2026">
+  - **Nieuw:** "Niet committen" met de valkuilen in `.gitignore`, en de sectie "Opleveren in de repo".
+  - **Bron:** Rayan — SOP's "Git-repo voor een thema aanmaken" en "Project netjes opleveren in de repo" (HOUS).
+</Callout>

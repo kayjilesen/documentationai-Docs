@@ -135,6 +135,20 @@ theme-naam/
 
 ---
 
+## Verplichte hooks
+
+`header.php` en `footer.php` moeten drie WordPress-hooks bevatten. Plugins hangen daar hun uitvoer aan.
+
+| Hook | Plek | Waarom |
+|------|------|--------|
+| `wp_head()` | In de `<head>`, vóór `</head>` | Stijlen en scripts van thema en plugins |
+| `wp_body_open()` | Direct na de openende `<body>`-tag | Cookiebanner, GTM-noscript, skip-links |
+| `wp_footer()` | Vóór `</body>` | Scripts die onderaan geladen worden |
+
+Ontbreekt een hook, dan faalt de plugin zonder foutmelding: er verschijnt gewoon niets. Het bekendste geval is een cookiebanner die niet verschijnt, zie [Cookiebanner verschijnt niet](/help-center/troubleshooting/cookiebanner-verschijnt-niet). De [KJ-Boilerplate](/client-projects/kj-boilerplate) heeft ze al. Neem je een bestaand thema over, controleer ze dan zelf.
+
+---
+
 ## Build Systeem
 
 Alle projecten gebruiken dezelfde NPM scripts:
@@ -223,3 +237,8 @@ Beschikbaar in elk project via `inc/helpers.php`:
     Voeg Custom Post Types toe in `inc/post-types.php` indien nodig.
   </Step>
 </Steps>
+
+<Callout kind="info" title="Aangevuld — november 2026">
+  - **Nieuw:** de sectie "Verplichte hooks" (`wp_head`, `wp_body_open`, `wp_footer`) met het waarom en wat er misgaat als er één ontbreekt.
+  - **Bron:** Rayan — SOP "Nieuw custom thema opzetten" (HOUS).
+</Callout>

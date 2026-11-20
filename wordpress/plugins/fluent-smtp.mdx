@@ -127,6 +127,25 @@ Via FluentSMTP → **Waarschuwingen** / notifications:
   </Step>
 </Steps>
 
+## Testen zonder dat de klant mail krijgt
+
+Tijdens het bouwen mag een testmail nooit bij de klant aankomen.
+
+<Steps>
+  <Step title="Ontvanger op een eigen adres" icon="user">
+    Zet de ontvanger van het formulier (blok of formulierinstellingen) én het beheerdersadres bij Instellingen → Algemeen op een adres waar jij bij kunt.
+  </Step>
+  <Step title="Beheerdersadres bevestigen" icon="check-circle">
+    WordPress past een nieuw beheerdersadres pas aan nadat je op de link in de bevestigingsmail hebt geklikt. Zonder die klik komen formulier-mails soms niet aan en denk je dat de SMTP-instelling stuk is.
+  </Step>
+  <Step title="Echt formulier én wachtwoord vergeten testen" icon="mail">
+    De testmail van FluentSMTP bewijst alleen de verbinding. Verstuur ook echt het contactformulier en gebruik "Wachtwoord vergeten" op de inlogpagina. Komt de resetmail aan, dan werkt site-mail.
+  </Step>
+  <Step title="Bij livegang terugzetten" icon="rotate-ccw">
+    Zet ontvanger en beheerdersadres terug naar het echte adres — zie [Livegang — Productie & DNS](/sops/livegang/productie-en-dns).
+  </Step>
+</Steps>
+
 ## Af
 
 - [ ] Maileroo primair: `noreply@klantdomein.nl`, DNS records gezet
@@ -136,6 +155,7 @@ Via FluentSMTP → **Waarschuwingen** / notifications:
 - [ ] Routing: 1 = Maileroo, 2 = SES backup; logging **1 jaar**
 - [ ] Testmail connection 1 én 2 ontvangen
 - [ ] Pushover gekoppeld + testalert ontvangen
+- [ ] Echt formulier én "Wachtwoord vergeten" getest; bij livegang ontvanger en beheerdersadres teruggezet
 
 ## Troubleshooting
 
@@ -145,6 +165,7 @@ Via FluentSMTP → **Waarschuwingen** / notifications:
 | SES faalt | Regio = Stockholm; IAM rechten; from-adres/`kayjilesen.dev` geverifieerd in SES |
 | Keys niet gelezen | FluentSMTP staat op “configuratiebestand”; defines vóór `require wp-settings.php` |
 | Geen Pushover | App-token/user key; test vanuit Waarschuwingen |
+| Testmail komt aan, formulier-mail niet | Beheerdersadres bevestigd via de link? Ontvanger in het formulier juist? FluentSMTP-log bekijken |
 
 ## Gerelateerd
 
@@ -153,3 +174,8 @@ Via FluentSMTP → **Waarschuwingen** / notifications:
 - [Google Workspace](/email/google-workspace)
 - [MXRoute](/email/mxroute)
 - [Site Management](/hosting/site-management)
+
+<Callout kind="info" title="Aangevuld — november 2026">
+  - **Nieuw:** de sectie "Testen zonder dat de klant mail krijgt" (ontvanger op een eigen adres, beheerdersadres bevestigen, formulier en wachtwoord-vergeten testen), een rij bij Troubleshooting en een punt in de **Af**-lijst.
+  - **Bron:** Rayan — werklog "Live Omgeving", staging fase 3 (FluentSMTP) en de Solea-livegangchecklist.
+</Callout>

@@ -32,6 +32,10 @@ De bron van waarheid is `/acf-json/` in Git. Op productie: na een deploy **ACF >
   Nooit veldgroepen alleen in de productie-database laten leven zonder JSON in Git. Anders mist de volgende deploy/omgeving je wijzigingen.
 </Callout>
 
+<Callout kind="info" title="JSON bevat de velden, niet de inhoud">
+  De JSON-bestanden bevatten alleen de **instellingen van de velden** (welke velden er zijn). De teksten en afbeeldingen die een redacteur invult staan in de database. Gaat een site naar een andere omgeving, dan moet de inhoud dus apart mee. Pas ook nooit dezelfde veldgroep tegelijk op twee omgevingen aan: de ene wijziging overschrijft dan de andere.
+</Callout>
+
 ---
 
 ## Veldgroep Structuur
@@ -183,6 +187,46 @@ Elke block heeft een eigen veldgroep met `"active": false` — ze worden niet di
 
 ---
 
+## Locatieregels
+
+Een locatieregel bepaalt **waar** een veldgroep in het beheer verschijnt. Staat de regel verkeerd, dan zie je de velden op de verkeerde plek of helemaal niet.
+
+| Veldgroep | Regel |
+|-----------|-------|
+| Pagebuilder (`group_pagebuilder.json`) | Berichttype is gelijk aan `page` |
+| Projectbuilder (eigen CPT) | Berichttype is gelijk aan het CPT, bijvoorbeeld `project` |
+| Options page | Options Page is gelijk aan de gekozen pagina |
+| Block-veldgroepen | Geen eigen regel nodig: `"active": false`, ze verschijnen alleen via de clone in de pagebuilder |
+
+- Voorwaarden **binnen één groep** zijn EN (alles moet kloppen). **Aparte regelgroepen** zijn OF (één is genoeg).
+- Voeg niet zomaar een extra OF-groep toe: de velden verschijnen dan ineens op veel meer plekken.
+- Verwar de zichtbare naam in het menu niet met de technische naam van het berichttype. Een CPT met de naam "Woningen" kan technisch `project` heten, en de regel gebruikt de technische naam.
+- Locatieregels zijn geen beveiliging. Ze bepalen alleen waar velden getoond worden.
+
+**Controle:** open zowel een plek waar de groep wél hoort als een plek waar hij **niet** hoort. Alleen het eerste nakijken is niet genoeg.
+
+---
+
+## Vaste paginatemplate (zonder pagebuilder)
+
+De pagebuilder is de standaard. Een vaste template met vaste velden past alleen als de pagina's echt altijd dezelfde opbouw hebben, zoals bij een one-pager ([Knapper bij Meagen](/client-projects/knapperbijmeagen)).
+
+<Steps>
+  <Step title="Template maken" icon="file-code">
+    PHP-bestand met bovenaan `Template Name`, daarin de header, de WordPress-loop en de footer.
+  </Step>
+  <Step title="Veldgroep koppelen" icon="link">
+    Locatieregel: **Paginatemplate is gelijk aan** deze template. De velden verschijnen dan alleen bij pagina's die hem gebruiken.
+  </Step>
+  <Step title="Velden tonen" icon="code">
+    Lees ze in de loop uit met `get_field()` en escape de uitvoer (`esc_html()`, `esc_url()`, `wp_kses_post()`).
+  </Step>
+</Steps>
+
+**Waar het misgaat:** de verkeerde template gekozen (de velden verschijnen niet), een veldnaam in PHP die afwijkt van ACF, en lege optionele velden die toch een lege kop of afbeelding tonen. Controleer dus ook met een leeg veld.
+
+---
+
 ## Optiepagina's
 
 ACF optiepagina's worden gebruikt voor thema-brede instellingen:
@@ -219,3 +263,8 @@ if (function_exists('acf_add_options_page')) {
 | Tabs | Alle velden onder een tab als tabs worden gebruikt |
 | Block groepen | `"active": false` (worden gecloned) |
 | Naamgeving | `group_layout_<slug>` voor blocks |
+
+<Callout kind="info" title="Aangevuld — november 2026">
+  - **Nieuw:** callout "JSON bevat de velden, niet de inhoud", sectie "Locatieregels" en sectie "Vaste paginatemplate (zonder pagebuilder)".
+  - **Bron:** Rayan — SOP's "Veldgroep aanmaken en synchroniseren", "Locatieregels" en "Vaste paginatemplate met ACF-velden" (HOUS).
+</Callout>

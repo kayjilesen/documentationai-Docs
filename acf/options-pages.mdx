@@ -114,6 +114,18 @@ kj_component('button', 'header_cta', false, true);
 //                                    ^subfield ^option
 ```
 
+### Waar het misgaat
+
+Een options page is er voor gegevens die op meerdere plekken terugkomen (telefoonnummer, adres, footer). Je past ze op één plek aan en overal staat de nieuwe waarde.
+
+<Callout kind="warning" title="Vaak gemaakte fouten">
+  - **`'option'` vergeten.** `get_field('telefoonnummer')` zoekt het veld op de huidige pagina en geeft niets terug. Het moet `get_field('telefoonnummer', 'option')` zijn.
+  - **Hetzelfde gegeven ook nog hardcoded in een template.** Dan verandert het ene stuk wel mee en het andere niet.
+  - **Veldgroep aan een andere slug gekoppeld** dan de options page. De pagina bestaat dan wel, maar blijft leeg.
+</Callout>
+
+**Controle:** pas één algemeen gegeven aan en kijk op twee plekken waar het gebruikt wordt (bijvoorbeeld header en footer). Beide moeten de nieuwe waarde tonen.
+
 ---
 
 ## Veelgebruikte velden
@@ -236,3 +248,8 @@ add_filter('acf/settings/load_json', function($paths) {
     ```
   </Step>
 </Steps>
+
+<Callout kind="info" title="Aangevuld — november 2026">
+  - **Nieuw:** sectie "Waar het misgaat" (vergeten `'option'`, dubbele hardcoded waarden, verkeerde slug) en hoe je het controleert.
+  - **Bron:** Rayan — SOP "Options page aanmaken" (HOUS).
+</Callout>
